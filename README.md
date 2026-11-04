@@ -73,6 +73,8 @@ The production environment variables are server-only. Never commit `server/.env`
 
 The Render Blueprint currently selects the free service plan. Free web services can spin down while idle, so the first request after inactivity may be delayed; use an always-on plan if that delay is unsuitable for the public site.
 
+If a build succeeds but startup exits, inspect the `[startup]` lines in Render's runtime logs. Startup writes diagnostics synchronously so they survive an immediate exit, and omits raw database errors and credentials. An authentication failure means the database user credentials in `MONGODB_URI` need checking; a network failure requires checking the cluster hostname/state and Atlas Network Access. Local `.env` changes do not update Render's Environment settings. Publish code changes to the repository connected to Render before redeploying to receive updated diagnostics.
+
 ## Features and implementation
 
 ### Theme system
