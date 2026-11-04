@@ -1,0 +1,1974 @@
+# Registration theme audit
+
+Audit performed before the theme cleanup edits in this pass. Scope: the account-creation panel and the embedded registration flow (Member, Cadet, Volunteer, Intern & Alumni Member, and member payment screen). The referenced `registration-reference.css` is a large legacy stylesheet bundle; its hardcoded token hits are inventoried below, including rules that may be unrelated to the registration DOM. The live screenshot supplied with the request is the visual baseline; browser-based exhaustive state capture has not yet been completed.
+
+## Theme system read
+
+- `client/src/styles.css:9-53` defines light and dark CSS variables: `--bg`, `--surface`, `--surface-elevated`, `--border`, `--text`, `--text-muted`, `--primary`, `--accent`, `--on-primary`, photo colors, `--success`, `--danger`, `--overlay`, `--shadow`, `--glow`, `--line`, `--muted`, `--surface-raised`, `--surface-soft`, `--amber`, and `--radius`; `color-scheme` is set for light/dark.
+- `client/tailwind.config.js` maps utility colors to those CSS variables (bg, surface, elevated, border, text, muted, primary, accent, success, danger).
+- Main app controls are styled in `client/src/styles.css`: auth card/brand/tab-bar around 844-895, common field and file controls around 922-965, plus later theme overrides around 2170-2240.
+- Registration is rendered in `client/src/RegistrationPortal.jsx` from `registration-reference.html` plus `registration-reference.css` in an iframe. The host sends the theme via `app-theme` postMessage; embedded styles therefore need their own token definitions and theme listener.
+- Registration form definitions are in `client/src/content/registration-reference.html`; registration CSS is a bundled, ~9k-line stylesheet containing legacy hardcoded colors and duplicate rules, including late overrides around 4735-4767, 7827-7892, 8097-8110, 8800, and 9392-9393.
+
+## Source-level inventory and baseline defects
+
+- Screens/flows present in source: Create Account, registration type chooser, Member form, Cadet enrollment form, Volunteer form, Intern form, payment simulation, blood-group inserts and applicant photo inserts. `RegistrationPortal.jsx` handles theme sync, form submission, previews and dynamic account notices.
+- In the supplied dark screenshot, the cadet form body leaves a bright cream/white vertical frame around dark sections; cadet field labels and the Create Account heading have insufficient contrast; duplicated numbering appears (for example `24. 16. Education Qualification`).
+- Source stylesheet review shows hardcoded light-only card, label, input, file-upload, notice, success, payment, border and focus colors across each form. These can override the app's theme and cause the mismatch reported for light/dark.
+- File controls have scattered native browser defaults; password-eye controls and their alignment need visual review across each form.
+- The account form, dropdown states, all form steps, success/loading/invalid states, responsive widths and all requested control interactions still require browser verification. No claims are made here about uninspected runtime states.
+
+## Hardcoded color inventory
+
+The following entries enumerate every matching hardcoded color token found by a source scan of registration-related source and stylesheet files at audit time. Tokens on a line are grouped under the exact file and line number. This is a source inventory; it does not claim every selector is active in the registration DOM.
+- `client/src/RegistrationPortal.jsx:65` — `#070d11, #08766f, #101c20, #17272b, #17634f, #1c2c3c, #4b5963, #70d7c3, #b0c0b8, #b9ee83, #c9c4b5, #ebe8dc, #edf4ef, #f2f0e8, #f8f6ef, rgba(0,0,0,.28), rgba(205,231,213,.2), rgba(26,43,37,.10), transparent`
+- `client/src/styles.css:10` — `#f2f0e8`
+- `client/src/styles.css:11` — `#f8f6ef`
+- `client/src/styles.css:12` — `#ebe8dc`
+- `client/src/styles.css:13` — `#c9c4b5`
+- `client/src/styles.css:14` — `#1c2c3c`
+- `client/src/styles.css:15` — `#4b5963`
+- `client/src/styles.css:16` — `#08766f`
+- `client/src/styles.css:17` — `#08766f`
+- `client/src/styles.css:18` — `#ffffff`
+- `client/src/styles.css:19` — `#f6faf7`
+- `client/src/styles.css:20` — `#c5f08d`
+- `client/src/styles.css:21` — `#122010`
+- `client/src/styles.css:22` — `#087447`
+- `client/src/styles.css:23` — `#b3261e`
+- `client/src/styles.css:24` — `rgba(8, 18, 28, .72)`
+- `client/src/styles.css:25` — `rgba(43, 39, 27, .12)`
+- `client/src/styles.css:26` — `rgba(8, 118, 111, .16)`
+- `client/src/styles.css:31` — `#885600`
+- `client/src/styles.css:37` — `#070d11`
+- `client/src/styles.css:38` — `#101c20`
+- `client/src/styles.css:39` — `#17272b`
+- `client/src/styles.css:40` — `rgba(201, 230, 210, .20)`
+- `client/src/styles.css:41` — `#edf4ef`
+- `client/src/styles.css:42` — `#b0c0b8`
+- `client/src/styles.css:43` — `#b9ee83`
+- `client/src/styles.css:44` — `#b9ee83`
+- `client/src/styles.css:45` — `#132010`
+- `client/src/styles.css:46` — `#f6faf7`
+- `client/src/styles.css:47` — `#c5f08d`
+- `client/src/styles.css:48` — `#122010`
+- `client/src/styles.css:49` — `#88dda8`
+- `client/src/styles.css:50` — `#ff9c91`
+- `client/src/styles.css:51` — `rgba(0, 0, 0, .76)`
+- `client/src/styles.css:52` — `rgba(0, 0, 0, .44)`
+- `client/src/styles.css:53` — `rgba(185, 238, 131, .20)`
+- `client/src/styles.css:54` — `#efbe72`
+- `client/src/styles.css:66` — `#070d11f2, #070d11f5`
+- `client/src/styles.css:82` — `transparent`
+- `client/src/styles.css:105` — `#b9ee83`
+- `client/src/styles.css:112` — `#b9ee83`
+- `client/src/styles.css:113` — `#132010`
+- `client/src/styles.css:165` — `white`
+- `client/src/styles.css:178` — `#29463c55, transparent`
+- `client/src/styles.css:179` — `#14404b33, transparent`
+- `client/src/styles.css:185` — `rgba(29, 46, 47, 0.72)`
+- `client/src/styles.css:186` — `rgba(13, 24, 29, 0.84)`
+- `client/src/styles.css:197` — `#132010`
+- `client/src/styles.css:206` — `#070d11dd`
+- `client/src/styles.css:239` — `white`
+- `client/src/styles.css:243` — `#c2cec9`
+- `client/src/styles.css:279` — `#b9ee8360`
+- `client/src/styles.css:285` — `transparent`
+- `client/src/styles.css:297` — `#799a8530`
+- `client/src/styles.css:314` — `#070d1120, #070d1138, #070d11e8`
+- `client/src/styles.css:322` — `#0a1319f5`
+- `client/src/styles.css:323` — `#0a1319c7`
+- `client/src/styles.css:324` — `transparent`
+- `client/src/styles.css:337` — `#d4e0da`
+- `client/src/styles.css:375` — `#0a151a8f`
+- `client/src/styles.css:383` — `#294137`
+- `client/src/styles.css:388` — `#b9ee8350`
+- `client/src/styles.css:414` — `#d7e5dc`
+- `client/src/styles.css:440` — `#0003`
+- `client/src/styles.css:463` — `#98d5a9, #b9ee83`
+- `client/src/styles.css:464` — `transparent`
+- `client/src/styles.css:468` — `#132010`
+- `client/src/styles.css:478` — `#b9ee831a`
+- `client/src/styles.css:481` — `#12221f`
+- `client/src/styles.css:482` — `#6e8f7966`
+- `client/src/styles.css:483` — `#d5edce`
+- `client/src/styles.css:487` — `#0c171a70, #10242090`
+- `client/src/styles.css:507` — `#080f13`
+- `client/src/styles.css:508` — `#aab9b3`
+- `client/src/styles.css:523` — `#9bad9f`
+- `client/src/styles.css:600` — `#e0eadf`
+- `client/src/styles.css:670` — `#e3eee5`
+- `client/src/styles.css:702` — `#0005`
+- `client/src/styles.css:714` — `white`
+- `client/src/styles.css:716` — `#0005`
+- `client/src/styles.css:741` — `#b9ee8355`
+- `client/src/styles.css:763` — `#0a1519`
+- `client/src/styles.css:778` — `#070d11c9`
+- `client/src/styles.css:817` — `#bacdbf`
+- `client/src/styles.css:825` — `#8fba8a38`
+- `client/src/styles.css:826` — `#8fba8a0b`
+- `client/src/styles.css:842` — `#11413433, transparent`
+- `client/src/styles.css:864` — `#070f13`
+- `client/src/styles.css:888` — `#244031`
+- `client/src/styles.css:889` — `#d3f5b9`
+- `client/src/styles.css:915` — `#d6e3db`
+- `client/src/styles.css:919` — `#d9b489`
+- `client/src/styles.css:927` — `#071115b3`
+- `client/src/styles.css:928` — `#61736b55`
+- `client/src/styles.css:933` — `#edf4ef`
+- `client/src/styles.css:938` — `#93a79d`
+- `client/src/styles.css:943` — `#8cb09077`
+- `client/src/styles.css:946` — `#efaa9b`
+- `client/src/styles.css:961` — `#294338`
+- `client/src/styles.css:962` — `#e4f3e5`
+- `client/src/styles.css:981` — `#b5c7ba`
+- `client/src/styles.css:1010` — `#ffb7a8`
+- `client/src/styles.css:1016` — `#e7a19666`
+- `client/src/styles.css:1019` — `#ffb7a8`
+- `client/src/styles.css:1020` — `#50252233`
+- `client/src/styles.css:1106` — `#b9ee8377`
+- `client/src/styles.css:1107` — `#0d1a1d`
+- `client/src/styles.css:1122` — `#1a3028`
+- `client/src/styles.css:1123` — `#b9ee8380`
+- `client/src/styles.css:1143` — `#132010`
+- `client/src/styles.css:1160` — `#112023, #2a5a4055, transparent`
+- `client/src/styles.css:1290` — `#a5c6ac`
+- `client/src/styles.css:1319` — `white`
+- `client/src/styles.css:1328` — `white`
+- `client/src/styles.css:1329` — `#f2d597`
+- `client/src/styles.css:1330` — `#bba05a10`
+- `client/src/styles.css:1334` — `#7fd07511`
+- `client/src/styles.css:1337` — `#ffb7a8`
+- `client/src/styles.css:1338` — `#ffb7a811`
+- `client/src/styles.css:1365` — `#02080cdb`
+- `client/src/styles.css:1377` — `#0009`
+- `client/src/styles.css:1414` — `white`
+- `client/src/styles.css:1476` — `#0b1519`
+- `client/src/styles.css:1845` — `rgba(7, 15, 20, 0.34)`
+- `client/src/styles.css:1874` — `#000b`
+- `client/src/styles.css:1879` — `#f0f5f1`
+- `client/src/styles.css:1880` — `#000`
+- `client/src/styles.css:1935` — `rgba(7, 13, 17, .82)`
+- `client/src/styles.css:1939` — `#0005, rgba(7, 13, 17, .94)`
+- `client/src/styles.css:1944` — `#f0f5f1`
+- `client/src/styles.css:1950` — `#c2cec9`
+- `client/src/styles.css:1953` — `#0008, #101c20f5`
+- `client/src/styles.css:1954` — `#d9e5df`
+- `client/src/styles.css:1955` — `#263a36`
+- `client/src/styles.css:1958` — `#b9ee8370, #e6f1e9, transparent`
+- `client/src/styles.css:1960` — `#75ba4b1c`
+- `client/src/styles.css:1965` — `rgba(3,12,16,.02), rgba(3,12,16,.3), rgba(3,12,16,.64), transparent`
+- `client/src/styles.css:1966` — `rgba(4,12,16,.32), rgba(4,12,16,.66), transparent`
+- `client/src/styles.css:1967` — `#001015`
+- `client/src/styles.css:1968` — `#001015`
+- `client/src/styles.css:1971` — `#eff7f180, rgba(7,18,22,.34)`
+- `client/src/styles.css:1973` — `#0d191d, #142328`
+- `client/src/styles.css:1980` — `#0b1519, #101d20, #d0ead10a`
+- `client/src/styles.css:1985` — `#0a1418, #142328`
+- `client/src/styles.css:1994` — `#0002, rgba(10,19,23,.94), rgba(205,231,213,.14), rgba(23,39,43,.84)`
+- `client/src/styles.css:1997` — `rgba(4,14,17,.12), rgba(4,14,17,.94)`
+- `client/src/styles.css:2000` — `#e2ece5`
+- `client/src/styles.css:2013` — `#26353a`
+- `client/src/styles.css:2014` — `#55c8a7`
+- `client/src/styles.css:2016` — `#93a49b`
+- `client/src/styles.css:2019` — `#e8f3eb`
+- `client/src/styles.css:2020` — `#07111570`
+- `client/src/styles.css:2046` — `#0b1519, #132126`
+- `client/src/styles.css:2048` — `#b9ee8370`
+- `client/src/styles.css:2051` — `#0a1418, #132126`
+- `client/src/styles.css:2056` — `#e5eee8`
+- `client/src/styles.css:2060` — `#0d191df5, transparent`
+- `client/src/styles.css:2066` — `#eff5f0`
+- `client/src/styles.css:2068` — `#bac9c1`
+- `client/src/styles.css:2071` — `#c4d6c9`
+- `client/src/styles.css:2073` — `#101c20eF`
+- `client/src/styles.css:2090` — `rgba(7,13,17,.98)`
+- `client/src/styles.css:2095` — `#101c20`
+- `client/src/styles.css:2111` — `rgba(3,12,16,.17), rgba(3,12,16,.62), rgba(3,12,16,.66), transparent`
+- `client/src/styles.css:2153` — `#0007, #112013, #92d77f, #c5f08d`
+- `client/src/styles.css:2170` — `rgba(242,240,232,.94), rgba(242,240,232,.96)`
+- `client/src/styles.css:2171` — `rgba(7,13,17,.94), rgba(7,13,17,.96)`
+- `client/src/styles.css:2181` — `transparent`
+- `client/src/styles.css:2182` — `transparent`
+- `client/src/styles.css:2186` — `#fff`
+- `client/src/styles.css:2193` — `rgba(3,12,16,.08), rgba(3,12,16,.38), rgba(3,12,16,.70), rgba(3,12,16,.72), transparent`
+- `client/src/styles.css:2196` — `#fff, rgba(255,255,255,.72), rgba(7,18,22,.58)`
+- `client/src/styles.css:2199` — `rgba(0,0,0,.9)`
+- `client/src/styles.css:2213` — `transparent`
+- `client/src/styles.css:2231` — `transparent`
+- `client/src/content/registration-reference.css:11` — `#333`
+- `client/src/content/registration-reference.css:12` — `#f9f9f9`
+- `client/src/content/registration-reference.css:23` — `#ffffff`
+- `client/src/content/registration-reference.css:24` — `rgba(0,0,0,0.05)`
+- `client/src/content/registration-reference.css:29` — `#ffffff`
+- `client/src/content/registration-reference.css:40` — `transparent`
+- `client/src/content/registration-reference.css:41` — `#08a88a, #0b6b51, #1769e0, #7c3aed`
+- `client/src/content/registration-reference.css:46` — `rgba(8,168,138,.18)`
+- `client/src/content/registration-reference.css:56` — `#08a88a`
+- `client/src/content/registration-reference.css:67` — `#7c3aed`
+- `client/src/content/registration-reference.css:100` — `#333`
+- `client/src/content/registration-reference.css:106` — `#2e8b57`
+- `client/src/content/registration-reference.css:110` — `#2e8b57`
+- `client/src/content/registration-reference.css:111` — `#ffffff`
+- `client/src/content/registration-reference.css:123` — `rgba(0,0,0,0.4)`
+- `client/src/content/registration-reference.css:129` — `#ffffff`
+- `client/src/content/registration-reference.css:137` — `rgba(0,0,0,0.6)`
+- `client/src/content/registration-reference.css:142` — `rgba(0,0,0,0.6)`
+- `client/src/content/registration-reference.css:155` — `#e0e0e0`
+- `client/src/content/registration-reference.css:169` — `#1a5e3a`
+- `client/src/content/registration-reference.css:176` — `#4a7c59`
+- `client/src/content/registration-reference.css:182` — `#555`
+- `client/src/content/registration-reference.css:193` — `#fff8e7`
+- `client/src/content/registration-reference.css:194` — `#ddd`
+- `client/src/content/registration-reference.css:198` — `rgba(0,0,0,0.1)`
+- `client/src/content/registration-reference.css:201` — `#0b1a70`
+- `client/src/content/registration-reference.css:207` — `#b30000`
+- `client/src/content/registration-reference.css:227` — `#b30000`
+- `client/src/content/registration-reference.css:237` — `#800000`
+- `client/src/content/registration-reference.css:238` — `white`
+- `client/src/content/registration-reference.css:249` — `rgba(0,0,0,0.15)`
+- `client/src/content/registration-reference.css:255` — `#1a7a5e`
+- `client/src/content/registration-reference.css:256` — `#ffffff`
+- `client/src/content/registration-reference.css:264` — `#1a7a5e`
+- `client/src/content/registration-reference.css:265` — `#ffffff`
+- `client/src/content/registration-reference.css:277` — `#103375`
+- `client/src/content/registration-reference.css:285` — `#000`
+- `client/src/content/registration-reference.css:290` — `#103375, #1a7a5e`
+- `client/src/content/registration-reference.css:291` — `#ffffff`
+- `client/src/content/registration-reference.css:296` — `rgba(0,0,0,0.1)`
+- `client/src/content/registration-reference.css:307` — `#e2f3e8`
+- `client/src/content/registration-reference.css:315` — `#ffffff`
+- `client/src/content/registration-reference.css:316` — `#2e8b57`
+- `client/src/content/registration-reference.css:320` — `rgba(0,0,0,0.06)`
+- `client/src/content/registration-reference.css:324` — `#103375`
+- `client/src/content/registration-reference.css:332` — `#444`
+- `client/src/content/registration-reference.css:342` — `#f0f8f3`
+- `client/src/content/registration-reference.css:343` — `#d1e7dd`
+- `client/src/content/registration-reference.css:351` — `#1a7a5e`
+- `client/src/content/registration-reference.css:355` — `#555`
+- `client/src/content/registration-reference.css:365` — `#fcfcfc`
+- `client/src/content/registration-reference.css:366` — `#e2e8f0`
+- `client/src/content/registration-reference.css:373` — `rgba(0,0,0,0.08)`
+- `client/src/content/registration-reference.css:377` — `#1a7a5e`
+- `client/src/content/registration-reference.css:379` — `#2e8b57`
+- `client/src/content/registration-reference.css:389` — `#444`
+- `client/src/content/registration-reference.css:399` — `#2e8b57`
+- `client/src/content/registration-reference.css:403` — `#ffeeba, #fff3cd`
+- `client/src/content/registration-reference.css:404` — `#ffe8a1`
+- `client/src/content/registration-reference.css:410` — `#856404`
+- `client/src/content/registration-reference.css:416` — `#533f03`
+- `client/src/content/registration-reference.css:420` — `#103375`
+- `client/src/content/registration-reference.css:421` — `#ffffff`
+- `client/src/content/registration-reference.css:433` — `#2e8b57`
+- `client/src/content/registration-reference.css:434` — `white`
+- `client/src/content/registration-reference.css:442` — `#246b43`
+- `client/src/content/registration-reference.css:447` — `#103375, #1a7a5e`
+- `client/src/content/registration-reference.css:448` — `#ffffff`
+- `client/src/content/registration-reference.css:453` — `rgba(0,0,0,0.1)`
+- `client/src/content/registration-reference.css:462` — `#e2f3e8`
+- `client/src/content/registration-reference.css:468` — `#ffffff`
+- `client/src/content/registration-reference.css:470` — `#e1efe6`
+- `client/src/content/registration-reference.css:471` — `#2e8b57`
+- `client/src/content/registration-reference.css:474` — `rgba(0,0,0,0.05)`
+- `client/src/content/registration-reference.css:478` — `#1a5e3a`
+- `client/src/content/registration-reference.css:486` — `#444`
+- `client/src/content/registration-reference.css:497` — `#eef8f1`
+- `client/src/content/registration-reference.css:498` — `#1a7a5e`
+- `client/src/content/registration-reference.css:503` — `#c9dfd0`
+- `client/src/content/registration-reference.css:507` — `#f4f8f5`
+- `client/src/content/registration-reference.css:508` — `#1a7a5e`
+- `client/src/content/registration-reference.css:512` — `rgba(0,0,0,0.06)`
+- `client/src/content/registration-reference.css:515` — `#eaeaea`
+- `client/src/content/registration-reference.css:527` — `#ffffff`
+- `client/src/content/registration-reference.css:528` — `#d7e9df`
+- `client/src/content/registration-reference.css:538` — `#b9d8c6`
+- `client/src/content/registration-reference.css:540` — `#eef8f2, #f8fffb`
+- `client/src/content/registration-reference.css:541` — `#1a7a5e`
+- `client/src/content/registration-reference.css:546` — `#103375`
+- `client/src/content/registration-reference.css:550` — `#64748b`
+- `client/src/content/registration-reference.css:559` — `#1a7a5e`
+- `client/src/content/registration-reference.css:560` — `#fff`
+- `client/src/content/registration-reference.css:570` — `#145c39`
+- `client/src/content/registration-reference.css:575` — `#1a7a5e`
+- `client/src/content/registration-reference.css:586` — `#eef8f1`
+- `client/src/content/registration-reference.css:587` — `#1a7a5e`
+- `client/src/content/registration-reference.css:592` — `#c9dfd0`
+- `client/src/content/registration-reference.css:599` — `#103375`
+- `client/src/content/registration-reference.css:605` — `#555`
+- `client/src/content/registration-reference.css:610` — `#f4f8f5`
+- `client/src/content/registration-reference.css:611` — `#d1e7dd`
+- `client/src/content/registration-reference.css:614` — `rgba(0,0,0,0.03)`
+- `client/src/content/registration-reference.css:618` — `#1a5e3a`
+- `client/src/content/registration-reference.css:623` — `#444`
+- `client/src/content/registration-reference.css:630` — `#f5fbf7, #ffffff`
+- `client/src/content/registration-reference.css:631` — `#cfe3d6`
+- `client/src/content/registration-reference.css:635` — `rgba(20,76,55,.12)`
+- `client/src/content/registration-reference.css:642` — `#0f6b4f, #103375, #2e8b57`
+- `client/src/content/registration-reference.css:651` — `#dcebe2`
+- `client/src/content/registration-reference.css:654` — `#103375`
+- `client/src/content/registration-reference.css:659` — `#64748b`
+- `client/src/content/registration-reference.css:670` — `#e8f7ee`
+- `client/src/content/registration-reference.css:671` — `#166534`
+- `client/src/content/registration-reference.css:672` — `#b7e2c5`
+- `client/src/content/registration-reference.css:685` — `#eef5f0`
+- `client/src/content/registration-reference.css:686` — `#cfe1d5`
+- `client/src/content/registration-reference.css:690` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:700` — `#fff`
+- `client/src/content/registration-reference.css:701` — `rgba(0,0,0,.16)`
+- `client/src/content/registration-reference.css:707` — `rgba(0,0,0,.18)`
+- `client/src/content/registration-reference.css:711` — `#64748b`
+- `client/src/content/registration-reference.css:720` — `#fff`
+- `client/src/content/registration-reference.css:721` — `#e1ece5`
+- `client/src/content/registration-reference.css:727` — `#64748b`
+- `client/src/content/registration-reference.css:735` — `#1e293b`
+- `client/src/content/registration-reference.css:741` — `#fff8e7`
+- `client/src/content/registration-reference.css:742` — `#f2d99b`
+- `client/src/content/registration-reference.css:745` — `#6b4e0b`
+- `client/src/content/registration-reference.css:757` — `#ffffff`
+- `client/src/content/registration-reference.css:758` — `#e0e0e0`
+- `client/src/content/registration-reference.css:762` — `rgba(0,0,0,0.05)`
+- `client/src/content/registration-reference.css:767` — `#1a7a5e`
+- `client/src/content/registration-reference.css:777` — `#ccc`
+- `client/src/content/registration-reference.css:789` — `#2e8b57`
+- `client/src/content/registration-reference.css:790` — `#f4fff6`
+- `client/src/content/registration-reference.css:803` — `#ffffff`
+- `client/src/content/registration-reference.css:804` — `#333`
+- `client/src/content/registration-reference.css:807` — `rgba(0,0,0,0.08)`
+- `client/src/content/registration-reference.css:811` — `#fffdf0`
+- `client/src/content/registration-reference.css:812` — `#c5a059`
+- `client/src/content/registration-reference.css:820` — `#6b21a8`
+- `client/src/content/registration-reference.css:821` — `#6b21a8`
+- `client/src/content/registration-reference.css:837` — `#0f4c3a, #103375, #1a7a5e`
+- `client/src/content/registration-reference.css:838` — `#fff`
+- `client/src/content/registration-reference.css:839` — `rgba(16,51,117,.16)`
+- `client/src/content/registration-reference.css:843` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:846` — `#e8f7ef`
+- `client/src/content/registration-reference.css:849` — `rgba(255,255,255,.13)`
+- `client/src/content/registration-reference.css:850` — `#fff, rgba(255,255,255,.25)`
+- `client/src/content/registration-reference.css:855` — `#103375`
+- `client/src/content/registration-reference.css:859` — `#103375, #1a7a5e`
+- `client/src/content/registration-reference.css:862` — `#d5e8dc, #f8fcfa, #fff`
+- `client/src/content/registration-reference.css:864` — `rgba(20,76,55,.10)`
+- `client/src/content/registration-reference.css:868` — `#dcebe2`
+- `client/src/content/registration-reference.css:870` — `#103375`
+- `client/src/content/registration-reference.css:871` — `#64748b`
+- `client/src/content/registration-reference.css:873` — `#166534, #b7e2c5, #e8f7ee`
+- `client/src/content/registration-reference.css:882` — `#cfe1d5, #eef5f0`
+- `client/src/content/registration-reference.css:883` — `rgba(255,255,255,.7)`
+- `client/src/content/registration-reference.css:887` — `#fff, rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:889` — `#64748b`
+- `client/src/content/registration-reference.css:891` — `#e1ece5, #fff`
+- `client/src/content/registration-reference.css:893` — `#64748b`
+- `client/src/content/registration-reference.css:896` — `#1e293b`
+- `client/src/content/registration-reference.css:897` — `#0f6b4f`
+- `client/src/content/registration-reference.css:899` — `#f2d99b, #fff8e7`
+- `client/src/content/registration-reference.css:900` — `#6b4e0b`
+- `client/src/content/registration-reference.css:902` — `#64748b`
+- `client/src/content/registration-reference.css:914` — `#103375, #1a7a5e`
+- `client/src/content/registration-reference.css:915` — `#ffffff`
+- `client/src/content/registration-reference.css:934` — `#4a5568`
+- `client/src/content/registration-reference.css:941` — `#ffffff`
+- `client/src/content/registration-reference.css:943` — `rgba(0, 0, 0, 0.08)`
+- `client/src/content/registration-reference.css:944` — `#cbd5e1`
+- `client/src/content/registration-reference.css:957` — `#103375, #1a7a5e, #2e8b57`
+- `client/src/content/registration-reference.css:960` — `#103375, #1a7a5e`
+- `client/src/content/registration-reference.css:962` — `transparent`
+- `client/src/content/registration-reference.css:969` — `#1a7a5e`
+- `client/src/content/registration-reference.css:977` — `#1a7a5e`
+- `client/src/content/registration-reference.css:978` — `rgba(0,0,0,0.03)`
+- `client/src/content/registration-reference.css:981` — `#ffffff`
+- `client/src/content/registration-reference.css:987` — `rgba(255, 255, 255, 0.3)`
+- `client/src/content/registration-reference.css:988` — `rgba(0,0,0,0.3)`
+- `client/src/content/registration-reference.css:990` — `#1a7a5e`
+- `client/src/content/registration-reference.css:991` — `#103375`
+- `client/src/content/registration-reference.css:992` — `#0d5c46`
+- `client/src/content/registration-reference.css:994` — `#ffffff`
+- `client/src/content/registration-reference.css:997` — `#f4f9f6`
+- `client/src/content/registration-reference.css:999` — `#e6f4ea`
+- `client/src/content/registration-reference.css:1000` — `#2e8b57`
+- `client/src/content/registration-reference.css:1002` — `#fffdf0`
+- `client/src/content/registration-reference.css:1003` — `#fff9db`
+- `client/src/content/registration-reference.css:1006` — `#cbd5e1`
+- `client/src/content/registration-reference.css:1007` — `#334155`
+- `client/src/content/registration-reference.css:1019` — `#1a7a5e`
+- `client/src/content/registration-reference.css:1020` — `#ffffff`
+- `client/src/content/registration-reference.css:1025` — `#103375`
+- `client/src/content/registration-reference.css:1036` — `#2e8b57`
+- `client/src/content/registration-reference.css:1040` — `#d97706`
+- `client/src/content/registration-reference.css:1041` — `#92400e`
+- `client/src/content/registration-reference.css:1043` — `#1a5e3a`
+- `client/src/content/registration-reference.css:1050` — `#f0fdf4`
+- `client/src/content/registration-reference.css:1051` — `#86efac`
+- `client/src/content/registration-reference.css:1056` — `#fffbe2`
+- `client/src/content/registration-reference.css:1057` — `#fcd34d`
+- `client/src/content/registration-reference.css:1058` — `#b45309`
+- `client/src/content/registration-reference.css:1070` — `#e0f2fe`
+- `client/src/content/registration-reference.css:1071` — `#0369a1`
+- `client/src/content/registration-reference.css:1072` — `#7dd3fc`
+- `client/src/content/registration-reference.css:1075` — `#dcfce7`
+- `client/src/content/registration-reference.css:1076` — `#15803d`
+- `client/src/content/registration-reference.css:1077` — `#86efac`
+- `client/src/content/registration-reference.css:1080` — `#eef8f1, #f0f8f3`
+- `client/src/content/registration-reference.css:1081` — `#2e8b57`
+- `client/src/content/registration-reference.css:1087` — `#1a5e3a`
+- `client/src/content/registration-reference.css:1094` — `#4a5568`
+- `client/src/content/registration-reference.css:1102` — `#f4f8f5`
+- `client/src/content/registration-reference.css:1103` — `#d7e9df`
+- `client/src/content/registration-reference.css:1106` — `rgba(0,0,0,.06)`
+- `client/src/content/registration-reference.css:1116` — `#fff`
+- `client/src/content/registration-reference.css:1121` — `#1a7a5e`
+- `client/src/content/registration-reference.css:1127` — `#1a7a5e`
+- `client/src/content/registration-reference.css:1128` — `#ffffff`
+- `client/src/content/registration-reference.css:1154` — `rgba(0,50,25,.72)`
+- `client/src/content/registration-reference.css:1163` — `#fff`
+- `client/src/content/registration-reference.css:1165` — `#2e8b57`
+- `client/src/content/registration-reference.css:1166` — `rgba(0,0,0,.3)`
+- `client/src/content/registration-reference.css:1170` — `#145c39, #2e8b57`
+- `client/src/content/registration-reference.css:1171` — `#fff`
+- `client/src/content/registration-reference.css:1182` — `#fff`
+- `client/src/content/registration-reference.css:1189` — `#eef8f1`
+- `client/src/content/registration-reference.css:1190` — `#d5eadb`
+- `client/src/content/registration-reference.css:1197` — `#fff`
+- `client/src/content/registration-reference.css:1198` — `#1a5e3a`
+- `client/src/content/registration-reference.css:1203` — `#2e8b57`
+- `client/src/content/registration-reference.css:1204` — `#fff`
+- `client/src/content/registration-reference.css:1218` — `#245c3c`
+- `client/src/content/registration-reference.css:1225` — `#c9dfd0`
+- `client/src/content/registration-reference.css:1228` — `#fbfffc`
+- `client/src/content/registration-reference.css:1232` — `#2e8b57`
+- `client/src/content/registration-reference.css:1233` — `rgba(46,139,87,.12)`
+- `client/src/content/registration-reference.css:1240` — `#2e8b57`
+- `client/src/content/registration-reference.css:1249` — `#444`
+- `client/src/content/registration-reference.css:1258` — `#16734f, #2e9b69`
+- `client/src/content/registration-reference.css:1259` — `#fff`
+- `client/src/content/registration-reference.css:1270` — `#777`
+- `client/src/content/registration-reference.css:1296` — `rgba(3,27,19,.88)`
+- `client/src/content/registration-reference.css:1309` — `#fff`
+- `client/src/content/registration-reference.css:1310` — `rgba(0,0,0,.45)`
+- `client/src/content/registration-reference.css:1320` — `#fff`
+- `client/src/content/registration-reference.css:1321` — `#103375`
+- `client/src/content/registration-reference.css:1325` — `rgba(0,0,0,.25)`
+- `client/src/content/registration-reference.css:1335` — `#fff`
+- `client/src/content/registration-reference.css:1337` — `#0b6b51, #1a8b69, #2bb673`
+- `client/src/content/registration-reference.css:1338` — `rgba(9, 88, 66, .18)`
+- `client/src/content/registration-reference.css:1350` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:1368` — `#fff`
+- `client/src/content/registration-reference.css:1369` — `#d9ebe4`
+- `client/src/content/registration-reference.css:1373` — `rgba(16, 51, 117, .08)`
+- `client/src/content/registration-reference.css:1378` — `rgba(16, 51, 117, .12)`
+- `client/src/content/registration-reference.css:1389` — `#103375`
+- `client/src/content/registration-reference.css:1394` — `#5a6673`
+- `client/src/content/registration-reference.css:1403` — `#e8f8f0`
+- `client/src/content/registration-reference.css:1404` — `#0b6b51`
+- `client/src/content/registration-reference.css:1405` — `#b8e5d2`
+- `client/src/content/registration-reference.css:1432` — `#f7faf8`
+- `client/src/content/registration-reference.css:1433` — `rgba(0,0,0,.16)`
+- `client/src/content/registration-reference.css:1434` — `#e1eee8`
+- `client/src/content/registration-reference.css:1439` — `rgba(0,0,0,.20)`
+- `client/src/content/registration-reference.css:1443` — `#111827`
+- `client/src/content/registration-reference.css:1448` — `#0d654d`
+- `client/src/content/registration-reference.css:1453` — `#374151`
+- `client/src/content/registration-reference.css:1466` — `#1a8b69`
+- `client/src/content/registration-reference.css:1468` — `#eefaf5, #f8fcfa`
+- `client/src/content/registration-reference.css:1469` — `#1f2937`
+- `client/src/content/registration-reference.css:1471` — `#0d654d`
+- `client/src/content/registration-reference.css:1480` — `#f7faf9`
+- `client/src/content/registration-reference.css:1481` — `#e1eee8`
+- `client/src/content/registration-reference.css:1493` — `#fff`
+- `client/src/content/registration-reference.css:1494` — `#0b6b51, #1a8b69`
+- `client/src/content/registration-reference.css:1496` — `rgba(11,107,81,.25)`
+- `client/src/content/registration-reference.css:1501` — `rgba(11,107,81,.32)`
+- `client/src/content/registration-reference.css:1506` — `#9bc7b7, transparent`
+- `client/src/content/registration-reference.css:1512` — `#f1f8f5`
+- `client/src/content/registration-reference.css:1513` — `#53636d`
+- `client/src/content/registration-reference.css:1532` — `#e8f7ed, #edf9ed, #f8fff9, rgba(204,244,204,.72), rgba(255,255,255,.95), transparent`
+- `client/src/content/registration-reference.css:1534` — `rgba(182,224,171,.28)`
+- `client/src/content/registration-reference.css:1535` — `rgba(199,236,190,.26)`
+- `client/src/content/registration-reference.css:1537` — `#101010`
+- `client/src/content/registration-reference.css:1538` — `#0b6b51, #1aa875, rgba(11,107,81,.10), transparent`
+- `client/src/content/registration-reference.css:1539` — `#222`
+- `client/src/content/registration-reference.css:1540` — `#0c664e, #26362e`
+- `client/src/content/registration-reference.css:1542` — `#173c31, rgba(13,101,77,.13), rgba(255,255,255,.82), rgba(30,85,58,.12)`
+- `client/src/content/registration-reference.css:1543` — `rgba(13,101,77,.3), rgba(30,85,58,.18)`
+- `client/src/content/registration-reference.css:1544` — `#fff, rgba(0,0,0,.15), rgba(255,255,255,.92)`
+- `client/src/content/registration-reference.css:1545` — `#2e2e2e, #43d7c8, #f2fbf7, #fff`
+- `client/src/content/registration-reference.css:1546` — `#006da7, #009edb, #0b6b51, #0ea5df, #1a8b69, #c52121, #d94d1f, #ef3f2f, #f28b2c, #ff6b35, #fff`
+- `client/src/content/registration-reference.css:1547` — `#60726a`
+- `client/src/content/registration-reference.css:1548` — `#fff, rgba(11,107,81,.2), rgba(12,102,78,.96), rgba(31,145,109,.96)`
+- `client/src/content/registration-reference.css:1549` — `#0b6b51, #fff`
+- `client/src/content/registration-reference.css:1555` — `#e8f5ed, #edf8ef, #f9fff9, rgba(197,236,197,.72), rgba(255,255,255,.96), transparent`
+- `client/src/content/registration-reference.css:1557` — `rgba(186,225,180,.28)`
+- `client/src/content/registration-reference.css:1558` — `rgba(194,231,192,.28)`
+- `client/src/content/registration-reference.css:1560` — `#101010`
+- `client/src/content/registration-reference.css:1561` — `#0b6b51, #1aa875, rgba(11,107,81,.10), transparent`
+- `client/src/content/registration-reference.css:1562` — `#26362e`
+- `client/src/content/registration-reference.css:1564` — `#0f6b4f, rgba(23,79,57,.12), rgba(255,255,255,.92)`
+- `client/src/content/registration-reference.css:1565` — `#edf3f1`
+- `client/src/content/registration-reference.css:1566` — `#0f6b4f, transparent`
+- `client/src/content/registration-reference.css:1567` — `#0d684d, #1c9974, #fff, rgba(15,107,79,.22)`
+- `client/src/content/registration-reference.css:1569` — `#0f6b4f`
+- `client/src/content/registration-reference.css:1570` — `#3c4144`
+- `client/src/content/registration-reference.css:1571` — `#cbd5d0, #fff`
+- `client/src/content/registration-reference.css:1572` — `#0f8b68, rgba(15,139,104,.11)`
+- `client/src/content/registration-reference.css:1573` — `#6a7370`
+- `client/src/content/registration-reference.css:1574` — `#0b6b51, #219b75, #fff, rgba(11,107,81,.2)`
+- `client/src/content/registration-reference.css:1575` — `rgba(11,107,81,.28)`
+- `client/src/content/registration-reference.css:1576` — `#737b78`
+- `client/src/content/registration-reference.css:1577` — `#0f6b4f`
+- `client/src/content/registration-reference.css:1578` — `rgba(235,249,244,.95), rgba(245,252,249,.92)`
+- `client/src/content/registration-reference.css:1579` — `#0f6b4f`
+- `client/src/content/registration-reference.css:1580` — `#0f6b4f, #fff, rgba(20,80,57,.06)`
+- `client/src/content/registration-reference.css:1581` — `#0f6b4f, #303536`
+- `client/src/content/registration-reference.css:1582` — `#17684f, #bfe5d3, #edf9f3`
+- `client/src/content/registration-reference.css:1583` — `#6b4e0b, #f0d79a, #fff8e7`
+- `client/src/content/registration-reference.css:1584` — `#17684f, #c8ddd4, #f7fbf9`
+- `client/src/content/registration-reference.css:1592` — `#f4f8f6, rgba(15,127,93,.05), rgba(242,184,75,.05), transparent`
+- `client/src/content/registration-reference.css:1594` — `rgba(0,0,0,.1)`
+- `client/src/content/registration-reference.css:1596` — `#a3e0c9, rgba(0,0,0,.16), rgba(255,255,255,.1)`
+- `client/src/content/registration-reference.css:1599` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:1603` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:1605` — `#a3e0c9`
+- `client/src/content/registration-reference.css:1607` — `#179b68`
+- `client/src/content/registration-reference.css:1609` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:1611` — `rgba(26,122,94,.25)`
+- `client/src/content/registration-reference.css:1614` — `rgba(0,0,0,.18)`
+- `client/src/content/registration-reference.css:1615` — `rgba(0,0,0,.08)`
+- `client/src/content/registration-reference.css:1618` — `rgba(16,51,117,.14)`
+- `client/src/content/registration-reference.css:1640` — `rgba(0,255,190,.72), transparent`
+- `client/src/content/registration-reference.css:1641` — `rgba(72,180,255,.72), transparent`
+- `client/src/content/registration-reference.css:1642` — `rgba(170,90,255,.62), transparent`
+- `client/src/content/registration-reference.css:1643` — `rgba(0,255,190,.68), transparent`
+- `client/src/content/registration-reference.css:1644` — `rgba(0,150,255,.12), rgba(0,255,190,.20), rgba(157,78,255,.18)`
+- `client/src/content/registration-reference.css:1645` — `rgba(0,210,180,.12), rgba(0,255,200,.22)`
+- `client/src/content/registration-reference.css:1651` — `rgba(255,220,70,.72), transparent`
+- `client/src/content/registration-reference.css:1652` — `rgba(0,255,190,.72), transparent`
+- `client/src/content/registration-reference.css:1653` — `rgba(72,180,255,.72), transparent`
+- `client/src/content/registration-reference.css:1654` — `rgba(170,90,255,.62), transparent`
+- `client/src/content/registration-reference.css:1655` — `rgba(0,210,180,.13), rgba(157,78,255,.16), rgba(255,210,60,.15)`
+- `client/src/content/registration-reference.css:1656` — `rgba(0,210,180,.12), rgba(157,78,255,.20)`
+- `client/src/content/registration-reference.css:1662` — `rgba(0,230,190,.28)`
+- `client/src/content/registration-reference.css:1663` — `rgba(120,110,255,.28)`
+- `client/src/content/registration-reference.css:1664` — `rgba(0,210,180,.10), rgba(100,90,255,.08), rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:1676` — `#00ffd0, #54b8ff, #a65cff`
+- `client/src/content/registration-reference.css:1678` — `#00ffd0, rgba(0,220,190,.55), rgba(110,90,255,.32)`
+- `client/src/content/registration-reference.css:1705` — `#f3faf7, #f7fbf9, #ffffff`
+- `client/src/content/registration-reference.css:1706` — `rgba(5,73,55,.16)`
+- `client/src/content/registration-reference.css:1709` — `rgba(14,128,82,.12)`
+- `client/src/content/registration-reference.css:1711` — `rgba(18,112,82,.22), transparent`
+- `client/src/content/registration-reference.css:1714` — `rgba(12,83,61,.13)`
+- `client/src/content/registration-reference.css:1722` — `#eef9f3, #f4fff9, #ffffff`
+- `client/src/content/registration-reference.css:1730` — `rgba(46,139,87,.10)`
+- `client/src/content/registration-reference.css:1739` — `rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:1746` — `#116d52, #bde2cc, #e5f7ec`
+- `client/src/content/registration-reference.css:1751` — `#0b5e48`
+- `client/src/content/registration-reference.css:1753` — `#4b6359`
+- `client/src/content/registration-reference.css:1756` — `rgba(255,255,255,.82)`
+- `client/src/content/registration-reference.css:1757` — `#d6eadf`
+- `client/src/content/registration-reference.css:1758` — `rgba(12,76,59,.12)`
+- `client/src/content/registration-reference.css:1763` — `#e1eee7, #fff`
+- `client/src/content/registration-reference.css:1766` — `#8fc9a9, rgba(12,76,59,.10)`
+- `client/src/content/registration-reference.css:1770` — `#0c6b50, #20a879, #fff`
+- `client/src/content/registration-reference.css:1771` — `rgba(12,107,80,.22)`
+- `client/src/content/registration-reference.css:1773` — `#70837a`
+- `client/src/content/registration-reference.css:1774` — `#103375`
+- `client/src/content/registration-reference.css:1775` — `#0f7658`
+- `client/src/content/registration-reference.css:1779` — `#103375, #176b58, #fff`
+- `client/src/content/registration-reference.css:1780` — `rgba(16,51,117,.18)`
+- `client/src/content/registration-reference.css:1784` — `#eaf6f1`
+- `client/src/content/registration-reference.css:1791` — `#0f6b51, #fff`
+- `client/src/content/registration-reference.css:1792` — `#fff, rgba(255,255,255,.08), rgba(255,255,255,.55)`
+- `client/src/content/registration-reference.css:1793` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:1795` — `#fff`
+- `client/src/content/registration-reference.css:1796` — `#dcebe3, rgba(12,76,59,.08)`
+- `client/src/content/registration-reference.css:1799` — `#1a7a5e`
+- `client/src/content/registration-reference.css:1800` — `#103375`
+- `client/src/content/registration-reference.css:1801` — `#56665f`
+- `client/src/content/registration-reference.css:1803` — `#1a7a5e, #fff`
+- `client/src/content/registration-reference.css:1804` — `#1a7a5e, #fff`
+- `client/src/content/registration-reference.css:1824` — `rgba(255,255,255,.92), transparent`
+- `client/src/content/registration-reference.css:1825` — `rgba(37,174,102,.13), transparent`
+- `client/src/content/registration-reference.css:1826` — `#eef9f2, #f8fffb, #f9fffc`
+- `client/src/content/registration-reference.css:1839` — `rgba(32,163,106,.10)`
+- `client/src/content/registration-reference.css:1844` — `rgba(22,112,87,.08)`
+- `client/src/content/registration-reference.css:1857` — `rgba(17,109,82,.10)`
+- `client/src/content/registration-reference.css:1858` — `#0f6b51`
+- `client/src/content/registration-reference.css:1866` — `#0b5e48`
+- `client/src/content/registration-reference.css:1872` — `#34453f`
+- `client/src/content/registration-reference.css:1882` — `rgba(255,255,255,.90)`
+- `client/src/content/registration-reference.css:1883` — `rgba(16,112,83,.22)`
+- `client/src/content/registration-reference.css:1887` — `rgba(12,76,59,.10)`
+- `client/src/content/registration-reference.css:1893` — `rgba(12,76,59,.18)`
+- `client/src/content/registration-reference.css:1894` — `#14956f`
+- `client/src/content/registration-reference.css:1901` — `#0c6b50, #20a879`
+- `client/src/content/registration-reference.css:1902` — `#fff`
+- `client/src/content/registration-reference.css:1904` — `rgba(14,112,82,.24)`
+- `client/src/content/registration-reference.css:1906` — `#125f4b`
+- `client/src/content/registration-reference.css:1907` — `#596760`
+- `client/src/content/registration-reference.css:1909` — `#0c7b5c`
+- `client/src/content/registration-reference.css:1918` — `#075e49, #158c69`
+- `client/src/content/registration-reference.css:1919` — `#fff`
+- `client/src/content/registration-reference.css:1924` — `rgba(7,94,73,.22)`
+- `client/src/content/registration-reference.css:1943` — `white`
+- `client/src/content/registration-reference.css:1946` — `#09644d, #fff`
+- `client/src/content/registration-reference.css:1947` — `#fff, rgba(255,255,255,.10), rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:1950` — `rgba(0,0,0,.16)`
+- `client/src/content/registration-reference.css:1976` — `rgba(255,255,255,.96), transparent`
+- `client/src/content/registration-reference.css:1977` — `rgba(47,181,105,.16), transparent`
+- `client/src/content/registration-reference.css:1978` — `#edf9f2, #f7fffb, #f8fffb`
+- `client/src/content/registration-reference.css:1991` — `rgba(35,167,99,.09)`
+- `client/src/content/registration-reference.css:1996` — `rgba(19,120,89,.08)`
+- `client/src/content/registration-reference.css:2003` — `rgba(255,255,255,.60), transparent`
+- `client/src/content/registration-reference.css:2004` — `rgba(255,255,255,.50), transparent`
+- `client/src/content/registration-reference.css:2022` — `rgba(12,106,78,.10)`
+- `client/src/content/registration-reference.css:2023` — `#0a6b50`
+- `client/src/content/registration-reference.css:2030` — `#075e49`
+- `client/src/content/registration-reference.css:2037` — `#34483f`
+- `client/src/content/registration-reference.css:2051` — `rgba(11,111,82,.18)`
+- `client/src/content/registration-reference.css:2053` — `rgba(255,255,255,.90)`
+- `client/src/content/registration-reference.css:2054` — `rgba(10,75,58,.11)`
+- `client/src/content/registration-reference.css:2063` — `#0b654c, #22a878`
+- `client/src/content/registration-reference.css:2067` — `rgba(14,139,100,.48)`
+- `client/src/content/registration-reference.css:2068` — `rgba(10,75,58,.18)`
+- `client/src/content/registration-reference.css:2077` — `#fff`
+- `client/src/content/registration-reference.css:2079` — `#075e49, #20a779`
+- `client/src/content/registration-reference.css:2080` — `rgba(10,110,81,.25)`
+- `client/src/content/registration-reference.css:2085` — `#6a7b73`
+- `client/src/content/registration-reference.css:2092` — `#0a644d`
+- `client/src/content/registration-reference.css:2098` — `#596960`
+- `client/src/content/registration-reference.css:2103` — `#087a5b`
+- `client/src/content/registration-reference.css:2116` — `#fff`
+- `client/src/content/registration-reference.css:2117` — `#075e49, #138a68`
+- `client/src/content/registration-reference.css:2118` — `rgba(7,94,73,.23)`
+- `client/src/content/registration-reference.css:2132` — `rgba(255,255,255,.15)`
+- `client/src/content/registration-reference.css:2169` — `#075e49`
+- `client/src/content/registration-reference.css:2170` — `#fff`
+- `client/src/content/registration-reference.css:2173` — `#fff`
+- `client/src/content/registration-reference.css:2174` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:2175` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:2180` — `rgba(0,0,0,.17)`
+- `client/src/content/registration-reference.css:2206` — `rgba(255,255,255,.98), transparent`
+- `client/src/content/registration-reference.css:2207` — `rgba(255,255,255,.78), transparent`
+- `client/src/content/registration-reference.css:2208` — `#e8f5ec, #eff9f2, #fbfffd`
+- `client/src/content/registration-reference.css:2215` — `rgba(255,255,255,.72), transparent`
+- `client/src/content/registration-reference.css:2216` — `rgba(255,255,255,.60), transparent`
+- `client/src/content/registration-reference.css:2217` — `rgba(89,194,120,.10), transparent`
+- `client/src/content/registration-reference.css:2229` — `rgba(55,176,104,.10)`
+- `client/src/content/registration-reference.css:2234` — `rgba(24,139,94,.08)`
+- `client/src/content/registration-reference.css:2251` — `rgba(10,108,78,.10)`
+- `client/src/content/registration-reference.css:2252` — `#0a6b50`
+- `client/src/content/registration-reference.css:2259` — `#075e49`
+- `client/src/content/registration-reference.css:2265` — `#2f423a`
+- `client/src/content/registration-reference.css:2275` — `rgba(13,113,82,.18)`
+- `client/src/content/registration-reference.css:2277` — `rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:2278` — `rgba(8,76,57,.12)`
+- `client/src/content/registration-reference.css:2294` — `#fff`
+- `client/src/content/registration-reference.css:2296` — `#075e49, #20a879`
+- `client/src/content/registration-reference.css:2297` — `rgba(10,112,82,.23)`
+- `client/src/content/registration-reference.css:2301` — `#718079`
+- `client/src/content/registration-reference.css:2308` — `#0b644d`
+- `client/src/content/registration-reference.css:2312` — `#151e1a`
+- `client/src/content/registration-reference.css:2318` — `#087c5b`
+- `client/src/content/registration-reference.css:2324` — `rgba(17,105,78,.16)`
+- `client/src/content/registration-reference.css:2330` — `#fff`
+- `client/src/content/registration-reference.css:2331` — `#075e49, #158e6a`
+- `client/src/content/registration-reference.css:2332` — `rgba(7,94,73,.23)`
+- `client/src/content/registration-reference.css:2372` — `rgba(0,0,0,.17)`
+- `client/src/content/registration-reference.css:2375` — `#075e49`
+- `client/src/content/registration-reference.css:2376` — `#fff`
+- `client/src/content/registration-reference.css:2379` — `#fff`
+- `client/src/content/registration-reference.css:2380` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:2381` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:2419` — `rgba(23,155,104,.09), transparent`
+- `client/src/content/registration-reference.css:2420` — `rgba(242,184,75,.08), transparent`
+- `client/src/content/registration-reference.css:2421` — `#f4f8f6`
+- `client/src/content/registration-reference.css:2433` — `rgba(23,155,104,.32), transparent`
+- `client/src/content/registration-reference.css:2434` — `rgba(23,155,104,.055), transparent`
+- `client/src/content/registration-reference.css:2435` — `rgba(11,92,67,.045), transparent`
+- `client/src/content/registration-reference.css:2450` — `rgba(23,155,104,.16), transparent`
+- `client/src/content/registration-reference.css:2479` — `rgba(163,224,201,.16), transparent`
+- `client/src/content/registration-reference.css:2480` — `rgba(242,184,75,.13), transparent`
+- `client/src/content/registration-reference.css:2500` — `#179b68`
+- `client/src/content/registration-reference.css:2503` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:2504` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:2518` — `#0b5c43, #179b68, #f2b84b`
+- `client/src/content/registration-reference.css:2531` — `rgba(0,0,0,.13)`
+- `client/src/content/registration-reference.css:2541` — `#a3e0c9`
+- `client/src/content/registration-reference.css:2543` — `rgba(163,224,201,.5)`
+- `client/src/content/registration-reference.css:2562` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:2563` — `rgba(23,155,104,.08)`
+- `client/src/content/registration-reference.css:2586` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:2587` — `rgba(23,155,104,.14)`
+- `client/src/content/registration-reference.css:2605` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:2618` — `rgba(255,255,255,.22), transparent`
+- `client/src/content/registration-reference.css:2656` — `transparent`
+- `client/src/content/registration-reference.css:2677` — `transparent`
+- `client/src/content/registration-reference.css:2678` — `rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:2679` — `transparent`
+- `client/src/content/registration-reference.css:2691` — `#0b5c43`
+- `client/src/content/registration-reference.css:2692` — `#e7fff5, #ffffff`
+- `client/src/content/registration-reference.css:2693` — `#8bd6b8`
+- `client/src/content/registration-reference.css:2696` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:2697` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:2702` — `#ffffff`
+- `client/src/content/registration-reference.css:2703` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:2704` — `#a3e0c9`
+- `client/src/content/registration-reference.css:2707` — `rgba(11,92,67,.35)`
+- `client/src/content/registration-reference.css:2708` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:2714` — `#0b5c43`
+- `client/src/content/registration-reference.css:2715` — `#e7fff5, #ffffff`
+- `client/src/content/registration-reference.css:2716` — `#179b68`
+- `client/src/content/registration-reference.css:2718` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:2719` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:2725` — `#ffffff`
+- `client/src/content/registration-reference.css:2726` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:2727` — `#a3e0c9`
+- `client/src/content/registration-reference.css:2729` — `rgba(11,92,67,.25)`
+- `client/src/content/registration-reference.css:2730` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:2745` — `#0b5c43`
+- `client/src/content/registration-reference.css:2746` — `#dffbef, #ffffff`
+- `client/src/content/registration-reference.css:2748` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:2749` — `rgba(23,155,104,.14)`
+- `client/src/content/registration-reference.css:2754` — `#f2b84b`
+- `client/src/content/registration-reference.css:2801` — `#073a2a`
+- `client/src/content/registration-reference.css:2802` — `#0b5c43, green`
+- `client/src/content/registration-reference.css:2803` — `#179b68`
+- `client/src/content/registration-reference.css:2804` — `#a3e0c9`
+- `client/src/content/registration-reference.css:2805` — `#f2b84b`
+- `client/src/content/registration-reference.css:2806` — `#173f7a, blue`
+- `client/src/content/registration-reference.css:2807` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:2819` — `rgba(23,155,104,.09), transparent`
+- `client/src/content/registration-reference.css:2820` — `rgba(242,184,75,.08), transparent`
+- `client/src/content/registration-reference.css:2821` — `#f2f8f5, #f8fcfa`
+- `client/src/content/registration-reference.css:2833` — `rgba(23,155,104,.30), transparent`
+- `client/src/content/registration-reference.css:2834` — `rgba(23,155,104,.055), transparent`
+- `client/src/content/registration-reference.css:2835` — `rgba(11,92,67,.045), transparent`
+- `client/src/content/registration-reference.css:2850` — `rgba(23,155,104,.16), transparent`
+- `client/src/content/registration-reference.css:2876` — `rgba(255,255,255,.94)`
+- `client/src/content/registration-reference.css:2879` — `rgba(0,0,0,.10)`
+- `client/src/content/registration-reference.css:2889` — `transparent`
+- `client/src/content/registration-reference.css:2903` — `rgba(255,255,255,.32), transparent`
+- `client/src/content/registration-reference.css:2912` — `green`
+- `client/src/content/registration-reference.css:2913` — `#e5fff3, #fff`
+- `client/src/content/registration-reference.css:2914` — `#8bd6b8`
+- `client/src/content/registration-reference.css:2916` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:2920` — `#fff`
+- `client/src/content/registration-reference.css:2921` — `green`
+- `client/src/content/registration-reference.css:2923` — `rgba(11,92,67,.35)`
+- `client/src/content/registration-reference.css:2936` — `green`
+- `client/src/content/registration-reference.css:2950` — `rgba(255,255,255,.24), transparent`
+- `client/src/content/registration-reference.css:2974` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:2988` — `rgba(163,224,201,.18), transparent`
+- `client/src/content/registration-reference.css:2989` — `rgba(242,184,75,.14), transparent`
+- `client/src/content/registration-reference.css:3016` — `green`
+- `client/src/content/registration-reference.css:3025` — `rgba(23,155,104,.18)`
+- `client/src/content/registration-reference.css:3069` — `rgba(255,255,255,.28), transparent`
+- `client/src/content/registration-reference.css:3102` — `rgba(11,92,67,.13)`
+- `client/src/content/registration-reference.css:3103` — `rgba(23,155,104,.08)`
+- `client/src/content/registration-reference.css:3133` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:3134` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:3168` — `rgba(11,92,67,.10)`
+- `client/src/content/registration-reference.css:3180` — `rgba(23,155,104,.055)`
+- `client/src/content/registration-reference.css:3195` — `rgba(11,92,67,.08), rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:3202` — `rgba(0,0,0,.08)`
+- `client/src/content/registration-reference.css:3213` — `rgba(163,224,201,.15), transparent`
+- `client/src/content/registration-reference.css:3263` — `#35e0a0`
+- `client/src/content/registration-reference.css:3264` — `#63e6ff`
+- `client/src/content/registration-reference.css:3265` — `#8b7cff`
+- `client/src/content/registration-reference.css:3266` — `#062f24`
+- `client/src/content/registration-reference.css:3267` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:3274` — `rgba(53,224,160,.42), transparent`
+- `client/src/content/registration-reference.css:3275` — `rgba(99,230,255,.07), transparent`
+- `client/src/content/registration-reference.css:3276` — `rgba(139,124,255,.055), transparent`
+- `client/src/content/registration-reference.css:3294` — `rgba(53,224,160,.20), transparent`
+- `client/src/content/registration-reference.css:3295` — `rgba(99,230,255,.13), transparent`
+- `client/src/content/registration-reference.css:3296` — `rgba(23,155,104,.08), transparent`
+- `client/src/content/registration-reference.css:3309` — `rgba(255,255,255,.82)`
+- `client/src/content/registration-reference.css:3310` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:3312` — `rgba(0,0,0,.08)`
+- `client/src/content/registration-reference.css:3313` — `rgba(53,224,160,.05)`
+- `client/src/content/registration-reference.css:3323` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:3324` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:3337` — `green`
+- `client/src/content/registration-reference.css:3338` — `rgba(53,224,160,.55)`
+- `client/src/content/registration-reference.css:3348` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:3350` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:3351` — `rgba(53,224,160,.08)`
+- `client/src/content/registration-reference.css:3365` — `rgba(255,255,255,.10), transparent`
+- `client/src/content/registration-reference.css:3382` — `rgba(53,224,160,.28)`
+- `client/src/content/registration-reference.css:3383` — `rgba(99,230,255,.14)`
+- `client/src/content/registration-reference.css:3400` — `rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:3401` — `rgba(23,155,104,.13)`
+- `client/src/content/registration-reference.css:3403` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:3404` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:3421` — `rgba(53,224,160,.35)`
+- `client/src/content/registration-reference.css:3423` — `rgba(6,65,48,.14)`
+- `client/src/content/registration-reference.css:3424` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:3440` — `green`
+- `client/src/content/registration-reference.css:3480` — `rgba(255,255,255,.24), transparent`
+- `client/src/content/registration-reference.css:3509` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:3510` — `rgba(53,224,160,.17)`
+- `client/src/content/registration-reference.css:3519` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:3520` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:3531` — `rgba(6,65,48,.12)`
+- `client/src/content/registration-reference.css:3532` — `rgba(163,224,201,.12)`
+- `client/src/content/registration-reference.css:3577` — `rgba(53,224,160,.20), transparent`
+- `client/src/content/registration-reference.css:3578` — `rgba(99,230,255,.16), transparent`
+- `client/src/content/registration-reference.css:3579` — `rgba(139,124,255,.12), transparent`
+- `client/src/content/registration-reference.css:3580` — `rgba(242,184,75,.13), transparent`
+- `client/src/content/registration-reference.css:3581` — `#eef8f4, #f7fcfa, #f8fcfb`
+- `client/src/content/registration-reference.css:3588` — `rgba(53,224,160,.55), transparent`
+- `client/src/content/registration-reference.css:3589` — `rgba(99,230,255,.09), transparent`
+- `client/src/content/registration-reference.css:3590` — `rgba(139,124,255,.075), transparent`
+- `client/src/content/registration-reference.css:3605` — `transparent`
+- `client/src/content/registration-reference.css:3606` — `rgba(53,224,160,.08)`
+- `client/src/content/registration-reference.css:3607` — `transparent`
+- `client/src/content/registration-reference.css:3608` — `transparent`
+- `client/src/content/registration-reference.css:3609` — `rgba(99,230,255,.08)`
+- `client/src/content/registration-reference.css:3610` — `transparent`
+- `client/src/content/registration-reference.css:3622` — `rgba(53,224,160,.75), transparent`
+- `client/src/content/registration-reference.css:3650` — `rgba(244,252,248,.91), rgba(255,255,255,.96)`
+- `client/src/content/registration-reference.css:3651` — `rgba(23,155,104,.20)`
+- `client/src/content/registration-reference.css:3653` — `rgba(6,65,48,.10)`
+- `client/src/content/registration-reference.css:3654` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:3675` — `rgba(53,224,160,.7)`
+- `client/src/content/registration-reference.css:3676` — `transparent`
+- `client/src/content/registration-reference.css:3677` — `rgba(99,230,255,.45)`
+- `client/src/content/registration-reference.css:3678` — `transparent`
+- `client/src/content/registration-reference.css:3679` — `rgba(242,184,75,.55)`
+- `client/src/content/registration-reference.css:3681` — `#000`
+- `client/src/content/registration-reference.css:3704` — `rgba(6,65,48,.15)`
+- `client/src/content/registration-reference.css:3705` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:3715` — `#f2fbf7, #ffffff`
+- `client/src/content/registration-reference.css:3716` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:3718` — `rgba(6,65,48,.13)`
+- `client/src/content/registration-reference.css:3719` — `rgba(53,224,160,.06)`
+- `client/src/content/registration-reference.css:3733` — `transparent`
+- `client/src/content/registration-reference.css:3734` — `rgba(255,255,255,.38)`
+- `client/src/content/registration-reference.css:3735` — `transparent`
+- `client/src/content/registration-reference.css:3752` — `rgba(6,65,48,.19)`
+- `client/src/content/registration-reference.css:3753` — `rgba(53,224,160,.14)`
+- `client/src/content/registration-reference.css:3778` — `#0b5c43`
+- `client/src/content/registration-reference.css:3779` — `#effcf6, #ffffff`
+- `client/src/content/registration-reference.css:3796` — `rgba(163,224,201,.38)`
+- `client/src/content/registration-reference.css:3802` — `rgba(6,65,48,.16)`
+- `client/src/content/registration-reference.css:3803` — `rgba(255,255,255,.24)`
+- `client/src/content/registration-reference.css:3823` — `rgba(255,255,255,.32), transparent`
+- `client/src/content/registration-reference.css:3853` — `rgba(6,65,48,.23)`
+- `client/src/content/registration-reference.css:3854` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:3874` — `rgba(6,65,48,.06)`
+- `client/src/content/registration-reference.css:3881` — `#0b5c43, #35e0a0, #63e6ff, #f2b84b`
+- `client/src/content/registration-reference.css:3884` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:3895` — `rgba(163,224,201,.32)`
+- `client/src/content/registration-reference.css:3897` — `rgba(6,65,48,.16)`
+- `client/src/content/registration-reference.css:3898` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:3903` — `rgba(23,155,104,.20)`
+- `client/src/content/registration-reference.css:3905` — `rgba(6,65,48,.10)`
+- `client/src/content/registration-reference.css:3906` — `rgba(53,224,160,.05)`
+- `client/src/content/registration-reference.css:3910` — `rgba(0,0,0,.18)`
+- `client/src/content/registration-reference.css:3918` — `rgba(53,224,160,.08), rgba(99,230,255,.04)`
+- `client/src/content/registration-reference.css:3937` — `rgba(6,65,48,.09)`
+- `client/src/content/registration-reference.css:3946` — `#eaf5f0`
+- `client/src/content/registration-reference.css:3951` — `#0b5c43, #35e0a0, #63e6ff`
+- `client/src/content/registration-reference.css:3952` — `#eaf5f0`
+- `client/src/content/registration-reference.css:3956` — `#073a2a, #179b68, #35e0a0`
+- `client/src/content/registration-reference.css:3995` — `#073a2a`
+- `client/src/content/registration-reference.css:3996` — `#eafff6, #f7fdff`
+- `client/src/content/registration-reference.css:3997` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:3998` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:4017` — `rgba(3,35,27,.72)`
+- `client/src/content/registration-reference.css:4034` — `rgba(53,224,160,.10), transparent`
+- `client/src/content/registration-reference.css:4035` — `rgba(99,230,255,.08), transparent`
+- `client/src/content/registration-reference.css:4036` — `#f8fcfa`
+- `client/src/content/registration-reference.css:4037` — `rgba(53,224,160,.45)`
+- `client/src/content/registration-reference.css:4039` — `rgba(0,0,0,.35)`
+- `client/src/content/registration-reference.css:4040` — `rgba(53,224,160,.14)`
+- `client/src/content/registration-reference.css:4050` — `rgba(53,224,160,.18), transparent`
+- `client/src/content/registration-reference.css:4059` — `#fff`
+- `client/src/content/registration-reference.css:4060` — `#0b5c43, #126c55, #179b68`
+- `client/src/content/registration-reference.css:4061` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:4084` — `rgba(255,255,255,.35)`
+- `client/src/content/registration-reference.css:4086` — `rgba(255,255,255,.12)`
+- `client/src/content/registration-reference.css:4087` — `#fff`
+- `client/src/content/registration-reference.css:4095` — `#fff`
+- `client/src/content/registration-reference.css:4096` — `#0b5c43`
+- `client/src/content/registration-reference.css:4111` — `#4b5962`
+- `client/src/content/registration-reference.css:4131` — `#3d3d3d`
+- `client/src/content/registration-reference.css:4138` — `#e53935`
+- `client/src/content/registration-reference.css:4147` — `#d7dfe0`
+- `client/src/content/registration-reference.css:4149` — `rgba(255,255,255,.96)`
+- `client/src/content/registration-reference.css:4150` — `#222`
+- `client/src/content/registration-reference.css:4164` — `#179b68`
+- `client/src/content/registration-reference.css:4166` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:4167` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:4182` — `#3d3d3d`
+- `client/src/content/registration-reference.css:4188` — `#179b68`
+- `client/src/content/registration-reference.css:4199` — `#fff`
+- `client/src/content/registration-reference.css:4200` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:4207` — `rgba(6,65,48,.20)`
+- `client/src/content/registration-reference.css:4208` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:4216` — `rgba(6,65,48,.25)`
+- `client/src/content/registration-reference.css:4217` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:4232` — `rgba(255,255,255,.35), transparent`
+- `client/src/content/registration-reference.css:4241` — `#075c43`
+- `client/src/content/registration-reference.css:4242` — `#e5fff3`
+- `client/src/content/registration-reference.css:4243` — `#9de1c4`
+- `client/src/content/registration-reference.css:4254` — `#075c43`
+- `client/src/content/registration-reference.css:4255` — `#e9fff4`
+- `client/src/content/registration-reference.css:4256` — `#9de1c4`
+- `client/src/content/registration-reference.css:4325` — `rgba(53,224,160,.14), transparent`
+- `client/src/content/registration-reference.css:4326` — `rgba(99,230,255,.12), transparent`
+- `client/src/content/registration-reference.css:4327` — `rgba(255,255,255,.92)`
+- `client/src/content/registration-reference.css:4328` — `rgba(23,155,104,.20)`
+- `client/src/content/registration-reference.css:4329` — `rgba(6,65,48,.12)`
+- `client/src/content/registration-reference.css:4337` — `rgba(53,224,160,.20), transparent`
+- `client/src/content/registration-reference.css:4353` — `#0b5c43`
+- `client/src/content/registration-reference.css:4354` — `#e7fff3`
+- `client/src/content/registration-reference.css:4355` — `#a7e3c6`
+- `client/src/content/registration-reference.css:4363` — `#103375`
+- `client/src/content/registration-reference.css:4371` — `#64748b`
+- `client/src/content/registration-reference.css:4386` — `rgba(23,155,104,.18)`
+- `client/src/content/registration-reference.css:4389` — `#fff`
+- `client/src/content/registration-reference.css:4391` — `rgba(6,65,48,.09)`
+- `client/src/content/registration-reference.css:4406` — `#0b5c43`
+- `client/src/content/registration-reference.css:4407` — `#f0fff7, #fff`
+- `client/src/content/registration-reference.css:4414` — `rgba(53,224,160,.55)`
+- `client/src/content/registration-reference.css:4416` — `rgba(6,65,48,.16)`
+- `client/src/content/registration-reference.css:4417` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:4433` — `rgba(2,24,18,.88)`
+- `client/src/content/registration-reference.css:4446` — `rgba(255,255,255,.25)`
+- `client/src/content/registration-reference.css:4447` — `rgba(0,0,0,.45)`
+- `client/src/content/registration-reference.css:4456` — `rgba(255,255,255,.3)`
+- `client/src/content/registration-reference.css:4458` — `rgba(255,255,255,.12)`
+- `client/src/content/registration-reference.css:4459` — `#fff`
+- `client/src/content/registration-reference.css:4472` — `#fff`
+- `client/src/content/registration-reference.css:4473` — `#0b5c43`
+- `client/src/content/registration-reference.css:4502` — `rgba(46,139,87,.35)`
+- `client/src/content/registration-reference.css:4503` — `#eefbf5, #ffffff`
+- `client/src/content/registration-reference.css:4504` — `#174f3b`
+- `client/src/content/registration-reference.css:4510` — `rgba(0,0,0,.10)`
+- `client/src/content/registration-reference.css:4512` — `white`
+- `client/src/content/registration-reference.css:4514` — `rgba(0,0,0,.16)`
+- `client/src/content/registration-reference.css:4516` — `#07111f`
+- `client/src/content/registration-reference.css:4517` — `#e7f5f2`
+- `client/src/content/registration-reference.css:4519` — `#0b1726, rgba(0,0,0,.45)`
+- `client/src/content/registration-reference.css:4520` — `#0b1726`
+- `client/src/content/registration-reference.css:4521` — `#d8eee9`
+- `client/src/content/registration-reference.css:4522` — `#45e0bd`
+- `client/src/content/registration-reference.css:4524` — `#12283a, #193d50`
+- `client/src/content/registration-reference.css:4525` — `#8fffe5`
+- `client/src/content/registration-reference.css:4526` — `#2bd6b1`
+- `client/src/content/registration-reference.css:4527` — `rgba(43,214,177,.18)`
+- `client/src/content/registration-reference.css:4529` — `#087f9d, #0b765d`
+- `client/src/content/registration-reference.css:4533` — `#d9e9e7`
+- `client/src/content/registration-reference.css:4534` — `#65e6c4`
+- `client/src/content/registration-reference.css:4535` — `#8fd9c6`
+- `client/src/content/registration-reference.css:4536` — `#c7d8d6`
+- `client/src/content/registration-reference.css:4537` — `#263a4a`
+- `client/src/content/registration-reference.css:4546` — `#101f31, #294356, #e5f4f1`
+- `client/src/content/registration-reference.css:4549` — `#0c1a2a, #315064, #e5f4f1`
+- `client/src/content/registration-reference.css:4550` — `#91a9aa`
+- `client/src/content/registration-reference.css:4551` — `#06101c, #c9dcda`
+- `client/src/content/registration-reference.css:4552` — `#101f31, #294356, #e5f4f1`
+- `client/src/content/registration-reference.css:4553` — `#d8ebe7`
+- `client/src/content/registration-reference.css:4555` — `rgba(2,8,15,.94)`
+- `client/src/content/registration-reference.css:4566` — `rgba(46,139,87,.18)`
+- `client/src/content/registration-reference.css:4568` — `rgba(238,245,255,.92), rgba(240,250,244,.92)`
+- `client/src/content/registration-reference.css:4569` — `rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:4579` — `rgba(46,139,87,.15), transparent`
+- `client/src/content/registration-reference.css:4591` — `rgba(46,139,87,.30)`
+- `client/src/content/registration-reference.css:4593` — `#0f6b4f, #103375, #218b63`
+- `client/src/content/registration-reference.css:4594` — `#fff`
+- `client/src/content/registration-reference.css:4600` — `rgba(16,51,117,.18)`
+- `client/src/content/registration-reference.css:4604` — `rgba(16,51,117,.25)`
+- `client/src/content/registration-reference.css:4616` — `rgba(255,255,255,.16)`
+- `client/src/content/registration-reference.css:4617` — `rgba(255,255,255,.25)`
+- `client/src/content/registration-reference.css:4624` — `rgba(255,255,255,.15)`
+- `client/src/content/registration-reference.css:4625` — `rgba(255,255,255,.25)`
+- `client/src/content/registration-reference.css:4629` — `rgba(255,255,255,.25)`
+- `client/src/content/registration-reference.css:4637` — `rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:4639` — `rgba(46,139,87,.18)`
+- `client/src/content/registration-reference.css:4640` — `rgba(16,51,117,.10)`
+- `client/src/content/registration-reference.css:4647` — `#103375`
+- `client/src/content/registration-reference.css:4658` — `#103375, #2e8b57`
+- `client/src/content/registration-reference.css:4660` — `#64748b`
+- `client/src/content/registration-reference.css:4666` — `#d7e9df`
+- `client/src/content/registration-reference.css:4667` — `#f7fbf9, #fff`
+- `client/src/content/registration-reference.css:4668` — `#155e43`
+- `client/src/content/registration-reference.css:4675` — `rgba(15,50,80,.06)`
+- `client/src/content/registration-reference.css:4681` — `#103375, #2e8b57`
+- `client/src/content/registration-reference.css:4685` — `rgba(16,51,117,.12)`
+- `client/src/content/registration-reference.css:4688` — `#67b38a`
+- `client/src/content/registration-reference.css:4689` — `rgba(46,139,87,.14)`
+- `client/src/content/registration-reference.css:4693` — `#0f6b4f, #248f67`
+- `client/src/content/registration-reference.css:4694` — `#fff`
+- `client/src/content/registration-reference.css:4695` — `#0f6b4f`
+- `client/src/content/registration-reference.css:4696` — `rgba(23,111,80,.25)`
+- `client/src/content/registration-reference.css:4704` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:4705` — `rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:4709` — `#fff`
+- `client/src/content/registration-reference.css:4718` — `#ecf9f1, #edf4ff`
+- `client/src/content/registration-reference.css:4719` — `#166534`
+- `client/src/content/registration-reference.css:4720` — `#c9e5d3`
+- `client/src/content/registration-reference.css:4724` — `#2e8b57, #fff`
+- `client/src/content/registration-reference.css:4725` — `#103375`
+- `client/src/content/registration-reference.css:4736` — `#cfe5d8, #f4faf7, #fff, rgba(15,107,79,.13)`
+- `client/src/content/registration-reference.css:4737` — `#0b5c43, #103375, #16805f, #fff`
+- `client/src/content/registration-reference.css:4738` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:4739` — `rgba(255,255,255,.14), rgba(255,255,255,.24)`
+- `client/src/content/registration-reference.css:4740` — `#e8f7ef`
+- `client/src/content/registration-reference.css:4741` — `#e0eee6, #fff, rgba(15,76,58,.045)`
+- `client/src/content/registration-reference.css:4742` — `#0f6b4f, #103375, #2e8b57, #e4eee8, #fff`
+- `client/src/content/registration-reference.css:4743` — `#245c3c, #2e8b57, #c9dfd0, #fbfffc, rgba(46,139,87,.12)`
+- `client/src/content/registration-reference.css:4744` — `#103375, #1a5e3a, #334155, #475569, #64748b, #6b4e0b, #86bda0, #f2d99b, #f7fcf9, #fff8e7`
+- `client/src/content/registration-reference.css:4745` — `#0f6b4f, #166534, #2e8b57, #475569, #718096, #a9cbb6, #b7dec4, #d9e9df, #eef6f1, #fbfffc, #fff, rgba(15,107,79,.18)`
+- `client/src/content/registration-reference.css:4746` — `#166534, #b7e2c5, #e8f7ee`
+- `client/src/content/registration-reference.css:4752` — `#dcebe3, rgba(16,51,117,.10)`
+- `client/src/content/registration-reference.css:4753` — `#0f6b4d, #174c8c`
+- `client/src/content/registration-reference.css:4756` — `#f7fbf9`
+- `client/src/content/registration-reference.css:4757` — `rgba(16,51,117,.06)`
+- `client/src/content/registration-reference.css:4758` — `#103375`
+- `client/src/content/registration-reference.css:4759` — `#16724f, #e6f6ed`
+- `client/src/content/registration-reference.css:4761` — `#355064`
+- `client/src/content/registration-reference.css:4762` — `#17364d, #cddfd6, #fbfefd`
+- `client/src/content/registration-reference.css:4763` — `#cfe4da, #f4f8ff, #f5fcf8`
+- `client/src/content/registration-reference.css:4764` — `#0f7451, #174c8c, rgba(23,76,140,.18)`
+- `client/src/content/registration-reference.css:4770` — `rgba(16,51,117,.32), rgba(3,19,14,.76), rgba(43,182,115,.28), rgba(8,168,138,.24), transparent`
+- `client/src/content/registration-reference.css:4771` — `rgba(0,0,0,.42), rgba(242,250,247,.96), rgba(255,255,255,.45), rgba(255,255,255,.97), rgba(46,139,87,.08)`
+- `client/src/content/registration-reference.css:4772` — `#063f31, #0b6b51, #103375`
+- `client/src/content/registration-reference.css:4773` — `rgba(255,255,255,.03), rgba(255,255,255,.04), rgba(255,255,255,.2)`
+- `client/src/content/registration-reference.css:4774` — `rgba(0,0,0,.2)`
+- `client/src/content/registration-reference.css:4775` — `rgba(255,255,255,.14), rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:4776` — `#0b6b51, #fff`
+- `client/src/content/registration-reference.css:4777` — `#dbece3, #edf7f1, #f7fcf9`
+- `client/src/content/registration-reference.css:4778` — `rgba(16,51,117,.04), transparent`
+- `client/src/content/registration-reference.css:4780` — `#0b6b51, #168867, rgba(11,107,81,.22)`
+- `client/src/content/registration-reference.css:4782` — `rgba(46,139,87,.08), transparent`
+- `client/src/content/registration-reference.css:4783` — `rgba(16,51,117,.10), transparent`
+- `client/src/content/registration-reference.css:4784` — `#dcece4, rgba(16,51,117,.10), rgba(255,255,255,.84)`
+- `client/src/content/registration-reference.css:4786` — `#0b6b51, #2bb673, #fff, rgba(11,107,81,.28)`
+- `client/src/content/registration-reference.css:4787` — `#103375`
+- `client/src/content/registration-reference.css:4788` — `#64748b`
+- `client/src/content/registration-reference.css:4790` — `#245c3c`
+- `client/src/content/registration-reference.css:4793` — `#cfe2d8, #f4faf7, #fbfffc, rgba(255,255,255,.9)`
+- `client/src/content/registration-reference.css:4794` — `#1a8b69, #fff, rgba(11,107,81,.08), rgba(43,182,115,.13)`
+- `client/src/content/registration-reference.css:4795` — `#9aa8a1`
+- `client/src/content/registration-reference.css:4796` — `#0b6b51, #edf7f1`
+- `client/src/content/registration-reference.css:4797` — `#dff2e8`
+- `client/src/content/registration-reference.css:4799` — `#52616c`
+- `client/src/content/registration-reference.css:4800` — `#0b6b51`
+- `client/src/content/registration-reference.css:4801` — `#0b6b51`
+- `client/src/content/registration-reference.css:4803` — `#063f31, #0b6b51, #178a67, #fff, rgba(11,107,81,.25)`
+- `client/src/content/registration-reference.css:4804` — `rgba(255,255,255,.22), transparent`
+- `client/src/content/registration-reference.css:4805` — `rgba(11,107,81,.32)`
+- `client/src/content/registration-reference.css:4807` — `#94a3b8`
+- `client/src/content/registration-reference.css:4808` — `#d8e7df, transparent`
+- `client/src/content/registration-reference.css:4809` — `#d8e7df, transparent`
+- `client/src/content/registration-reference.css:4810` — `#64748b`
+- `client/src/content/registration-reference.css:4811` — `#103375`
+- `client/src/content/registration-reference.css:4812` — `#527061, #d8ebe1, #f1f8f5`
+- `client/src/content/registration-reference.css:4817` — `#bfe5d0, #eef5ff, #effcf5, rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:4818` — `#0b6b51, #fff, rgba(11,107,81,.25)`
+- `client/src/content/registration-reference.css:4819` — `#103375, #5a6673, #dc2626, #fff, rgba(220,38,38,.22)`
+- `client/src/content/registration-reference.css:4820` — `rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:4821` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:4829` — `#0b5c43`
+- `client/src/content/registration-reference.css:4830` — `rgba(5,60,45,.14)`
+- `client/src/content/registration-reference.css:4852` — `rgba(0,20,15,.18)`
+- `client/src/content/registration-reference.css:4856` — `rgba(0,0,0,.06), rgba(0,20,15,.48)`
+- `client/src/content/registration-reference.css:4861` — `#fff`
+- `client/src/content/registration-reference.css:4862` — `rgba(0,0,0,.65)`
+- `client/src/content/registration-reference.css:4866` — `rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:4867` — `rgba(7,70,51,.48)`
+- `client/src/content/registration-reference.css:4893` — `rgba(12,112,79,.18), rgba(236,247,255,.94), rgba(236,252,244,.97), rgba(255,255,255,.98), rgba(7,79,57,.10)`
+- `client/src/content/registration-reference.css:4895` — `#086448, #d8f7e8`
+- `client/src/content/registration-reference.css:4896` — `#075b47`
+- `client/src/content/registration-reference.css:4897` — `#526b63`
+- `client/src/content/registration-reference.css:4898` — `#15966d, #d7eee3, rgba(255,255,255,.92), rgba(8,75,55,.06)`
+- `client/src/content/registration-reference.css:4899` — `#075b47`
+- `client/src/content/registration-reference.css:4900` — `#33483f`
+- `client/src/content/registration-reference.css:4903` — `#0d6a50, #effcf5, #fff`
+- `client/src/content/registration-reference.css:4904` — `#075b47, #d8f7e8`
+- `client/src/content/registration-reference.css:4905` — `#d2e9de, #eef8ff, #f2fff8, #fff, rgba(8,73,53,.09)`
+- `client/src/content/registration-reference.css:4906` — `#075b47`
+- `client/src/content/registration-reference.css:4907` — `#5b6f67`
+- `client/src/content/registration-reference.css:4909` — `#dbece4, #fff, rgba(5,75,53,.09)`
+- `client/src/content/registration-reference.css:4910` — `rgba(5,75,53,.16)`
+- `client/src/content/registration-reference.css:4911` — `#edf7f2`
+- `client/src/content/registration-reference.css:4912` — `#245849`
+- `client/src/content/registration-reference.css:4914` — `#d4eadf, #effcf5, #fff, rgba(4,70,50,.07)`
+- `client/src/content/registration-reference.css:4915` — `#075b47`
+- `client/src/content/registration-reference.css:4916` — `#4b6359`
+- `client/src/content/registration-reference.css:4918` — `#d6e9df, #fff, rgba(7,72,53,.08)`
+- `client/src/content/registration-reference.css:4920` — `#0b6b50, #1aa77b, #fff, rgba(7,107,80,.22)`
+- `client/src/content/registration-reference.css:4921` — `#075b47`
+- `client/src/content/registration-reference.css:4922` — `#718178`
+- `client/src/content/registration-reference.css:4923` — `#f6faf7`
+- `client/src/content/registration-reference.css:4924` — `#63776d`
+- `client/src/content/registration-reference.css:4928` — `#665532, #c78a24, #fff9e9`
+- `client/src/content/registration-reference.css:4935` — `#f3faf7, #f7fbf9, #ffffff`
+- `client/src/content/registration-reference.css:4936` — `rgba(5,73,55,.16)`
+- `client/src/content/registration-reference.css:4939` — `rgba(14,128,82,.12)`
+- `client/src/content/registration-reference.css:4941` — `rgba(18,112,82,.22), transparent`
+- `client/src/content/registration-reference.css:4944` — `rgba(12,83,61,.13)`
+- `client/src/content/registration-reference.css:4952` — `#eef9f3, #f4fff9, #ffffff`
+- `client/src/content/registration-reference.css:4960` — `rgba(46,139,87,.10)`
+- `client/src/content/registration-reference.css:4969` — `rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:4976` — `#116d52, #bde2cc, #e5f7ec`
+- `client/src/content/registration-reference.css:4981` — `#0b5e48`
+- `client/src/content/registration-reference.css:4983` — `#4b6359`
+- `client/src/content/registration-reference.css:4986` — `rgba(255,255,255,.82)`
+- `client/src/content/registration-reference.css:4987` — `#d6eadf`
+- `client/src/content/registration-reference.css:4988` — `rgba(12,76,59,.12)`
+- `client/src/content/registration-reference.css:4993` — `#e1eee7, #fff`
+- `client/src/content/registration-reference.css:4996` — `#8fc9a9, rgba(12,76,59,.10)`
+- `client/src/content/registration-reference.css:5000` — `#0c6b50, #20a879, #fff`
+- `client/src/content/registration-reference.css:5001` — `rgba(12,107,80,.22)`
+- `client/src/content/registration-reference.css:5003` — `#70837a`
+- `client/src/content/registration-reference.css:5004` — `#103375`
+- `client/src/content/registration-reference.css:5005` — `#0f7658`
+- `client/src/content/registration-reference.css:5009` — `#103375, #176b58, #fff`
+- `client/src/content/registration-reference.css:5010` — `rgba(16,51,117,.18)`
+- `client/src/content/registration-reference.css:5014` — `#eaf6f1`
+- `client/src/content/registration-reference.css:5021` — `#0f6b51, #fff`
+- `client/src/content/registration-reference.css:5022` — `#fff, rgba(255,255,255,.08), rgba(255,255,255,.55)`
+- `client/src/content/registration-reference.css:5023` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:5025` — `#fff`
+- `client/src/content/registration-reference.css:5026` — `#dcebe3, rgba(12,76,59,.08)`
+- `client/src/content/registration-reference.css:5029` — `#1a7a5e`
+- `client/src/content/registration-reference.css:5030` — `#103375`
+- `client/src/content/registration-reference.css:5031` — `#56665f`
+- `client/src/content/registration-reference.css:5033` — `#1a7a5e, #fff`
+- `client/src/content/registration-reference.css:5034` — `#1a7a5e, #fff`
+- `client/src/content/registration-reference.css:5054` — `rgba(255,255,255,.92), transparent`
+- `client/src/content/registration-reference.css:5055` — `rgba(37,174,102,.13), transparent`
+- `client/src/content/registration-reference.css:5056` — `#eef9f2, #f8fffb, #f9fffc`
+- `client/src/content/registration-reference.css:5069` — `rgba(32,163,106,.10)`
+- `client/src/content/registration-reference.css:5074` — `rgba(22,112,87,.08)`
+- `client/src/content/registration-reference.css:5087` — `rgba(17,109,82,.10)`
+- `client/src/content/registration-reference.css:5088` — `#0f6b51`
+- `client/src/content/registration-reference.css:5096` — `#0b5e48`
+- `client/src/content/registration-reference.css:5102` — `#34453f`
+- `client/src/content/registration-reference.css:5112` — `rgba(255,255,255,.90)`
+- `client/src/content/registration-reference.css:5113` — `rgba(16,112,83,.22)`
+- `client/src/content/registration-reference.css:5117` — `rgba(12,76,59,.10)`
+- `client/src/content/registration-reference.css:5123` — `rgba(12,76,59,.18)`
+- `client/src/content/registration-reference.css:5124` — `#14956f`
+- `client/src/content/registration-reference.css:5131` — `#0c6b50, #20a879`
+- `client/src/content/registration-reference.css:5132` — `#fff`
+- `client/src/content/registration-reference.css:5134` — `rgba(14,112,82,.24)`
+- `client/src/content/registration-reference.css:5136` — `#125f4b`
+- `client/src/content/registration-reference.css:5137` — `#596760`
+- `client/src/content/registration-reference.css:5139` — `#0c7b5c`
+- `client/src/content/registration-reference.css:5148` — `#075e49, #158c69`
+- `client/src/content/registration-reference.css:5149` — `#fff`
+- `client/src/content/registration-reference.css:5154` — `rgba(7,94,73,.22)`
+- `client/src/content/registration-reference.css:5173` — `white`
+- `client/src/content/registration-reference.css:5176` — `#09644d, #fff`
+- `client/src/content/registration-reference.css:5177` — `#fff, rgba(255,255,255,.10), rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:5180` — `rgba(0,0,0,.16)`
+- `client/src/content/registration-reference.css:5206` — `rgba(255,255,255,.96), transparent`
+- `client/src/content/registration-reference.css:5207` — `rgba(47,181,105,.16), transparent`
+- `client/src/content/registration-reference.css:5208` — `#edf9f2, #f7fffb, #f8fffb`
+- `client/src/content/registration-reference.css:5221` — `rgba(35,167,99,.09)`
+- `client/src/content/registration-reference.css:5226` — `rgba(19,120,89,.08)`
+- `client/src/content/registration-reference.css:5233` — `rgba(255,255,255,.60), transparent`
+- `client/src/content/registration-reference.css:5234` — `rgba(255,255,255,.50), transparent`
+- `client/src/content/registration-reference.css:5252` — `rgba(12,106,78,.10)`
+- `client/src/content/registration-reference.css:5253` — `#0a6b50`
+- `client/src/content/registration-reference.css:5260` — `#075e49`
+- `client/src/content/registration-reference.css:5267` — `#34483f`
+- `client/src/content/registration-reference.css:5281` — `rgba(11,111,82,.18)`
+- `client/src/content/registration-reference.css:5283` — `rgba(255,255,255,.90)`
+- `client/src/content/registration-reference.css:5284` — `rgba(10,75,58,.11)`
+- `client/src/content/registration-reference.css:5293` — `#0b654c, #22a878`
+- `client/src/content/registration-reference.css:5297` — `rgba(14,139,100,.48)`
+- `client/src/content/registration-reference.css:5298` — `rgba(10,75,58,.18)`
+- `client/src/content/registration-reference.css:5307` — `#fff`
+- `client/src/content/registration-reference.css:5309` — `#075e49, #20a779`
+- `client/src/content/registration-reference.css:5310` — `rgba(10,110,81,.25)`
+- `client/src/content/registration-reference.css:5315` — `#6a7b73`
+- `client/src/content/registration-reference.css:5322` — `#0a644d`
+- `client/src/content/registration-reference.css:5328` — `#596960`
+- `client/src/content/registration-reference.css:5333` — `#087a5b`
+- `client/src/content/registration-reference.css:5346` — `#fff`
+- `client/src/content/registration-reference.css:5347` — `#075e49, #138a68`
+- `client/src/content/registration-reference.css:5348` — `rgba(7,94,73,.23)`
+- `client/src/content/registration-reference.css:5362` — `rgba(255,255,255,.15)`
+- `client/src/content/registration-reference.css:5399` — `#075e49`
+- `client/src/content/registration-reference.css:5400` — `#fff`
+- `client/src/content/registration-reference.css:5403` — `#fff`
+- `client/src/content/registration-reference.css:5404` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:5405` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:5410` — `rgba(0,0,0,.17)`
+- `client/src/content/registration-reference.css:5436` — `rgba(255,255,255,.98), transparent`
+- `client/src/content/registration-reference.css:5437` — `rgba(255,255,255,.78), transparent`
+- `client/src/content/registration-reference.css:5438` — `#e8f5ec, #eff9f2, #fbfffd`
+- `client/src/content/registration-reference.css:5445` — `rgba(255,255,255,.72), transparent`
+- `client/src/content/registration-reference.css:5446` — `rgba(255,255,255,.60), transparent`
+- `client/src/content/registration-reference.css:5447` — `rgba(89,194,120,.10), transparent`
+- `client/src/content/registration-reference.css:5459` — `rgba(55,176,104,.10)`
+- `client/src/content/registration-reference.css:5464` — `rgba(24,139,94,.08)`
+- `client/src/content/registration-reference.css:5481` — `rgba(10,108,78,.10)`
+- `client/src/content/registration-reference.css:5482` — `#0a6b50`
+- `client/src/content/registration-reference.css:5489` — `#075e49`
+- `client/src/content/registration-reference.css:5495` — `#2f423a`
+- `client/src/content/registration-reference.css:5505` — `rgba(13,113,82,.18)`
+- `client/src/content/registration-reference.css:5507` — `rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:5508` — `rgba(8,76,57,.12)`
+- `client/src/content/registration-reference.css:5524` — `#fff`
+- `client/src/content/registration-reference.css:5526` — `#075e49, #20a879`
+- `client/src/content/registration-reference.css:5527` — `rgba(10,112,82,.23)`
+- `client/src/content/registration-reference.css:5531` — `#718079`
+- `client/src/content/registration-reference.css:5538` — `#0b644d`
+- `client/src/content/registration-reference.css:5542` — `#151e1a`
+- `client/src/content/registration-reference.css:5548` — `#087c5b`
+- `client/src/content/registration-reference.css:5554` — `rgba(17,105,78,.16)`
+- `client/src/content/registration-reference.css:5560` — `#fff`
+- `client/src/content/registration-reference.css:5561` — `#075e49, #158e6a`
+- `client/src/content/registration-reference.css:5562` — `rgba(7,94,73,.23)`
+- `client/src/content/registration-reference.css:5602` — `rgba(0,0,0,.17)`
+- `client/src/content/registration-reference.css:5605` — `#075e49`
+- `client/src/content/registration-reference.css:5606` — `#fff`
+- `client/src/content/registration-reference.css:5609` — `#fff`
+- `client/src/content/registration-reference.css:5610` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:5611` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:5649` — `rgba(23,155,104,.09), transparent`
+- `client/src/content/registration-reference.css:5650` — `rgba(242,184,75,.08), transparent`
+- `client/src/content/registration-reference.css:5651` — `#f4f8f6`
+- `client/src/content/registration-reference.css:5663` — `rgba(23,155,104,.32), transparent`
+- `client/src/content/registration-reference.css:5664` — `rgba(23,155,104,.055), transparent`
+- `client/src/content/registration-reference.css:5665` — `rgba(11,92,67,.045), transparent`
+- `client/src/content/registration-reference.css:5680` — `rgba(23,155,104,.16), transparent`
+- `client/src/content/registration-reference.css:5709` — `rgba(163,224,201,.16), transparent`
+- `client/src/content/registration-reference.css:5710` — `rgba(242,184,75,.13), transparent`
+- `client/src/content/registration-reference.css:5730` — `#179b68`
+- `client/src/content/registration-reference.css:5733` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:5734` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:5748` — `#0b5c43, #179b68, #f2b84b`
+- `client/src/content/registration-reference.css:5761` — `rgba(0,0,0,.13)`
+- `client/src/content/registration-reference.css:5771` — `#a3e0c9`
+- `client/src/content/registration-reference.css:5773` — `rgba(163,224,201,.5)`
+- `client/src/content/registration-reference.css:5792` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:5793` — `rgba(23,155,104,.08)`
+- `client/src/content/registration-reference.css:5816` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:5817` — `rgba(23,155,104,.14)`
+- `client/src/content/registration-reference.css:5835` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:5848` — `rgba(255,255,255,.22), transparent`
+- `client/src/content/registration-reference.css:5886` — `transparent`
+- `client/src/content/registration-reference.css:5907` — `transparent`
+- `client/src/content/registration-reference.css:5908` — `rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:5909` — `transparent`
+- `client/src/content/registration-reference.css:5921` — `#0b5c43`
+- `client/src/content/registration-reference.css:5922` — `#e7fff5, #ffffff`
+- `client/src/content/registration-reference.css:5923` — `#8bd6b8`
+- `client/src/content/registration-reference.css:5926` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:5927` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:5932` — `#ffffff`
+- `client/src/content/registration-reference.css:5933` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:5934` — `#a3e0c9`
+- `client/src/content/registration-reference.css:5937` — `rgba(11,92,67,.35)`
+- `client/src/content/registration-reference.css:5938` — `rgba(255,255,255,.10)`
+- `client/src/content/registration-reference.css:5944` — `#0b5c43`
+- `client/src/content/registration-reference.css:5945` — `#e7fff5, #ffffff`
+- `client/src/content/registration-reference.css:5946` — `#179b68`
+- `client/src/content/registration-reference.css:5948` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:5949` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:5955` — `#ffffff`
+- `client/src/content/registration-reference.css:5956` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:5957` — `#a3e0c9`
+- `client/src/content/registration-reference.css:5959` — `rgba(11,92,67,.25)`
+- `client/src/content/registration-reference.css:5960` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:5975` — `#0b5c43`
+- `client/src/content/registration-reference.css:5976` — `#dffbef, #ffffff`
+- `client/src/content/registration-reference.css:5978` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:5979` — `rgba(23,155,104,.14)`
+- `client/src/content/registration-reference.css:5984` — `#f2b84b`
+- `client/src/content/registration-reference.css:6031` — `#073a2a`
+- `client/src/content/registration-reference.css:6032` — `#0b5c43, green`
+- `client/src/content/registration-reference.css:6033` — `#179b68`
+- `client/src/content/registration-reference.css:6034` — `#a3e0c9`
+- `client/src/content/registration-reference.css:6035` — `#f2b84b`
+- `client/src/content/registration-reference.css:6036` — `#173f7a, blue`
+- `client/src/content/registration-reference.css:6037` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:6049` — `rgba(23,155,104,.09), transparent`
+- `client/src/content/registration-reference.css:6050` — `rgba(242,184,75,.08), transparent`
+- `client/src/content/registration-reference.css:6051` — `#f2f8f5, #f8fcfa`
+- `client/src/content/registration-reference.css:6063` — `rgba(23,155,104,.30), transparent`
+- `client/src/content/registration-reference.css:6064` — `rgba(23,155,104,.055), transparent`
+- `client/src/content/registration-reference.css:6065` — `rgba(11,92,67,.045), transparent`
+- `client/src/content/registration-reference.css:6080` — `rgba(23,155,104,.16), transparent`
+- `client/src/content/registration-reference.css:6106` — `rgba(255,255,255,.94)`
+- `client/src/content/registration-reference.css:6109` — `rgba(0,0,0,.10)`
+- `client/src/content/registration-reference.css:6119` — `transparent`
+- `client/src/content/registration-reference.css:6133` — `rgba(255,255,255,.32), transparent`
+- `client/src/content/registration-reference.css:6142` — `green`
+- `client/src/content/registration-reference.css:6143` — `#e5fff3, #fff`
+- `client/src/content/registration-reference.css:6144` — `#8bd6b8`
+- `client/src/content/registration-reference.css:6146` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:6150` — `#fff`
+- `client/src/content/registration-reference.css:6151` — `green`
+- `client/src/content/registration-reference.css:6153` — `rgba(11,92,67,.35)`
+- `client/src/content/registration-reference.css:6166` — `green`
+- `client/src/content/registration-reference.css:6180` — `rgba(255,255,255,.24), transparent`
+- `client/src/content/registration-reference.css:6204` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:6218` — `rgba(163,224,201,.18), transparent`
+- `client/src/content/registration-reference.css:6219` — `rgba(242,184,75,.14), transparent`
+- `client/src/content/registration-reference.css:6246` — `green`
+- `client/src/content/registration-reference.css:6255` — `rgba(23,155,104,.18)`
+- `client/src/content/registration-reference.css:6299` — `rgba(255,255,255,.28), transparent`
+- `client/src/content/registration-reference.css:6332` — `rgba(11,92,67,.13)`
+- `client/src/content/registration-reference.css:6333` — `rgba(23,155,104,.08)`
+- `client/src/content/registration-reference.css:6363` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:6364` — `rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:6398` — `rgba(11,92,67,.10)`
+- `client/src/content/registration-reference.css:6410` — `rgba(23,155,104,.055)`
+- `client/src/content/registration-reference.css:6425` — `rgba(11,92,67,.08), rgba(23,155,104,.12)`
+- `client/src/content/registration-reference.css:6432` — `rgba(0,0,0,.08)`
+- `client/src/content/registration-reference.css:6443` — `rgba(163,224,201,.15), transparent`
+- `client/src/content/registration-reference.css:6493` — `#35e0a0`
+- `client/src/content/registration-reference.css:6494` — `#63e6ff`
+- `client/src/content/registration-reference.css:6495` — `#8b7cff`
+- `client/src/content/registration-reference.css:6496` — `#062f24`
+- `client/src/content/registration-reference.css:6497` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:6504` — `rgba(53,224,160,.42), transparent`
+- `client/src/content/registration-reference.css:6505` — `rgba(99,230,255,.07), transparent`
+- `client/src/content/registration-reference.css:6506` — `rgba(139,124,255,.055), transparent`
+- `client/src/content/registration-reference.css:6524` — `rgba(53,224,160,.20), transparent`
+- `client/src/content/registration-reference.css:6525` — `rgba(99,230,255,.13), transparent`
+- `client/src/content/registration-reference.css:6526` — `rgba(23,155,104,.08), transparent`
+- `client/src/content/registration-reference.css:6539` — `rgba(255,255,255,.82)`
+- `client/src/content/registration-reference.css:6540` — `rgba(23,155,104,.16)`
+- `client/src/content/registration-reference.css:6542` — `rgba(0,0,0,.08)`
+- `client/src/content/registration-reference.css:6543` — `rgba(53,224,160,.05)`
+- `client/src/content/registration-reference.css:6553` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:6554` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:6567` — `green`
+- `client/src/content/registration-reference.css:6568` — `rgba(53,224,160,.55)`
+- `client/src/content/registration-reference.css:6578` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:6580` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:6581` — `rgba(53,224,160,.08)`
+- `client/src/content/registration-reference.css:6595` — `rgba(255,255,255,.10), transparent`
+- `client/src/content/registration-reference.css:6612` — `rgba(53,224,160,.28)`
+- `client/src/content/registration-reference.css:6613` — `rgba(99,230,255,.14)`
+- `client/src/content/registration-reference.css:6630` — `rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:6631` — `rgba(23,155,104,.13)`
+- `client/src/content/registration-reference.css:6633` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:6634` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:6651` — `rgba(53,224,160,.35)`
+- `client/src/content/registration-reference.css:6653` — `rgba(6,65,48,.14)`
+- `client/src/content/registration-reference.css:6654` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:6670` — `green`
+- `client/src/content/registration-reference.css:6710` — `rgba(255,255,255,.24), transparent`
+- `client/src/content/registration-reference.css:6739` — `rgba(11,92,67,.22)`
+- `client/src/content/registration-reference.css:6740` — `rgba(53,224,160,.17)`
+- `client/src/content/registration-reference.css:6749` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:6750` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:6761` — `rgba(6,65,48,.12)`
+- `client/src/content/registration-reference.css:6762` — `rgba(163,224,201,.12)`
+- `client/src/content/registration-reference.css:6807` — `rgba(53,224,160,.20), transparent`
+- `client/src/content/registration-reference.css:6808` — `rgba(99,230,255,.16), transparent`
+- `client/src/content/registration-reference.css:6809` — `rgba(139,124,255,.12), transparent`
+- `client/src/content/registration-reference.css:6810` — `rgba(242,184,75,.13), transparent`
+- `client/src/content/registration-reference.css:6811` — `#eef8f4, #f7fcfa, #f8fcfb`
+- `client/src/content/registration-reference.css:6818` — `rgba(53,224,160,.55), transparent`
+- `client/src/content/registration-reference.css:6819` — `rgba(99,230,255,.09), transparent`
+- `client/src/content/registration-reference.css:6820` — `rgba(139,124,255,.075), transparent`
+- `client/src/content/registration-reference.css:6835` — `transparent`
+- `client/src/content/registration-reference.css:6836` — `rgba(53,224,160,.08)`
+- `client/src/content/registration-reference.css:6837` — `transparent`
+- `client/src/content/registration-reference.css:6838` — `transparent`
+- `client/src/content/registration-reference.css:6839` — `rgba(99,230,255,.08)`
+- `client/src/content/registration-reference.css:6840` — `transparent`
+- `client/src/content/registration-reference.css:6852` — `rgba(53,224,160,.75), transparent`
+- `client/src/content/registration-reference.css:6880` — `rgba(244,252,248,.91), rgba(255,255,255,.96)`
+- `client/src/content/registration-reference.css:6881` — `rgba(23,155,104,.20)`
+- `client/src/content/registration-reference.css:6883` — `rgba(6,65,48,.10)`
+- `client/src/content/registration-reference.css:6884` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:6905` — `rgba(53,224,160,.7)`
+- `client/src/content/registration-reference.css:6906` — `transparent`
+- `client/src/content/registration-reference.css:6907` — `rgba(99,230,255,.45)`
+- `client/src/content/registration-reference.css:6908` — `transparent`
+- `client/src/content/registration-reference.css:6909` — `rgba(242,184,75,.55)`
+- `client/src/content/registration-reference.css:6911` — `#000`
+- `client/src/content/registration-reference.css:6934` — `rgba(6,65,48,.15)`
+- `client/src/content/registration-reference.css:6935` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:6945` — `#f2fbf7, #ffffff`
+- `client/src/content/registration-reference.css:6946` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:6948` — `rgba(6,65,48,.13)`
+- `client/src/content/registration-reference.css:6949` — `rgba(53,224,160,.06)`
+- `client/src/content/registration-reference.css:6963` — `transparent`
+- `client/src/content/registration-reference.css:6964` — `rgba(255,255,255,.38)`
+- `client/src/content/registration-reference.css:6965` — `transparent`
+- `client/src/content/registration-reference.css:6982` — `rgba(6,65,48,.19)`
+- `client/src/content/registration-reference.css:6983` — `rgba(53,224,160,.14)`
+- `client/src/content/registration-reference.css:7008` — `#0b5c43`
+- `client/src/content/registration-reference.css:7009` — `#effcf6, #ffffff`
+- `client/src/content/registration-reference.css:7026` — `rgba(163,224,201,.38)`
+- `client/src/content/registration-reference.css:7032` — `rgba(6,65,48,.16)`
+- `client/src/content/registration-reference.css:7033` — `rgba(255,255,255,.24)`
+- `client/src/content/registration-reference.css:7053` — `rgba(255,255,255,.32), transparent`
+- `client/src/content/registration-reference.css:7083` — `rgba(6,65,48,.23)`
+- `client/src/content/registration-reference.css:7084` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:7104` — `rgba(6,65,48,.06)`
+- `client/src/content/registration-reference.css:7111` — `#0b5c43, #35e0a0, #63e6ff, #f2b84b`
+- `client/src/content/registration-reference.css:7114` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:7125` — `rgba(163,224,201,.32)`
+- `client/src/content/registration-reference.css:7127` — `rgba(6,65,48,.16)`
+- `client/src/content/registration-reference.css:7128` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:7133` — `rgba(23,155,104,.20)`
+- `client/src/content/registration-reference.css:7135` — `rgba(6,65,48,.10)`
+- `client/src/content/registration-reference.css:7136` — `rgba(53,224,160,.05)`
+- `client/src/content/registration-reference.css:7140` — `rgba(0,0,0,.18)`
+- `client/src/content/registration-reference.css:7148` — `rgba(53,224,160,.08), rgba(99,230,255,.04)`
+- `client/src/content/registration-reference.css:7167` — `rgba(6,65,48,.09)`
+- `client/src/content/registration-reference.css:7176` — `#eaf5f0`
+- `client/src/content/registration-reference.css:7181` — `#0b5c43, #35e0a0, #63e6ff`
+- `client/src/content/registration-reference.css:7182` — `#eaf5f0`
+- `client/src/content/registration-reference.css:7186` — `#073a2a, #179b68, #35e0a0`
+- `client/src/content/registration-reference.css:7225` — `#073a2a`
+- `client/src/content/registration-reference.css:7226` — `#eafff6, #f7fdff`
+- `client/src/content/registration-reference.css:7227` — `rgba(23,155,104,.22)`
+- `client/src/content/registration-reference.css:7228` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:7247` — `rgba(3,35,27,.72)`
+- `client/src/content/registration-reference.css:7264` — `rgba(53,224,160,.10), transparent`
+- `client/src/content/registration-reference.css:7265` — `rgba(99,230,255,.08), transparent`
+- `client/src/content/registration-reference.css:7266` — `#f8fcfa`
+- `client/src/content/registration-reference.css:7267` — `rgba(53,224,160,.45)`
+- `client/src/content/registration-reference.css:7269` — `rgba(0,0,0,.35)`
+- `client/src/content/registration-reference.css:7270` — `rgba(53,224,160,.14)`
+- `client/src/content/registration-reference.css:7280` — `rgba(53,224,160,.18), transparent`
+- `client/src/content/registration-reference.css:7289` — `#fff`
+- `client/src/content/registration-reference.css:7290` — `#0b5c43, #126c55, #179b68`
+- `client/src/content/registration-reference.css:7291` — `rgba(6,65,48,.18)`
+- `client/src/content/registration-reference.css:7314` — `rgba(255,255,255,.35)`
+- `client/src/content/registration-reference.css:7316` — `rgba(255,255,255,.12)`
+- `client/src/content/registration-reference.css:7317` — `#fff`
+- `client/src/content/registration-reference.css:7325` — `#fff`
+- `client/src/content/registration-reference.css:7326` — `#0b5c43`
+- `client/src/content/registration-reference.css:7341` — `#4b5962`
+- `client/src/content/registration-reference.css:7361` — `#3d3d3d`
+- `client/src/content/registration-reference.css:7368` — `#e53935`
+- `client/src/content/registration-reference.css:7377` — `#d7dfe0`
+- `client/src/content/registration-reference.css:7379` — `rgba(255,255,255,.96)`
+- `client/src/content/registration-reference.css:7380` — `#222`
+- `client/src/content/registration-reference.css:7394` — `#179b68`
+- `client/src/content/registration-reference.css:7396` — `rgba(53,224,160,.12)`
+- `client/src/content/registration-reference.css:7397` — `rgba(6,65,48,.08)`
+- `client/src/content/registration-reference.css:7412` — `#3d3d3d`
+- `client/src/content/registration-reference.css:7418` — `#179b68`
+- `client/src/content/registration-reference.css:7429` — `#fff`
+- `client/src/content/registration-reference.css:7430` — `#0b5c43, #179b68`
+- `client/src/content/registration-reference.css:7437` — `rgba(6,65,48,.20)`
+- `client/src/content/registration-reference.css:7438` — `rgba(53,224,160,.10)`
+- `client/src/content/registration-reference.css:7446` — `rgba(6,65,48,.25)`
+- `client/src/content/registration-reference.css:7447` — `rgba(53,224,160,.18)`
+- `client/src/content/registration-reference.css:7462` — `rgba(255,255,255,.35), transparent`
+- `client/src/content/registration-reference.css:7471` — `#075c43`
+- `client/src/content/registration-reference.css:7472` — `#e5fff3`
+- `client/src/content/registration-reference.css:7473` — `#9de1c4`
+- `client/src/content/registration-reference.css:7484` — `#075c43`
+- `client/src/content/registration-reference.css:7485` — `#e9fff4`
+- `client/src/content/registration-reference.css:7486` — `#9de1c4`
+- `client/src/content/registration-reference.css:7546` — `rgba(16,185,129,.13), transparent`
+- `client/src/content/registration-reference.css:7547` — `rgba(59,130,246,.10), transparent`
+- `client/src/content/registration-reference.css:7548` — `#eef8f4, #f5f9ff, #f7fffb`
+- `client/src/content/registration-reference.css:7551` — `#075e49, #1769e0, #18a878, #7c3aed`
+- `client/src/content/registration-reference.css:7553` — `transparent`
+- `client/src/content/registration-reference.css:7555` — `rgba(24,168,120,.12)`
+- `client/src/content/registration-reference.css:7559` — `rgba(10,108,78,.08)`
+- `client/src/content/registration-reference.css:7560` — `rgba(10,108,78,.12)`
+- `client/src/content/registration-reference.css:7567` — `rgba(255,255,255,.68)`
+- `client/src/content/registration-reference.css:7568` — `rgba(8,76,57,.12)`
+- `client/src/content/registration-reference.css:7575` — `rgba(244,251,248,.94), rgba(255,255,255,.98)`
+- `client/src/content/registration-reference.css:7576` — `rgba(17,105,78,.11)`
+- `client/src/content/registration-reference.css:7577` — `rgba(12,76,59,.07)`
+- `client/src/content/registration-reference.css:7583` — `#075e49, #1769e0, #20a879`
+- `client/src/content/registration-reference.css:7587` — `rgba(32,168,121,.08)`
+- `client/src/content/registration-reference.css:7591` — `rgba(24,168,120,.32)`
+- `client/src/content/registration-reference.css:7592` — `rgba(12,76,59,.14)`
+- `client/src/content/registration-reference.css:7596` — `#075e49, #1769e0, #20a879`
+- `client/src/content/registration-reference.css:7597` — `rgba(10,112,82,.22)`
+- `client/src/content/registration-reference.css:7603` — `#70837a`
+- `client/src/content/registration-reference.css:7604` — `#103375`
+- `client/src/content/registration-reference.css:7605` — `#0f7658`
+- `client/src/content/registration-reference.css:7611` — `#063f32, #08745a, #1769b5`
+- `client/src/content/registration-reference.css:7612` — `rgba(7,94,73,.22)`
+- `client/src/content/registration-reference.css:7616` — `rgba(255,255,255,.16)`
+- `client/src/content/registration-reference.css:7621` — `rgba(255,255,255,.06)`
+- `client/src/content/registration-reference.css:7625` — `rgba(255,255,255,.15)`
+- `client/src/content/registration-reference.css:7626` — `rgba(255,255,255,.15)`
+- `client/src/content/registration-reference.css:7633` — `rgba(0,0,0,.12)`
+- `client/src/content/registration-reference.css:7637` — `#f5fbf8, #fff`
+- `client/src/content/registration-reference.css:7638` — `#d7ebe1`
+- `client/src/content/registration-reference.css:7639` — `rgba(12,76,59,.09)`
+- `client/src/content/registration-reference.css:7641` — `#103375`
+- `client/src/content/registration-reference.css:7642` — `#0b7657`
+- `client/src/content/registration-reference.css:7643` — `#0b7657, #18a878`
+- `client/src/content/registration-reference.css:7644` — `#0b7657, #15936f`
+- `client/src/content/registration-reference.css:7669` — `#fff`
+- `client/src/content/registration-reference.css:7670` — `#fff`
+- `client/src/content/registration-reference.css:7671` — `#0b6b51, #168b66`
+- `client/src/content/registration-reference.css:7673` — `rgba(11,107,81,.18)`
+- `client/src/content/registration-reference.css:7706` — `#eef7ff, #f4fbf7`
+- `client/src/content/registration-reference.css:7707` — `#d7e9df`
+- `client/src/content/registration-reference.css:7711` — `#103375`
+- `client/src/content/registration-reference.css:7721` — `#e5f5ec`
+- `client/src/content/registration-reference.css:7722` — `#166534`
+- `client/src/content/registration-reference.css:7731` — `#cfe3d6`
+- `client/src/content/registration-reference.css:7732` — `#fff`
+- `client/src/content/registration-reference.css:7733` — `#174c36`
+- `client/src/content/registration-reference.css:7742` — `rgba(20,76,55,.06)`
+- `client/src/content/registration-reference.css:7751` — `#2e8b57`
+- `client/src/content/registration-reference.css:7752` — `rgba(20,76,55,.13)`
+- `client/src/content/registration-reference.css:7753` — `#f7fffa`
+- `client/src/content/registration-reference.css:7756` — `#fff`
+- `client/src/content/registration-reference.css:7757` — `#1a7a5e`
+- `client/src/content/registration-reference.css:7758` — `#0b6b51, #2e9b69`
+- `client/src/content/registration-reference.css:7759` — `rgba(11,107,81,.24)`
+- `client/src/content/registration-reference.css:7762` — `#173b80`
+- `client/src/content/registration-reference.css:7763` — `#c8d7f5`
+- `client/src/content/registration-reference.css:7766` — `#fff`
+- `client/src/content/registration-reference.css:7767` — `#103375`
+- `client/src/content/registration-reference.css:7768` — `#103375, #2563eb`
+- `client/src/content/registration-reference.css:7774` — `#64748b`
+- `client/src/content/registration-reference.css:7776` — `#0b6b51`
+- `client/src/content/registration-reference.css:7796` — `#c9dfd4, #eef5ff, #f6fbf8, rgba(16,51,117,.10)`
+- `client/src/content/registration-reference.css:7797` — `#d7e6df`
+- `client/src/content/registration-reference.css:7798` — `#103375`
+- `client/src/content/registration-reference.css:7799` — `#64748b`
+- `client/src/content/registration-reference.css:7800` — `#103375, #fff`
+- `client/src/content/registration-reference.css:7801` — `#9a6700, #f0d28b, #fff8e6`
+- `client/src/content/registration-reference.css:7802` — `#137044, #9ad4b3, #e8f8ef`
+- `client/src/content/registration-reference.css:7803` — `#a52727, #efb0b0, #fff0f0`
+- `client/src/content/registration-reference.css:7805` — `#dce9e3, #fff`
+- `client/src/content/registration-reference.css:7806` — `#708090`
+- `client/src/content/registration-reference.css:7807` — `#173d34`
+- `client/src/content/registration-reference.css:7808` — `#667085, #b8cec4, #fff`
+- `client/src/content/registration-reference.css:7810` — `#eefaf5, #f7fffb, rgba(11,92,67,.08), rgba(15,118,110,.16)`
+- `client/src/content/registration-reference.css:7811` — `#155d45`
+- `client/src/content/registration-reference.css:7812` — `#fff, rgba(0,0,0,.10)`
+- `client/src/content/registration-reference.css:7813` — `#0b6a45, #148a5b`
+- `client/src/content/registration-reference.css:7814` — `#a91f1f, #d64545`
+- `client/src/content/registration-reference.css:7816` — `#718096`
+- `client/src/content/registration-reference.css:7821` — `#17684f, #8bc8aa, #c8ddd4, #eef8f3, #fff, rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:7824` — `#0f6b4d, #174c8c, #fff, rgba(16,51,117,.14)`
+- `client/src/content/registration-reference.css:7825` — `rgba(255,255,255,.16), rgba(255,255,255,.3)`
+- `client/src/content/registration-reference.css:7827` — `#dcebe3, #fff, rgba(16,51,117,.06)`
+- `client/src/content/registration-reference.css:7828` — `#103375, #16724f, #e6f6ed`
+- `client/src/content/registration-reference.css:7829` — `#355064, #78909c`
+- `client/src/content/registration-reference.css:7830` — `#17364d, #299064, #cddfd6, #fbfefd, #fff, rgba(41,144,100,.10)`
+- `client/src/content/registration-reference.css:7831` — `#16805a, #385263`
+- `client/src/content/registration-reference.css:7832` — `#176d4c, #cddfd6, #d9eae1, #dff2e8, #f5faf7, #fff`
+- `client/src/content/registration-reference.css:7833` — `#16805a, #1b6549, #cce4d6, #eef8f2`
+- `client/src/content/registration-reference.css:7834` — `#174c8c, #2e8b57, #355064, #536b75, #78909c, #9dcbb2, #cddfd6, #f4f8ff, #f5fcf8, #f8fbfa, #fff`
+- `client/src/content/registration-reference.css:7836` — `#cfe4da, #eef7f4, #f7fcfa, rgba(15,107,77,.08)`
+- `client/src/content/registration-reference.css:7837` — `#6b8a84, #8bb9a5, #fff`
+- `client/src/content/registration-reference.css:7839` — `#0f7451, #174c8c, #fff, rgba(23,76,140,.12)`
+- `client/src/content/registration-reference.css:7840` — `rgba(23,76,140,.18)`
+- `client/src/content/registration-reference.css:7842` — `#174c8c`
+- `client/src/content/registration-reference.css:7843` — `#78908e`
+- `client/src/content/registration-reference.css:7844` — `#16805a, #36565a, #58706c, #647a83, #c9e6d5, #eef8f3`
+- `client/src/content/registration-reference.css:7845` — `#155f47, #174c8c, #53656c, #cfe2d8, #f8fbfa`
+- `client/src/content/registration-reference.css:7846` — `#0f7451, #174c8c, #17643f, #355064, #a9d8bb, #e8f8ef, #eef3f6, #fff, rgba(23,76,140,.16)`
+- `client/src/content/registration-reference.css:7848` — `#b8d8c8`
+- `client/src/content/registration-reference.css:7870` — `#17684f, #c8ddd4, #fff, rgba(16,51,117,.08)`
+- `client/src/content/registration-reference.css:7871` — `#8bc8aa, #eef8f3`
+- `client/src/content/registration-reference.css:7872` — `#fff, rgba(16,51,117,.14)`
+- `client/src/content/registration-reference.css:7873` — `#0b6b51, #174c8c, #1a8b69`
+- `client/src/content/registration-reference.css:7874` — `#0b6b51, #103375, #2563eb`
+- `client/src/content/registration-reference.css:7875` — `rgba(255,255,255,.12)`
+- `client/src/content/registration-reference.css:7876` — `rgba(255,255,255,.16), rgba(255,255,255,.3)`
+- `client/src/content/registration-reference.css:7878` — `#dcebe3, #fff, rgba(16,51,117,.06)`
+- `client/src/content/registration-reference.css:7879` — `#103375, #16724f, #e6f6ed`
+- `client/src/content/registration-reference.css:7880` — `#1d4ed8, #eaf0ff`
+- `client/src/content/registration-reference.css:7882` — `#355064`
+- `client/src/content/registration-reference.css:7883` — `#17364d, #cddfd6, #fbfefd`
+- `client/src/content/registration-reference.css:7884` — `#299064, #fff, rgba(41,144,100,.10)`
+- `client/src/content/registration-reference.css:7885` — `#2563eb, rgba(37,99,235,.10)`
+- `client/src/content/registration-reference.css:7886` — `#16805a, #2563eb, #385263, #d6e8df, #f4faf7`
+- `client/src/content/registration-reference.css:7887` — `#6b4e0b, #f0d99b, #fff8e7`
+- `client/src/content/registration-reference.css:7888` — `#174c8c, #78909c, #9dcbb2, #f4f8ff, #f7fcfa`
+- `client/src/content/registration-reference.css:7889` — `#16805a, #2563eb, #36565a, #c9e6d5, #cad8f5, #eef4ff, #eef8f3`
+- `client/src/content/registration-reference.css:7890` — `#0f7451, #103375, #174c8c, #2563eb, #fff, rgba(23,76,140,.16)`
+- `client/src/content/registration-reference.css:7891` — `#17643f, #a9d8bb, #e8f8ef`
+- `client/src/content/registration-reference.css:7904` — `rgba(255,255,255,.22)`
+- `client/src/content/registration-reference.css:7906` — `#fff`
+- `client/src/content/registration-reference.css:7912` — `rgba(8,72,53,.22)`
+- `client/src/content/registration-reference.css:7918` — `#0b5c43, #148a62, #21a66f`
+- `client/src/content/registration-reference.css:7921` — `#0d5c72, #157b88, #299c8c`
+- `client/src/content/registration-reference.css:7926` — `rgba(255,255,255,.18)`
+- `client/src/content/registration-reference.css:7934` — `rgba(8,72,53,.30)`
+- `client/src/content/registration-reference.css:7940` — `rgba(33,166,111,.35)`
+- `client/src/content/registration-reference.css:7943` — `rgba(255,255,255,.18), rgba(255,255,255,.22)`
+- `client/src/content/registration-reference.css:7946` — `rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:7966` — `rgba(26, 87, 72, .18)`
+- `client/src/content/registration-reference.css:7968` — `rgba(241,248,245,.96), rgba(255,255,255,.98)`
+- `client/src/content/registration-reference.css:7969` — `#285d50`
+- `client/src/content/registration-reference.css:7979` — `rgba(13, 65, 52, .10)`
+- `client/src/content/registration-reference.css:7980` — `rgba(255,255,255,.95)`
+- `client/src/content/registration-reference.css:7992` — `rgba(33,166,111,.12), transparent`
+- `client/src/content/registration-reference.css:7993` — `rgba(239,247,244,.96), rgba(255,255,255,.98)`
+- `client/src/content/registration-reference.css:8006` — `rgba(33,166,111,.16), transparent`
+- `client/src/content/registration-reference.css:8014` — `rgba(33,166,111,.45)`
+- `client/src/content/registration-reference.css:8015` — `#edf8f2, #ffffff`
+- `client/src/content/registration-reference.css:8017` — `rgba(13, 65, 52, .16)`
+- `client/src/content/registration-reference.css:8018` — `rgba(255,255,255,1)`
+- `client/src/content/registration-reference.css:8034` — `rgba(33,166,111,.32)`
+- `client/src/content/registration-reference.css:8043` — `#1f765b`
+- `client/src/content/registration-reference.css:8053` — `rgba(33,166,111,.10)`
+- `client/src/content/registration-reference.css:8057` — `white`
+- `client/src/content/registration-reference.css:8058` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:8097` — `#f2fbf6, #f5f8ff, #ffffff, rgba(12,63,45,.16), rgba(23,76,140,.08), rgba(46,139,87,.22)`
+- `client/src/content/registration-reference.css:8098` — `rgba(255,205,49,.22), rgba(255,205,49,0)`
+- `client/src/content/registration-reference.css:8099` — `rgba(15,116,81,.14), rgba(15,116,81,0)`
+- `client/src/content/registration-reference.css:8100` — `#0f7451, #174c8c, #fff, rgba(23,76,140,.22)`
+- `client/src/content/registration-reference.css:8101` — `#103375, #526875`
+- `client/src/content/registration-reference.css:8102` — `#0f6b4d, #cfe4da, #e8f8ef, #eef4ff, rgba(16,51,117,.07)`
+- `client/src/content/registration-reference.css:8103` — `#174c8c`
+- `client/src/content/registration-reference.css:8104` — `#dbe9e1, #fff, rgba(13,92,67,.13)`
+- `client/src/content/registration-reference.css:8105` — `#355064, #fff`
+- `client/src/content/registration-reference.css:8106` — `#17684f, #d7e8df, #fff`
+- `client/src/content/registration-reference.css:8107` — `#765915, #f0d998, #fff8e5`
+- `client/src/content/registration-reference.css:8108` — `#0f7451, #174c8c, #355064, #edf3f5, #fff, rgba(23,76,140,.18)`
+- `client/src/content/registration-reference.css:8109` — `#17643f, #b7dfc4, #e9f8ef`
+- `client/src/content/registration-reference.css:8118` — `rgba(12,92,67,.18)`
+- `client/src/content/registration-reference.css:8119` — `#eef8f3, #f8fbff, #ffffff`
+- `client/src/content/registration-reference.css:8120` — `rgba(9,62,44,.11)`
+- `client/src/content/registration-reference.css:8124` — `rgba(214,169,44,.22), transparent`
+- `client/src/content/registration-reference.css:8129` — `#0b5c43, #c8e4d4, #e7f5ed`
+- `client/src/content/registration-reference.css:8130` — `#123c30`
+- `client/src/content/registration-reference.css:8131` — `#60756c`
+- `client/src/content/registration-reference.css:8132` — `#846000, #efd48a, #fff4d8, white`
+- `client/src/content/registration-reference.css:8133` — `#116842, #b9dfc7, #e7f7ed`
+- `client/src/content/registration-reference.css:8134` — `#1647a8, #c9d7ff, #eaf0ff`
+- `client/src/content/registration-reference.css:8136` — `#355064`
+- `client/src/content/registration-reference.css:8139` — `#193a30, #d2e2d8, rgba(255,255,255,.88)`
+- `client/src/content/registration-reference.css:8142` — `#1d8a62, rgba(29,138,98,.10)`
+- `client/src/content/registration-reference.css:8143` — `#547067, #f7fbf8`
+- `client/src/content/registration-reference.css:8148` — `#0b5c43, #197b5a, #fff, rgba(11,92,67,.2)`
+- `client/src/content/registration-reference.css:8149` — `#164c3b, #c9dfd3, #fff`
+- `client/src/content/registration-reference.css:8150` — `rgba(9,62,44,.14)`
+- `client/src/content/registration-reference.css:8152` — `#506b60`
+- `client/src/content/registration-reference.css:8153` — `#116842, #b9dfc7, #e7f7ed`
+- `client/src/content/registration-reference.css:8156` — `#eef4f1, #f4f8f6, #ffffff`
+- `client/src/content/registration-reference.css:8157` — `#0b5c43, rgba(6,59,44,.22)`
+- `client/src/content/registration-reference.css:8161` — `#e4b42d, #fff1a5, rgba(11,92,67,.18), rgba(228,180,45,.22), transparent`
+- `client/src/content/registration-reference.css:8166` — `rgba(11,92,67,.12)`
+- `client/src/content/registration-reference.css:8169` — `#fff`
+- `client/src/content/registration-reference.css:8170` — `#063b2c, #0b5c43, #173b72`
+- `client/src/content/registration-reference.css:8172` — `#d6a92c, #ffe16a`
+- `client/src/content/registration-reference.css:8175` — `#0b5c43, #d6a92c, #fff`
+- `client/src/content/registration-reference.css:8176` — `rgba(0,0,0,.2)`
+- `client/src/content/registration-reference.css:8181` — `rgba(255,255,255,.12), rgba(255,255,255,.22)`
+- `client/src/content/registration-reference.css:8186` — `#0b5c43, #123f73, #d6a92c, rgba(8,67,49,.18)`
+- `client/src/content/registration-reference.css:8188` — `rgba(214,169,44,.5)`
+- `client/src/content/registration-reference.css:8189` — `#e7ece9`
+- `client/src/content/registration-reference.css:8192` — `#4e655c`
+- `client/src/content/registration-reference.css:8193` — `#dfe6e2, #eef2f0, rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:8195` — `#355064`
+- `client/src/content/registration-reference.css:8199` — `#b9c9c0`
+- `client/src/content/registration-reference.css:8201` — `#17382e`
+- `client/src/content/registration-reference.css:8202` — `#48645a`
+- `client/src/content/registration-reference.css:8205` — `#d7e5dc, rgba(255,255,255,.72)`
+- `client/src/content/registration-reference.css:8208` — `#537066`
+- `client/src/content/registration-reference.css:8209` — `#17382e`
+- `client/src/content/registration-reference.css:8212` — `#fff`
+- `client/src/content/registration-reference.css:8213` — `#063b2c, #0b5c43, #17436f`
+- `client/src/content/registration-reference.css:8215` — `rgba(7,58,42,.14)`
+- `client/src/content/registration-reference.css:8221` — `#60756c, #d9e7df, #eff6f1`
+- `client/src/content/registration-reference.css:8241` — `#063b2c, green`
+- `client/src/content/registration-reference.css:8242` — `#0b5c43, green`
+- `client/src/content/registration-reference.css:8243` — `#1a7a5e, green`
+- `client/src/content/registration-reference.css:8244` — `#173b72, blue`
+- `client/src/content/registration-reference.css:8245` — `#d6a92c`
+- `client/src/content/registration-reference.css:8246` — `#ffe16a`
+- `client/src/content/registration-reference.css:8247` — `#172a24`
+- `client/src/content/registration-reference.css:8261` — `rgba(11,92,67,.18), transparent`
+- `client/src/content/registration-reference.css:8288` — `rgba(214,169,44,.78)`
+- `client/src/content/registration-reference.css:8291` — `rgba(214,169,44,.18), transparent`
+- `client/src/content/registration-reference.css:8292` — `rgba(23,59,114,.12), transparent`
+- `client/src/content/registration-reference.css:8293` — `#f4fbf7, #f6f8fc, #ffffff`
+- `client/src/content/registration-reference.css:8295` — `rgba(6,59,44,.24)`
+- `client/src/content/registration-reference.css:8296` — `rgba(23,59,114,.10)`
+- `client/src/content/registration-reference.css:8297` — `rgba(255,255,255,.75)`
+- `client/src/content/registration-reference.css:8305` — `rgba(11,92,67,.075)`
+- `client/src/content/registration-reference.css:8307` — `rgba(214,169,44,.035), rgba(23,59,114,.025)`
+- `client/src/content/registration-reference.css:8317` — `rgba(11,92,67,.045)`
+- `client/src/content/registration-reference.css:8318` — `rgba(11,92,67,.06)`
+- `client/src/content/registration-reference.css:8319` — `rgba(11,92,67,.06)`
+- `client/src/content/registration-reference.css:8322` — `white`
+- `client/src/content/registration-reference.css:8327` — `rgba(255,255,255,.12), transparent`
+- `client/src/content/registration-reference.css:8328` — `#032a20, #0b5c43, #173b72`
+- `client/src/content/registration-reference.css:8329` — `rgba(3,42,32,.22)`
+- `client/src/content/registration-reference.css:8335` — `rgba(255,255,255,.13), transparent`
+- `client/src/content/registration-reference.css:8348` — `#edf8f2, #fff`
+- `client/src/content/registration-reference.css:8349` — `rgba(0,0,0,.24), rgba(214,169,44,.16), rgba(255,255,255,.08)`
+- `client/src/content/registration-reference.css:8355` — `rgba(255,255,255,.8), transparent`
+- `client/src/content/registration-reference.css:8364` — `rgba(0,0,0,.13), rgba(255,255,255,.06)`
+- `client/src/content/registration-reference.css:8371` — `rgba(11,92,67,.16)`
+- `client/src/content/registration-reference.css:8372` — `#075f45, #0d6c83, #15936c`
+- `client/src/content/registration-reference.css:8378` — `rgba(255,255,255,.16), transparent`
+- `client/src/content/registration-reference.css:8396` — `#0b5c43, #173b72, #d6a92c`
+- `client/src/content/registration-reference.css:8397` — `rgba(214,169,44,.10), rgba(8,67,49,.22)`
+- `client/src/content/registration-reference.css:8403` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:8412` — `rgba(255,255,255,.25), transparent`
+- `client/src/content/registration-reference.css:8432` — `rgba(185,201,192,.72)`
+- `client/src/content/registration-reference.css:8440` — `#0b5c43, #d6a92c`
+- `client/src/content/registration-reference.css:8445` — `rgba(255,255,255,.56)`
+- `client/src/content/registration-reference.css:8448` — `#42695b`
+- `client/src/content/registration-reference.css:8451` — `#132f25`
+- `client/src/content/registration-reference.css:8456` — `rgba(11,92,67,.20)`
+- `client/src/content/registration-reference.css:8457` — `rgba(231,249,239,.95), rgba(245,250,255,.92)`
+- `client/src/content/registration-reference.css:8458` — `rgba(11,92,67,.08), rgba(255,255,255,.9)`
+- `client/src/content/registration-reference.css:8462` — `#d09f20`
+- `client/src/content/registration-reference.css:8466` — `#173b72`
+- `client/src/content/registration-reference.css:8471` — `rgba(11,92,67,.15)`
+- `client/src/content/registration-reference.css:8472` — `rgba(241,249,245,.86), rgba(255,255,255,.92)`
+- `client/src/content/registration-reference.css:8473` — `#fff, rgba(8,67,49,.07)`
+- `client/src/content/registration-reference.css:8480` — `rgba(214,169,44,.08)`
+- `client/src/content/registration-reference.css:8491` — `rgba(232,248,240,.85), rgba(255,255,255,.55)`
+- `client/src/content/registration-reference.css:8492` — `rgba(8,67,49,.06)`
+- `client/src/content/registration-reference.css:8495` — `rgba(11,92,67,.18)`
+- `client/src/content/registration-reference.css:8496` — `rgba(238,248,243,.9), rgba(255,255,255,.96)`
+- `client/src/content/registration-reference.css:8497` — `rgba(8,67,49,.09)`
+- `client/src/content/registration-reference.css:8500` — `rgba(23,59,114,.04), transparent`
+- `client/src/content/registration-reference.css:8505` — `green`
+- `client/src/content/registration-reference.css:8506` — `#eef8f3, #fff`
+- `client/src/content/registration-reference.css:8507` — `rgba(214,169,44,.07), rgba(6,59,44,.14)`
+- `client/src/content/registration-reference.css:8515` — `rgba(11,92,67,.17)`
+- `client/src/content/registration-reference.css:8516` — `rgba(11,92,67,.12)`
+- `client/src/content/registration-reference.css:8517` — `rgba(11,92,67,.12)`
+- `client/src/content/registration-reference.css:8522` — `#032a20, #0b5c43, #173b72`
+- `client/src/content/registration-reference.css:8523` — `rgba(6,59,44,.12)`
+- `client/src/content/registration-reference.css:8529` — `rgba(214,169,44,.82)`
+- `client/src/content/registration-reference.css:8532` — `rgba(214,169,44,.20), transparent`
+- `client/src/content/registration-reference.css:8533` — `rgba(23,59,114,.14), transparent`
+- `client/src/content/registration-reference.css:8534` — `rgba(11,92,67,.13), transparent`
+- `client/src/content/registration-reference.css:8535` — `#f3f8fb, #f8edf5, #fffafd`
+- `client/src/content/registration-reference.css:8536` — `rgba(23,59,114,.10), rgba(255,255,255,.72), rgba(6,59,44,.22)`
+- `client/src/content/registration-reference.css:8541` — `rgba(11,92,67,.075)`
+- `client/src/content/registration-reference.css:8542` — `rgba(214,169,44,.035), rgba(23,59,114,.025)`
+- `client/src/content/registration-reference.css:8547` — `rgba(214,169,44,.20), rgba(23,59,114,.08), transparent`
+- `client/src/content/registration-reference.css:8554` — `rgba(11,92,67,.045)`
+- `client/src/content/registration-reference.css:8556` — `white`
+- `client/src/content/registration-reference.css:8562` — `rgba(255,255,255,.12), transparent`
+- `client/src/content/registration-reference.css:8563` — `#032a20, #0b5c43, #173b72`
+- `client/src/content/registration-reference.css:8564` — `rgba(6,59,44,.18)`
+- `client/src/content/registration-reference.css:8570` — `rgba(255,255,255,.14), transparent`
+- `client/src/content/registration-reference.css:8580` — `rgba(0,0,0,.12), rgba(255,255,255,.06)`
+- `client/src/content/registration-reference.css:8590` — `rgba(11,92,67,.09)`
+- `client/src/content/registration-reference.css:8592` — `rgba(255,255,255,.42)`
+- `client/src/content/registration-reference.css:8593` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:8598` — `rgba(255,255,255,.65)`
+- `client/src/content/registration-reference.css:8599` — `rgba(8,67,49,.07)`
+- `client/src/content/registration-reference.css:8602` — `#274d41`
+- `client/src/content/registration-reference.css:8603` — `#fff`
+- `client/src/content/registration-reference.css:8606` — `#4b4e53`
+- `client/src/content/registration-reference.css:8607` — `#252b30`
+- `client/src/content/registration-reference.css:8608` — `rgba(255,255,255,.8)`
+- `client/src/content/registration-reference.css:8616` — `rgba(255,255,255,.48)`
+- `client/src/content/registration-reference.css:8622` — `rgba(11,92,67,.20)`
+- `client/src/content/registration-reference.css:8624` — `rgba(244,250,247,.70), rgba(255,255,255,.83)`
+- `client/src/content/registration-reference.css:8625` — `#fff, rgba(8,67,49,.09)`
+- `client/src/content/registration-reference.css:8631` — `#0b5c43, #173b72, #d6a92c`
+- `client/src/content/registration-reference.css:8637` — `#0b5c43`
+- `client/src/content/registration-reference.css:8644` — `#fff`
+- `client/src/content/registration-reference.css:8645` — `#a87908, #d6a92c`
+- `client/src/content/registration-reference.css:8647` — `rgba(168,121,8,.20)`
+- `client/src/content/registration-reference.css:8652` — `rgba(214,169,44,.45)`
+- `client/src/content/registration-reference.css:8655` — `#0b5c43`
+- `client/src/content/registration-reference.css:8660` — `rgba(255,225,106,.55)`
+- `client/src/content/registration-reference.css:8667` — `#ffe16a, transparent`
+- `client/src/content/registration-reference.css:8678` — `rgba(11,92,67,.13)`
+- `client/src/content/registration-reference.css:8680` — `rgba(255,255,255,.72)`
+- `client/src/content/registration-reference.css:8681` — `rgba(8,67,49,.07)`
+- `client/src/content/registration-reference.css:8685` — `#0b5c43, #d6a92c`
+- `client/src/content/registration-reference.css:8686` — `rgba(11,92,67,.09), rgba(214,169,44,.55)`
+- `client/src/content/registration-reference.css:8689` — `#e8f8ef, #f7fbff`
+- `client/src/content/registration-reference.css:8690` — `rgba(11,92,67,.20)`
+- `client/src/content/registration-reference.css:8691` — `rgba(8,67,49,.06)`
+- `client/src/content/registration-reference.css:8776` — `#050b12`
+- `client/src/content/registration-reference.css:8777` — `#050a11, #050b12, #08131d, #e8f6f3, rgba(15,127,93,.16), rgba(30,92,150,.16), transparent`
+- `client/src/content/registration-reference.css:8778` — `#050a11, #050b12, #08131d, #e8f6f3, rgba(15,127,93,.16), rgba(30,92,150,.16), transparent`
+- `client/src/content/registration-reference.css:8779` — `#0a1420, #e8f6f3, rgba(0,0,0,.42)`
+- `client/src/content/registration-reference.css:8780` — `#071923, #0a2730, #0b1c31, rgba(0,0,0,.42), rgba(69,224,189,.16)`
+- `client/src/content/registration-reference.css:8781` — `#effffb`
+- `client/src/content/registration-reference.css:8782` — `rgba(4,12,20,.92)`
+- `client/src/content/registration-reference.css:8783` — `#cde5e1, transparent`
+- `client/src/content/registration-reference.css:8784` — `#55e6c5, rgba(45,214,177,.08)`
+- `client/src/content/registration-reference.css:8785` — `#075b78, #087456, #123a70, #fff, rgba(0,0,0,.3)`
+- `client/src/content/registration-reference.css:8786` — `#e1efed, transparent`
+- `client/src/content/registration-reference.css:8787` — `#68e6c7, rgba(64,230,196,.12)`
+- `client/src/content/registration-reference.css:8788` — `#91d9ca`
+- `client/src/content/registration-reference.css:8789` — `#0b1824, #0e1d2b, #263d4e, #d9e9e7, rgba(0,0,0,.28)`
+- `client/src/content/registration-reference.css:8790` — `#cbdedb`
+- `client/src/content/registration-reference.css:8791` — `#0b1724, #0f1e2c, #294457, #e4f4f1, rgba(0,0,0,.3)`
+- `client/src/content/registration-reference.css:8792` — `#72e9ca`
+- `client/src/content/registration-reference.css:8793` — `#08131f, #315064, #e5f5f2`
+- `client/src/content/registration-reference.css:8794` — `#829da0`
+- `client/src/content/registration-reference.css:8796` — `#03080d, #06101a, #c9dcda, rgba(69,224,189,.12)`
+- `client/src/content/registration-reference.css:8797` — `rgba(1,6,12,.95)`
+- `client/src/content/registration-reference.css:8798` — `#263b4b`
+- `client/src/content/registration-reference.css:8799` — `#d9ece8`
+- `client/src/content/registration-reference.css:8800` — `#0a1622, #0d1d2a, #294456, #dcebe8`
+- `client/src/content/registration-reference.css:8801` — `rgba(0,0,0,.35), rgba(69,224,189,.14)`
+- `client/src/content/registration-reference.css:8802` — `#050b12, #08131d, #09131e`
+- `client/src/content/registration-reference.css:8897` — `#050b12, #087f9d, #0a1420, #0b765d, #101f31, #294356, #45e0bd, #b8cfcc, #e8f6f3`
+- `client/src/content/registration-reference.css:8898` — `#fff, rgba(0,0,0,.22), rgba(255,255,255,.28)`
+- `client/src/content/registration-reference.css:8899` — `#a9bfbc, #fff, rgba(0,0,0,.42), rgba(255,255,255,.05), rgba(255,255,255,.1), rgba(255,255,255,.12), rgba(255,255,255,.18), rgba(255,255,255,.22), rgba(7,17,27,.97), white`
+- `client/src/content/registration-reference.css:8900` — `#fff`
+- `client/src/content/registration-reference.css:8906` — `#f4f8f6`
+- `client/src/content/registration-reference.css:8911` — `rgba(15,127,93,.06), transparent`
+- `client/src/content/registration-reference.css:8912` — `rgba(242,184,75,.07), transparent`
+- `client/src/content/registration-reference.css:8913` — `#f4f8f6`
+- `client/src/content/registration-reference.css:8914` — `#333`
+- `client/src/content/registration-reference.css:8917` — `#0b5c43`
+- `client/src/content/registration-reference.css:8918` — `#fff`
+- `client/src/content/registration-reference.css:8919` — `rgba(11,92,67,.18)`
+- `client/src/content/registration-reference.css:8923` — `#0b5c43`
+- `client/src/content/registration-reference.css:8924` — `#fff`
+- `client/src/content/registration-reference.css:8929` — `#fff`
+- `client/src/content/registration-reference.css:8932` — `#333`
+- `client/src/content/registration-reference.css:8933` — `#fff`
+- `client/src/content/registration-reference.css:8934` — `#d9e7e1`
+- `client/src/content/registration-reference.css:8937` — `rgba(255,255,255,.14)`
+- `client/src/content/registration-reference.css:8938` — `rgba(255,255,255,.35)`
+- `client/src/content/registration-reference.css:8947` — `#fff`
+- `client/src/content/registration-reference.css:8948` — `#333`
+- `client/src/content/registration-reference.css:8949` — `#d9e7e1`
+- `client/src/content/registration-reference.css:8954` — `#fff`
+- `client/src/content/registration-reference.css:8955` — `#333`
+- `client/src/content/registration-reference.css:8956` — `#cbdcd5`
+- `client/src/content/registration-reference.css:8960` — `#fff`
+- `client/src/content/registration-reference.css:8963` — `#0b5c43`
+- `client/src/content/registration-reference.css:8964` — `#fff`
+- `client/src/content/registration-reference.css:8987` — `white`
+- `client/src/content/registration-reference.css:8989` — `#d6e5de`
+- `client/src/content/registration-reference.css:8991` — `#ffffff`
+- `client/src/content/registration-reference.css:8992` — `#1a5e3a`
+- `client/src/content/registration-reference.css:8993` — `rgba(16,51,117,.05)`
+- `client/src/content/registration-reference.css:9000` — `#ffffff`
+- `client/src/content/registration-reference.css:9001` — `#1a5e3a`
+- `client/src/content/registration-reference.css:9002` — `#b9d6c9`
+- `client/src/content/registration-reference.css:9003` — `rgba(16,51,117,.05)`
+- `client/src/content/registration-reference.css:9008` — `#2e8b57, rgba(16,51,117,.05)`
+- `client/src/content/registration-reference.css:9079` — `rgba(15,70,48,.10)`
+- `client/src/content/registration-reference.css:9086` — `black`
+- `client/src/content/registration-reference.css:9095` — `#111`
+- `client/src/content/registration-reference.css:9103` — `#000`
+- `client/src/content/registration-reference.css:9115` — `rgba(11,92,67,.14)`
+- `client/src/content/registration-reference.css:9134` — `rgba(15,70,48,.10)`
+- `client/src/content/registration-reference.css:9179` — `rgba(12,40,30,.2), transparent`
+- `client/src/content/registration-reference.css:9190` — `#8b1111`
+- `client/src/content/registration-reference.css:9193` — `rgba(16,51,117,.16)`
+- `client/src/content/registration-reference.css:9194` — `#fff, #fff8dc`
+- `client/src/content/registration-reference.css:9195` — `rgba(16,51,117,.1)`
+- `client/src/content/registration-reference.css:9208` — `rgba(16,51,117,.22)`
+- `client/src/content/registration-reference.css:9209` — `#103375, #eaf8f1, #fff`
+- `client/src/content/registration-reference.css:9210` — `rgba(16,51,117,.12)`
+- `client/src/content/registration-reference.css:9214` — `rgba(16,51,117,.18)`
+- `client/src/content/registration-reference.css:9220` — `rgba(255,255,255,.78)`
+- `client/src/content/registration-reference.css:9222` — `rgba(46,139,87,.08), rgba(8,47,73,.18)`
+- `client/src/content/registration-reference.css:9223` — `rgba(239,250,245,.96), rgba(255,255,255,.98)`
+- `client/src/content/registration-reference.css:9235` — `#18a477`
+- `client/src/content/registration-reference.css:9236` — `rgba(24,164,119,.14)`
+- `client/src/content/registration-reference.css:9247` — `#0b604a, #0b6b50, #f0fbf6, rgba(5,82,60,.12)`
+- `client/src/content/registration-reference.css:9248` — `#075b47, #159b73, #fff, rgba(7,91,71,.28)`
+- `client/src/content/registration-reference.css:9249` — `rgba(7,91,71,.2)`
+- `client/src/content/registration-reference.css:9252` — `#075b4733, #087357, #20a57c, rgba(255,255,255,.7), white`
+- `client/src/content/registration-reference.css:9254` — `#075b47, #0e9f6e, #e9fff4, #f7fffb, rgba(6,100,73,.12)`
+- `client/src/content/registration-reference.css:9256` — `rgba(15,118,89,.2), rgba(232,255,246,.92), rgba(255,255,255,.96), rgba(5,75,56,.1)`
+- `client/src/content/registration-reference.css:9257` — `#075b47, #46645b`
+- `client/src/content/registration-reference.css:9259` — `#d9eee5, #fff, rgba(3,70,50,.09)`
+- `client/src/content/registration-reference.css:9261` — `#145e4b`
+- `client/src/content/registration-reference.css:9263` — `#075b47, #075b4725, #1b9b75, white`
+- `client/src/content/registration-reference.css:9264` — `#075b47, #dcebe4, #fff, rgba(4,67,49,.1)`
+- `client/src/content/registration-reference.css:9265` — `#075b47, #087a52, #946200, #b42332, #c7e8da, #d5ebe1, #f1fff8, #fff`
+- `client/src/content/registration-reference.css:9271` — `#08664f, #13b88a, #dff8ee, green`
+- `client/src/content/registration-reference.css:9272` — `#e9fff6, #f4fff9, #fff, rgba(251,191,36,.16), rgba(34,197,151,.3), rgba(4,80,59,.14), rgba(45,212,191,.20), transparent`
+- `client/src/content/registration-reference.css:9273` — `#10b981, #2dd4bf, #fbbf24, transparent`
+- `client/src/content/registration-reference.css:9274` — `#075b47, rgba(16,185,129,.13)`
+- `client/src/content/registration-reference.css:9275` — `#45685c`
+- `client/src/content/registration-reference.css:9277` — `rgba(16,185,129,.25), rgba(236,253,245,.97), rgba(240,253,250,.97), rgba(255,255,255,.98), rgba(4,78,57,.11)`
+- `client/src/content/registration-reference.css:9278` — `#059669, #2dd4bf, #fbbf24`
+- `client/src/content/registration-reference.css:9279` — `#075b47`
+- `client/src/content/registration-reference.css:9280` — `#36594e`
+- `client/src/content/registration-reference.css:9282` — `#075b47, rgba(255,255,255,.88), rgba(5,150,105,.2), rgba(5,90,65,.07)`
+- `client/src/content/registration-reference.css:9284` — `#effcf6, #fff, rgba(16,185,129,.28), rgba(4,78,57,.15)`
+- `client/src/content/registration-reference.css:9285` — `#eaf8f1, #fff`
+- `client/src/content/registration-reference.css:9287` — `#075b47, #0f9f76, #fff, rgba(5,91,71,.24)`
+- `client/src/content/registration-reference.css:9288` — `rgba(5,91,71,.3)`
+- `client/src/content/registration-reference.css:9289` — `#075b47`
+- `client/src/content/registration-reference.css:9290` — `#effcf6, #f0fdfa, #fff, rgba(16,185,129,.28), rgba(4,78,57,.12), rgba(45,212,191,.13), transparent`
+- `client/src/content/registration-reference.css:9291` — `#075b47`
+- `client/src/content/registration-reference.css:9292` — `#45685c`
+- `client/src/content/registration-reference.css:9294` — `rgba(16,185,129,.22), rgba(255,255,255,.96), rgba(4,78,57,.09)`
+- `client/src/content/registration-reference.css:9295` — `rgba(16,185,129,.55), rgba(4,78,57,.16)`
+- `client/src/content/registration-reference.css:9296` — `#edf8f2`
+- `client/src/content/registration-reference.css:9297` — `#145e4b`
+- `client/src/content/registration-reference.css:9298` — `rgba(16,185,129,.18), rgba(255,255,255,.78)`
+- `client/src/content/registration-reference.css:9299` — `#075b47, #0f9f76, #fff, rgba(5,91,71,.22)`
+- `client/src/content/registration-reference.css:9301` — `#fbbf24`
+- `client/src/content/registration-reference.css:9302` — `#075b47`
+- `client/src/content/registration-reference.css:9303` — `#e8fff4, #fff, rgba(16,185,129,.22), rgba(4,78,57,.08)`
+- `client/src/content/registration-reference.css:9309` — `#111`
+- `client/src/content/registration-reference.css:9312` — `rgba(0,0,0,.38)`
+- `client/src/content/registration-reference.css:9313` — `#fff, rgba(0,0,0,.7)`
+- `client/src/content/registration-reference.css:9314` — `rgba(0,0,0,.55)`
+- `client/src/content/registration-reference.css:9322` — `#d8e9df`
+- `client/src/content/registration-reference.css:9323` — `#eef8f2, #f7fff9, #ffffff`
+- `client/src/content/registration-reference.css:9328` — `#fff`
+- `client/src/content/registration-reference.css:9329` — `rgba(15,70,48,.16)`
+- `client/src/content/registration-reference.css:9330` — `rgba(15,107,79,.12)`
+- `client/src/content/registration-reference.css:9339` — `#45534b`
+- `client/src/content/registration-reference.css:9347` — `#214a91`
+- `client/src/content/registration-reference.css:9348` — `#405248`
+- `client/src/content/registration-reference.css:9352` — `#0b5c43, #209a72, #fff`
+- `client/src/content/registration-reference.css:9354` — `rgba(11,92,67,.2)`
+- `client/src/content/registration-reference.css:9385` — `#1a8b69`
+- `client/src/content/registration-reference.css:9386` — `#275b46, #f2fbf6`
+- `client/src/content/registration-reference.css:9391` — `#145c39, #b8e5d2, #eefaf4`
+- `client/src/content/registration-reference.css:9392` — `#8fcbb1, #f8fffa`
+- `client/src/content/registration-reference.css:9393` — `#145c39`
+- `client/src/content/registration-reference.css:9394` — `rgba(3,27,19,.78)`
+- `client/src/content/registration-reference.css:9395` — `#2e8b57, #fff, rgba(0,0,0,.35)`
+- `client/src/content/registration-reference.css:9396` — `#103375`
+- `client/src/content/registration-reference.css:9397` — `#5b6770`
+- `client/src/content/registration-reference.css:9399` — `#245c3c`
+- `client/src/content/registration-reference.css:9400` — `#c9dfd0`
+- `client/src/content/registration-reference.css:9403` — `#145c39, #1a7a5e, #edf3ef, #fff`
+- `client/src/content/registration-reference.css:9404` — `#145c39, #eef8f1`
+- `client/src/content/registration-reference.html:2` — `#103375`
+- `client/src/content/registration-reference.html:98` — `#eef2f0`
+
+## Audit status
+
+- [ ] Inspect all listed states and viewport widths in both themes with Playwright.
+- [ ] Replace active registration colors with app design tokens and consistent shared control styling.
+- [ ] Verify behavior and contrast; capture required screenshots.
+
+
+## Changes made after the baseline audit
+
+- Added registration-only light/dark styles in `client/src/content/registration-theme.css`. It consumes app tokens forwarded from the host page, rather than defining a second palette. Account panel, type chooser, all four registration types, member payment view, sections, fields, choices, upload/signature controls, terms, notices, success states and buttons share the same theme surface and control system.
+- Added app tokens in `client/src/styles.css` for input surfaces/borders, registration borders, focus, info, warning, success, danger and theme-aware hero gradients; mapped the new utility colors in `client/tailwind.config.js`.
+- The iframe receives computed app tokens at first render and on each theme change. Native `color-scheme` changes with it. Reduced motion is honored in the embedded view.
+- Replaced only the two requested placeholder typos: `Enter father's or guardian's name` and `Re-enter password`. Removed inline color/background styling from the account title and readonly enrollment date so they use the theme layer.
+- Added dynamic accessible labels to the password visibility buttons, preserving their visible text and behavior. Removed duplicate leading number prefixes before the runtime's existing field numbering pass.
+- The registration override and legacy bundled `registration-reference.css` now resolve color-bearing declarations through theme tokens. PostCSS validation reports zero literal color values in declaration values across both stylesheets. Layout and behavior rules remain in place.
+
+## Checks and limits
+
+- [x] Read the host theme tokens, Tailwind color mapping, registration source markup, runtime, and relevant styles.
+- [x] Fix the source-level defects visible in the provided screenshot: low-contrast fixed colors, pale form frame in dark mode, duplicated labels, inconsistent fields, and misaligned password toggles.
+- [x] JSX parse passed; CSS parse passed for app CSS, registration override, and legacy CSS; generated registration runtime parse passed.
+- [x] PostCSS scan found zero literal color values in declaration values in both `registration-theme.css` and `registration-reference.css`.
+- [x] Design-token contrast calculations: light body 13.17:1, muted text 7.22:1, primary button 5.48:1, info 8.08:1, warning 8.28:1, success 7.16:1, danger 5.54:1; dark body 15.54:1, muted text 8.14:1, primary button 12.58:1, info 11.03:1, warning 10.29:1, success 10.68:1, danger 7.70:1. Registration borders calculate at least 3.7:1 against the checked card surfaces in both themes.
+- [x] Production Vite build completed after allowing workspace file resolution. Rollup reports existing Zod annotation notices and a 519.19 kB main chunk warning.
+- [ ] Full Playwright inspection, screenshots, and interaction checks for every listed state/viewport are not complete. Playwright is not installed in the client dependencies, and the local preview request was denied by the environment's socket permissions. No screenshots were created or represented as current.
+- [ ] Re-run the visual checklist and capture current screenshots once local browser access is available. The remaining verification gap is visual browser inspection, not source tokenization.
+
+### Final layout pass
+
+- The registration-only host card now uses the app `--surface`, `--registration-border`, and `--shadow` tokens in both themes, so no cream glass surface remains behind the embedded form. This selector is limited to `.auth-card-registration.glass`; login and admin surfaces are not targeted.
+- The report's Playwright checklist remains open because this session has no usable browser automation or local HTTP socket access. Existing screenshots under `docs/screenshots/` predate this final styling pass and were not reused as evidence.

@@ -1,0 +1,529 @@
+<div id="registerPanel" class="auth-panel">
+    <h3><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Create Account</h3>
+
+    <form id="standardRegisterForm" onsubmit="event.preventDefault(); alert('Account Created Successfully!');
+closeAuth();">
+     <input type="hidden" id="regAccountType" name="accountType" value="Member">
+     <div class="auth-grid">
+       <div class="auth-group">
+        <label for="regFullName">Full Name</label>
+        <input type="text" id="regFullName" name="fullName" required placeholder="Enter full name" autocomplete="name" autocapitalize="words" spellcheck="false">
+       </div>
+       <div class="auth-group">
+        <label for="regUsername">Username</label>
+        <input type="text" id="regUsername" required placeholder="Choose a username">
+       </div>
+     <div class="auth-group full">
+         <label for="regPhoto">User Photo Upload</label>
+         <input type="file" id="regPhoto" accept="image/*" onchange="previewPhoto(event)">
+         <img id="photoPreview" class="photo-preview" alt="Preview">
+     </div>
+
+
+     <div class="auth-group">
+         <label for="regEmail">Email Address</label>
+         <input type="email" id="regEmail" name="email" required placeholder="name@example.com" autocomplete="email" inputmode="email">
+     </div>
+     <div class="auth-group">
+         <label for="regGuardian">Father's / Guardian Name</label>
+         <input type="text" id="regGuardian" required placeholder="Enter father's or guardian's name">
+     </div>
+
+
+     <!-- Address Section -->
+     <div class="auth-group">
+         <label for="regState">Permanent Address State</label>
+         <select id="regState" required onchange="populateDistricts()">
+          <option value="">Select State</option>
+          <option value="Andhra Pradesh">Andhra Pradesh</option>
+          <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+          <option value="Assam">Assam</option>
+          <option value="Bihar">Bihar</option>
+          <option value="Chhattisgarh">Chhattisgarh</option>
+          <option value="Goa">Goa</option>
+          <option value="Gujarat">Gujarat</option>
+          <option value="Haryana">Haryana</option>
+          <option value="Himachal Pradesh">Himachal Pradesh</option>
+          <option value="Jharkhand">Jharkhand</option>
+          <option value="Karnataka">Karnataka</option>
+  <option value="Kerala">Kerala</option>
+  <option value="Madhya Pradesh">Madhya Pradesh</option>
+  <option value="Maharashtra">Maharashtra</option>
+  <option value="Manipur">Manipur</option>
+  <option value="Meghalaya">Meghalaya</option>
+  <option value="Mizoram">Mizoram</option>
+  <option value="Nagaland">Nagaland</option>
+  <option value="Odisha">Odisha</option>
+  <option value="Punjab">Punjab</option>
+  <option value="Sikkim">Sikkim</option>
+  <option value="Tamil Nadu">Tamil Nadu</option>
+  <option value="Telangana">Telangana</option>
+  <option value="Tripura">Tripura</option>
+  <option value="Uttar Pradesh">Uttar Pradesh</option>
+  <option value="Uttarakhand">Uttarakhand</option>
+  <option value="West Bengal">West Bengal</option>
+ </select>
+</div>
+<div class="auth-group">
+ <label for="regDistrict">Permanent Address District</label>
+ <select id="regDistrict" required>
+  <option value="">Select District</option>
+ </select>
+</div>
+
+
+<div class="auth-group">
+ <label for="regBloodGroup">Blood Group</label>
+ <select id="regBloodGroup" required>
+  <option value="">Select Blood Group</option>
+  <option value="A+">A+</option>
+  <option value="A-">A-</option>
+  <option value="B+">B+</option>
+  <option value="B-">B-</option>
+         <option value="O+">O+</option>
+         <option value="O-">O-</option>
+         <option value="AB+">AB+</option>
+         <option value="AB-">AB-</option>
+        </select>
+      </div>
+      <div class="auth-group">
+        <label for="regDOB">Date of Birth (DOB)</label>
+        <input type="date" id="regDOB" required>
+      </div>
+
+
+      <div class="auth-group">
+        <label for="regEnrollDate">Date of Enrollment</label>
+         <input type="date" id="regEnrollDate" readonly>
+      </div>
+
+
+      <div class="auth-group">
+        <label for="regPassword">Password (Hidden)</label>
+        <div class="password-wrap">
+         <input type="password" id="regPassword" required placeholder="Create password">
+         <button type="button" class="password-toggle" onclick="togglePass('regPassword')">
+👁️</button>
+        </div>
+      </div>
+
+
+      <div class="auth-group full">
+        <label for="regConfirmPassword">Confirm Password</label>
+        <div class="password-wrap">
+         <input type="password" id="regConfirmPassword" required placeholder="Re-enter password">
+         <button type="button" class="password-toggle"
+onclick="togglePass('regConfirmPassword')">   👁️</button>
+        </div>
+       </div>
+     </div>
+
+
+     <button type="submit" class="auth-btn" style="margin-top: 15px;">Register
+Now</button>
+    </form>
+
+    <!-- DETAILED MEMBERS REGISTRATION FORM -->
+    <div id="memberRegistrationForm" class="member-registration-form" style="display:none;">
+      <button type="button" class="member-top-back" onclick="backToRegistrationTypes()" aria-label="Back to registration form">
+        <span class="back-arrow">←</span><span>Back to Registration Form</span>
+      </button>
+      <div class="member-form-hero">
+        <div class="member-form-badge">AGNI SENA • S/1L/55059</div>
+        <h3><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M17 3.13a4 4 0 0 1 0 7.75"/></svg>Members Registration Form</h3>
+        <p>To be filled by the Members</p>
+        <div class="member-form-org">Agni Rural Welfare Society</div>
+      </div>
+
+      <form id="memberForm" autocomplete="on" onsubmit="submitMemberRegistration(event)">
+        <input type="hidden" name="registrationType" value="Member">
+
+        <div class="member-section">
+          <div class="member-section-title"><span>01</span> Personal Information</div>
+          <div class="member-grid">
+            <div class="member-field member-full">
+              <label>Name <small>(First / Middle Name / Last)</small></label>
+              <input type="text" name="memberName" id="memberNameField" required placeholder="Enter your full name" autocomplete="name" autocapitalize="words" spellcheck="false">
+            </div>
+            <div class="member-field">
+              <label>Gender</label>
+              <div class="member-choice-row">
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other"> Other</label>
+              </div>
+            </div>
+            <div class="member-field">
+              <label>Marital Status</label>
+              <select name="maritalStatus" required>
+                <option value="">Select status</option><option>Married</option><option>Unmarried</option><option>Others</option>
+              </select>
+            </div>
+            <div class="member-field"><label>Nationality</label><input type="text" name="nationality" required placeholder="Enter nationality"></div>
+            <div class="member-field"><label>Education Qualification</label><input type="text" name="education" required placeholder="e.g. Graduate / Diploma"></div>
+            <div class="member-field"><label>Institution *</label><input type="text" name="institution" required placeholder="Enter your school / college / institution"></div>
+            <div class="member-field"><label>Mobile No</label><input type="tel" name="mobile" required placeholder="Enter mobile number"></div>
+            <div class="member-field"><label>Date of Birth</label><input type="date" name="memberDOB" required></div>
+            <div class="member-field"><label>Blood Group</label>
+              <select name="bloodGroup" required>
+                <option value="">Select blood group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="member-field"><label>Email ID</label><input type="email" name="memberEmail" required placeholder="name@example.com" autocomplete="email" inputmode="email"></div>
+          </div>
+        </div>
+
+        <div class="member-section">
+          <div class="member-section-title"><span>02</span> Address & Identification</div>
+          <div class="member-grid">
+            <div class="member-field member-full"><label>Address</label><textarea name="address" required placeholder="Enter complete address"></textarea></div>
+            <div class="member-field"><label>Pin Code</label><input type="text" name="pinCode" required maxlength="6" placeholder="6-digit PIN code"></div>
+            <div class="member-field"><label>Aadhar Card No</label><input type="text" name="aadhar" maxlength="12" placeholder="Enter Aadhar number"></div>
+            <div class="member-field"><label>PAN No</label><input type="text" name="pan" maxlength="10" placeholder="Enter PAN number"></div>
+            <div class="member-field"><label>Marriage Date</label><input type="date" name="marriageDate"></div>
+            <div class="member-field"><label>Occupation</label><select name="occupation" required><option value="">Select occupation</option><option>Job</option><option>Business</option><option>Self Employed</option><option>Other</option></select></div>
+          </div>
+        </div>
+
+        <div class="member-section">
+          <div class="member-section-title"><span>03</span> Family Information</div>
+          <div class="member-grid">
+            <div class="member-field"><label>Guardian's Name</label><input type="text" name="guardianName" placeholder="Enter guardian's name"></div>
+            <div class="member-field"><label>Guardian's Occupation</label><input type="text" name="guardianOccupation" placeholder="Enter occupation"></div>
+            <div class="member-field"><label>Husband's / Wife Name</label><input type="text" name="spouseName" placeholder="Enter name"></div>
+            <div class="member-field"><label>Husband's / Wife Occupation</label><input type="text" name="spouseOccupation" placeholder="Enter occupation"></div>
+            <div class="member-field"><label>Husband's / Wife DOB</label><input type="date" name="spouseDOB"></div>
+            <div class="member-field"><label>Mother's Maiden Name</label><input type="text" name="motherMaidenName" placeholder="Enter mother's maiden name"></div>
+            <div class="member-field member-full">
+              <label>If you have any child</label>
+              <div class="member-choice-row">
+                <label><input type="radio" name="hasChild" value="Yes" onclick="toggleMemberChildren(true)"> Yes</label>
+                <label><input type="radio" name="hasChild" value="No" onclick="toggleMemberChildren(false)" checked> No</label>
+                <input class="child-count-input" type="number" min="0" max="3" name="childCount" placeholder="How many?" oninput="toggleMemberChildren(this.value > 0)">
+              </div>
+            </div>
+          </div>
+          <div id="memberChildren" class="children-list" style="display:none;">
+            <div class="child-row"><strong>1</strong><input type="text" name="child1Name" placeholder="Child Name"><select name="child1Gender"><option value="">M / F</option><option>M</option><option>F</option></select><input type="date" name="child1DOB"></div>
+            <div class="child-row"><strong>2</strong><input type="text" name="child2Name" placeholder="Child Name"><select name="child2Gender"><option value="">M / F</option><option>M</option><option>F</option></select><input type="date" name="child2DOB"></div>
+            <div class="child-row"><strong>3</strong><input type="text" name="child3Name" placeholder="Child Name"><select name="child3Gender"><option value="">M / F</option><option>M</option><option>F</option></select><input type="date" name="child3DOB"></div>
+          </div>
+        </div>
+
+        <div class="member-section">
+          <div class="member-section-title"><span>04</span> Payment / Contribution Details</div>
+          <div class="payment-methods">
+            <label><input type="checkbox" name="paymentCash"> Cash</label>
+            <label><input type="checkbox" name="paymentCheque"> Cheque</label>
+            <label><input type="checkbox" name="paymentDD"> DD</label>
+            <label><input type="checkbox" name="paymentNEFT"> NEFT</label>
+          </div>
+          <div class="member-grid">
+            <div class="member-field"><label>Bank Name</label><input type="text" name="bankName" placeholder="Enter bank name"></div>
+            <div class="member-field"><label>Bank Account No</label><input type="text" name="bankAccount" placeholder="Enter account number"></div>
+            <div class="member-field"><label>Branch Name</label><input type="text" name="branchName" placeholder="Enter branch name"></div>
+            <div class="member-field"><label>IFSC Code</label><input type="text" name="ifsc" placeholder="Enter IFSC code"></div>
+          </div>
+        </div>
+
+        <div class="member-section">
+          <div class="member-section-title"><span>05</span> Introducer & Enrollment</div>
+          <div class="member-grid">
+            <div class="member-field"><label>Introducer Name</label><input type="text" name="introducerName" placeholder="Enter introducer name"></div>
+            <div class="member-field"><label>Introducer Code</label><input type="text" name="introducerCode" placeholder="Enter introducer code"></div>
+            <div class="member-field"><label>Introducer Contact No</label><input type="tel" name="introducerContact" placeholder="Enter contact number"></div>
+            <div class="member-field"><label>Date of Enrollment</label><input type="date" id="memberEnrollmentDate" name="enrollmentDate" readonly></div>
+          </div>
+        </div>
+
+        <div class="member-section photo-document-section">
+          <div class="member-section-title"><span>06</span> Photograph & Required Documents</div>
+          <div class="member-photo-grid">
+            <div class="member-photo-box">
+              <div class="photo-icon">📷</div><h4>Color Stamp Size Photograph</h4><p>Required</p>
+              <input type="file" name="memberPhoto" accept="image/*" required onchange="previewMemberPhoto(event)">
+              <img id="memberPhotoPreview" class="member-photo-preview" alt="Photograph preview">
+            </div>
+            <div class="document-list">
+              <h4>Required Documents</h4>
+              <ol><li>Age Proof, Address Proof & Identity Proof: Aadhar Card & PAN Card</li><li>4 Copy Stamp Size Photo</li><li>Bank Account Details</li></ol>
+              <label class="document-upload">Upload supporting documents<input type="file" name="supportingDocuments" multiple accept=".pdf,.jpg,.jpeg,.png"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="member-section">
+          <div class="member-section-title"><span>07</span> Signatures & Declaration</div>
+          <div class="signature-grid">
+            <div class="signature-upload-card">
+              <div class="signature-preview-wrap">
+                <span id="applicantSignaturePlaceholder">✍️</span>
+                <img id="applicantSignaturePreview" class="signature-preview" alt="Applicant signature preview">
+              </div>
+              <label class="signature-file-btn">
+                📎 Add Applicant Signature
+                <input type="file" name="applicantSignature" accept="image/*,.pdf" required onchange="previewSignature(event,'applicantSignaturePreview','applicantSignaturePlaceholder')">
+              </label>
+              <span class="signature-label">Signature of the Applicant</span>
+              <small>Upload a clear signature image or PDF</small>
+            </div>
+          </div>
+          <label class="member-agreement"><input type="checkbox" name="memberDeclaration" required> I confirm that the information provided in this application is true and accurate, and I agree to abide by the Membership Terms and Conditions.</label>
+        </div>
+
+        <details class="membership-terms">
+          <summary>Membership Terms and Conditions</summary>
+          <div class="terms-content">
+            <p>The terms and conditions of membership are designed with you, our members, in mind. All members must keep to the same terms and conditions. They are necessary to make sure we can offer a safe platform for members to share project management knowledge, tools, resources, and experience.</p>
+            <h4>1. Definitions</h4><p>ARWS NGOs Board Member: members that are Board Members of ARWS NGOs. ARWS NGOs Team Member: members that are Member staff of ARWS NGOs. In these Membership Terms, “we” or “us” means ARWS NGOs and “you” or “your” means a Member.</p>
+            <h4>2. Membership Benefits</h4><p>Full access to the ARWS NGOs website. Access to ARWS NGOs management tools and resources. The opportunity to attend online and face to face events according to each event's rules and fees. To submit articles, tools and other forms of publications to be included in the ARWS NGOs website. ARWS NGOs reserves the right to change membership benefits at any time and may designate areas which specific member levels can access due to their content.</p>
+            <h4>3. Fees and Services</h4><p>Membership is free. Member can donate to ARWS NGOs, but does not receive any benefit or claim for donation to ARWS NGOs.</p>
+            <h4>4. Public Forums</h4><p>ARWS NGOs may make messaging services, chat services, bulletin boards, message boards, blogs and other forums available through the Site. Members must not upload, post, transmit, distribute or publish material that restricts or inhibits another user; is fraudulent, unlawful, threatening, abusive, harassing, libelous, defamatory, obscene, vulgar, offensive, pornographic, profane, sexually explicit or indecent; encourages criminal conduct or violates law; infringes third-party rights; contains a virus, spyware or harmful component; contains embedded links, commercial solicitation, advertising, chain letters, mass mailings or pyramid schemes; constitutes spam; or contains false or misleading indications of origin, endorsement or statements of fact. Members must not impersonate any person or entity. Members are responsible for information they post and its consequences. ARWS NGOs reserves the right to monitor, review, disclose, edit, refuse or remove information where necessary and may restrict access to forums for breaches of these terms or applicable law. Comments may be recorded and stored in multiple places and members should be careful about disclosing sensitive, embarrassing, proprietary or confidential information.</p>
+            <h4>5. Suspension or Termination</h4><p>ARWS NGOs may suspend or terminate registration and deny access to the Member Area immediately if a member breaches these Membership Terms or other Site rules; ARWS NGOs is unable to verify or authenticate information provided; or ARWS NGOs believes the member's actions may cause legal liability. By proceeding with this application you confirm that, as a member of the ARWS NGOs community, you will be committed to the development of others and intend to develop your management skills and professionalism continuously. You agree to abide by the ARWS NGOs Terms and Conditions for Membership. If accepted into membership but any information is misleading or false, membership may be revoked with immediate effect, without right of appeal. Member agrees to pay annual fees established for its Membership Class, as may be amended from time to time in accordance with the Bylaws.</p>
+          </div>
+        </details>
+
+        <div id="memberFormSuccess" class="member-success">✓ Member registration form completed successfully.</div>
+        <div class="member-form-actions">
+          <button type="submit" class="member-submit-btn">SUBMIT MEMBER REGISTRATION →</button>
+        </div>
+      </form>
+
+
+      <!-- MEMBER REGISTRATION RAZORPAY PAYMENT SCREEN -->
+      <div id="memberPaymentScreen" class="member-payment-screen" aria-live="polite">
+        <div class="member-payment-card">
+          <div class="member-payment-icon">₹</div>
+          <h3>Pay Your Member Registration Fee</h3>
+          <p>Your registration details are ready. Complete the required payment securely through Razorpay to submit your application for administrator verification.</p>
+          <div class="member-payment-amount">Member Registration Fee <strong>₹650</strong></div>
+          <div class="member-payment-status"><span>🔒 Razorpay Secure Checkout</span><span>✓ Amount: ₹650</span><span>💳 UPI / Card / Net Banking / Wallet</span></div>
+          <div class="member-payment-warning"><strong>Important:</strong> Your application is sent to the Administrator Portal only after Razorpay payment is successfully verified. A cancelled or failed payment does not submit the application.</div>
+          <div class="member-payment-actions">
+            <button type="button" class="member-payment-back" onclick="returnToMemberForm()">← Back to Registration Form</button>
+            <button id="razorpayMemberPayBtn" type="button" class="member-payment-done" onclick="startRazorpayMemberPayment()">Pay ₹650 Securely with Razorpay →</button>
+          </div>
+          <div id="memberPaymentSuccess" class="member-payment-success">✓ Payment verified successfully. Your Member registration has been submitted to the Administrator Portal for verification and approval.</div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- ARWS CADET ENROLLMENT FORM -->
+    <div id="cadetRegistrationForm" class="cadet-registration-form member-style-cadet-form" style="display:none;">
+      <button type="button" class="member-top-back cadet-top-back" onclick="backToRegistrationTypes()" aria-label="Back to registration form">
+        <span class="back-arrow">←</span><span>Back to Registration Form</span>
+      </button>
+      <div class="cadet-form-shell">
+        <div class="cadet-form-hero">
+          <span class="cadet-badge">ARWS Cadet Enrollment</span>
+          <h2><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11"/><path d="m9 12 2 2 4-4"/></svg>Senior & Junior Division/Wing Enrollment Form</h2>
+          <p>AGNI RURAL WELFARE SOCIETY • Regd No: S/1L/55059 • Motto: Bravery, Unity & Discipline</p>
+        </div>
+        <div class="cadet-form-body">
+          <form id="cadetEnrollmentForm" autocomplete="on" onsubmit="submitCadetForm(event)">
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>01</span> Cadet Personal Information</div>
+              <div class="cadet-grid">
+                <div class="cadet-field"><label>1. Full Name of Cadet *</label><input type="text" name="cadetName" id="cadetNameField" required autocomplete="name" autocapitalize="words" spellcheck="false"></div>
+                <div class="cadet-field"><label>2. Gender *</label><div class="cadet-radio-row"><label><input type="radio" name="cadetGender" value="Male" required> Male</label><label><input type="radio" name="cadetGender" value="Female"> Female</label></div></div>
+                <div class="cadet-field"><label>Email Address *</label><input type="email" name="email" id="cadetEmailField" required autocomplete="email" placeholder="name@example.com" inputmode="email"></div>
+                <div class="cadet-field"><label>17. Date of Birth *</label><input type="date" name="cadetDOB" required></div>
+                <div class="cadet-field"><label>Age</label><input type="number" name="cadetAge" min="1" max="100" placeholder="Enter age"></div>
+                <div class="cadet-field"><label>10. Aadhaar Card Number</label><input type="text" name="cadetAadhaar" maxlength="12" inputmode="numeric" placeholder="12-digit Aadhaar number"></div>
+                <div class="cadet-field"><label>21. Cadet Contact Number *</label><input type="tel" name="cadetPhone" required placeholder="Enter cadet contact number"></div>
+              </div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>02</span> Parent / Guardian Information</div>
+              <div class="cadet-grid">
+                <div class="cadet-field"><label>3. Father's Name *</label><input type="text" name="fatherName" required></div>
+                <div class="cadet-field"><label>4. Father's Occupation</label><input type="text" name="fatherOccupation"></div>
+                <div class="cadet-field"><label>5. Father's Annual Income</label><input type="text" name="fatherIncome"></div>
+                <div class="cadet-field"><label>6. Mother's Name</label><input type="text" name="motherName"></div>
+                <div class="cadet-field"><label>7. Mother's Occupation</label><input type="text" name="motherOccupation"></div>
+                <div class="cadet-field"><label>8. Mother's Annual Income</label><input type="text" name="motherIncome"></div>
+                <div class="cadet-field"><label>9. Parent / Guardian Name *</label><input type="text" name="guardianName" required></div>
+                <div class="cadet-field"><label>21. Guardian Contact Number *</label><input type="tel" name="guardianPhone" required></div>
+              </div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>03</span> Address & Citizenship</div>
+              <div class="cadet-grid">
+                <div class="cadet-field cadet-full"><label>11. Address *</label><textarea name="cadetAddress" required placeholder="Enter complete address"></textarea></div>
+                <div class="cadet-field"><label>12. Citizenship *</label><select name="citizenship" required><option value="">Select</option><option>Citizen of India</option><option>Subject of Nepal</option><option>Other</option></select></div>
+                <div class="cadet-field"><label>13. Village</label><input type="text" name="village"></div>
+                <div class="cadet-field"><label>Tehsil / Taluka</label><input type="text" name="tehsil"></div>
+                <div class="cadet-field"><label>District *</label><input type="text" name="district" required></div>
+                <div class="cadet-field"><label>PIN Code *</label><input type="text" name="pinCode" maxlength="6" required></div>
+                <div class="cadet-field"><label>14. Post Office</label><input type="text" name="postOffice"></div>
+                <div class="cadet-field"><label>15. Nearest Railway Station</label><input type="text" name="railwayStation"></div>
+              </div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>04</span> Education & Training</div>
+              <div class="cadet-grid">
+                <div class="cadet-field"><label>16. Education Qualification *</label><input type="text" name="educationQualification" required></div>
+                <div class="cadet-field"><label>18. School / College Currently Studying *</label><input type="text" name="schoolCollege" required></div>
+                <div class="cadet-field"><label>Institution *</label><input type="text" name="institution" required placeholder="Enter institution name"></div>
+                <div class="cadet-field cadet-full"><label>19. Willing to undergo ARWS service training? *</label><div class="cadet-radio-row"><label><input type="radio" name="trainingWilling" value="Yes" required> Yes, I am willing</label><label><input type="radio" name="trainingWilling" value="No"> No</label></div></div>
+                <div class="cadet-field cadet-full"><label>20. Residential Address (if different)</label><textarea name="residentialAddress" placeholder="Enter residential address if applicable"></textarea></div>
+              </div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>05</span> Photograph & Required Documents</div>
+              <div class="cadet-upload-grid">
+                <div class="cadet-upload-card"><h4>📷 Cadet Photograph</h4><p>Upload a recent stamp-size photograph.</p><input type="file" name="cadetPhoto" accept="image/*" required></div>
+                <div class="cadet-upload-card"><h4>📄 Education Qualification Proof</h4><p>Upload a clear copy of the education proof.</p><input type="file" name="educationProof" accept=".pdf,.jpg,.jpeg,.png" required></div>
+                <div class="cadet-upload-card"><h4>🪪 Cadet Aadhaar Card</h4><p>Upload Aadhaar card copy.</p><input type="file" name="cadetAadhaarFile" accept=".pdf,.jpg,.jpeg,.png" required></div>
+                <div class="cadet-upload-card"><h4>🪪 Guardian Aadhaar Card</h4><p>Upload guardian Aadhaar card copy.</p><input type="file" name="guardianAadhaarFile" accept=".pdf,.jpg,.jpeg,.png" required></div>
+              </div>
+              <div class="cadet-note"><strong>Required documents from the source form:</strong> Education qualification proof, Aadhaar Card and 2 stamp-size photographs for the applicant; Aadhaar Card for the guardian.</div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>06</span> Declaration of Acceptance for Enrollment</div>
+              <p class="cadet-declaration"><strong>22.</strong> I solemnly declare that the answers given in this form are true and that no part of them is false, and that I am willing to fulfill the engagement made.</p>
+              <p class="cadet-declaration"><strong>23.</strong> I promise that I will honestly and faithfully serve my country and abide by the Rules and Regulations of ARWS Training, and to the best of my ability attend all required parades and camps.</p>
+              <p class="cadet-declaration"><strong>24.</strong> I understand the enrollment and activity conditions stated by ARWS regarding training camps, courses, travel and other ARWS events.</p>
+              <p class="cadet-declaration"><strong>25.</strong> I promise to bind myself according to the applicable laws, rules and regulations.</p>
+              <div class="cadet-signatures">
+                <div class="cadet-signature-card"><div class="cadet-signature-preview"><span id="guardianSigText">Guardian signature preview</span><img id="guardianSigPreview" alt="Guardian signature"></div><input type="file" name="guardianSignature" accept="image/*" required onchange="previewCadetSignature(event,'guardianSigPreview','guardianSigText')"><small>Signature of Guardian</small></div>
+                <div class="cadet-signature-card"><div class="cadet-signature-preview"><span id="cadetSigText">Cadet signature preview</span><img id="cadetSigPreview" alt="Cadet signature"></div><input type="file" name="cadetSignature" accept="image/*" required onchange="previewCadetSignature(event,'cadetSigPreview','cadetSigText')"><small>Signature of Candidate</small></div>
+              </div>
+              <div class="cadet-grid" style="margin-top:14px"><div class="cadet-field"><label>Place *</label><input type="text" name="declarationPlace" required></div><div class="cadet-field"><label>Date *</label><input type="date" name="declarationDate" required></div></div>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>07</span> Declaration by Parent / Guardian</div>
+              <p class="cadet-declaration">I solemnly declare that the answers given in this form are true, that my Son / Daughter / Ward is willing to fulfill the engagement made, and that I agree to adhere to the discipline, programme and rules and regulations applicable to ARWS training and camps.</p>
+              <p class="cadet-declaration">I further declare that my son / daughter is in good health and physically fit to undergo ARWS training, subject to the required medical assessment.</p>
+              <label class="cadet-check"><input type="checkbox" name="parentDeclaration" required> <span>I, as the Parent / Guardian, understand and agree to the enrollment conditions and declarations above.</span></label>
+            </div>
+
+            <div class="cadet-section">
+              <div class="cadet-section-title"><span>08</span> Final Confirmation</div>
+              <label class="cadet-check"><input type="checkbox" name="cadetDeclaration" required> <span>I confirm that the information provided in this Cadet Enrollment Form is true and accurate and I agree to abide by the Rules & Regulations of ARWS Training.</span></label>
+              <div id="cadetFormSuccess" class="cadet-success">✓ Cadet enrollment form submitted successfully.</div>
+              <div class="cadet-form-actions"><button type="button" class="cadet-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Types</button><button type="submit" class="cadet-submit-btn">SUBMIT CADET ENROLLMENT →</button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- VOLUNTEER REGISTRATION FORM -->
+    <div id="volunteerRegistrationForm" class="volunteer-registration-form" style="display:none;">
+      <button type="button" class="program-top-back registration-return-btn volunteer-registration-back" onclick="backToRegistrationTypes()" aria-label="Back to Registration Form">
+        <span class="registration-return-arrow" aria-hidden="true">←</span>
+        <span class="registration-return-label">Back to Registration Form</span>
+      </button>
+      <div class="program-form-hero volunteer-hero-form">
+        <div class="program-form-badge"><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>COMMUNITY SERVICE • VOLUNTEER PROGRAM</div>
+        <h3><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>Volunteer Registration Form</h3>
+        <p>Tell us how you would like to contribute your time, skills and energy to community service.</p>
+        <div class="program-form-org">Agni Rural Welfare Society</div>
+      </div>
+      <form id="volunteerForm" autocomplete="on" onsubmit="submitProgramForm(event,'volunteerFormSuccess','VOLUNTEER REGISTRATION SUBMITTED ✓')">
+        <div class="program-section"><div class="program-section-title"><span>01</span> Personal & Contact Information</div><div class="program-grid">
+          <div class="program-field"><label>Full Name *</label><input name="fullName" autocomplete="name" autocapitalize="words" spellcheck="false" required></div><div class="program-field"><label>Date of Birth *</label><input type="date" name="dob" required></div>
+          <div class="program-field"><label>Email Address *</label><input type="email" name="email" required autocomplete="email" inputmode="email"></div><div class="program-field"><label>Mobile Number *</label><input type="tel" name="phone" required></div>
+          <div class="program-field full"><label>Current Address *</label><textarea name="address" required></textarea></div>
+          <div class="program-field"><label>Occupation / Current Status *</label><select name="occupation" required><option value="">Select</option><option>Student</option><option>Employed</option><option>Self-employed</option><option>Homemaker</option><option>Retired</option><option>Other</option></select></div>
+          <div class="program-field"><label>Institution *</label><input name="institution" required placeholder="School / College / Organization"></div>
+          <div class="program-field"><label>Preferred Communication</label><select name="communication"><option>Email</option><option>Phone Call</option><option>WhatsApp / SMS</option></select></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>02</span> Volunteer Interests & Skills</div><div class="program-grid">
+          <div class="program-field full"><label>Preferred Volunteer Areas *</label><div class="program-choice"><label><input type="checkbox" name="interest" value="Education"> Education & Mentoring</label><label><input type="checkbox" name="interest" value="Field"> Field Activities</label><label><input type="checkbox" name="interest" value="Events"> Events</label><label><input type="checkbox" name="interest" value="Fundraising"> Fundraising</label><label><input type="checkbox" name="interest" value="Admin"> Administration</label></div></div>
+          <div class="program-field"><label>Key Skills / Languages</label><input name="skills" placeholder="e.g. teaching, communication, design"></div><div class="program-field"><label>Previous Volunteer Experience</label><input name="experience" placeholder="Organization or role, if any"></div>
+          <div class="program-field full"><label>Why would you like to volunteer with ARWS? *</label><textarea name="motivation" required></textarea></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>03</span> Availability & Commitment</div><div class="program-grid">
+          <div class="program-field full"><label>Available Days *</label><div class="program-choice"><label><input type="checkbox" name="day" value="Weekdays"> Weekdays</label><label><input type="checkbox" name="day" value="Weekends"> Weekends</label><label><input type="checkbox" name="day" value="Events"> Special Events</label><label><input type="checkbox" name="day" value="Flexible"> Flexible</label></div></div>
+          <div class="program-field"><label>Preferred Time *</label><select name="time" required><option value="">Select</option><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Flexible</option></select></div><div class="program-field"><label>Hours Available per Week *</label><select name="hours" required><option value="">Select</option><option>1–3 Hours</option><option>4–6 Hours</option><option>7–10 Hours</option><option>10+ Hours</option></select></div>
+          <div class="program-field"><label>Preferred Start Date *</label><input type="date" name="startDate" required></div><div class="program-field"><label>Commitment Preference</label><select name="commitment"><option>One-time / Event-based</option><option>Short-term</option><option>Long-term / Regular</option></select></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>04</span> Emergency Contact & Documents</div><div class="program-grid">
+          <div class="program-field"><label>Emergency Contact Name *</label><input name="emergencyName" required></div><div class="program-field"><label>Relationship *</label><input name="relationship" required></div><div class="program-field"><label>Emergency Contact Number *</label><input type="tel" name="emergencyPhone" required></div>
+          <div class="program-field"><label>How did you hear about us? <small>(Optional)</small></label><select name="source"><option value="">Select</option><option>Website</option><option>Social Media</option><option>Friend / Family</option><option>College / Institution</option><option>Other</option></select></div>
+          <div class="program-field full"><div class="program-upload-grid"><div class="program-upload-card"><h4>📷 Photograph</h4><p>Optional recent profile photograph.</p><input type="file" name="photo" accept="image/*"></div><div class="program-upload-card"><h4>📄 Supporting Document</h4><p>Optional résumé, certificate or relevant document.</p><input type="file" name="document" accept=".pdf,.jpg,.jpeg,.png"></div></div></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>05</span> Declaration & Confirmation</div><label class="program-agreement"><input type="checkbox" required> I confirm that the information provided is true and I agree to follow the safety, discipline and volunteer guidelines of Agni Rural Welfare Society.</label><div class="program-note">After submission, your volunteer application can be reviewed by the organization before a suitable role or activity is assigned.</div></div>
+        <div id="volunteerFormSuccess" class="program-success">✓ Volunteer registration submitted successfully.</div><div class="program-actions"><button type="submit" class="program-submit-btn">SUBMIT VOLUNTEER REGISTRATION →</button></div>
+      </form>
+    </div>
+
+    <!-- INTERN REGISTRATION FORM -->
+    <div id="internRegistrationForm" class="intern-registration-form" style="display:none;">
+      <button type="button" class="program-top-back registration-return-btn intern-registration-back" onclick="backToRegistrationTypes()" aria-label="Back to Registration Form">
+        <span class="registration-return-arrow" aria-hidden="true">←</span>
+        <span class="registration-return-label">Back to Registration Form</span>
+      </button>
+      <div class="program-form-hero intern-hero-form">
+        <div class="program-form-badge"><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></svg>LEARNING • PROJECT EXPERIENCE • MENTORSHIP</div>
+        <h3><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></svg>Internship Registration Form</h3>
+        <p>Designed for students and early-career applicants seeking structured learning and practical experience.</p>
+        <div class="program-form-org">Agni Rural Welfare Society</div>
+      </div>
+      <form id="internForm" autocomplete="on" onsubmit="submitProgramForm(event,'internFormSuccess','INTERNSHIP APPLICATION SUBMITTED ✓')">
+        <div class="program-section"><div class="program-section-title"><span>01</span> Applicant Information</div><div class="program-grid">
+          <div class="program-field"><label>Full Name *</label><input name="fullName" autocomplete="name" autocapitalize="words" spellcheck="false" required></div><div class="program-field"><label>Date of Birth *</label><input type="date" name="dob" required></div><div class="program-field"><label>Email Address *</label><input type="email" name="email" required autocomplete="email" inputmode="email"></div><div class="program-field"><label>Mobile Number *</label><input type="tel" name="phone" required></div><div class="program-field full"><label>Current Address *</label><textarea name="address" required></textarea></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>02</span> Academic Background</div><div class="program-grid">
+          <div class="program-field"><label>College / University *</label><input name="college" required></div><div class="program-field"><label>Institution *</label><input name="institution" required placeholder="College / University / Institution"></div><div class="program-field"><label>Degree / Program *</label><input name="degree" required></div><div class="program-field"><label>Branch / Major *</label><input name="major" required></div><div class="program-field"><label>Current Year / Semester *</label><input name="yearSemester" required></div><div class="program-field"><label>Expected Graduation *</label><input type="month" name="graduation" required></div><div class="program-field"><label>Academic Advisor / Faculty <small>(Optional)</small></label><input name="advisor"></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>03</span> Internship Preference & Availability</div><div class="program-grid">
+          <div class="program-field"><label>Preferred Internship Area *</label><select name="area" required><option value="">Select</option><option>Web Development / IT</option><option>Education & Training</option><option>Research & Documentation</option><option>Social Media & Content</option><option>Fundraising & Outreach</option><option>Field Coordination</option><option>Administration</option></select></div><div class="program-field"><label>Mode Preference *</label><select name="mode" required><option value="">Select</option><option>Virtual / Remote</option><option>On-site</option><option>Hybrid</option></select></div><div class="program-field"><label>Preferred Start Date *</label><input type="date" name="startDate" required></div><div class="program-field"><label>Preferred End Date *</label><input type="date" name="endDate" required></div><div class="program-field"><label>Hours Available per Week *</label><select name="hours" required><option value="">Select</option><option>5–10 Hours</option><option>10–20 Hours</option><option>20–30 Hours</option><option>30+ Hours</option></select></div><div class="program-field"><label>Academic Credit Required?</label><select name="credit"><option>No</option><option>Yes</option><option>Not Sure</option></select></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>04</span> Skills, Projects & Supporting Documents</div><div class="program-grid">
+          <div class="program-field"><label>Technical / Professional Skills *</label><input name="skills" required placeholder="e.g. HTML, CSS, communication, research"></div><div class="program-field"><label>Portfolio / LinkedIn / GitHub Link <small>(Optional)</small></label><input type="url" name="portfolio" placeholder="https://"></div><div class="program-field full"><label>Relevant Coursework, Project or Experience *</label><textarea name="project" required placeholder="Describe a project, coursework, volunteer work or experience relevant to this internship"></textarea></div><div class="program-field full"><label>Why are you interested in this internship? *</label><textarea name="motivation" required></textarea></div>
+          <div class="program-field full"><div class="program-upload-grid"><div class="program-upload-card"><h4>📄 Résumé / CV *</h4><p>Upload your current résumé or CV.</p><input type="file" name="resume" accept=".pdf,.doc,.docx" required></div><div class="program-upload-card"><h4>🗂 Work Sample / Certificate</h4><p>Optional portfolio sample, certificate or supporting document.</p><input type="file" name="workSample" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"></div></div></div>
+        </div></div>
+        <div class="program-section"><div class="program-section-title"><span>05</span> Reference & Final Declaration</div><div class="program-grid"><div class="program-field"><label>Reference Name <small>(Optional)</small></label><input name="referenceName"></div><div class="program-field"><label>Reference Email / Phone <small>(Optional)</small></label><input name="referenceContact"></div></div><label class="program-agreement"><input type="checkbox" required> I confirm that the information and documents provided are accurate and I agree that Agni Rural Welfare Society may review my application for internship selection and communication.</label><div class="program-note">Internship applications focus on education, skills, project experience, availability and learning goals. Selection and assignment may depend on program requirements and available opportunities.</div></div>
+        <div id="internFormSuccess" class="program-success">✓ Internship application submitted successfully.</div><div class="program-actions"><button type="submit" class="program-submit-btn">SUBMIT INTERNSHIP APPLICATION →</button></div>
+      </form>
+    </div>
+
+    <!-- Registration Type Dropdown - placed below the register form -->
+    <div class="role-register-dropdown" id="registerTypeDropdown">
+      <button type="button" class="role-dropdown-toggle" onclick="toggleRegisterTypeDropdown()" aria-expanded="false">
+        <span class="dropdown-label"><svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M9 10h6M9 14h6M9 18h3"/></svg><span class="dropdown-label-text">Choose Your Registration Type</span></span>
+        <span class="role-dropdown-arrow">▼</span>
+      </button>
+
+      <div class="role-register-box">
+        <div class="role-register-title">Choose Your Registration Type</div>
+        <div class="role-register-subtitle">Select the account type you want to create</div>
+
+        <div class="role-register-grid">
+          <button type="button" class="role-register-btn active" onclick="selectRegisterRole(this,'Member')">
+            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M17 3.13a4 4 0 0 1 0 7.75"/></svg><span>Register Members</span>
+          </button>
+          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Cadet')">
+            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11"/><path d="m9 12 2 2 4-4"/></svg><span>Register Cadets</span>
+          </button>
+          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Volunteer')">
+            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg><span>Register Volunteers</span>
+          </button>
+          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Intern & Alumni Member')">
+            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></svg><span>Register Intern &amp; Alumni Members</span>
+          </button>
+        </div>
+
+        <div class="role-selected">
+          Selected Account Type: <strong id="selectedRegisterRole">Member</strong>
+        </div>
+      </div>
+    </div>
+   </div>
+
+
+   

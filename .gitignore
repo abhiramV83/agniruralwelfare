@@ -1,0 +1,13 @@
+node_modules/
+.npm-cache/
+.env
+server/.env
+client/.env
+client/dist/
+server/uploads/*
+!server/uploads/.gitkeep
+reference/
+*.log
+.cache/
+server/.demo-data/
+docs/qa/

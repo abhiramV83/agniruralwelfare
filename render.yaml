@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: agni-rural-society-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.12.0
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DATABASE
+        value: agni_rural_welfare
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: FIELD_ENCRYPTION_KEY
+        sync: false
+      - key: CLIENT_ORIGIN
+        sync: false

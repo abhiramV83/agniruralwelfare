@@ -1,0 +1,542 @@
+/* Registration iframe skin. All colors resolve from the host app's theme tokens. */
+:root {
+  color-scheme: light;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+:root[data-theme="dark"] { color-scheme: dark; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  background: transparent;
+}
+body,
+#registerPanel {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100%;
+  max-width: none !important;
+  min-height: 0 !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  font: 400 16px/1.55 Inter, "Segoe UI", Arial, sans-serif !important;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+#registerPanel > h3 {
+  margin: 0 0 16px !important;
+  color: var(--text) !important;
+  font-size: 24px !important;
+  font-weight: 750 !important;
+  line-height: 1.2;
+  text-align: left !important;
+}
+#registerPanel,
+#registerPanel * { box-sizing: border-box; }
+#registerPanel button,
+#registerPanel input,
+#registerPanel select,
+#registerPanel textarea { font: inherit; }
+#registerPanel .registration-inline-icon { display:inline-block; width:1.15em; height:1.15em; flex:none; margin-inline-end:.35em; vertical-align:-.2em; color:var(--primary); }
+#registerPanel .photo-icon .registration-inline-icon { width:1.6em; height:1.6em; margin:0; }
+#registerPanel .password-toggle .registration-inline-icon { margin:0; color:currentColor; }
+#registerPanel :is(input, select, textarea, button, summary, a) {
+  scroll-margin-top: 96px;
+}
+#registerPanel :is(input, select, textarea, button, summary):focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Surfaces and section rhythm shared by the account panel and all four forms. */
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero) {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: 4px;
+  margin: 0 0 16px;
+  padding: 24px clamp(18px, 3vw, 32px);
+  border: 1px solid var(--registration-border);
+  border-radius: var(--radius);
+  background: linear-gradient(125deg, var(--hero-start), var(--hero-mid) 55%, var(--hero-end)) !important;
+  color: var(--photo-text) !important;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero)::before,
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero)::after,
+#registerPanel :is(.program-top-back, .registration-return-btn, .member-payment-card)::before,
+#registerPanel :is(.program-top-back, .registration-return-btn, .member-payment-card)::after {
+  display: none !important;
+}
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero) :is(h2, h3, p, .member-form-badge, .cadet-badge, .program-form-badge, .member-form-org, .program-form-org) {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--photo-text) !important;
+  text-shadow: none !important;
+}
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero) :is(h2, h3) {
+  font-size: clamp(21px, 2.5vw, 30px) !important;
+  line-height: 1.22;
+  font-weight: 750 !important;
+}
+#registerPanel :is(.member-form-hero, .cadet-form-hero, .program-form-hero) p { font-size: 14px !important; opacity: 1 !important; }
+#registerPanel :is(.member-form-badge, .cadet-badge, .program-form-badge) {
+  width: fit-content;
+  padding: 5px 10px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--surface) 20%, transparent) !important;
+  font-size: 12px !important;
+  letter-spacing: .02em !important;
+}
+#registerPanel :is(.member-registration-form, .cadet-registration-form, .volunteer-registration-form, .intern-registration-form) {
+  width: 100% !important;
+  max-width: 1120px !important;
+  min-width: 0;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  color: var(--text) !important;
+  animation-duration: 200ms !important;
+  scroll-margin-top: 96px;
+}
+#registerPanel :is(.member-form-shell, .cadet-form-shell, .program-form-shell) {
+  width: 100%;
+  overflow: visible !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: var(--radius) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow) !important;
+}
+#registerPanel :is(.member-form-body, .cadet-form-body, .program-form-body) {
+  padding: clamp(16px, 2.5vw, 28px) !important;
+  border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+#registerPanel :is(.member-section, .cadet-section, .program-section, .agni-extra-account-section) {
+  min-width: 0;
+  margin: 0 0 16px !important;
+  padding: clamp(16px, 2vw, 22px) !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 16px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: var(--shadow) !important;
+  scroll-margin-top: 96px;
+}
+#registerPanel :is(.member-section-title, .cadet-section-title, .program-section-title) {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  margin: 0 0 16px !important;
+  padding: 0 0 12px !important;
+  border-bottom: 1px solid var(--registration-border) !important;
+  color: var(--text) !important;
+  font-size: 18px !important;
+  line-height: 1.3;
+  font-weight: 750 !important;
+}
+#registerPanel :is(.member-section-title, .cadet-section-title, .program-section-title) span {
+  flex: 0 0 36px;
+  width: 36px !important;
+  height: 36px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 50%;
+  background: var(--info-bg) !important;
+  color: var(--info-text) !important;
+  font-size: 13px !important;
+}
+
+/* One consistent grid and control recipe for every registration type. */
+#registerPanel :is(.auth-grid, .member-grid, .cadet-grid, .program-grid, .agni-extra-account-grid) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px !important;
+}
+#registerPanel :is(.auth-group, .member-field, .cadet-field, .program-field) {
+  min-width: 0;
+  margin: 0 !important;
+  color: var(--text) !important;
+}
+#registerPanel :is(.auth-group.full, .member-field.member-full, .cadet-full, .program-field.full) { grid-column: 1 / -1; }
+#registerPanel :is(.auth-group label, .member-field label, .cadet-field label, .program-field label, .agni-photo-required label) {
+  display: block;
+  margin: 0 0 7px !important;
+  color: var(--text) !important;
+  font-size: 14px !important;
+  font-weight: 650 !important;
+  line-height: 1.4;
+}
+#registerPanel :is(.auth-group input:not([type="radio"]):not([type="checkbox"]), .auth-group select, .member-field input:not([type="radio"]):not([type="checkbox"]), .member-field select, .member-field textarea, .cadet-field input:not([type="radio"]):not([type="checkbox"]), .cadet-field select, .cadet-field textarea, .program-field input:not([type="radio"]):not([type="checkbox"]), .program-field select, .program-field textarea, .agni-photo-required input) {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  margin: 0;
+  padding: 11px 14px !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 12px !important;
+  background: var(--input-bg) !important;
+  color: var(--text) !important;
+  font: 400 15px/1.4 Inter, "Segoe UI", Arial, sans-serif !important;
+  box-shadow: none !important;
+  transition: border-color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+#registerPanel textarea { min-height: 104px !important; resize: vertical; }
+#registerPanel :is(input, select, textarea):hover { border-color: var(--primary) !important; }
+#registerPanel :is(input, select, textarea):focus-visible {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring) !important;
+}
+#registerPanel :is(input, select, textarea):disabled,
+#registerPanel :is(input, select, textarea)[readonly] {
+  background: var(--surface) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed;
+  opacity: 1;
+}
+#registerPanel ::placeholder { color: var(--text-muted) !important; opacity: 1 !important; }
+#registerPanel :is(input, select, textarea):user-invalid { border-color: var(--danger) !important; }
+#registerPanel :is(input, select, textarea):user-valid { border-color: var(--success) !important; }
+#registerPanel :is(input[type="radio"], input[type="checkbox"]) {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  margin: 2px 7px 0 0 !important;
+  padding: 0 !important;
+  accent-color: var(--primary);
+}
+#registerPanel :is(.member-radio-row, .cadet-radio-row, .program-choice, .member-check, .cadet-check, .program-agreement, .member-agreement) {
+  color: var(--text) !important;
+  font-size: 14px !important;
+  line-height: 1.5;
+}
+#registerPanel :is(.member-choice-row label, .cadet-radio-row label, .program-choice label) {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  color: var(--text) !important;
+}
+#registerPanel :is(.member-choice-row, .payment-methods) { color: var(--text) !important; }
+#registerPanel .payment-methods label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 12px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 999px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+#registerPanel .child-row {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) minmax(80px, .55fr) minmax(132px, .8fr);
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--surface) !important;
+}
+#registerPanel .child-row strong {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid var(--registration-border);
+  border-radius: 50%;
+  background: var(--info-bg);
+  color: var(--info-text);
+}
+#registerPanel .child-row :is(input, select) { min-width: 0; }
+#registerPanel :is(.program-choice label, .payment-chip, .member-payment-status span) {
+  min-height: 40px;
+  padding: 8px 12px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 999px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+/* Uploads, signatures, previews, explanatory messages and terms. */
+#registerPanel :is(.cadet-upload-card, .program-upload-card, .member-photo-card, .member-photo-box, .member-upload-card, .document-list, .document-upload, .signature-upload-card, .member-signature-card, .cadet-signature-card, .agni-photo-required) {
+  min-width: 0;
+  padding: 16px !important;
+  border: 1px dashed var(--registration-border) !important;
+  border-radius: 14px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+#registerPanel :is(.cadet-upload-card h4, .program-upload-card h4, .member-photo-card h4, .member-photo-box h4, .member-upload-card h4, .document-list h4) { color: var(--text) !important; }
+#registerPanel :is(.cadet-upload-card p, .program-upload-card p, .member-photo-card p, .member-photo-box p, .member-upload-card p, .agni-photo-required small, .member-field label small) { color: var(--text-muted) !important; }
+#registerPanel :is(.document-list ol, .document-upload, .signature-label) { color: var(--text-muted) !important; }
+#registerPanel input[type="file"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 5px !important;
+  border: 1px solid var(--input-border) !important;
+  border-radius: 12px !important;
+  background: var(--input-bg) !important;
+  color: var(--text-muted) !important;
+  font-size: 14px !important;
+}
+#registerPanel input[type="file"]::file-selector-button {
+  min-height: 36px;
+  margin-right: 10px;
+  padding: 6px 12px;
+  border: 1px solid var(--registration-border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+#registerPanel :is(.photo-preview, .member-photo-preview, .cadet-signature-preview, .signature-preview-wrap, .signature-preview) {
+  max-width: 100%;
+  border: 1px dashed var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--surface) !important;
+  color: var(--text-muted) !important;
+}
+#registerPanel :is(.cadet-note, .program-note, .member-note, .member-payment-warning) {
+  padding: 12px 14px !important;
+  border: 1px solid var(--warning-border) !important;
+  border-radius: 12px !important;
+  background: var(--warning-bg) !important;
+  color: var(--warning-text) !important;
+}
+#registerPanel :is(.cadet-declaration, .member-declaration, .terms-content, .program-section p) { color: var(--text-muted) !important; }
+#registerPanel :is(.cadet-declaration, .member-declaration) strong { color: var(--primary) !important; }
+#registerPanel :is(.membership-terms, .terms-content) {
+  border-color: var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+#registerPanel .membership-terms summary { color: var(--primary) !important; }
+#registerPanel .terms-content :is(h4, p) { color: var(--text) !important; }
+#registerPanel :is(.member-agreement, .program-agreement, .cadet-check) {
+  padding: 12px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--info-bg) !important;
+  color: var(--info-text) !important;
+}
+#registerPanel :is(.cadet-success, .program-success, .member-success, .member-payment-success, .registration-success) {
+  border: 1px solid var(--success-border) !important;
+  border-radius: 12px !important;
+  background: var(--success-bg) !important;
+  color: var(--success-text) !important;
+}
+
+/* Account type chooser and account-form controls. */
+#registerPanel .role-register-dropdown {
+  margin: 24px 0 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#registerPanel .role-register-dropdown::before { display: none !important; }
+#registerPanel .role-dropdown-arrow {
+  border: 1px solid var(--registration-border) !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  transition: transform 200ms ease;
+}
+#registerPanel .role-dropdown-toggle {
+  min-height: 48px;
+  padding: 12px 16px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--primary) !important;
+  color: var(--on-primary) !important;
+  box-shadow: var(--shadow) !important;
+  transform: none !important;
+}
+#registerPanel .role-dropdown-toggle:hover { filter: brightness(1.06); }
+#registerPanel .dropdown-label { display:inline-flex; align-items:center; gap:10px; }
+#registerPanel .registration-title-icon { display:inline-block; width:1.15em; height:1.15em; flex:none; margin-right:.4em; vertical-align:-.2em; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+#registerPanel h3 .registration-title-icon, #registerPanel h2 .registration-title-icon { color:var(--primary); }
+#registerPanel .program-form-badge .registration-title-icon { color:currentColor; }
+#registerPanel .registration-type-icon { display:block; width:26px; height:26px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+#registerPanel .dropdown-label .registration-type-icon { width:20px; height:20px; }
+#registerPanel .role-register-btn { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; }
+#registerPanel .role-register-btn span { display:block; margin:0; font-size:12px; line-height:1.35; }
+#registerPanel .role-register-btn .registration-type-icon { color:var(--primary); transition:transform 180ms ease,color 180ms ease; }
+#registerPanel .role-register-btn:hover .registration-type-icon { transform:translateY(-2px); }
+#registerPanel .role-register-btn.active .registration-type-icon { color:var(--primary); }
+#registerPanel .role-register-box {
+  position: relative !important;
+  inset: auto !important;
+  margin-top: 12px;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 16px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: var(--shadow) !important;
+}
+#registerPanel :is(.role-register-title, .role-register-subtitle, .role-selected) { color: var(--text) !important; }
+#registerPanel .role-register-btn {
+  min-height: 92px;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 14px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+#registerPanel .role-register-btn.active { border-color: var(--primary) !important; background: var(--info-bg) !important; color: var(--text) !important; }
+#registerPanel .role-register-btn::before,
+#registerPanel .role-register-btn::after { display: none !important; }
+#registerPanel :is(.auth-grid, .auth-group) { min-width: 0; }
+#registerPanel .password-wrap { position: relative !important; display: block !important; }
+#registerPanel .password-wrap input { padding-right: 54px !important; }
+#registerPanel .password-toggle {
+  position: absolute !important;
+  top: 50% !important;
+  right: 5px !important;
+  display: grid !important;
+  width: 40px !important;
+  min-width: 40px;
+  height: 40px !important;
+  min-height: 40px;
+  place-items: center;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  outline: 0 !important;
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+#registerPanel .password-toggle:hover { background: var(--surface) !important; color: var(--text) !important; }
+#registerPanel .password-toggle:focus-visible { outline: 2px solid var(--focus-ring) !important; }
+#registerPanel :is(.cadet-radio-row label, .member-choice-row label) > input { flex: 0 0 18px; }
+#registerPanel .signature-file-btn {
+  min-height: 44px;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 10px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+#registerPanel .signature-file-btn:focus-within { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+#registerPanel .auth-btn,
+#registerPanel :is(.member-submit-btn, .cadet-submit-btn, .program-submit-btn, .member-payment-done) {
+  min-height: 48px;
+  padding: 12px 20px !important;
+  border: 1px solid var(--primary) !important;
+  border-radius: 12px !important;
+  background: var(--primary) !important;
+  color: var(--on-primary) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  box-shadow: var(--glow) !important;
+}
+#registerPanel :is(.member-back-btn, .cadet-back-btn, .member-payment-back, .program-top-back, .member-top-back, .cadet-top-back) {
+  min-height: 44px;
+  padding: 10px 14px !important;
+  border: 1px solid var(--registration-border) !important;
+  border-radius: 12px !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+}
+#registerPanel :is(button, .auth-btn):disabled { opacity: .58 !important; cursor: not-allowed !important; filter: none !important; }
+#registerPanel .role-dropdown-arrow { transition: transform 200ms ease; }
+#registerPanel .role-register-dropdown.open .role-dropdown-arrow { transform: rotate(180deg); }
+#registerPanel :is(.member-payment-card, .member-payment-screen) {
+  border-color: var(--registration-border) !important;
+  border-radius: var(--radius) !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+  box-shadow: var(--shadow) !important;
+}
+#registerPanel .member-payment-icon {
+  border: 1px solid var(--registration-border);
+  background: var(--primary) !important;
+  color: var(--on-primary) !important;
+  box-shadow: var(--glow) !important;
+}
+#registerPanel :is(.member-payment-card h3, .member-payment-card p, .member-payment-card strong) { color: var(--text) !important; }
+#registerPanel :is(.member-payment-amount, .member-payment-status span) {
+  border-color: var(--registration-border) !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+@media (max-width: 760px) {
+  #registerPanel :is(.auth-grid, .member-grid, .cadet-grid, .program-grid, .agni-extra-account-grid, .member-photo-grid, .signature-grid, .cadet-upload-grid, .cadet-signatures, .program-upload-grid, .role-register-grid) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  #registerPanel :is(.auth-group.full, .member-field.member-full, .cadet-full, .program-field.full) { grid-column: auto !important; }
+  #registerPanel :is(.member-form-body, .cadet-form-body, .program-form-body) { padding: 14px !important; }
+  #registerPanel :is(.member-form-actions, .cadet-form-actions, .program-actions, .member-payment-actions) { display: grid !important; grid-template-columns: minmax(0, 1fr); }
+  #registerPanel .child-row { grid-template-columns: 30px minmax(0, 1fr) 72px !important; }
+  #registerPanel .child-row input[type="date"] { grid-column: 2 / -1; }
+  #registerPanel :is(.member-form-actions button, .cadet-form-actions button, .program-actions button, .member-payment-actions button) { width: 100%; }
+  #registerPanel :is(.member-section, .cadet-section, .program-section, .agni-extra-account-section) { padding: 15px !important; }
+  #registerPanel :is(.member-section-title, .cadet-section-title, .program-section-title) { align-items: flex-start; font-size: 16px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #registerPanel *, #registerPanel *::before, #registerPanel *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Refined registration controls retain the selected palette instead of using
+   black fields; this is shared by member, cadet, volunteer and internship forms. */
+#registerPanel :is(.auth-group input:not([type="radio"]):not([type="checkbox"]), .auth-group select,
+  .member-field input:not([type="radio"]):not([type="checkbox"]), .member-field select, .member-field textarea,
+  .cadet-field input:not([type="radio"]):not([type="checkbox"]), .cadet-field select, .cadet-field textarea,
+  .program-field input:not([type="radio"]):not([type="checkbox"]), .program-field select, .program-field textarea,
+  .agni-photo-required input, input[type="file"]) {
+  background:linear-gradient(145deg,color-mix(in srgb,var(--input-bg) 92%,var(--surface-elevated)),var(--input-bg)) !important;
+  border-color:var(--input-border) !important;
+  border-radius:14px !important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 20%,transparent),0 3px 10px color-mix(in srgb,var(--text) 5%,transparent) !important;
+  transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease !important;
+}
+#registerPanel :is(input,select,textarea):hover { border-color:color-mix(in srgb,var(--primary) 70%,var(--input-border)) !important; }
+#registerPanel :is(input,select,textarea):focus-visible {
+  border-color:var(--primary) !important;
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--primary) 20%,transparent),0 8px 22px color-mix(in srgb,var(--primary) 10%,transparent) !important;
+}
+#registerPanel :is(input,textarea,select)[aria-invalid="true"],
+#registerPanel :is(input,textarea,select):user-invalid {
+  border-color:var(--danger) !important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 15%,transparent) !important;
+}
+#registerPanel input:-webkit-autofill,#registerPanel input:-webkit-autofill:hover,#registerPanel input:-webkit-autofill:focus {
+  -webkit-text-fill-color:var(--text) !important;
+  -webkit-box-shadow:0 0 0 1000px var(--input-bg) inset !important;
+  caret-color:var(--text);
+}
+#registerPanel input[type="file"]::file-selector-button {
+  min-height:32px; padding:5px 12px; border:0; border-radius:9px;
+  color:var(--on-primary); background:var(--primary); font:inherit; font-weight:650; cursor:pointer;
+}
+#registerPanel :is(.member-section,.cadet-section,.program-section,.agni-extra-account-section) {
+  background:linear-gradient(145deg,var(--surface-elevated),var(--surface)) !important;
+  box-shadow:var(--shadow) !important;
+}
+#registerPanel :is(.member-form-actions button,.cadet-form-actions button,.program-actions button,.member-payment-actions button) {
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+#registerPanel :is(.member-form-actions button,.cadet-form-actions button,.program-actions button,.member-payment-actions button):hover {
+  transform:translateY(-2px); filter:brightness(1.04); box-shadow:var(--glow),var(--shadow);
+}
+@media (prefers-reduced-motion:reduce) {
+  #registerPanel :is(input,select,textarea,.member-form-actions button,.cadet-form-actions button,.program-actions button,.member-payment-actions button) { transition:none !important; }
+}

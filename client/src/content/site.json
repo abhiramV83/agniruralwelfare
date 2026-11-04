@@ -1,0 +1,3649 @@
+{
+  "brand": {
+    "name": "Agni Rural Welfare Society",
+    "tagline": "Serving Society with Responsibility",
+    "welcome": "Welcome",
+    "footer": "© Agni Rural Welfare Society | Serving Society with Responsibility",
+    "permission": "Built with the permission of Agni Rural Welfare Society.",
+    "motto": "Motto : Bravery Unity & Discipline"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "to": "/"
+    },
+    {
+      "label": "Login",
+      "to": "/login"
+    },
+    {
+      "label": "About Organization",
+      "to": "/about"
+    },
+    {
+      "label": "Gallery/Activites",
+      "to": "/gallery"
+    },
+    {
+      "label": "Jobs",
+      "to": "/jobs"
+    },
+    {
+      "label": "Documentation",
+      "to": "/documentation"
+    },
+    {
+      "label": "Membership",
+      "to": "/membership"
+    },
+    {
+      "label": "Volunteer/Internship",
+      "to": "/volunteer"
+    },
+    {
+      "label": "Supporters",
+      "to": "/supporters"
+    },
+    {
+      "label": "Donate/Membership",
+      "to": "/donate"
+    },
+    {
+      "label": "Contact",
+      "to": "/contact"
+    }
+  ],
+  "home": {
+    "heading": "Spreading Joy Through Social Service",
+    "subtitle": "Working together for children, communities, and a better tomorrow.",
+    "supportHeading": "Support Our Social Activities",
+    "supportSubtitle": "Support Sundarban poor School Students with New Clothes,study materials, portion food & others.",
+    "supportParagraphs": [
+      "As we do every year, this time as well, AGNI Rural Welfare Society is proud to continue its tradition of supporting the underprivileged by distributing new clothes to the students of Sundarbans poor School in the. This initiative is part of our Social activities, a time when we aim to bring joy to these children and ensure they feel included in the festive spirit. The smiles on their faces remind us of the importance of community and compassion during this special occasion.",
+      "We are calling on generous individuals, organizations, and well-wishers who wish to contribute to this cause. You can support these students by making a donation through our bank account or using the Bank QR code provided. Your contributions will directly go towards purchasing new clothes for the students, many of whom come from economically disadvantaged backgrounds and eagerly look forward to this time of the year.",
+      "Together, we can make these social activities a memorable one for these students and give back to the community in a meaningful way.",
+      "Thank you for your support and generosity!"
+    ],
+    "contact": "Contact : 9433834013",
+    "donate": "Donate Now",
+    "recruitment": "Recruitment going on for",
+    "recruitmentSubtitle": "NCC ‘C’ Pass Candidates:-",
+    "fundraising": "NGO Fundraising & Field Coordinator",
+    "more": "Click here for more information",
+    "apply": "Apply Now",
+    "images": [
+      "/assets/original/image51.jpg",
+      "/assets/original/image3.jpg",
+      "/assets/original/image20.jpg",
+      "/assets/original/image57.jpg",
+      "/assets/original/image58.jpg",
+      "/assets/original/image59.jpg",
+      "/assets/original/image61.jpg",
+      "/assets/original/image62.jpg",
+      "/assets/original/image64.jpg",
+      "/assets/original/image4.jpg",
+      "/assets/original/image52.jpg"
+    ]
+  },
+  "about": {
+    "heading": "About Organization",
+    "paragraphs": [
+      "AGNI RURAL WELFARE SOCIETY, a society of Social work organization.",
+      "We beg to introduce ourselves as a non-government and non-profit organization working intensively in the semi urban region of South 24 Parganas District of West Bengal. Our operational area is presently at Sonarpur Block but ready to extend little broader region in the entire Baruipur sub division.",
+      "This is for your kind inform that we started from the very beginning two day’s weekly Training Programme at Sonarpur Mahavidyalaya play ground \"Drill, Band, Physical training, sports, games, Obstacle Management, Disaster Management, Civil Defence, NDA, IMA, OTA (Army, Navy, Air Force) examination & inspiration training\". Our primary aim is to cover the students belonging to Secondary & Higher Secondary schools within the jurisdiction of Baruipur SDO & by the help of this programme the students will be highly benefited in all respects.",
+      "We have much pleasure to inform you that we are started National Defense Academy Inspiration training (Army, Navy & Air Force) UPSC examination preparation for school students at jurisdiction of Baruipur SDO. There are many students who are not aware in this area about the Examination as per Indian army survey report. We, the only organization have taken necessary measures to educate the students for preparation of National Defense Academy (Army, Navy & Air Force) & UPSC examination for their bright career.",
+      "Established on 22/09/2008. We started the process of getting some of the poor kids to be impaired for brightening their aim. In 2009, there was a storm Aila in the south of the south 24 Parganas. Many people of the Sundarbans, after losing another, clothes, water, water and habitat. To cope with this situation and to keep them in mind, we and our organization's students collect relief materials from the area and deliver relief material to the people of these flooded areas. Storm like Aila teaches many things in our lives. We then plan that there is a need to tackle the crisis of emergency in all areas.",
+      "Students, young people are troubled by many anti-social and cultural issues, and they are becoming addicted to various forms and their education teachers and humanitarianism are being overthrown by the teachers and honor of the elders. Due to the nonconformity, social norms among them are being lost day by day. They are becoming physically and mentally weak, keeping them healthy and physically fit in the environment and making them reflect in society through training.",
+      "We did a survey in South 24 Parganas, which showed that some poor children are losing their parents' negligence. They do not have any desire and plans like their future. Parents of these families can not give them the right time, and many of them are nutritious A lack is seen In the absence of suitable food they are lagging behind mental and physical development.",
+      "In view of this, a special purpose was taken from our organization that a training camp was organized to tackle one of the worst disaster situations for one and a half students in the sports premises of Sonarpur College in front of Sonarpur BDO. We train students to collect some of them from the society, where the “Drill, Obstacle, Pipe Band, Games, Self Defense, P.T, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination etc” Give training Creating a goal among them that they will be in the future.",
+      "These students and their parents can not send them any day or outside as they are not able to do so. We take them to camp for 10 days each year on school holidays every day, so that their old-minded reading is not wasted, time is spent on training and singing about their hills or the ocean areas.",
+      "One of our little efforts is to make them healthy, strong, emotionally, physically, and socially trained by them. By introducing them to various welfare social services and spreading their socialism."
+    ],
+    "activitiesHeading": "We are working with various type of social welfare activities, such as:",
+    "activities": [
+      "Cloth (Bastra) Distribution.",
+      "Health & Sanitation awareness.",
+      "Buyer and consumer protection and awareness.",
+      "World Environment Day.",
+      "Football Competition.",
+      "Relief goods to reach the people at flooded area.",
+      "Plant implants."
+    ],
+    "closing": [
+      "We also observed, Biswa Kabi Guru Rabindranath, Poet Kazi Nazrul Islam, the Father of the Nation Mahatma Gandhi Jayanti. Shaheed Kshudiram, Ex-president and distinguished scientific Dr. Kalam, Netaji Subhash Chandra Bose and the Swami Vivekananda’s birthday also observed.",
+      "Republic Day Celebration. Co-operate with Financially Backward Students. Winter clothing distribution Anesthesia. Drill, Obstacle, Pipe Band, Games, Self Defense, PT, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination on the day of Yoga training. International Yoga Day. 1st Baishakh celebrate. etc etc",
+      "In this era, the youth and the student community are being overwhelmed by a superstitious, uneasy condition. By establishing them in a healthy society through such a program, we have a small effort.",
+      "We are thinking of the academy in the future for an NDA where the students will be in a healthy entry and they will have the right to be trained in education and various remedies where they can have a healthy society.",
+      "So we are kind of you that we should extend our cooperation to our organization so that these students can shine their future with your help."
+    ]
+  },
+  "volunteer": {
+    "nccHeading": "Request for Nomination of NCC ‘C’ Certificate Holders",
+    "nccSubtitle": "Six-Month Paid Internship as Volunteer Trainers",
+    "nccBlocks": [
+      {
+        "title": "Dear Cadets,",
+        "text": "We beg to introduce ourselves as a non-governmental and non-profit organization working extensively in the semi-urban and rural regions of West Bengal. At present, our operational area is the Sonarpur Block; however, we are prepared to expand our activities across the entire state.\nSince Cyclone Aila in 2009 and the subsequent devastation in the Sundarbans, we have been actively involved in social welfare activities in districts such as South 24 Parganas, Midnapore, Darjeeling, and Kalimpong.\nWe conduct regular training camps every Saturday and Sunday including Drill, Physical Training, Marching Band, Obstacle Management, Sports & Games, Cultural Activities, Yoga, Wrestling, Disaster Management, Motivation & Personality Grooming and NDA / IMA / OTA awareness training.\nThese camps are conducted at Sonarpur Mahavidyalaya Playground and Rajpur Agami Playground from 6:20 AM to 10:30 AM."
+      },
+      {
+        "title": "Internship Programme",
+        "text": "We are planning to launch a six-month paid internship programme for NCC ‘C’ Certificate holder cadets who can provide training in schools once a week.\nInterns will receive a stipend between ₹1,000 – ₹2,000 per month. After successful completion and performance evaluation, candidates may receive a salary of ₹15,000 – ₹18,000 per month."
+      },
+      {
+        "title": "Eligibility Criteria",
+        "items": [
+          "Graduate (Passed)",
+          "NCC ‘C’ Certificate Holder",
+          "Basic knowledge of Disaster Management & NDA/IMA/OTA exams",
+          "Resident of Kolkata or South 24 Parganas",
+          "Age between 19 – 25 years"
+        ]
+      },
+      {
+        "title": "Nature of Work",
+        "text": "Conduct drill training in schools at least once per week (minimum four days per month).\nAssist in NGO activities such as project research, analysis, content writing, budget preparation, and field implementation."
+      },
+      {
+        "title": "How to Apply",
+        "text": "Interested cadets may send their CV / Resume, recent photograph and NCC ‘C’ Certificate copy to the contact below.\nEmail: arws008@gmail.com\nWhatsApp: +91 94338 34013\nThanking you.\nYours sincerely\nDipankar Lahiri"
+      }
+    ],
+    "fundHeading": "NGO Fundraising & Field Coordinator",
+    "fundSubtitle": "Volunteer & Internship Programme (Only for Kolkata)",
+    "fundBlocks": [
+      {
+        "text": "Volunteering with Agni Rural Welfare Society is an opportunity to participate in meaningful social service and contribute directly to community development.\nVolunteers play an important role in supporting our welfare initiatives and outreach programs.\nAgni Rural Welfare Society is planning a major social welfare initiative where we will distribute new clothes, notebooks, pens, pencils, educational materials, and essential supplies to underprivileged children across nearly 20 villages in the Sundarbans region.\nTo make this mission successful, we are inviting motivated and compassionate Volunteers and Interns to join our team and contribute to this noble cause."
+      },
+      {
+        "title": "Internship / Volunteer Role Details",
+        "text": "Position: NGO Fundraising & Field Coordinator\nDuration: 6 Months Internship\nLocation: Kolkata (Field-based activities)"
+      },
+      {
+        "title": "Key Responsibilities",
+        "items": [
+          "Conduct fundraising activities including face-to-face campaigns and donor outreach.",
+          "Organize fundraising camps in residential complexes, offices, and other locations.",
+          "Build strong relationships with donors and supporters.",
+          "Increase overall fundraising and awareness support.",
+          "Assist in social media promotion (Facebook, Twitter, LinkedIn, Instagram, YouTube).",
+          "Support additional NGO activities when required."
+        ]
+      },
+      {
+        "title": "Compensation & Benefits",
+        "text": "1. Monthly Stipend: ₹1,000 – ₹2,000 (Terms & Conditions Apply)\n2. Minimum Fundraising Target: ₹20,000 during internship period.\nCandidates who successfully complete the 6-month internship may be offered placement within the organization.\nStarting Salary: ₹20,000 – ₹35,000 per month\nAdditional Benefits: Incentives, Rewards & Recognition"
+      },
+      {
+        "title": "How to Apply",
+        "text": "Interested candidates may send their CV/Resume with a recent photo through WhatsApp or email.\nWhatsApp / Contact: +91 94338 34013\nEmail: arws008@gmail.com\nOrganization: Agni Rural Welfare Society"
+      }
+    ]
+  },
+  "gallery": {
+    "heading": "Gallery & Activities",
+    "intro": "Browse through our collection of moments from our social service initiatives and community activities.",
+    "subheading": "Our Social Activities",
+    "paragraphs": [
+      "As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor school students in the Sundarbans by providing new clothes, study materials, portion food, and essential items.",
+      "These activities aim to bring joy, dignity, and a sense of inclusion to children from economically disadvantaged backgrounds."
+    ],
+    "previous": "← PREVIOUS",
+    "next": "NEXT →",
+    "referenceTotal": 47,
+    "images": [
+      {
+        "src": "/assets/original/image1.jpg",
+        "alt": "Agni Rural Welfare Society social activity 1",
+        "referenceIndex": 1
+      },
+      {
+        "src": "/assets/original/image3.jpg",
+        "alt": "Agni Rural Welfare Society social activity 2",
+        "referenceIndex": 2
+      },
+      {
+        "src": "/assets/original/image4.jpg",
+        "alt": "Agni Rural Welfare Society social activity 3",
+        "referenceIndex": 3
+      },
+      {
+        "src": "/assets/original/image5.jpg",
+        "alt": "Agni Rural Welfare Society social activity 4",
+        "referenceIndex": 4
+      },
+      {
+        "src": "/assets/original/image6.jpg",
+        "alt": "Agni Rural Welfare Society social activity 5",
+        "referenceIndex": 5
+      },
+      {
+        "src": "/assets/original/image7.jpg",
+        "alt": "Agni Rural Welfare Society social activity 6",
+        "referenceIndex": 6
+      },
+      {
+        "src": "/assets/original/image8.jpg",
+        "alt": "Agni Rural Welfare Society social activity 7",
+        "referenceIndex": 7
+      },
+      {
+        "src": "/assets/original/image9.jpg",
+        "alt": "Agni Rural Welfare Society social activity 8",
+        "referenceIndex": 8
+      },
+      {
+        "src": "/assets/original/image10.jpg",
+        "alt": "Agni Rural Welfare Society social activity 9",
+        "referenceIndex": 9
+      },
+      {
+        "src": "/assets/original/image11.jpg",
+        "alt": "Agni Rural Welfare Society social activity 10",
+        "referenceIndex": 10
+      },
+      {
+        "src": "/assets/original/image14.jpg",
+        "alt": "Agni Rural Welfare Society social activity 11",
+        "referenceIndex": 11
+      },
+      {
+        "src": "/assets/original/image15.jpg",
+        "alt": "Agni Rural Welfare Society social activity 12",
+        "referenceIndex": 12
+      },
+      {
+        "src": "/assets/original/image16.jpg",
+        "alt": "Agni Rural Welfare Society social activity 13",
+        "referenceIndex": 13
+      },
+      {
+        "src": "/assets/original/image17.jpg",
+        "alt": "Agni Rural Welfare Society social activity 14",
+        "referenceIndex": 14
+      },
+      {
+        "src": "/assets/original/image18.jpg",
+        "alt": "Agni Rural Welfare Society social activity 15",
+        "referenceIndex": 15
+      },
+      {
+        "src": "/assets/original/image19.jpg",
+        "alt": "Agni Rural Welfare Society social activity 16",
+        "referenceIndex": 16
+      },
+      {
+        "src": "/assets/original/image20.jpg",
+        "alt": "Agni Rural Welfare Society social activity 17",
+        "referenceIndex": 17
+      },
+      {
+        "src": "/assets/original/image21.jpg",
+        "alt": "Agni Rural Welfare Society social activity 18",
+        "referenceIndex": 18
+      },
+      {
+        "src": "/assets/original/image22.jpg",
+        "alt": "Agni Rural Welfare Society social activity 19",
+        "referenceIndex": 19
+      },
+      {
+        "src": "/assets/original/image23.jpg",
+        "alt": "Agni Rural Welfare Society social activity 20",
+        "referenceIndex": 20
+      },
+      {
+        "src": "/assets/original/image24.jpg",
+        "alt": "Agni Rural Welfare Society social activity 21",
+        "referenceIndex": 21
+      },
+      {
+        "src": "/assets/original/image25.jpg",
+        "alt": "Agni Rural Welfare Society social activity 22",
+        "referenceIndex": 22
+      },
+      {
+        "src": "/assets/original/image26.jpg",
+        "alt": "Agni Rural Welfare Society social activity 23",
+        "referenceIndex": 23
+      },
+      {
+        "src": "/assets/original/image27.jpg",
+        "alt": "Agni Rural Welfare Society social activity 24",
+        "referenceIndex": 24
+      },
+      {
+        "src": "/assets/original/image28.jpg",
+        "alt": "Agni Rural Welfare Society social activity 25",
+        "referenceIndex": 25
+      },
+      {
+        "src": "/assets/original/image29.jpg",
+        "alt": "Agni Rural Welfare Society social activity 26",
+        "referenceIndex": 26
+      },
+      {
+        "src": "/assets/original/image30.jpg",
+        "alt": "Agni Rural Welfare Society social activity 27",
+        "referenceIndex": 27
+      },
+      {
+        "src": "/assets/original/image31.jpg",
+        "alt": "Agni Rural Welfare Society social activity 28",
+        "referenceIndex": 28
+      },
+      {
+        "src": "/assets/original/image32.jpg",
+        "alt": "Agni Rural Welfare Society social activity 29",
+        "referenceIndex": 29
+      },
+      {
+        "src": "/assets/original/image33.jpg",
+        "alt": "Agni Rural Welfare Society social activity 30",
+        "referenceIndex": 30
+      },
+      {
+        "src": "/assets/original/image34.jpg",
+        "alt": "Agni Rural Welfare Society social activity 31",
+        "referenceIndex": 31
+      },
+      {
+        "src": "/assets/original/image35.jpg",
+        "alt": "Agni Rural Welfare Society social activity 32",
+        "referenceIndex": 32
+      },
+      {
+        "src": "/assets/original/image36.jpg",
+        "alt": "Agni Rural Welfare Society social activity 33",
+        "referenceIndex": 33
+      },
+      {
+        "src": "/assets/original/image37.jpg",
+        "alt": "Agni Rural Welfare Society social activity 34",
+        "referenceIndex": 34
+      },
+      {
+        "src": "/assets/original/image38.jpg",
+        "alt": "Agni Rural Welfare Society social activity 35",
+        "referenceIndex": 35
+      },
+      {
+        "src": "/assets/original/image39.jpg",
+        "alt": "Agni Rural Welfare Society social activity 36",
+        "referenceIndex": 36
+      },
+      {
+        "src": "/assets/original/image40.jpg",
+        "alt": "Agni Rural Welfare Society social activity 37",
+        "referenceIndex": 37
+      },
+      {
+        "src": "/assets/original/image41.jpg",
+        "alt": "Agni Rural Welfare Society social activity 38",
+        "referenceIndex": 38
+      },
+      {
+        "src": "/assets/original/image42.jpg",
+        "alt": "Agni Rural Welfare Society social activity 39",
+        "referenceIndex": 39
+      },
+      {
+        "src": "/assets/original/image43.jpg",
+        "alt": "Agni Rural Welfare Society social activity 40",
+        "referenceIndex": 40
+      },
+      {
+        "src": "/assets/original/image44.jpg",
+        "alt": "Agni Rural Welfare Society social activity 41",
+        "referenceIndex": 41
+      },
+      {
+        "src": "/assets/original/image45.jpg",
+        "alt": "Agni Rural Welfare Society social activity 42",
+        "referenceIndex": 42
+      },
+      {
+        "src": "/assets/original/image46.jpg",
+        "alt": "Agni Rural Welfare Society social activity 43",
+        "referenceIndex": 43
+      },
+      {
+        "src": "/assets/original/image47.jpg",
+        "alt": "Agni Rural Welfare Society social activity 44",
+        "referenceIndex": 44
+      },
+      {
+        "src": "/assets/original/image48.jpg",
+        "alt": "Agni Rural Welfare Society social activity 45",
+        "referenceIndex": 45
+      },
+      {
+        "src": "/assets/original/image49.jpg",
+        "alt": "Agni Rural Welfare Society social activity 46",
+        "referenceIndex": 46
+      },
+      {
+        "src": "/assets/original/image50.jpg",
+        "alt": "Agni Rural Welfare Society social activity 47",
+        "referenceIndex": 47
+      }
+    ]
+  },
+  "membership": {
+    "heading": "Become a Member",
+    "paragraphs": [
+      "Membership at Agni Rural Welfare Society is for social service and social responsibility. It is not intended for political or profit-making purposes.",
+      "Members are encouraged to actively participate in service activities or indirectly support the organization’s welfare initiatives."
+    ],
+    "benefits": "Benefits of Membership:",
+    "benefitsText": "Members are invited to participate in various activities and events organized by Agni Rural Welfare Society.",
+    "terms": "Terms & Conditions Apply.",
+    "chartTitle": "MEMBERSHIP CRITERIA",
+    "columns": [
+      "SL.NO",
+      "MEMBERSHIP AMOUNT",
+      "TYPE OF CLUB MEMBER",
+      "MONTHLY",
+      "MEMBERSHIP AMOUNT",
+      "YEARLY"
+    ],
+    "rows": [
+      [
+        "1",
+        "500",
+        "Woman's Club member",
+        "MONTHLY",
+        "6,000",
+        "YEARLY"
+      ],
+      [
+        "2",
+        "1000",
+        "Advisory Member",
+        "MONTHLY",
+        "12,000",
+        "YEARLY"
+      ],
+      [
+        "3",
+        "1500 TO 4500",
+        "Club Member",
+        "MONTHLY",
+        "18,000 TO 54,000",
+        "YEARLY"
+      ],
+      [
+        "4",
+        "5000 TO 10000",
+        "Secretary Club Member",
+        "MONTHLY",
+        "60,000 TO 1,20,000",
+        "YEARLY"
+      ],
+      [
+        "5",
+        "10001 TO 20000",
+        "President Club Member",
+        "MONTHLY",
+        "1,20,012 TO 2,40,000",
+        "YEARLY"
+      ],
+      [
+        "6",
+        "20001 TO 25000",
+        "Elite Club Member",
+        "MONTHLY",
+        "2,40,012 TO 3,00,000",
+        "YEARLY"
+      ],
+      [
+        "7",
+        "26000 TO 50000",
+        "Elite Plus Club Member",
+        "MONTHLY",
+        "3,12,000 TO 6,00,000",
+        "YEARLY"
+      ],
+      [
+        "8",
+        "51000 to above",
+        "Star Club Member",
+        "MONTHLY",
+        "6,12,000 Above",
+        "YEARLY"
+      ]
+    ]
+  },
+  "supporters": {
+    "heading": "Supporters of the Society",
+    "paragraphs": [
+      "Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and institutions may associate with Agni Rural Welfare Society under the “Supporters of the Society” category.",
+      "Such support helps strengthen our welfare programs and extend our reach to underserved communities."
+    ],
+    "links": [
+      {
+        "src": "/assets/original/connectfor.png",
+        "alt": "ConnectFor",
+        "href": "https://www.connectfor.org/"
+      },
+      {
+        "src": "/assets/original/intershala.png",
+        "alt": "Internshala",
+        "href": "https://internshala.com/"
+      },
+      {
+        "src": "/assets/original/nyks.png",
+        "alt": "Nehru Yuva Kendra Sangathan",
+        "href": "https://nyks.nic.in/"
+      }
+    ]
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "intro": "We welcome individuals, volunteers, donors, and organizations to connect with us.",
+    "phoneLabel": "Phone:",
+    "phone": "+91 9433834013",
+    "emailLabel": "Email:",
+    "email": "arws008@gmail.com"
+  },
+  "donate": {
+    "heading": "Support Our Mission",
+    "intro": "Your donation helps us continue our mission to support underprivileged children and rural communities. Every contribution makes a meaningful difference!",
+    "tabs": [
+      "Donate",
+      "Membership"
+    ],
+    "choose": "Choose Donation Amount",
+    "impact": "Your Impact",
+    "proceed": "Proceed to Payment",
+    "originalPaymentNote": "💳 Secure payment powered by Razorpay",
+    "supportNote": "✓ 100% of your support goes to our welfare programs",
+    "impacts": [
+      {
+        "amount": 100,
+        "text": "Provides books & stationery for one child"
+      },
+      {
+        "amount": 500,
+        "text": "One month nutritious meal for a child"
+      },
+      {
+        "amount": 1000,
+        "text": "Educational supplies for a student"
+      },
+      {
+        "amount": 5000,
+        "text": "Monthly support for rural education program"
+      }
+    ],
+    "membershipHeading": "Membership Contribution",
+    "membershipIntro": "Become a supporting member of Agni Rural Welfare Society.",
+    "membershipOptions": [
+      "Monthly Membership",
+      "Yearly Membership"
+    ]
+  },
+  "auth": {
+    "tabs": [
+      "Login",
+      "Register",
+      "Admin"
+    ],
+    "loginHeading": "Welcome Back",
+    "loginIntro": "Sign in to your account",
+    "registerHeading": "Create Account",
+    "registerIntro": "Join our mission today",
+    "adminHeading": "Admin",
+    "adminIntro": "Enter admin credentials",
+    "signIn": "SIGN IN",
+    "remember": "Remember me",
+    "continue": "CONTINUE",
+    "skip": "SKIP",
+    "create": "CREATE ACCOUNT",
+    "terms": "I agree to the terms and conditions",
+    "adminUsername": "Admin username",
+    "adminPassword": "Admin password"
+  },
+  "forms": {
+    "login": [
+      {
+        "name": "username",
+        "label": "USERNAME",
+        "placeholder": "Enter your username",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "password",
+        "label": "PASSWORD",
+        "placeholder": "Enter your password",
+        "type": "password",
+        "required": true,
+        "visibleRequired": false
+      }
+    ],
+    "register": [
+      {
+        "name": "registrationType",
+        "label": "REGISTER TYPE",
+        "type": "select",
+        "placeholder": "Select registration type",
+        "options": [
+          "Register Member",
+          "Register Cadets",
+          "Register Volunteers",
+          "Register Intern & Alumni Members"
+        ],
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "fullName",
+        "label": "FULL NAME",
+        "placeholder": "Enter your full name",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "username",
+        "label": "USERNAME",
+        "placeholder": "Enter your username",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "photo",
+        "label": "USER PHOTO",
+        "type": "file",
+        "accept": "image/png,image/jpeg",
+        "visibleRequired": false,
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "EMAIL",
+        "placeholder": "Enter your email",
+        "type": "email",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "guardian",
+        "label": "FATHER'S / GUARDIAN NAME",
+        "placeholder": "Enter father's / guardian name",
+        "visibleRequired": false,
+        "required": true
+      },
+      {
+        "name": "address",
+        "label": "PERMANENT ADDRESS",
+        "placeholder": "Enter permanent address",
+        "type": "textarea",
+        "visibleRequired": false,
+        "required": true
+      },
+      {
+        "name": "bloodGroup",
+        "label": "BLOOD GROUP",
+        "placeholder": "e.g. O+, A-, B+",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "dob",
+        "label": "DATE OF BIRTH",
+        "type": "date",
+        "visibleRequired": false,
+        "required": true
+      },
+      {
+        "name": "enrollmentDate",
+        "label": "DATE OF ENROLLMENT",
+        "type": "date",
+        "visibleRequired": false,
+        "readOnly": true
+      },
+      {
+        "name": "password",
+        "label": "PASSWORD",
+        "placeholder": "Create a password",
+        "type": "password",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "confirmPassword",
+        "label": "CONFIRM PASSWORD",
+        "placeholder": "Confirm your password",
+        "type": "password",
+        "required": true,
+        "visibleRequired": false
+      }
+    ],
+    "internship": [
+      {
+        "name": "fullName",
+        "label": "NAME",
+        "placeholder": "Enter your full name",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "gender",
+        "label": "GENDER",
+        "type": "select",
+        "placeholder": "Select Gender",
+        "required": true,
+        "options": [
+          "Male",
+          "Female"
+        ],
+        "wide": false
+      },
+      {
+        "name": "phone",
+        "label": "MOBILE NUMBER",
+        "placeholder": "Enter your mobile number",
+        "type": "tel",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "email",
+        "label": "EMAIL ID",
+        "placeholder": "Enter your email address",
+        "type": "email",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "address",
+        "label": "ADDRESS",
+        "placeholder": "Enter your complete address",
+        "type": "textarea",
+        "wide": true,
+        "required": true
+      },
+      {
+        "name": "position",
+        "label": "WHICH INTERNSHIP ARE YOU APPLYING FOR?",
+        "type": "select",
+        "placeholder": "Select Internship",
+        "required": true,
+        "options": [
+          {
+            "label": "Volunteer Trainer (NCC ‘C’ Certificate Internship)",
+            "value": "Volunteer Trainer (NCC C Certificate Internship)"
+          },
+          "NGO Fundraising & Field Coordinator Internship"
+        ],
+        "wide": false
+      },
+      {
+        "name": "qualification",
+        "label": "QUALIFICATION",
+        "placeholder": "e.g., Graduate, Post Graduate",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "cv",
+        "label": "UPLOAD CV/RESUME WITH PHOTO",
+        "type": "file",
+        "accept": ".pdf,.doc,.docx,.jpg,.jpeg,.png",
+        "wide": true,
+        "required": true
+      },
+      {
+        "name": "institute",
+        "label": "INSTITUTE NAME",
+        "placeholder": "Enter your institute/university name",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "jobPortal",
+        "label": "JOB PORTAL",
+        "placeholder": "Where did you find this job? (Optional)",
+        "required": false,
+        "wide": false
+      },
+      {
+        "name": "motivation",
+        "label": "WHY DO YOU WANT TO JOIN THIS INTERNSHIP?",
+        "placeholder": "Explain why you want to apply for this position",
+        "type": "textarea",
+        "wide": true,
+        "required": true
+      },
+      {
+        "name": "applicationDate",
+        "label": "APPLICATION DATE",
+        "type": "date",
+        "required": true,
+        "wide": false
+      },
+      {
+        "name": "consent",
+        "label": "I CONFIRM THAT ALL THE INFORMATION PROVIDED IS TRUE AND ACCURATE",
+        "type": "checkbox",
+        "wide": true,
+        "required": true
+      }
+    ],
+    "pledge": [
+      {
+        "name": "amount",
+        "label": "Enter Amount:",
+        "placeholder": "Enter amount in ₹",
+        "type": "number",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "fullName",
+        "label": "Your Full Name",
+        "placeholder": "Your Full Name",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "email",
+        "label": "Your Email Address",
+        "placeholder": "Your Email Address",
+        "type": "email",
+        "required": true,
+        "visibleRequired": false
+      },
+      {
+        "name": "phone",
+        "label": "Your Phone Number",
+        "placeholder": "Your Phone Number",
+        "type": "tel",
+        "required": true,
+        "visibleRequired": false
+      }
+    ]
+  },
+  "internshipForm": {
+    "heading": "Volunteer Trainer (For NCC ‘C’ Certificate Passed Candidates) /NGO Fundraising & Field Coordinator",
+    "intro": "Please fill out all the required fields below to apply for the internship position.",
+    "submit": "SUBMIT APPLICATION"
+  },
+  "comingSoon": "Coming Soon",
+  "demo": {
+    "notice": "Payments are not processed on this page.",
+    "dataNotice": "",
+    "unobserved": "",
+    "success": "Submission successful",
+    "close": "Close",
+    "paymentSuccess": "Pledge recorded",
+    "registrationId": "Registration ID",
+    "enroll": "Cadet enrollment",
+    "enrollIntro": "Aadhaar, PAN and annual income are not required.",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit enrollment",
+    "idHeading": "IDENTITY CARD",
+    "download": "Download ID Card",
+    "logout": "Sign out",
+    "verify": "Member verification",
+    "verified": "Verified member",
+    "notFound": "Record not found",
+    "pending": "pending",
+    "statusLabel": "Application status",
+    "applicationPending": "Registration awaiting approval",
+    "applicationPendingText": "Your registration details have been sent to the administrator. The identity card and verification link will appear here once approved.",
+    "applicationDeclined": "Registration not approved",
+    "applicationDeclinedText": "Your registration was declined. Please contact Agni Rural Welfare Society if you need help.",
+    "admin": "Admin",
+    "approve": "Approve",
+    "reject": "Reject",
+    "export": "Export CSV",
+    "upload": "Upload gallery image",
+    "fillSample": "Fill sample details",
+    "lightbox": "Open image",
+    "galleryNote": "",
+    "passwordHelp": "Use 10–72 characters, including uppercase, lowercase and a number.",
+    "cvHelp": "PDF, DOC, DOCX, JPG or PNG. Maximum 2 MB.",
+    "imageHelp": "JPEG or PNG, up to 2 MB.",
+    "paymentExplanation": "Payments are not processed on this page. Your pledge is recorded without a charge.",
+    "saved": "Saved",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "termsHeading": "Terms",
+    "termsText": "No payment is collected and no email is sent.",
+    "accountCreated": "Account created",
+    "page": "Page",
+    "noRecords": "No records yet.",
+    "referenceUnavailable": "Reference content was not visible in the recording.",
+    "review": "Review",
+    "status": "Status",
+    "statsLabels": [
+      "All applicants",
+      "Members",
+      "Cadet applications",
+      "Volunteer applications",
+      "Internship applications",
+      "Pledges"
+    ],
+    "enrollmentFields": [
+      {
+        "name": "fullName",
+        "label": "Name",
+        "type": "text",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter your full name",
+        "group": "identity"
+      },
+      {
+        "name": "photo",
+        "label": "Passport Size Photo",
+        "type": "file",
+        "required": true,
+        "page": 2,
+        "accept": "image/png,image/jpeg",
+        "group": "identity"
+      },
+      {
+        "name": "gender",
+        "label": "Gender",
+        "type": "select",
+        "required": true,
+        "page": 1,
+        "placeholder": "Select Gender",
+        "options": [
+          "Male",
+          "Female"
+        ]
+      },
+      {
+        "name": "fatherName",
+        "label": "Father's Name",
+        "type": "text",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter father's name"
+      },
+      {
+        "name": "fatherOccupation",
+        "label": "Father's Occupation",
+        "type": "text",
+        "required": false,
+        "page": 1,
+        "placeholder": "Enter father's occupation"
+      },
+      {
+        "name": "motherName",
+        "label": "Mother's Name",
+        "type": "text",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter mother's name"
+      },
+      {
+        "name": "motherOccupation",
+        "label": "Mother's Occupation",
+        "type": "text",
+        "required": false,
+        "page": 1,
+        "placeholder": "Enter mother's occupation"
+      },
+      {
+        "name": "guardian",
+        "label": "Parent / Guardian Name",
+        "type": "text",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter guardian name"
+      },
+      {
+        "name": "address",
+        "label": "Address",
+        "type": "textarea",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter complete address"
+      },
+      {
+        "name": "citizenship",
+        "label": "Are you citizen of India or subject of Nepal?",
+        "type": "select",
+        "required": true,
+        "page": 1,
+        "placeholder": "Select",
+        "options": [
+          "India",
+          "Nepal"
+        ]
+      },
+      {
+        "name": "village",
+        "label": "Village",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter village"
+      },
+      {
+        "name": "tehsil",
+        "label": "Tehsil / Taluka",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter tehsil / taluka"
+      },
+      {
+        "name": "district",
+        "label": "District",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter district"
+      },
+      {
+        "name": "pincode",
+        "label": "PIN Code",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter PIN code"
+      },
+      {
+        "name": "postOffice",
+        "label": "Post Office",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter post office"
+      },
+      {
+        "name": "railwayStation",
+        "label": "Railway Station",
+        "type": "text",
+        "required": false,
+        "page": 2,
+        "placeholder": "Enter railway station"
+      },
+      {
+        "name": "qualification",
+        "label": "Educational Qualification",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter qualification"
+      },
+      {
+        "name": "dob",
+        "label": "Date of Birth",
+        "type": "date",
+        "required": true,
+        "page": 1
+      },
+      {
+        "name": "school",
+        "label": "School / College Name",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter school / college"
+      },
+      {
+        "name": "training",
+        "label": "Willing to undergo service training?",
+        "type": "select",
+        "required": true,
+        "page": 2,
+        "placeholder": "Select",
+        "options": [
+          "Yes",
+          "No"
+        ]
+      },
+      {
+        "name": "residentialAddress",
+        "label": "Residential Address",
+        "type": "textarea",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter residential address",
+        "wide": true
+      },
+      {
+        "name": "phone",
+        "label": "Contact Number (Cadet & Guardian)",
+        "type": "tel",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter contact number",
+        "wide": true
+      },
+      {
+        "name": "email",
+        "label": "Email Address",
+        "type": "email",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter your email address",
+        "wide": true
+      },
+      {
+        "name": "age",
+        "label": "Age",
+        "type": "text",
+        "required": false,
+        "page": 1,
+        "placeholder": "Enter age"
+      },
+      {
+        "name": "guardianPhone",
+        "label": "Guardian Contact Number",
+        "type": "tel",
+        "required": true,
+        "page": 1,
+        "placeholder": "Enter guardian contact number"
+      },
+      {
+        "name": "institution",
+        "label": "Institution",
+        "type": "text",
+        "required": true,
+        "page": 2,
+        "placeholder": "Enter your school / college / institution"
+      },
+      {
+        "name": "bloodGroup",
+        "label": "Blood Group",
+        "type": "select",
+        "required": true,
+        "page": 2,
+        "placeholder": "Select Blood Group",
+        "options": [
+          "A+",
+          "A-",
+          "B+",
+          "B-",
+          "AB+",
+          "AB-",
+          "O+",
+          "O-"
+        ]
+      },
+      {
+        "name": "introducerName",
+        "label": "Introducer Name",
+        "type": "text",
+        "required": false,
+        "page": 2
+      },
+      {
+        "name": "introducerCode",
+        "label": "Introducer Code",
+        "type": "text",
+        "required": false,
+        "page": 2
+      },
+      {
+        "name": "introducerPhone",
+        "label": "Introducer Contact Number",
+        "type": "tel",
+        "required": false,
+        "page": 2
+      },
+      {
+        "name": "enrollmentDate",
+        "label": "Date of Enrollment",
+        "type": "date",
+        "required": false,
+        "page": 2
+      },
+      {
+        "name": "qualificationProof",
+        "label": "Education Qualification Proof",
+        "type": "file",
+        "required": false,
+        "page": 2,
+        "accept": ".pdf,.jpg,.jpeg,.png"
+      },
+      {
+        "name": "guardianSignature",
+        "label": "Guardian Signature (Optional)",
+        "type": "file",
+        "required": false,
+        "page": 2,
+        "accept": "image/png,image/jpeg"
+      },
+      {
+        "name": "cadetSignature",
+        "label": "Cadet Signature (Optional)",
+        "type": "file",
+        "required": false,
+        "page": 2,
+        "accept": "image/png,image/jpeg"
+      },
+      {
+        "name": "guardianDeclaration",
+        "label": "I, as the Parent / Guardian, understand and agree to the enrollment conditions and declarations above.",
+        "type": "checkbox",
+        "required": true,
+        "page": 2,
+        "wide": true
+      },
+      {
+        "name": "finalConfirmation",
+        "label": "I confirm that the information provided in this Cadet Enrollment Form is true and accurate and I agree to abide by the Rules & Regulations of ARWS Training.",
+        "type": "checkbox",
+        "required": true,
+        "page": 2,
+        "wide": true
+      },
+      {
+        "name": "place",
+        "label": "Place",
+        "type": "text",
+        "required": true,
+        "page": 2
+      },
+      {
+        "name": "declarationDate",
+        "label": "Date",
+        "type": "date",
+        "required": true,
+        "page": 2
+      }
+    ],
+    "adminTabs": [
+      "applications",
+      "cadets",
+      "internships",
+      "pledges",
+      "gallery"
+    ],
+    "adminLabels": [
+      "All applicants",
+      "Cadet applications",
+      "Internship applications",
+      "Pledges",
+      "Gallery"
+    ],
+    "altLabel": "Image description",
+    "fileLabel": "Gallery image",
+    "viewCV": "Download CV",
+    "openVerification": "Open verification",
+    "profile": "Your ARWS Identity Card",
+    "menu": "Toggle navigation",
+    "skipContent": "Skip to content",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "pause": "Pause slideshow",
+    "play": "Play slideshow",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "passwordMismatch": "Passwords must match",
+    "genericError": "Something went wrong. Please try again.",
+    "home": "Return home",
+    "amountLabel": "Amount",
+    "approvalNote": "Review and manage submitted records.",
+    "submitUpload": "Upload image",
+    "referenceIndex": "Reference image",
+    "pdfTitle": "MEMBER ID CARD",
+    "enrollmentLabel": "Enrollment:",
+    "scan": "Scan to verify",
+    "enrollmentHeadings": [
+      "ARWS Cadet Enrollment – Page 1",
+      "ARWS Cadet Enrollment – Page 2"
+    ],
+    "cadetSuccess": "🎉 Registration Successful!",
+    "cadetSubmitted": "Your ARWS Cadet Enrollment has been submitted successfully!",
+    "copyId": "Copy ID",
+    "copied": "ID copied",
+    "cadetDownload": "Download Identity Card",
+    "cadetEmailNotice": "Copy your Registration ID and download your Identity Card here. No email is sent.",
+    "idFields": [
+      {
+        "name": "fullName",
+        "label": "Full Name :"
+      },
+      {
+        "name": "username",
+        "label": "Username :"
+      },
+      {
+        "name": "email",
+        "label": "Email :"
+      },
+      {
+        "name": "guardian",
+        "label": "Father's / Guardian :"
+      },
+      {
+        "name": "address",
+        "label": "Permanent Address :"
+      },
+      {
+        "name": "bloodGroup",
+        "label": "Blood Group :"
+      },
+      {
+        "name": "dob",
+        "label": "Date of Birth :"
+      },
+      {
+        "name": "enrollmentDate",
+        "label": "Date of Enrollment :"
+      }
+    ],
+    "cadetRegistrationId": "Your Registration ID:"
+  },
+  "documentation": {
+    "heading": "FORM NO. 10AC",
+    "rule": "(See rule 17A/11AA)",
+    "subheading": "Order for provisional approval",
+    "rows": [
+      [
+        "1",
+        "PAN",
+        "AABAA7008E"
+      ],
+      [
+        "2",
+        "Name",
+        "AGNI RURAL WELFARE SOCIETY"
+      ],
+      [
+        "2a",
+        "Nature of Activities",
+        "Charitable"
+      ],
+      [
+        "2b",
+        "Address",
+        "Flat/Door/Building: 47, School Road\nRoad/Street/Post Office: Dakshin Jagatdal S.O\nArea/Locality: Dingelpota\nTown/City/District: South 24 Parganas\nState: West Bengal\nCountry: India\nPin Code: 700151"
+      ],
+      [
+        "3",
+        "Document Identification Number",
+        "AABAA7008EF2025101"
+      ],
+      [
+        "4",
+        "Application Number",
+        "946744880270425"
+      ],
+      [
+        "5",
+        "Unique Registration Number",
+        "AABAA7008EF20251"
+      ],
+      [
+        "6",
+        "Section under which provisional approval is granted",
+        "12-Sub-clause (A) of clause (iv) of first proviso to sub-section (5) of section 80G"
+      ],
+      [
+        "7",
+        "Date of provisional approval",
+        "04-05-2025"
+      ],
+      [
+        "8",
+        "Assessment year or years for which trust is approved",
+        "From AY 2026-27 to AY 2028-2029"
+      ]
+    ],
+    "order": [
+      "a. After considering the application of the applicant and the material available on record, the applicant is hereby granted provisional approval with effect from the assessment year mentioned at serial no. 8 above subject to the conditions mentioned in row number 10.",
+      "b. The taxability, or otherwise, of the income of the applicant would be separately considered as per the provisions of the Income Tax Act, 1961.",
+      "c. This order is liable to be withdrawn by the prescribed authority if it is subsequently found that the activities of the applicant are not genuine or if they are not carried out in accordance with the conditions prescribed in the Income Tax Act."
+    ],
+    "conditionsHeading": "The approval is granted subject to the following conditions:",
+    "conditions": [
+      "The registration granted under section 12AB or approval granted under clause (23C) of section 10 has not been cancelled by the Principal Commissioner.",
+      "The form for approval in Form No. 10A has been duly filled with correct information and no false or incorrect documents have been provided.",
+      "The institution or fund shall apply for approval within 6 months of commencement of activities or at least 6 months prior to expiry of provisional approval.",
+      "The registration granted under section 12AB or approval granted under clause (23C) has not been cancelled by the Principal Commissioner as per the Income-tax Rules."
+    ],
+    "authorityLabel": "Name and Designation of the Approving Authority",
+    "authority": "Principal Commissioner of Income Tax\nCommissioner of Income Tax",
+    "certificates": [
+      {
+        "src": "/assets/original/image66.png",
+        "alt": "Certificate of Registration of Societies"
+      },
+      {
+        "src": "/assets/original/image67.png",
+        "alt": "Government of India CSR registration letter"
+      }
+    ],
+    "signatureAlt": "Digitally signed approval mark"
+  },
+  "imageText": {
+    "hero": "Do you want to join our NGO for social service?\nThose who want to become member of our NGO contact us :-9433834013 and share this post to everyone.",
+    "ncc": [
+      "Kolkata, West Bengal",
+      "NCC “C” CERTIFICATE HOLDERS",
+      "WANTED FOR",
+      "SIX-MONTH PAID INTERNSHIP",
+      "AS VOLUNTEER TRAINERS",
+      "ELIGIBILITY",
+      "Graduate (Passed)",
+      "NCC ‘C’ Certificate Holder",
+      "Age: 19 to 25 Years",
+      "Resident of Kolkata / South 24 Parganas",
+      "BENEFITS",
+      "Stipend: ₹1,000 - ₹2,000 Per Month",
+      "After 6 Months: ₹15,000 - ₹18,000 Per Month",
+      "Experience in Drill & Training Camps",
+      "INTERNSHIP WORK",
+      "Conduct Training & Schools at least once a week (minimum four days per month)",
+      "Assist in an NGO all type of activities (which are mentioned above):",
+      "APPLY NOW!",
+      "Send Your Resume with NCC “C” Certificate",
+      "Email: arws008@gmail.com",
+      "WhatsApp: 94338 34013",
+      "AGNI RURAL WELFARE SOCIETY",
+      "Service to Society Since 2009"
+    ],
+    "fundraising": [
+      "NGO FUNDRAISING & FIELD COORDINATOR",
+      "VOLUNTEER & INTERNSHIP PROGRAMME",
+      "(For Kolkata Only)",
+      "AGNI RURAL WELFARE SOCIETY",
+      "WE ARE PLANNING TO DISTRIBUTE:",
+      "New Clothes",
+      "Notebooks & Stationery",
+      "Educational Materials",
+      "20 Villages of Sundarbans | Every Month:",
+      "January · February · March · April · May · June",
+      "July · August · September · October · November · Dec",
+      "Support Underprivileged Children",
+      "Join a Noble Social Cause",
+      "INTERNSHIP DETAILS",
+      "Role: Fundraising & Field Coordinator",
+      "Duration: 6 Months",
+      "Location: Kolkata (Field Work)",
+      "COMPENSATION & BENEFITS",
+      "Stipend: ₹1,000 - ₹2,000 / Month",
+      "Target: ₹20,000 Minimum Collection (Every Month)",
+      "Placement After Internship",
+      "Salary: ₹20,000 - ₹35,000",
+      "+ Incentives & Rewards",
+      "APPLY NOW!",
+      "Send CV / Resume with Photo via WhatsApp",
+      "+91 94338 34013",
+      "arws008@gmail.com",
+      "Agni Rural Welfare Society",
+      "Serving Humanity with Commitment"
+    ],
+    "donation": [
+      "AGNI RURAL WELFARE SOCIETY",
+      "PLEASE DONATE US",
+      "SCAN & PAY USING ANY BHIM UPI APP",
+      "9831460161m@pnb",
+      "MERCHANT: AGNI RURAL WELFARE SOCIETY",
+      "Contact : 9433834013"
+    ],
+    "csr": [
+      "GOVERNMENT OF INDIA",
+      "MINISTRY OF CORPORATE AFFAIRS",
+      "OFFICE OF THE REGISTRAR OF COMPANIES",
+      "Dated : 05-05-2025",
+      "NOTE - THIS LETTER IS ONLY AN APPROVAL FOR REGISTRATION OF THE ENTITIES FOR UNDERTAKING CSR ACTIVITIES.",
+      "To,",
+      "AGNI RURAL WELFARE SOCIETY , 47 , SCHOOL ROAD , Dakshin Jagatdal,Dingelpota , SOUTH 24 PARGANAS,SOUTH PARGANAS,WB16,WB,700151",
+      "PAN : AABAA7008E",
+      "Subject: In Reference to Registration of Entities for undertaking CSR activities",
+      "Reference: Your application dated 05-05-2025 (SRN-N30590962)",
+      "Sir/Madam,",
+      "With reference to the above, it is informed that the entity has been registered for undertaking CSR activities and the Registration number is CSR00091482. Please refer the registration number for any further communication.",
+      "Registrar of Companies",
+      "ROC-DELHI",
+      "Note: The corresponding form has been approved and this letter has been digitally signed through a system generated digital signature."
+    ],
+    "society": [
+      "West Bengal Form No. 264.",
+      "Certificate of Registration of Societies",
+      "WEST BENGAL ACT XXVI of 1961",
+      "I hereby certify that",
+      "has this day been registered under the West Bengal Societies Registration Act, 1961.",
+      "Given under my hand at",
+      "Registrar of Firms, Societies & Non-Trading Corporations, West Bengal."
+    ],
+    "unreadable": [],
+    "signature": [
+      "Digitally signed by DS INCOME TAX DEPARTMENT 26"
+    ]
+  },
+  "sourceEvidence": {
+    "url": "https://agniruralwelfaresociety.org.in/",
+    "forms": {
+      "loginForm": {
+        "tag": "form",
+        "text": "Welcome Back Sign in to your account Username Password 👁️ Sign In Remember me",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Welcome Back",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Sign in to your account",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "👁️",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Sign In",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "loginUser",
+            "placeholder": "Enter your username",
+            "label": "Username",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "password",
+            "id": "loginPass",
+            "placeholder": "Enter your password",
+            "label": "Password",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "label": "Remember me",
+            "options": []
+          }
+        ]
+      },
+      "registerForm": {
+        "tag": "form",
+        "text": "Create Account Join our mission today Full Name Username User Photo Email Father's / Guardian Name Permanent Address Blood Group Date of Birth Date of Enrollment Password 👁️ Confirm Password 👁️ Continue Skip Create Account I agree to the terms and conditions Your ARWS Identity Card Agni Rural Welfare Society IDENTITY CARD Motto : Bravery Unity & Discipline Full Name : - Username : - Email : - Father's / Guardian : - Permanent Address : - Blood Group : - Date of Birth : - Date of Enrollment : - AGNI RURAL WELFARE SOCIETY Download ID Card",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Create Account",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Join our mission today",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "👁️",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "👁️",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Continue",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Skip",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Create Account",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Your ARWS Identity Card",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Agni Rural Welfare Society",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "IDENTITY CARD",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Motto : Bravery Unity & Discipline",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Full Name : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Username : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Email : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Father's / Guardian : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Permanent Address : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Blood Group : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Date of Birth : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Date of Enrollment : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "AGNI RURAL WELFARE SOCIETY",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Download ID Card",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "registerName",
+            "placeholder": "Enter your full name",
+            "label": "Full Name",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "registerUsername",
+            "placeholder": "Enter your username",
+            "label": "Username",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "id": "registerPhoto",
+            "accept": "image/*",
+            "label": "User Photo",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "registerEmail",
+            "placeholder": "Enter your email",
+            "label": "Email",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "registerGuardian",
+            "placeholder": "Enter father's / guardian name",
+            "label": "Father's / Guardian Name",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "registerAddress",
+            "rows": "2",
+            "placeholder": "Enter permanent address",
+            "label": "Permanent Address",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "registerBlood",
+            "placeholder": "e.g. O+, A-, B+",
+            "label": "Blood Group",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "registerDob",
+            "label": "Date of Birth",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "registerEnrollmentDate",
+            "readonly": null,
+            "label": "Date of Enrollment",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "password",
+            "id": "registerPass",
+            "placeholder": "Create a password",
+            "label": "Password",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "password",
+            "id": "registerConfirm",
+            "placeholder": "Confirm your password",
+            "label": "Confirm Password",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "required": null,
+            "label": "I agree to the terms and conditions",
+            "options": []
+          }
+        ]
+      },
+      "userIdCardSection": {
+        "tag": "div",
+        "text": "Your ARWS Identity Card Agni Rural Welfare Society IDENTITY CARD Motto : Bravery Unity & Discipline Full Name : - Username : - Email : - Father's / Guardian : - Permanent Address : - Blood Group : - Date of Birth : - Date of Enrollment : - AGNI RURAL WELFARE SOCIETY Download ID Card",
+        "blocks": [
+          {
+            "tag": "h3",
+            "text": "Your ARWS Identity Card",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Agni Rural Welfare Society",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "IDENTITY CARD",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Motto : Bravery Unity & Discipline",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Full Name : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Username : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Email : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Father's / Guardian : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Permanent Address : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Blood Group : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Date of Birth : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Date of Enrollment : -",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "AGNI RURAL WELFARE SOCIETY",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Download ID Card",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "adminForm": {
+        "tag": "form",
+        "text": "Admin Login Enter admin credentials Username Password 👁️ Sign In",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Admin Login",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Enter admin credentials",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "👁️",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Sign In",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "adminUser",
+            "placeholder": "Admin username",
+            "label": "Username",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "password",
+            "id": "adminPass",
+            "placeholder": "Admin password",
+            "label": "Password",
+            "options": []
+          }
+        ]
+      },
+      "cadetFlow": {
+        "tag": "section",
+        "text": "ARWS Cadet Enrollment – Page 1 Name * Passport Size Photo * Gender * Select Gender Male Female Father's Name * Father's Occupation Father's Annual Income Mother's Name * Mother's Occupation Mother's Annual Income Parent / Guardian Name * Aadhaar Card No * Pan Card No * Address * Are you citizen of India or subject of Nepal? * Select India Nepal Next ARWS Cadet Enrollment – Page 2 Village * Tehsil / Taluka * District * PIN Code * Post Office * Railway Station Educational Qualification * Date of Birth * School / College Name * Willing to undergo service training? * Select Yes No Residential Address * Contact Number (Cadet & Guardian) * Email Address * Registration ID and Identity Card will be sent to this email Back Continue",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "ARWS Cadet Enrollment – Page 1",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Next",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "ARWS Cadet Enrollment – Page 2",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Back",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Continue",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "cadetName",
+            "placeholder": "Enter your full name",
+            "label": "Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "id": "cadetPhoto",
+            "accept": "image/*",
+            "label": "Passport Size Photo *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "cadetGenderSelect",
+            "label": "Gender *",
+            "options": [
+              {
+                "label": "Select Gender",
+                "value": ""
+              },
+              {
+                "label": "Male",
+                "value": "Male"
+              },
+              {
+                "label": "Female",
+                "value": "Female"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherName",
+            "placeholder": "Enter father's name",
+            "label": "Father's Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherOcc",
+            "placeholder": "Enter father's occupation",
+            "label": "Father's Occupation",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherIncome",
+            "placeholder": "Enter father's income",
+            "label": "Father's Annual Income",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherName",
+            "placeholder": "Enter mother's name",
+            "label": "Mother's Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherOcc",
+            "placeholder": "Enter mother's occupation",
+            "label": "Mother's Occupation",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherIncome",
+            "placeholder": "Enter mother's income",
+            "label": "Mother's Annual Income",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "guardianName",
+            "placeholder": "Enter guardian name",
+            "label": "Parent / Guardian Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "aadhaar",
+            "placeholder": "Enter Aadhaar number",
+            "label": "Aadhaar Card No *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "panNumber",
+            "placeholder": "Enter PAN Card number",
+            "label": "Pan Card No *",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "cadetAddress",
+            "rows": "3",
+            "placeholder": "Enter complete address",
+            "label": "Address *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "citizenship",
+            "label": "Are you citizen of India or subject of Nepal? *",
+            "options": [
+              {
+                "label": "Select",
+                "value": ""
+              },
+              {
+                "label": "India",
+                "value": "India"
+              },
+              {
+                "label": "Nepal",
+                "value": "Nepal"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "village",
+            "placeholder": "Enter village",
+            "label": "Village *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "tehsil",
+            "placeholder": "Enter tehsil / taluka",
+            "label": "Tehsil / Taluka *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "district",
+            "placeholder": "Enter district",
+            "label": "District *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "pincode",
+            "placeholder": "Enter PIN code",
+            "label": "PIN Code *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "postOffice",
+            "placeholder": "Enter post office",
+            "label": "Post Office *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "railwayStation",
+            "placeholder": "Enter railway station",
+            "label": "Railway Station",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "education",
+            "placeholder": "Enter qualification",
+            "label": "Educational Qualification *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "dob",
+            "label": "Date of Birth *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "school",
+            "placeholder": "Enter school / college",
+            "label": "School / College Name *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "training",
+            "label": "Willing to undergo service training? *",
+            "options": [
+              {
+                "label": "Select",
+                "value": ""
+              },
+              {
+                "label": "Yes",
+                "value": "Yes"
+              },
+              {
+                "label": "No",
+                "value": "No"
+              }
+            ]
+          },
+          {
+            "tag": "textarea",
+            "id": "resAddress",
+            "rows": "3",
+            "placeholder": "Enter residential address",
+            "label": "Residential Address *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "tel",
+            "id": "contactNo",
+            "placeholder": "Enter contact number",
+            "label": "Contact Number (Cadet & Guardian) *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "cadetEmail",
+            "placeholder": "Enter your email address",
+            "label": "Email Address *",
+            "options": []
+          }
+        ]
+      },
+      "cadetStep1": {
+        "tag": "div",
+        "text": "ARWS Cadet Enrollment – Page 1 Name * Passport Size Photo * Gender * Select Gender Male Female Father's Name * Father's Occupation Father's Annual Income Mother's Name * Mother's Occupation Mother's Annual Income Parent / Guardian Name * Aadhaar Card No * Pan Card No * Address * Are you citizen of India or subject of Nepal? * Select India Nepal Next",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "ARWS Cadet Enrollment – Page 1",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Next",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "cadetName",
+            "placeholder": "Enter your full name",
+            "label": "Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "id": "cadetPhoto",
+            "accept": "image/*",
+            "label": "Passport Size Photo *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "cadetGenderSelect",
+            "label": "Gender *",
+            "options": [
+              {
+                "label": "Select Gender",
+                "value": ""
+              },
+              {
+                "label": "Male",
+                "value": "Male"
+              },
+              {
+                "label": "Female",
+                "value": "Female"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherName",
+            "placeholder": "Enter father's name",
+            "label": "Father's Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherOcc",
+            "placeholder": "Enter father's occupation",
+            "label": "Father's Occupation",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "fatherIncome",
+            "placeholder": "Enter father's income",
+            "label": "Father's Annual Income",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherName",
+            "placeholder": "Enter mother's name",
+            "label": "Mother's Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherOcc",
+            "placeholder": "Enter mother's occupation",
+            "label": "Mother's Occupation",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "motherIncome",
+            "placeholder": "Enter mother's income",
+            "label": "Mother's Annual Income",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "guardianName",
+            "placeholder": "Enter guardian name",
+            "label": "Parent / Guardian Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "aadhaar",
+            "placeholder": "Enter Aadhaar number",
+            "label": "Aadhaar Card No *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "panNumber",
+            "placeholder": "Enter PAN Card number",
+            "label": "Pan Card No *",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "cadetAddress",
+            "rows": "3",
+            "placeholder": "Enter complete address",
+            "label": "Address *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "citizenship",
+            "label": "Are you citizen of India or subject of Nepal? *",
+            "options": [
+              {
+                "label": "Select",
+                "value": ""
+              },
+              {
+                "label": "India",
+                "value": "India"
+              },
+              {
+                "label": "Nepal",
+                "value": "Nepal"
+              }
+            ]
+          }
+        ]
+      },
+      "cadetStep2": {
+        "tag": "div",
+        "text": "ARWS Cadet Enrollment – Page 2 Village * Tehsil / Taluka * District * PIN Code * Post Office * Railway Station Educational Qualification * Date of Birth * School / College Name * Willing to undergo service training? * Select Yes No Residential Address * Contact Number (Cadet & Guardian) * Email Address * Registration ID and Identity Card will be sent to this email Back Continue",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "ARWS Cadet Enrollment – Page 2",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Back",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Continue",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "village",
+            "placeholder": "Enter village",
+            "label": "Village *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "tehsil",
+            "placeholder": "Enter tehsil / taluka",
+            "label": "Tehsil / Taluka *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "district",
+            "placeholder": "Enter district",
+            "label": "District *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "pincode",
+            "placeholder": "Enter PIN code",
+            "label": "PIN Code *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "postOffice",
+            "placeholder": "Enter post office",
+            "label": "Post Office *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "railwayStation",
+            "placeholder": "Enter railway station",
+            "label": "Railway Station",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "education",
+            "placeholder": "Enter qualification",
+            "label": "Educational Qualification *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "dob",
+            "label": "Date of Birth *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "school",
+            "placeholder": "Enter school / college",
+            "label": "School / College Name *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "training",
+            "label": "Willing to undergo service training? *",
+            "options": [
+              {
+                "label": "Select",
+                "value": ""
+              },
+              {
+                "label": "Yes",
+                "value": "Yes"
+              },
+              {
+                "label": "No",
+                "value": "No"
+              }
+            ]
+          },
+          {
+            "tag": "textarea",
+            "id": "resAddress",
+            "rows": "3",
+            "placeholder": "Enter residential address",
+            "label": "Residential Address *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "tel",
+            "id": "contactNo",
+            "placeholder": "Enter contact number",
+            "label": "Contact Number (Cadet & Guardian) *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "cadetEmail",
+            "placeholder": "Enter your email address",
+            "label": "Email Address *",
+            "options": []
+          }
+        ]
+      },
+      "home": {
+        "tag": "section",
+        "text": "Spreading Joy Through Social Service Working together for children, communities, and a better tomorrow. Donate Now Support Our Social Activities Support Sundarban poor School Students with New Clothes,study materials, portion food & others. As we do every year, this time as well, AGNI Rural Welfare Society is proud to continue its tradition of supporting the underprivileged by distributing new clothes to the students of Sundarbans poor School in the. This initiative is part of our Social activities, a time when we aim to bring joy to these children and ensure they feel included in the festive spirit. The smiles on their faces remind us of the importance of community and compassion during this special occasion. We are calling on generous individuals, organizations, and well-wishers who wish to contribute to this cause. You can support these students by making a donation through our bank account or using the Bank QR code provided. Your contributions will directly go towards purchasing new clothes for the students, many of whom come from economically disadvantaged backgrounds and eagerly look forward to this time of the year. Together, we can make these social activities a memorable one for these students and give back to the community in a meaningful way. Thank you for your support and generosity! Contact : 9433834013 Apply Now Recruitment going on for NCC ‘C’ Pass Candidates:- Click here for more information Apply Now NGO Fundraising & Field Coordinator Click here for more information",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Spreading Joy Through Social Service",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Working together for children, communities, and a better tomorrow.",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Donate Now",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Support Our Social Activities",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Support Sundarban poor School Students with New Clothes,study materials, portion food & others.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "As we do every year, this time as well, AGNI Rural Welfare Society is proud to continue its tradition of supporting the underprivileged by distributing new clothes to the students of Sundarbans poor School in the. This initiative is part of our Social activities, a time when we aim to bring joy to these children and ensure they feel included in the festive spirit. The smiles on their faces remind us of the importance of community and compassion during this special occasion.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We are calling on generous individuals, organizations, and well-wishers who wish to contribute to this cause. You can support these students by making a donation through our bank account or using the Bank QR code provided. Your contributions will directly go towards purchasing new clothes for the students, many of whom come from economically disadvantaged backgrounds and eagerly look forward to this time of the year.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Together, we can make these social activities a memorable one for these students and give back to the community in a meaningful way.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Thank you for your support and generosity!",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Contact : 9433834013",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Apply Now",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Recruitment going on for",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "NCC ‘C’ Pass Candidates:-",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Click here for more information",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Apply Now",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "NGO Fundraising & Field Coordinator",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Click here for more information",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "about": {
+        "tag": "section",
+        "text": "About Organization AGNI RURAL WELFARE SOCIETY, a society of Social work organization. We beg to introduce ourselves as a non-government and non-profit organization working intensively in the semi urban region of South 24 Parganas District of West Bengal. Our operational area is presently at Sonarpur Block but ready to extend little broader region in the entire Baruipur sub division. This is for your kind inform that we started from the very beginning two day’s weekly Training Programme at Sonarpur Mahavidyalaya play ground \"Drill, Band, Physical training, sports, games, Obstacle Management, Disaster Management, Civil Defence, NDA, IMA, OTA (Army, Navy, Air Force) examination & inspiration training\". Our primary aim is to cover the students belonging to Secondary & Higher Secondary schools within the jurisdiction of Baruipur SDO & by the help of this programme the students will be highly benefited in all respects. We have much pleasure to inform you that we are started National Defense Academy Inspiration training (Army, Navy & Air Force) UPSC examination preparation for school students at jurisdiction of Baruipur SDO. There are many students who are not aware in this area about the Examination as per Indian army survey report. We, the only organization have taken necessary measures to educate the students for preparation of National Defense Academy (Army, Navy & Air Force) & UPSC examination for their bright career. Established on 22/09/2008. We started the process of getting some of the poor kids to be impaired for brightening their aim. In 2009, there was a storm Aila in the south of the south 24 Parganas. Many people of the Sundarbans, after losing another, clothes, water, water and habitat. To cope with this situation and to keep them in mind, we and our organization's students collect relief materials from the area and deliver relief material to the people of these flooded areas. Storm like Aila teaches many things in our lives. We then plan that there is a need to tackle the crisis of emergency in all areas. Students, young people are troubled by many anti-social and cultural issues, and they are becoming addicted to various forms and their education teachers and humanitarianism are being overthrown by the teachers and honor of the elders. Due to the nonconformity, social norms among them are being lost day by day. They are becoming physically and mentally weak, keeping them healthy and physically fit in the environment and making them reflect in society through training. We did a survey in South 24 Parganas, which showed that some poor children are losing their parents' negligence. They do not have any desire and plans like their future. Parents of these families can not give them the right time, and many of them are nutritious A lack is seen In the absence of suitable food they are lagging behind mental and physical development. In view of this, a special purpose was taken from our organization that a training camp was organized to tackle one of the worst disaster situations for one and a half students in the sports premises of Sonarpur College in front of Sonarpur BDO. We train students to collect some of them from the society, where the “Drill, Obstacle, Pipe Band, Games, Self Defense, P.T, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination etc” Give training Creating a goal among them that they will be in the future. These students and their parents can not send them any day or outside as they are not able to do so. We take them to camp for 10 days each year on school holidays every day, so that their old-minded reading is not wasted, time is spent on training and singing about their hills or the ocean areas. One of our little efforts is to make them healthy, strong, emotionally, physically, and socially trained by them. By introducing them to various welfare social services and spreading their socialism. We are working with various type of social welfare activities, such as: 1. Cloth (Bastra) Distribution. 2. Health & Sanitation awareness. 3. Buyer and consumer protection and awareness. 4. World Environment Day. 5. Football Competition. 6. Relief goods to reach the people at flooded area. 7. Plant implants. We also observed, Biswa Kabi Guru Rabindranath, Poet Kazi Nazrul Islam, the Father of the Nation Mahatma Gandhi Jayanti. Shaheed Kshudiram, Ex-president and distinguished scientific Dr. Kalam, Netaji Subhash Chandra Bose and the Swami Vivekananda’s birthday also observed. Republic Day Celebration. Co-operate with Financially Backward Students. Winter clothing distribution Anesthesia. Drill, Obstacle, Pipe Band, Games, Self Defense, PT, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination on the day of Yoga training. International Yoga Day. 1st Baishakh celebrate. etc etc In this era, the youth and the student community are being overwhelmed by a superstitious, uneasy condition. By establishing them in a healthy society through such a program, we have a small effort. We are thinking of the academy in the future for an NDA where the students will be in a healthy entry and they will have the right to be trained in education and various remedies where they can have a healthy society. So we are kind of you that we should extend our cooperation to our organization so that these students can shine their future with your help.",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "About Organization",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "AGNI RURAL WELFARE SOCIETY, a society of Social work organization.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We beg to introduce ourselves as a non-government and non-profit organization working intensively in the semi urban region of South 24 Parganas District of West Bengal. Our operational area is presently at Sonarpur Block but ready to extend little broader region in the entire Baruipur sub division.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "This is for your kind inform that we started from the very beginning two day’s weekly Training Programme at Sonarpur Mahavidyalaya play ground \"Drill, Band, Physical training, sports, games, Obstacle Management, Disaster Management, Civil Defence, NDA, IMA, OTA (Army, Navy, Air Force) examination & inspiration training\". Our primary aim is to cover the students belonging to Secondary & Higher Secondary schools within the jurisdiction of Baruipur SDO & by the help of this programme the students will be highly benefited in all respects.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We have much pleasure to inform you that we are started National Defense Academy Inspiration training (Army, Navy & Air Force) UPSC examination preparation for school students at jurisdiction of Baruipur SDO. There are many students who are not aware in this area about the Examination as per Indian army survey report. We, the only organization have taken necessary measures to educate the students for preparation of National Defense Academy (Army, Navy & Air Force) & UPSC examination for their bright career.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Established on 22/09/2008. We started the process of getting some of the poor kids to be impaired for brightening their aim. In 2009, there was a storm Aila in the south of the south 24 Parganas. Many people of the Sundarbans, after losing another, clothes, water, water and habitat. To cope with this situation and to keep them in mind, we and our organization's students collect relief materials from the area and deliver relief material to the people of these flooded areas. Storm like Aila teaches many things in our lives. We then plan that there is a need to tackle the crisis of emergency in all areas.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Students, young people are troubled by many anti-social and cultural issues, and they are becoming addicted to various forms and their education teachers and humanitarianism are being overthrown by the teachers and honor of the elders. Due to the nonconformity, social norms among them are being lost day by day. They are becoming physically and mentally weak, keeping them healthy and physically fit in the environment and making them reflect in society through training.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We did a survey in South 24 Parganas, which showed that some poor children are losing their parents' negligence. They do not have any desire and plans like their future. Parents of these families can not give them the right time, and many of them are nutritious A lack is seen In the absence of suitable food they are lagging behind mental and physical development.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "In view of this, a special purpose was taken from our organization that a training camp was organized to tackle one of the worst disaster situations for one and a half students in the sports premises of Sonarpur College in front of Sonarpur BDO. We train students to collect some of them from the society, where the “Drill, Obstacle, Pipe Band, Games, Self Defense, P.T, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination etc” Give training Creating a goal among them that they will be in the future.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "These students and their parents can not send them any day or outside as they are not able to do so. We take them to camp for 10 days each year on school holidays every day, so that their old-minded reading is not wasted, time is spent on training and singing about their hills or the ocean areas.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "One of our little efforts is to make them healthy, strong, emotionally, physically, and socially trained by them. By introducing them to various welfare social services and spreading their socialism.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We are working with various type of social welfare activities, such as:",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "1. Cloth (Bastra) Distribution.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "2. Health & Sanitation awareness.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "3. Buyer and consumer protection and awareness.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "4. World Environment Day.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "5. Football Competition.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "6. Relief goods to reach the people at flooded area.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "7. Plant implants.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We also observed, Biswa Kabi Guru Rabindranath, Poet Kazi Nazrul Islam, the Father of the Nation Mahatma Gandhi Jayanti. Shaheed Kshudiram, Ex-president and distinguished scientific Dr. Kalam, Netaji Subhash Chandra Bose and the Swami Vivekananda’s birthday also observed.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Republic Day Celebration. Co-operate with Financially Backward Students. Winter clothing distribution Anesthesia. Drill, Obstacle, Pipe Band, Games, Self Defense, PT, Disaster Management, sea explorer, Yoga, Telent hunt, Civil defense, Grooming & Inspiration of join NDA, IMA, OTA (Indian Army, Navy, Air Force) examination on the day of Yoga training. International Yoga Day. 1st Baishakh celebrate. etc etc",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "In this era, the youth and the student community are being overwhelmed by a superstitious, uneasy condition. By establishing them in a healthy society through such a program, we have a small effort.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We are thinking of the academy in the future for an NDA where the students will be in a healthy entry and they will have the right to be trained in education and various remedies where they can have a healthy society.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "So we are kind of you that we should extend our cooperation to our organization so that these students can shine their future with your help.",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "jobs": {
+        "tag": "section",
+        "text": "Coming Soon",
+        "blocks": [
+          {
+            "tag": "h1",
+            "text": "Coming Soon",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "documentation": {
+        "tag": "section",
+        "text": "FORM NO. 10AC (See rule 17A/11AA) Order for provisional approval 1 PAN AABAA7008E 2 Name AGNI RURAL WELFARE SOCIETY 2a Nature of Activities Charitable 2b Address Flat/Door/Building: 47, School Road Road/Street/Post Office: Dakshin Jagatdal S.O Area/Locality: Dingelpota Town/City/District: South 24 Parganas State: West Bengal Country: India Pin Code: 700151 3 Document Identification Number AABAA7008EF2025101 4 Application Number 946744880270425 5 Unique Registration Number AABAA7008EF20251 6 Section under which provisional approval is granted 12-Sub-clause (A) of clause (iv) of first proviso to sub-section (5) of section 80G 7 Date of provisional approval 04-05-2025 8 Assessment year or years for which trust is approved From AY 2026-27 to AY 2028-2029 9 Order for provisional approval a. After considering the application of the applicant and the material available on record, the applicant is hereby granted provisional approval with effect from the assessment year mentioned at serial no. 8 above subject to the conditions mentioned in row number 10. b. The taxability, or otherwise, of the income of the applicant would be separately considered as per the provisions of the Income Tax Act, 1961. c. This order is liable to be withdrawn by the prescribed authority if it is subsequently found that the activities of the applicant are not genuine or if they are not carried out in accordance with the conditions prescribed in the Income Tax Act. 10 The approval is granted subject to the following conditions: The registration granted under section 12AB or approval granted under clause (23C) of section 10 has not been cancelled by the Principal Commissioner. The form for approval in Form No. 10A has been duly filled with correct information and no false or incorrect documents have been provided. The institution or fund shall apply for approval within 6 months of commencement of activities or at least 6 months prior to expiry of provisional approval. The registration granted under section 12AB or approval granted under clause (23C) has not been cancelled by the Principal Commissioner as per the Income-tax Rules. Name and Designation of the Approving Authority Principal Commissioner of Income Tax Commissioner of Income Tax",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "FORM NO. 10AC",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "(See rule 17A/11AA)",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Order for provisional approval",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "The registration granted under section 12AB or approval granted under clause (23C) of section 10 has not been cancelled by the Principal Commissioner.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "The form for approval in Form No. 10A has been duly filled with correct information and no false or incorrect documents have been provided.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "The institution or fund shall apply for approval within 6 months of commencement of activities or at least 6 months prior to expiry of provisional approval.",
+            "id": null
+          },
+          {
+            "tag": "li",
+            "text": "The registration granted under section 12AB or approval granted under clause (23C) has not been cancelled by the Principal Commissioner as per the Income-tax Rules.",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "membership": {
+        "tag": "section",
+        "text": "Become a Member Membership at Agni Rural Welfare Society is for social service and social responsibility. It is not intended for political or profit-making purposes. Members are encouraged to actively participate in service activities or indirectly support the organization’s welfare initiatives. Benefits of Membership: Members are invited to participate in various activities and events organized by Agni Rural Welfare Society. Terms & Conditions Apply.",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Become a Member",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Membership at Agni Rural Welfare Society is for social service and social responsibility. It is not intended for political or profit-making purposes.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Members are encouraged to actively participate in service activities or indirectly support the organization’s welfare initiatives.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Benefits of Membership: Members are invited to participate in various activities and events organized by Agni Rural Welfare Society. Terms & Conditions Apply.",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "volunteer": {
+        "tag": "section",
+        "text": "Apply Now Request for Nomination of NCC ‘C’ Certificate Holders Six-Month Paid Internship as Volunteer Trainers Dear Cadets, We beg to introduce ourselves as a non-governmental and non-profit organization working extensively in the semi-urban and rural regions of West Bengal. At present, our operational area is the Sonarpur Block; however, we are prepared to expand our activities across the entire state. Since Cyclone Aila in 2009 and the subsequent devastation in the Sundarbans, we have been actively involved in social welfare activities in districts such as South 24 Parganas, Midnapore, Darjeeling, and Kalimpong. We conduct regular training camps every Saturday and Sunday including Drill, Physical Training, Marching Band, Obstacle Management, Sports & Games, Cultural Activities, Yoga, Wrestling, Disaster Management, Motivation & Personality Grooming and NDA / IMA / OTA awareness training. These camps are conducted at Sonarpur Mahavidyalaya Playground and Rajpur Agami Playground from 6:20 AM to 10:30 AM. Internship Programme We are planning to launch a six-month paid internship programme for NCC ‘C’ Certificate holder cadets who can provide training in schools once a week. Interns will receive a stipend between ₹1,000 – ₹2,000 per month. After successful completion and performance evaluation, candidates may receive a salary of ₹15,000 – ₹18,000 per month. Eligibility Criteria 1. Graduate (Passed) 2. NCC ‘C’ Certificate Holder 3. Basic knowledge of Disaster Management & NDA/IMA/OTA exams 4. Resident of Kolkata or South 24 Parganas 5. Age between 19 – 25 years Nature of Work Conduct drill training in schools at least once per week (minimum four days per month). Assist in NGO activities such as project research, analysis, content writing, budget preparation, and field implementation. How to Apply Interested cadets may send their CV / Resume, recent photograph and NCC ‘C’ Certificate copy to the contact below. Email: arws008@gmail.com WhatsApp: +91 94338 34013 Thanking you. Yours sincerely Dipankar Lahiri Apply Now NGO Fundraising & Field Coordinator Volunteer & Internship Programme (Only for Kolkata) Volunteering with Agni Rural Welfare Society is an opportunity to participate in meaningful social service and contribute directly to community development. Volunteers play an important role in supporting our welfare initiatives and outreach programs. Agni Rural Welfare Society is planning a major social welfare initiative where we will distribute new clothes, notebooks, pens, pencils, educational materials, and essential supplies to underprivileged children across nearly 20 villages in the Sundarbans region. To make this mission successful, we are inviting motivated and compassionate Volunteers and Interns to join our team and contribute to this noble cause. Internship / Volunteer Role Details Position: NGO Fundraising & Field Coordinator Duration: 6 Months Internship Location: Kolkata (Field-based activities) Key Responsibilities 1. Conduct fundraising activities including face-to-face campaigns and donor outreach. 2. Organize fundraising camps in residential complexes, offices, and other locations. 3. Build strong relationships with donors and supporters. 4. Increase overall fundraising and awareness support. 5. Assist in social media promotion (Facebook, Twitter, LinkedIn, Instagram, YouTube). 6. Support additional NGO activities when required. Compensation & Benefits 1. Monthly Stipend: ₹1,000 – ₹2,000 (Terms & Conditions Apply) 2. Minimum Fundraising Target: ₹20,000 during internship period. Candidates who successfully complete the 6-month internship may be offered placement within the organization. Starting Salary: ₹20,000 – ₹35,000 per month Additional Benefits: Incentives, Rewards & Recognition How to Apply Interested candidates may send their CV/Resume with a recent photo through WhatsApp or email. WhatsApp / Contact: +91 94338 34013 Email: arws008@gmail.com Organization: Agni Rural Welfare Society",
+        "blocks": [
+          {
+            "tag": "button",
+            "text": "Apply Now",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Request for Nomination of NCC ‘C’ Certificate Holders",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Six-Month Paid Internship as Volunteer Trainers",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Dear Cadets,",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We beg to introduce ourselves as a non-governmental and non-profit organization working extensively in the semi-urban and rural regions of West Bengal. At present, our operational area is the Sonarpur Block; however, we are prepared to expand our activities across the entire state.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Since Cyclone Aila in 2009 and the subsequent devastation in the Sundarbans, we have been actively involved in social welfare activities in districts such as South 24 Parganas, Midnapore, Darjeeling, and Kalimpong.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We conduct regular training camps every Saturday and Sunday including Drill, Physical Training, Marching Band, Obstacle Management, Sports & Games, Cultural Activities, Yoga, Wrestling, Disaster Management, Motivation & Personality Grooming and NDA / IMA / OTA awareness training.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "These camps are conducted at Sonarpur Mahavidyalaya Playground and Rajpur Agami Playground from 6:20 AM to 10:30 AM.",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Internship Programme",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We are planning to launch a six-month paid internship programme for NCC ‘C’ Certificate holder cadets who can provide training in schools once a week.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Interns will receive a stipend between ₹1,000 – ₹2,000 per month. After successful completion and performance evaluation, candidates may receive a salary of ₹15,000 – ₹18,000 per month.",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Eligibility Criteria",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "1. Graduate (Passed)",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "2. NCC ‘C’ Certificate Holder",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "3. Basic knowledge of Disaster Management & NDA/IMA/OTA exams",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "4. Resident of Kolkata or South 24 Parganas",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "5. Age between 19 – 25 years",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Nature of Work",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Conduct drill training in schools at least once per week (minimum four days per month).",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Assist in NGO activities such as project research, analysis, content writing, budget preparation, and field implementation.",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "How to Apply",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Interested cadets may send their CV / Resume, recent photograph and NCC ‘C’ Certificate copy to the contact below.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Email: arws008@gmail.com",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "WhatsApp: +91 94338 34013",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Thanking you.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Yours sincerely",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Dipankar Lahiri",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Apply Now",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "NGO Fundraising & Field Coordinator",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Volunteer & Internship Programme (Only for Kolkata)",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Volunteering with Agni Rural Welfare Society is an opportunity to participate in meaningful social service and contribute directly to community development. Volunteers play an important role in supporting our welfare initiatives and outreach programs.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Agni Rural Welfare Society is planning a major social welfare initiative where we will distribute new clothes, notebooks, pens, pencils, educational materials, and essential supplies to underprivileged children across nearly 20 villages in the Sundarbans region.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "To make this mission successful, we are inviting motivated and compassionate Volunteers and Interns to join our team and contribute to this noble cause.",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Internship / Volunteer Role Details",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Position: NGO Fundraising & Field Coordinator",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Duration: 6 Months Internship",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Location: Kolkata (Field-based activities)",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Key Responsibilities",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "1. Conduct fundraising activities including face-to-face campaigns and donor outreach.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "2. Organize fundraising camps in residential complexes, offices, and other locations.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "3. Build strong relationships with donors and supporters.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "4. Increase overall fundraising and awareness support.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "5. Assist in social media promotion (Facebook, Twitter, LinkedIn, Instagram, YouTube).",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "6. Support additional NGO activities when required.",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Compensation & Benefits",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "1. Monthly Stipend: ₹1,000 – ₹2,000 (Terms & Conditions Apply)",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "2. Minimum Fundraising Target: ₹20,000 during internship period.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Candidates who successfully complete the 6-month internship may be offered placement within the organization.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Starting Salary: ₹20,000 – ₹35,000 per month",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Additional Benefits: Incentives, Rewards & Recognition",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "How to Apply",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Interested candidates may send their CV/Resume with a recent photo through WhatsApp or email.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "WhatsApp / Contact: +91 94338 34013",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Email: arws008@gmail.com",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Organization: Agni Rural Welfare Society",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "supporters": {
+        "tag": "section",
+        "text": "Supporters of the Society Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and institutions may associate with Agni Rural Welfare Society under the “Supporters of the Society” category. Such support helps strengthen our welfare programs and extend our reach to underserved communities.",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Supporters of the Society",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Corporate Social Responsibility (CSR) divisions of companies, funding agencies, and institutions may associate with Agni Rural Welfare Society under the “Supporters of the Society” category.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Such support helps strengthen our welfare programs and extend our reach to underserved communities.",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "gallery": {
+        "tag": "section",
+        "text": "Gallery & Activities Browse through our collection of moments from our social service initiatives and community activities. Our Social Activities As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor school students in the Sundarbans by providing new clothes, study materials, portion food, and essential items. These activities aim to bring joy, dignity, and a sense of inclusion to children from economically disadvantaged backgrounds. 1 / 0 ← Previous Next →",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Gallery & Activities",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Browse through our collection of moments from our social service initiatives and community activities.",
+            "id": null
+          },
+          {
+            "tag": "h2",
+            "text": "Our Social Activities",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "As part of our ongoing social initiatives, Agni Rural Welfare Society supports poor school students in the Sundarbans by providing new clothes, study materials, portion food, and essential items.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "These activities aim to bring joy, dignity, and a sense of inclusion to children from economically disadvantaged backgrounds.",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "← Previous",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Next →",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "donate": {
+        "tag": "section",
+        "text": "Support Our Mission Your donation helps us continue our mission to support underprivileged children and rural communities. Every contribution makes a meaningful difference! Donate Membership Choose Donation Amount Membership Contribution Become a supporting member of Agni Rural Welfare Society. Monthly Membership Yearly Membership Enter Amount: Proceed to Payment 💳 Secure payment powered by Razorpay ✓ 100% of your support goes to our welfare programs Your Impact ₹100 Provides books & stationery for one child ₹500 One month nutritious meal for a child ₹1,000 Educational supplies for a student ₹5,000 Monthly support for rural education program",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Support Our Mission",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Your donation helps us continue our mission to support underprivileged children and rural communities. Every contribution makes a meaningful difference!",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Donate",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Membership",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Choose Donation Amount",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Membership Contribution",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Become a supporting member of Agni Rural Welfare Society.",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Monthly Membership",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Yearly Membership",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Proceed to Payment",
+            "id": "payBtn"
+          },
+          {
+            "tag": "p",
+            "text": "💳 Secure payment powered by Razorpay ✓ 100% of your support goes to our welfare programs",
+            "id": null
+          },
+          {
+            "tag": "h3",
+            "text": "Your Impact",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "number",
+            "id": "customAmount",
+            "placeholder": "Enter amount in ₹",
+            "min": "1",
+            "label": "Enter Amount:",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "donorName",
+            "placeholder": "Your Full Name",
+            "required": null,
+            "label": null,
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "donorEmail",
+            "placeholder": "Your Email Address",
+            "required": null,
+            "label": null,
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "tel",
+            "id": "donorPhone",
+            "placeholder": "Your Phone Number",
+            "required": null,
+            "label": null,
+            "options": []
+          }
+        ]
+      },
+      "contact": {
+        "tag": "section",
+        "text": "Contact Us We welcome individuals, volunteers, donors, and organizations to connect with us. Phone: +91 9433834013 Email: arws008@gmail.com",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Contact Us",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "We welcome individuals, volunteers, donors, and organizations to connect with us.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Phone: +91 9433834013",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Email: arws008@gmail.com",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "nccForm": {
+        "tag": "section",
+        "text": "Volunteer Trainer (For NCC ‘C’ Certificate Passed Candidates) /NGO Fundraising & Field Coordinator Please fill out all the required fields below to apply for the internship position. Name * Gender * Select Gender Male Female Mobile Number * Email ID * Address * Which Internship are you applying for? * Select Internship Volunteer Trainer (NCC ‘C’ Certificate Internship) NGO Fundraising & Field Coordinator Internship Qualification * Upload CV/Resume with Photo * Institute Name * Job Portal Why do you want to join this internship? * Application Date * I confirm that all the information provided is true and accurate * Submit Application",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "Volunteer Trainer (For NCC ‘C’ Certificate Passed Candidates) /NGO Fundraising & Field Coordinator",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Please fill out all the required fields below to apply for the internship position.",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Submit Application",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccName",
+            "name": "name",
+            "placeholder": "Enter your full name",
+            "required": null,
+            "label": "Name *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "nccGender",
+            "name": "gender",
+            "required": null,
+            "label": "Gender *",
+            "options": [
+              {
+                "label": "Select Gender",
+                "value": ""
+              },
+              {
+                "label": "Male",
+                "value": "Male"
+              },
+              {
+                "label": "Female",
+                "value": "Female"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "tel",
+            "id": "nccMobile",
+            "name": "mobile",
+            "placeholder": "Enter your mobile number",
+            "required": null,
+            "label": "Mobile Number *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "nccEmail",
+            "name": "email",
+            "placeholder": "Enter your email address",
+            "required": null,
+            "label": "Email ID *",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "nccAddress",
+            "name": "address",
+            "rows": "3",
+            "placeholder": "Enter your complete address",
+            "required": null,
+            "label": "Address *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "nccJob",
+            "name": "job",
+            "required": null,
+            "label": "Which Internship are you applying for? *",
+            "options": [
+              {
+                "label": "Select Internship",
+                "value": ""
+              },
+              {
+                "label": "Volunteer Trainer (NCC ‘C’ Certificate Internship)",
+                "value": "Volunteer Trainer (NCC C Certificate Internship)"
+              },
+              {
+                "label": "NGO Fundraising & Field Coordinator Internship",
+                "value": "NGO Fundraising & Field Coordinator Internship"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccQualification",
+            "name": "qualification",
+            "placeholder": "e.g., Graduate, Post Graduate",
+            "required": null,
+            "label": "Qualification *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "id": "nccCV",
+            "name": "cv",
+            "accept": ".pdf,.doc,.docx,.jpg,.jpeg,.png",
+            "required": null,
+            "label": "Upload CV/Resume with Photo *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccInstitute",
+            "name": "institute",
+            "placeholder": "Enter your institute/university name",
+            "required": null,
+            "label": "Institute Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccJobPortal",
+            "name": "jobPortal",
+            "placeholder": "Where did you find this job? (Optional)",
+            "label": "Job Portal",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "nccPurpose",
+            "name": "purpose",
+            "rows": "4",
+            "placeholder": "Explain why you want to apply for this position",
+            "required": null,
+            "label": "Why do you want to join this internship? *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "nccApplicationDate",
+            "name": "applicationDate",
+            "required": null,
+            "label": "Application Date *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "id": "nccAgree",
+            "required": null,
+            "label": "I confirm that all the information provided is true and accurate *",
+            "options": []
+          }
+        ]
+      },
+      "nccRecruitmentForm": {
+        "tag": "form",
+        "text": "Name * Gender * Select Gender Male Female Mobile Number * Email ID * Address * Which Internship are you applying for? * Select Internship Volunteer Trainer (NCC ‘C’ Certificate Internship) NGO Fundraising & Field Coordinator Internship Qualification * Upload CV/Resume with Photo * Institute Name * Job Portal Why do you want to join this internship? * Application Date * I confirm that all the information provided is true and accurate * Submit Application",
+        "blocks": [
+          {
+            "tag": "button",
+            "text": "Submit Application",
+            "id": null
+          }
+        ],
+        "fields": [
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccName",
+            "name": "name",
+            "placeholder": "Enter your full name",
+            "required": null,
+            "label": "Name *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "nccGender",
+            "name": "gender",
+            "required": null,
+            "label": "Gender *",
+            "options": [
+              {
+                "label": "Select Gender",
+                "value": ""
+              },
+              {
+                "label": "Male",
+                "value": "Male"
+              },
+              {
+                "label": "Female",
+                "value": "Female"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "tel",
+            "id": "nccMobile",
+            "name": "mobile",
+            "placeholder": "Enter your mobile number",
+            "required": null,
+            "label": "Mobile Number *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "email",
+            "id": "nccEmail",
+            "name": "email",
+            "placeholder": "Enter your email address",
+            "required": null,
+            "label": "Email ID *",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "nccAddress",
+            "name": "address",
+            "rows": "3",
+            "placeholder": "Enter your complete address",
+            "required": null,
+            "label": "Address *",
+            "options": []
+          },
+          {
+            "tag": "select",
+            "id": "nccJob",
+            "name": "job",
+            "required": null,
+            "label": "Which Internship are you applying for? *",
+            "options": [
+              {
+                "label": "Select Internship",
+                "value": ""
+              },
+              {
+                "label": "Volunteer Trainer (NCC ‘C’ Certificate Internship)",
+                "value": "Volunteer Trainer (NCC C Certificate Internship)"
+              },
+              {
+                "label": "NGO Fundraising & Field Coordinator Internship",
+                "value": "NGO Fundraising & Field Coordinator Internship"
+              }
+            ]
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccQualification",
+            "name": "qualification",
+            "placeholder": "e.g., Graduate, Post Graduate",
+            "required": null,
+            "label": "Qualification *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "file",
+            "id": "nccCV",
+            "name": "cv",
+            "accept": ".pdf,.doc,.docx,.jpg,.jpeg,.png",
+            "required": null,
+            "label": "Upload CV/Resume with Photo *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccInstitute",
+            "name": "institute",
+            "placeholder": "Enter your institute/university name",
+            "required": null,
+            "label": "Institute Name *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "text",
+            "id": "nccJobPortal",
+            "name": "jobPortal",
+            "placeholder": "Where did you find this job? (Optional)",
+            "label": "Job Portal",
+            "options": []
+          },
+          {
+            "tag": "textarea",
+            "id": "nccPurpose",
+            "name": "purpose",
+            "rows": "4",
+            "placeholder": "Explain why you want to apply for this position",
+            "required": null,
+            "label": "Why do you want to join this internship? *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "date",
+            "id": "nccApplicationDate",
+            "name": "applicationDate",
+            "required": null,
+            "label": "Application Date *",
+            "options": []
+          },
+          {
+            "tag": "input",
+            "type": "checkbox",
+            "id": "nccAgree",
+            "required": null,
+            "label": "I confirm that all the information provided is true and accurate *",
+            "options": []
+          }
+        ]
+      },
+      "registrationSuccessModal": {
+        "tag": "div",
+        "text": "🎉 Registration Successful! ✕ ✓ Your ARWS Cadet Enrollment has been submitted successfully! Your Registration ID: - Copy ID 📧 Your Registration ID and Identity Card have been sent to your registered email address. Please check your email inbox (and spam folder) within a few minutes. Download Identity Card Close",
+        "blocks": [
+          {
+            "tag": "h2",
+            "text": "🎉 Registration Successful!",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "✕",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Your ARWS Cadet Enrollment has been submitted successfully!",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Copy ID",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "📧 Your Registration ID and Identity Card have been sent to your registered email address.",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Please check your email inbox (and spam folder) within a few minutes.",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Download Identity Card",
+            "id": null
+          },
+          {
+            "tag": "button",
+            "text": "Close",
+            "id": null
+          }
+        ],
+        "fields": []
+      },
+      "identityCardTemplate": {
+        "tag": "div",
+        "text": "AGNI RURAL WELFARE SOCIETY Cadet Identity Card Registration ID: - Name: - Date of Birth: - Aadhaar: - Contact: - This is an official identity card issued by ARWS",
+        "blocks": [
+          {
+            "tag": "h3",
+            "text": "AGNI RURAL WELFARE SOCIETY",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "Cadet Identity Card",
+            "id": null
+          },
+          {
+            "tag": "p",
+            "text": "This is an official identity card issued by ARWS",
+            "id": null
+          }
+        ],
+        "fields": []
+      }
+    },
+    "note": "Reference transcript only. Payment and email services are not connected."
+  }
+}

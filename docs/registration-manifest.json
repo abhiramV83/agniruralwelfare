@@ -1,0 +1,2596 @@
+{
+  "source": "client/src/content/registration-reference.html plus runtime behavior in client/src/RegistrationPortal.jsx",
+  "forms": {
+    "standardRegisterForm": {
+      "sections": [],
+      "fields": [
+        {
+          "name": "accountType",
+          "label": "",
+          "type": "hidden",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Member",
+          "helperText": null
+        },
+        {
+          "name": "fullName",
+          "label": "Full Name",
+          "type": "text",
+          "placeholder": "Enter full name",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regUsername",
+          "label": "Username",
+          "type": "text",
+          "placeholder": "Choose a username",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regPhoto",
+          "label": "User Photo Upload",
+          "type": "file",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "email",
+          "label": "Email Address",
+          "type": "email",
+          "placeholder": "name@example.com",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regGuardian",
+          "label": "Father's / Guardian Name",
+          "type": "text",
+          "placeholder": "Enter father's or guardian's name",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regState",
+          "label": "Permanent Address State",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select State",
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regDistrict",
+          "label": "Permanent Address District",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select District"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regBloodGroup",
+          "label": "Blood Group",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select Blood Group",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "O+",
+            "O-",
+            "AB+",
+            "AB-"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regDOB",
+          "label": "Date of Birth (DOB)",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regEnrollDate",
+          "label": "Date of Enrollment",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": true,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regPassword",
+          "label": "Password (Hidden)",
+          "type": "password",
+          "placeholder": "Create password",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "regConfirmPassword",
+          "label": "Confirm Password",
+          "type": "password",
+          "placeholder": "Re-enter password",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        }
+      ],
+      "buttons": [
+        "👁️",
+        "👁️",
+        "Register\nNow"
+      ],
+      "notices": []
+    },
+    "memberForm": {
+      "sections": [
+        {
+          "number": "01",
+          "title": "Personal Information",
+          "class": "member-section"
+        },
+        {
+          "number": "02",
+          "title": "Address & Identification",
+          "class": "member-section"
+        },
+        {
+          "number": "03",
+          "title": "Family Information",
+          "class": "member-section"
+        },
+        {
+          "number": "04",
+          "title": "Payment / Contribution Details",
+          "class": "member-section"
+        },
+        {
+          "number": "05",
+          "title": "Introducer & Enrollment",
+          "class": "member-section"
+        },
+        {
+          "number": "06",
+          "title": "Photograph & Required Documents",
+          "class": "member-section photo-document-section"
+        },
+        {
+          "number": "07",
+          "title": "Signatures & Declaration",
+          "class": "member-section"
+        }
+      ],
+      "fields": [
+        {
+          "name": "registrationType",
+          "label": "",
+          "type": "hidden",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Member",
+          "helperText": null
+        },
+        {
+          "name": "memberName",
+          "label": "Name (First / Middle Name / Last)",
+          "type": "text",
+          "placeholder": "Enter your full name",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(First / Middle Name / Last)"
+          ]
+        },
+        {
+          "name": "gender",
+          "label": "Gender",
+          "type": "radio",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Male",
+          "helperText": null
+        },
+        {
+          "name": "gender",
+          "label": "Gender",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Female",
+          "helperText": null
+        },
+        {
+          "name": "gender",
+          "label": "Gender",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Other",
+          "helperText": null
+        },
+        {
+          "name": "maritalStatus",
+          "label": "Marital Status",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select status",
+            "Married",
+            "Unmarried",
+            "Others"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "nationality",
+          "label": "Nationality",
+          "type": "text",
+          "placeholder": "Enter nationality",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "education",
+          "label": "Education Qualification",
+          "type": "text",
+          "placeholder": "e.g. Graduate / Diploma",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "institution",
+          "label": "Institution *",
+          "type": "text",
+          "placeholder": "Enter your school / college / institution",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "mobile",
+          "label": "Mobile No",
+          "type": "tel",
+          "placeholder": "Enter mobile number",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "memberDOB",
+          "label": "Date of Birth",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "bloodGroup",
+          "label": "Blood Group",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select blood group",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "memberEmail",
+          "label": "Email ID",
+          "type": "email",
+          "placeholder": "name@example.com",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "address",
+          "label": "Address",
+          "type": "textarea",
+          "placeholder": "Enter complete address",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "pinCode",
+          "label": "Pin Code",
+          "type": "text",
+          "placeholder": "6-digit PIN code",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": "6",
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "aadhar",
+          "label": "Aadhar Card No",
+          "type": "text",
+          "placeholder": "Enter Aadhar number",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": "12",
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "pan",
+          "label": "PAN No",
+          "type": "text",
+          "placeholder": "Enter PAN number",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": "10",
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "marriageDate",
+          "label": "Marriage Date",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "occupation",
+          "label": "Occupation",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select occupation",
+            "Job",
+            "Business",
+            "Self Employed",
+            "Other"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "guardianName",
+          "label": "Guardian's Name",
+          "type": "text",
+          "placeholder": "Enter guardian's name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "guardianOccupation",
+          "label": "Guardian's Occupation",
+          "type": "text",
+          "placeholder": "Enter occupation",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "spouseName",
+          "label": "Husband's / Wife Name",
+          "type": "text",
+          "placeholder": "Enter name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "spouseOccupation",
+          "label": "Husband's / Wife Occupation",
+          "type": "text",
+          "placeholder": "Enter occupation",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "spouseDOB",
+          "label": "Husband's / Wife DOB",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motherMaidenName",
+          "label": "Mother's Maiden Name",
+          "type": "text",
+          "placeholder": "Enter mother's maiden name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "hasChild",
+          "label": "If you have any child",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Yes",
+          "helperText": null
+        },
+        {
+          "name": "hasChild",
+          "label": "If you have any child",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "No",
+          "helperText": null
+        },
+        {
+          "name": "childCount",
+          "label": "If you have any child",
+          "type": "number",
+          "placeholder": "How many?",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child1Name",
+          "label": "",
+          "type": "text",
+          "placeholder": "Child Name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child1Gender",
+          "label": "",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "M / F",
+            "M",
+            "F"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child1DOB",
+          "label": "",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child2Name",
+          "label": "",
+          "type": "text",
+          "placeholder": "Child Name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child2Gender",
+          "label": "",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "M / F",
+            "M",
+            "F"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child2DOB",
+          "label": "",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child3Name",
+          "label": "",
+          "type": "text",
+          "placeholder": "Child Name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child3Gender",
+          "label": "",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "M / F",
+            "M",
+            "F"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "child3DOB",
+          "label": "",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "paymentCash",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "paymentCheque",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "paymentDD",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "paymentNEFT",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "bankName",
+          "label": "Bank Name",
+          "type": "text",
+          "placeholder": "Enter bank name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "bankAccount",
+          "label": "Bank Account No",
+          "type": "text",
+          "placeholder": "Enter account number",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "branchName",
+          "label": "Branch Name",
+          "type": "text",
+          "placeholder": "Enter branch name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "ifsc",
+          "label": "IFSC Code",
+          "type": "text",
+          "placeholder": "Enter IFSC code",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "introducerName",
+          "label": "Introducer Name",
+          "type": "text",
+          "placeholder": "Enter introducer name",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "introducerCode",
+          "label": "Introducer Code",
+          "type": "text",
+          "placeholder": "Enter introducer code",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "introducerContact",
+          "label": "Introducer Contact No",
+          "type": "tel",
+          "placeholder": "Enter contact number",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "enrollmentDate",
+          "label": "Date of Enrollment",
+          "type": "date",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": true,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "memberPhoto",
+          "label": "",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "supportingDocuments",
+          "label": "",
+          "type": "file",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "applicantSignature",
+          "label": "",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": "image/*,.pdf",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "memberDeclaration",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        }
+      ],
+      "buttons": [
+        "SUBMIT MEMBER REGISTRATION →"
+      ],
+      "notices": [
+        {
+          "class": "member-agreement",
+          "text": "I confirm that the information provided in this application is true and accurate, and I agree to abide by the Membership Terms and Conditions."
+        },
+        {
+          "class": "member-success",
+          "text": "✓ Member registration form completed successfully."
+        }
+      ]
+    },
+    "cadetEnrollmentForm": {
+      "sections": [
+        {
+          "number": "01",
+          "title": "Cadet Personal Information",
+          "class": "cadet-section"
+        },
+        {
+          "number": "02",
+          "title": "Parent / Guardian Information",
+          "class": "cadet-section"
+        },
+        {
+          "number": "03",
+          "title": "Address & Citizenship",
+          "class": "cadet-section"
+        },
+        {
+          "number": "04",
+          "title": "Education & Training",
+          "class": "cadet-section"
+        },
+        {
+          "number": "05",
+          "title": "Photograph & Required Documents",
+          "class": "cadet-section"
+        },
+        {
+          "number": "06",
+          "title": "Declaration of Acceptance for Enrollment",
+          "class": "cadet-section"
+        },
+        {
+          "number": "07",
+          "title": "Declaration by Parent / Guardian",
+          "class": "cadet-section"
+        },
+        {
+          "number": "08",
+          "title": "Final Confirmation",
+          "class": "cadet-section"
+        }
+      ],
+      "fields": [
+        {
+          "name": "cadetName",
+          "label": "1. Full Name of Cadet *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetGender",
+          "label": "2. Gender *",
+          "type": "radio",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Male",
+          "helperText": null
+        },
+        {
+          "name": "cadetGender",
+          "label": "2. Gender *",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Female",
+          "helperText": null
+        },
+        {
+          "name": "email",
+          "label": "Email Address *",
+          "type": "email",
+          "placeholder": "name@example.com",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetDOB",
+          "label": "17. Date of Birth *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetAge",
+          "label": "Age",
+          "type": "number",
+          "placeholder": "Enter age",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetAadhaar",
+          "label": "10. Aadhaar Card Number",
+          "type": "text",
+          "placeholder": "12-digit Aadhaar number",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": "12",
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetPhone",
+          "label": "21. Cadet Contact Number *",
+          "type": "tel",
+          "placeholder": "Enter cadet contact number",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "fatherName",
+          "label": "3. Father's Name *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "fatherOccupation",
+          "label": "4. Father's Occupation",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "fatherIncome",
+          "label": "5. Father's Annual Income",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motherName",
+          "label": "6. Mother's Name",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motherOccupation",
+          "label": "7. Mother's Occupation",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motherIncome",
+          "label": "8. Mother's Annual Income",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "guardianName",
+          "label": "9. Parent / Guardian Name *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "guardianPhone",
+          "label": "21. Guardian Contact Number *",
+          "type": "tel",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetAddress",
+          "label": "11. Address *",
+          "type": "textarea",
+          "placeholder": "Enter complete address",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "citizenship",
+          "label": "12. Citizenship *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "Citizen of India",
+            "Subject of Nepal",
+            "Other"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "village",
+          "label": "13. Village",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "tehsil",
+          "label": "Tehsil / Taluka",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "district",
+          "label": "District *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "pinCode",
+          "label": "PIN Code *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": "6",
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "postOffice",
+          "label": "14. Post Office",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "railwayStation",
+          "label": "15. Nearest Railway Station",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "educationQualification",
+          "label": "16. Education Qualification *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "schoolCollege",
+          "label": "18. School / College Currently Studying *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "institution",
+          "label": "Institution *",
+          "type": "text",
+          "placeholder": "Enter institution name",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "trainingWilling",
+          "label": "19. Willing to undergo ARWS service training? *",
+          "type": "radio",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Yes",
+          "helperText": null
+        },
+        {
+          "name": "trainingWilling",
+          "label": "19. Willing to undergo ARWS service training? *",
+          "type": "radio",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "No",
+          "helperText": null
+        },
+        {
+          "name": "residentialAddress",
+          "label": "20. Residential Address (if different)",
+          "type": "textarea",
+          "placeholder": "Enter residential address if applicable",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetPhoto",
+          "label": "📷 Cadet Photograph",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Upload a recent stamp-size photograph."
+          ]
+        },
+        {
+          "name": "educationProof",
+          "label": "📄 Education Qualification Proof",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Upload a clear copy of the education proof."
+          ]
+        },
+        {
+          "name": "cadetAadhaarFile",
+          "label": "🪪 Cadet Aadhaar Card",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Upload Aadhaar card copy."
+          ]
+        },
+        {
+          "name": "guardianAadhaarFile",
+          "label": "🪪 Guardian Aadhaar Card",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Upload guardian Aadhaar card copy."
+          ]
+        },
+        {
+          "name": "guardianSignature",
+          "label": "",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetSignature",
+          "label": "",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "declarationPlace",
+          "label": "Place *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "declarationDate",
+          "label": "Date *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "parentDeclaration",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "cadetDeclaration",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        }
+      ],
+      "buttons": [
+        "← Back to Registration Types",
+        "SUBMIT CADET ENROLLMENT →"
+      ],
+      "notices": [
+        {
+          "class": "cadet-note",
+          "text": "Required documents from the source form: Education qualification proof, Aadhaar Card and 2 stamp-size photographs for the applicant; Aadhaar Card for the guardian."
+        },
+        {
+          "class": "cadet-success",
+          "text": "✓ Cadet enrollment form submitted successfully."
+        }
+      ]
+    },
+    "volunteerForm": {
+      "sections": [
+        {
+          "number": "01",
+          "title": "Personal & Contact Information",
+          "class": "program-section"
+        },
+        {
+          "number": "02",
+          "title": "Volunteer Interests & Skills",
+          "class": "program-section"
+        },
+        {
+          "number": "03",
+          "title": "Availability & Commitment",
+          "class": "program-section"
+        },
+        {
+          "number": "04",
+          "title": "Emergency Contact & Documents",
+          "class": "program-section"
+        },
+        {
+          "number": "05",
+          "title": "Declaration & Confirmation",
+          "class": "program-section"
+        }
+      ],
+      "fields": [
+        {
+          "name": "fullName",
+          "label": "Full Name *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "dob",
+          "label": "Date of Birth *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "email",
+          "label": "Email Address *",
+          "type": "email",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "phone",
+          "label": "Mobile Number *",
+          "type": "tel",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "address",
+          "label": "Current Address *",
+          "type": "textarea",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "occupation",
+          "label": "Occupation / Current Status *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "Student",
+            "Employed",
+            "Self-employed",
+            "Homemaker",
+            "Retired",
+            "Other"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "institution",
+          "label": "Institution *",
+          "type": "text",
+          "placeholder": "School / College / Organization",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "communication",
+          "label": "Preferred Communication",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "Email",
+            "Phone Call",
+            "WhatsApp / SMS"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "interest",
+          "label": "Preferred Volunteer Areas *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Education",
+          "helperText": null
+        },
+        {
+          "name": "interest",
+          "label": "Preferred Volunteer Areas *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Field",
+          "helperText": null
+        },
+        {
+          "name": "interest",
+          "label": "Preferred Volunteer Areas *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Events",
+          "helperText": null
+        },
+        {
+          "name": "interest",
+          "label": "Preferred Volunteer Areas *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Fundraising",
+          "helperText": null
+        },
+        {
+          "name": "interest",
+          "label": "Preferred Volunteer Areas *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Admin",
+          "helperText": null
+        },
+        {
+          "name": "skills",
+          "label": "Key Skills / Languages",
+          "type": "text",
+          "placeholder": "e.g. teaching, communication, design",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "experience",
+          "label": "Previous Volunteer Experience",
+          "type": "text",
+          "placeholder": "Organization or role, if any",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motivation",
+          "label": "Why would you like to volunteer with ARWS? *",
+          "type": "textarea",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "day",
+          "label": "Available Days *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Weekdays",
+          "helperText": null
+        },
+        {
+          "name": "day",
+          "label": "Available Days *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Weekends",
+          "helperText": null
+        },
+        {
+          "name": "day",
+          "label": "Available Days *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Events",
+          "helperText": null
+        },
+        {
+          "name": "day",
+          "label": "Available Days *",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": "Flexible",
+          "helperText": null
+        },
+        {
+          "name": "time",
+          "label": "Preferred Time *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "Morning",
+            "Afternoon",
+            "Evening",
+            "Flexible"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "hours",
+          "label": "Hours Available per Week *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "1–3 Hours",
+            "4–6 Hours",
+            "7–10 Hours",
+            "10+ Hours"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "startDate",
+          "label": "Preferred Start Date *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "commitment",
+          "label": "Commitment Preference",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "One-time / Event-based",
+            "Short-term",
+            "Long-term / Regular"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "emergencyName",
+          "label": "Emergency Contact Name *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "relationship",
+          "label": "Relationship *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "emergencyPhone",
+          "label": "Emergency Contact Number *",
+          "type": "tel",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "source",
+          "label": "How did you hear about us? (Optional)",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "Select",
+            "Website",
+            "Social Media",
+            "Friend / Family",
+            "College / Institution",
+            "Other"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(Optional)"
+          ]
+        },
+        {
+          "name": "photo",
+          "label": "📷 Photograph",
+          "type": "file",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": "image/*",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Optional recent profile photograph."
+          ]
+        },
+        {
+          "name": "document",
+          "label": "📄 Supporting Document",
+          "type": "file",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Optional résumé, certificate or relevant document."
+          ]
+        },
+        {
+          "name": "",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        }
+      ],
+      "buttons": [
+        "SUBMIT VOLUNTEER REGISTRATION →"
+      ],
+      "notices": [
+        {
+          "class": "program-agreement",
+          "text": "I confirm that the information provided is true and I agree to follow the safety, discipline and volunteer guidelines of Agni Rural Welfare Society."
+        },
+        {
+          "class": "program-note",
+          "text": "After submission, your volunteer application can be reviewed by the organization before a suitable role or activity is assigned."
+        },
+        {
+          "class": "program-success",
+          "text": "✓ Volunteer registration submitted successfully."
+        }
+      ]
+    },
+    "internForm": {
+      "sections": [
+        {
+          "number": "01",
+          "title": "Applicant Information",
+          "class": "program-section"
+        },
+        {
+          "number": "02",
+          "title": "Academic Background",
+          "class": "program-section"
+        },
+        {
+          "number": "03",
+          "title": "Internship Preference & Availability",
+          "class": "program-section"
+        },
+        {
+          "number": "04",
+          "title": "Skills, Projects & Supporting Documents",
+          "class": "program-section"
+        },
+        {
+          "number": "05",
+          "title": "Reference & Final Declaration",
+          "class": "program-section"
+        }
+      ],
+      "fields": [
+        {
+          "name": "fullName",
+          "label": "Full Name *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "dob",
+          "label": "Date of Birth *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "email",
+          "label": "Email Address *",
+          "type": "email",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "phone",
+          "label": "Mobile Number *",
+          "type": "tel",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "address",
+          "label": "Current Address *",
+          "type": "textarea",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "college",
+          "label": "College / University *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "institution",
+          "label": "Institution *",
+          "type": "text",
+          "placeholder": "College / University / Institution",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "degree",
+          "label": "Degree / Program *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "major",
+          "label": "Branch / Major *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "yearSemester",
+          "label": "Current Year / Semester *",
+          "type": "text",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "graduation",
+          "label": "Expected Graduation *",
+          "type": "month",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "advisor",
+          "label": "Academic Advisor / Faculty (Optional)",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(Optional)"
+          ]
+        },
+        {
+          "name": "area",
+          "label": "Preferred Internship Area *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "Web Development / IT",
+            "Education & Training",
+            "Research & Documentation",
+            "Social Media & Content",
+            "Fundraising & Outreach",
+            "Field Coordination",
+            "Administration"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "mode",
+          "label": "Mode Preference *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "Virtual / Remote",
+            "On-site",
+            "Hybrid"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "startDate",
+          "label": "Preferred Start Date *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "endDate",
+          "label": "Preferred End Date *",
+          "type": "date",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "hours",
+          "label": "Hours Available per Week *",
+          "type": "select",
+          "placeholder": null,
+          "required": true,
+          "options": [
+            "Select",
+            "5–10 Hours",
+            "10–20 Hours",
+            "20–30 Hours",
+            "30+ Hours"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "credit",
+          "label": "Academic Credit Required?",
+          "type": "select",
+          "placeholder": null,
+          "required": false,
+          "options": [
+            "No",
+            "Yes",
+            "Not Sure"
+          ],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "skills",
+          "label": "Technical / Professional Skills *",
+          "type": "text",
+          "placeholder": "e.g. HTML, CSS, communication, research",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "portfolio",
+          "label": "Portfolio / LinkedIn / GitHub Link (Optional)",
+          "type": "url",
+          "placeholder": "https://",
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(Optional)"
+          ]
+        },
+        {
+          "name": "project",
+          "label": "Relevant Coursework, Project or Experience *",
+          "type": "textarea",
+          "placeholder": "Describe a project, coursework, volunteer work or experience relevant to this internship",
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "motivation",
+          "label": "Why are you interested in this internship? *",
+          "type": "textarea",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        },
+        {
+          "name": "resume",
+          "label": "📄 Résumé / CV *",
+          "type": "file",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": ".pdf,.doc,.docx",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Upload your current résumé or CV."
+          ]
+        },
+        {
+          "name": "workSample",
+          "label": "🗂 Work Sample / Certificate",
+          "type": "file",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": ".pdf,.jpg,.jpeg,.png,.doc,.docx",
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "Optional portfolio sample, certificate or supporting document."
+          ]
+        },
+        {
+          "name": "referenceName",
+          "label": "Reference Name (Optional)",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(Optional)"
+          ]
+        },
+        {
+          "name": "referenceContact",
+          "label": "Reference Email / Phone (Optional)",
+          "type": "text",
+          "placeholder": null,
+          "required": false,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": [
+            "(Optional)"
+          ]
+        },
+        {
+          "name": "",
+          "label": "",
+          "type": "checkbox",
+          "placeholder": null,
+          "required": true,
+          "options": [],
+          "accept": null,
+          "maxlength": null,
+          "readonly": false,
+          "defaultValue": null,
+          "helperText": null
+        }
+      ],
+      "buttons": [
+        "SUBMIT INTERNSHIP APPLICATION →"
+      ],
+      "notices": [
+        {
+          "class": "program-agreement",
+          "text": "I confirm that the information and documents provided are accurate and I agree that Agni Rural Welfare Society may review my application for internship selection and communication."
+        },
+        {
+          "class": "program-note",
+          "text": "Internship applications focus on education, skills, project experience, availability and learning goals. Selection and assignment may depend on program requirements and available opportunities."
+        },
+        {
+          "class": "program-success",
+          "text": "✓ Internship application submitted successfully."
+        }
+      ]
+    },
+    "memberPayment": {
+      "headings": [
+        "Pay Your Member Registration Fee"
+      ],
+      "buttons": [
+        "← Back to Registration Form",
+        "Pay ₹650 Securely with Razorpay →"
+      ],
+      "text": "₹\n          Pay Your Member Registration Fee\n          Your registration details are ready. Complete the required payment securely through Razorpay to submit your application for administrator verification.\n          Member Registration Fee ₹650\n          🔒 Razorpay Secure Checkout✓ Amount: ₹650💳 UPI / Card / Net Banking / Wallet\n          Important: Your application is sent to the Administrator Portal only after Razorpay payment is successfully verified. A cancelled or failed payment does not submit the application.\n          \n            ← Back to Registration Form\n            Pay ₹650 Securely with Razorpay →\n          \n          ✓ Payment verified successfully. Your Member registration has been submitted to the Administrator Portal for verification and approval."
+    }
+  },
+  "dynamicBehavior": {
+    "registrationTypeOptions": [
+      "Member",
+      "Cadet",
+      "Volunteer",
+      "Intern & Alumni Member"
+    ],
+    "injectedFields": [
+      {
+        "forms": [
+          "memberForm",
+          "cadetEnrollmentForm",
+          "volunteerForm",
+          "internForm"
+        ],
+        "name": "bloodGroup",
+        "label": "Blood Group",
+        "type": "select",
+        "options": [
+          "A+",
+          "A-",
+          "B+",
+          "B-",
+          "AB+",
+          "AB-",
+          "O+",
+          "O-"
+        ],
+        "required": [
+          "cadetEnrollmentForm"
+        ]
+      },
+      {
+        "forms": [
+          "volunteerForm",
+          "internForm"
+        ],
+        "name": "profilePhoto",
+        "label": "Recent Applicant Photograph *",
+        "type": "file",
+        "required": true,
+        "accept": "image/*"
+      }
+    ],
+    "behavior": [
+      "State selection populates District options from state-districts.js.",
+      "Enrollment dates are autofilled with the current Asia/Kolkata date when empty.",
+      "Member child count/details are shown or hidden by the child toggle.",
+      "Account, cadet, member and program photo/signature previews use object URLs.",
+      "Password visibility is toggled by adjacent password buttons.",
+      "Registration type selection hides the other forms and displays the selected form.",
+      "Each detailed form has a Back control that returns to the type selector.",
+      "Member submission validates, then shows the simulated payment screen; Back returns to the member form; proceeding records the demo registration without a real charge.",
+      "Cadet, volunteer and intern submissions show success banners after API confirmation.",
+      "Account creation submits to /api/auth/register and navigates into the authenticated member/cadet flow."
+    ]
+  },
+  "disclaimers": [
+    "Aadhaar/PAN/income inputs are not collected; corresponding fields/files are filtered or omitted by the running app.",
+    "Bank account and IFSC fields exist in Member markup but are excluded from safeEntries payload filtering.",
+    "Section titles/numbers and visible source text are captured verbatim, including existing oddities."
+  ]
+}
