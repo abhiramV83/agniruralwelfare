@@ -17,8 +17,25 @@ startupLog("Configuration loaded. Connecting to MongoDB Atlas...");
 try {
   await mongoose.connect(cfg.mongo, { dbName: cfg.dbName, serverSelectionTimeoutMS: 15000, appName: "agni-rural-welfare-society" });
 } catch (error) {
-  const diagnostic = `${error?.name || ""} ${error?.message || ""}`;
-  const category = error?.code === 18 || /auth|credential/i.test(diagnostic) ? "authentication failed: check the Atlas database username and password in MONGODB_URI; URL-encode special password characters" : /ENOTFOUND|ECONN|server selection|timeout/i.test(diagnostic) ? "network or host unreachable: check the cluster hostname, cluster state, and Atlas Network Access for this server's outbound IP addresses" : "connection failed: check MONGODB_URI and Atlas cluster settings";
+  // Server selection errors wrap the useful authentication/DNS/socket error
+  // inside topology descriptions. Inspect those causes without printing values.
+  const pending = [error];
+  const seen = new Set();
+  const diagnostics = [];
+  while (pending.length && seen.size < 30) {
+    const current = pending.shift();
+    if (!current || typeof current !== "object" || seen.has(current)) continue;
+    seen.add(current);
+    diagnostics.push(`${current.name || ""} ${current.code || ""} ${current.codeName || ""} ${current.message || ""}`);
+    if (current.cause) pending.push(current.cause);
+    if (current.reason?.servers instanceof Map) {
+      for (const server of current.reason.servers.values()) {
+        if (server.error) pending.push(server.error);
+      }
+    }
+  }
+  const diagnostic = diagnostics.join(" ");
+  const category = /18|8000|AuthenticationFailed|auth|credential/i.test(diagnostic) ? "authentication failed: check the Atlas database username and password in MONGODB_URI; URL-encode special password characters" : /ENOTFOUND|ECONN|server selection|timeout|ETIMEDOUT|ETIMEOUT/i.test(diagnostic) ? "network or host unreachable: check the cluster hostname, cluster state, and Atlas Network Access for this server's outbound IP addresses" : "connection failed: check MONGODB_URI and Atlas cluster settings";
   startupLog(`MongoDB Atlas ${category}. Update the hosting environment variables or server/.env. No credentials logged.`);
   process.exit(1);
 }
