@@ -21,10 +21,10 @@ export function config() {
     .map((value) => value.trim().replace(/\/$/, ""))
     .filter(Boolean);
   const origin = clientOrigins[0];
-  const mongo = process.env.MONGODB_URI;
+  const mongo = (process.env.MONGODB_URI || "").trim().replace(/^["']|["']$/g, "");
   if (!mongo || !/^mongodb(?:\+srv)?:\/\//i.test(mongo))
     throw new Error("MONGODB_URI is missing or invalid. Set the Atlas connection string in server/.env.");
-  const encryptionKey = process.env.FIELD_ENCRYPTION_KEY;
+  const encryptionKey = (process.env.FIELD_ENCRYPTION_KEY || "").trim().replace(/^["']|["']$/g, "");
   if (!encryptionKey || !/^(?:[a-f0-9]{64}|[A-Za-z0-9_-]{43}=?)$/i.test(encryptionKey))
     throw new Error("FIELD_ENCRYPTION_KEY must be a 32-byte hex or base64url key. Generate with: node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"");
   return {
@@ -34,7 +34,7 @@ export function config() {
     production: process.env.NODE_ENV === "production",
     port: Number(process.env.PORT || 5001),
     mongo,
-    dbName: process.env.MONGODB_DATABASE || "agni_rural_welfare",
+    dbName: (process.env.MONGODB_DATABASE || "agni_rural_welfare").trim(),
     encryptionKey,
   };
 }

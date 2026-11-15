@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 try {
   await mongoose.connect(cfg.mongo, {
     dbName: cfg.dbName,
-    serverSelectionTimeoutMS: 5000,
+    serverSelectionTimeoutMS: 15000,
     appName: "agni-rural-welfare-society",
     autoIndex: process.env.NODE_ENV !== "production",
   });
