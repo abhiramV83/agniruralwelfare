@@ -38,22 +38,500 @@ export function createRegistrationDocument() {
       const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>Array.from(root.querySelectorAll(s));
       let pendingMember=null;
       function send(type,form){ const fd=new FormData(form); const entries=Array.from(fd.entries()).filter(([,v])=>typeof v==='string'); const files=Array.from(fd.entries()).filter(([,v])=>v instanceof File && v.size).map(([name,file])=>({name,file})); parent.postMessage({type,formId:form?.id,entries,files},'*'); }
-      function validateForm(form){const invalid=Array.from(form.elements).filter(el=>el.willValidate&&!el.checkValidity());if(!invalid.length)return true;invalid.forEach(el=>el.setAttribute('aria-invalid','true'));const labels=[...new Set(invalid.map(el=>{const group=el.closest('.member-field,.cadet-field,.program-field,.auth-group,.cadet-upload-card,.program-upload-card,fieldset');const label=el.labels?.[0]?.textContent||group?.querySelector('label,h4,legend')?.textContent||el.getAttribute('aria-label')||el.name||'Required field';return label.replace(/\\s+/g,' ').replace(/^(?:[0-9]+[.)]\\s*)+/,'').replace(/\\s*\\*\\s*$/,'').trim();}))];invalid[0].focus({preventScroll:true});invalid[0].scrollIntoView({behavior:'smooth',block:'center'});parent.postMessage({type:'registration-validation',fields:labels},'*');return false;}
+      function validateForm(form){
+        if(form && form.id === 'standardRegisterForm'){
+          const passInput = $('#regPassword');
+          const confirmInput = $('#regConfirmPassword');
+          const pass = passInput ? passInput.value || '' : '';
+          const confirm = confirmInput ? confirmInput.value || '' : '';
+          if(!pass){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password is required.']},'*');
+            return false;
+          }
+          if(pass.length < 8){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password must contain at least 8 characters.']},'*');
+            return false;
+          }
+          if(pass.length > 64){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password cannot exceed 64 characters.']},'*');
+            return false;
+          }
+          if(!/[A-Z]/.test(pass)){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password must contain at least one uppercase letter (A–Z).']},'*');
+            return false;
+          }
+          if(!/[a-z]/.test(pass)){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password must contain at least one lowercase letter (a–z).']},'*');
+            return false;
+          }
+          if(!/[0-9]/.test(pass)){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password must contain at least one number (0–9).']},'*');
+            return false;
+          }
+          if(!/[^A-Za-z0-9]/.test(pass)){
+            passInput.setAttribute('aria-invalid','true');
+            passInput.focus({preventScroll:true});
+            passInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Password must contain at least one special character (!@#$%^&* etc.).']},'*');
+            return false;
+          }
+          if(!confirm){
+            confirmInput.setAttribute('aria-invalid','true');
+            confirmInput.focus({preventScroll:true});
+            confirmInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Please confirm your password.']},'*');
+            return false;
+          }
+          if(pass !== confirm){
+            confirmInput.setAttribute('aria-invalid','true');
+            confirmInput.focus({preventScroll:true});
+            confirmInput.scrollIntoView({behavior:'smooth',block:'center'});
+            parent.postMessage({type:'registration-validation',fields:['Passwords do not match. Please enter the same password twice.']},'*');
+            return false;
+          }
+        }
+        const invalid=Array.from(form.elements).filter(el=>el.willValidate&&!el.checkValidity());
+        if(!invalid.length)return true;
+        invalid.forEach(el=>el.setAttribute('aria-invalid','true'));
+        const labels=[...new Set(invalid.map(el=>{const group=el.closest('.member-field,.cadet-field,.program-field,.auth-group,.cadet-upload-card,.program-upload-card,fieldset');const label=el.labels?.[0]?.textContent||group?.querySelector('label,h4,legend')?.textContent||el.getAttribute('aria-label')||el.name||'Required field';return label.replace(/\\s+/g,' ').replace(/^(?:[0-9]+[.)]\\s*)+/,'').replace(/\\s*\\*\\s*$/,'').trim();}))];
+        invalid[0].focus({preventScroll:true});
+        invalid[0].scrollIntoView({behavior:'smooth',block:'center'});
+        parent.postMessage({type:'registration-validation',fields:labels},'*');
+        return false;
+      }
       function toggleRegisterTypeDropdown(){const box=$('#registerTypeDropdown');const t=$('.role-dropdown-toggle');const open=box.classList.toggle('open');t.setAttribute('aria-expanded',String(open));}
-      function selectRegisterRole(button,role){$$('.role-register-btn').forEach(x=>x.classList.remove('active'));button.classList.add('active');$('#selectedRegisterRole').textContent=role;$('#regAccountType').value=role;const ids=['standardRegisterForm','memberRegistrationForm','cadetRegistrationForm','volunteerRegistrationForm','internRegistrationForm'];ids.forEach(id=>{const el=$('#'+id);if(el)el.style.display='none'});const target=role==='Member'?'memberRegistrationForm':role==='Cadet'?'cadetRegistrationForm':role==='Volunteer'?'volunteerRegistrationForm':'internRegistrationForm';$('#'+target).style.display='block';$('#registerTypeDropdown').classList.remove('open');$('.role-dropdown-toggle').setAttribute('aria-expanded','false');setTimeout(()=>$('#'+target).scrollIntoView({block:'start',behavior:'smooth'}),0);}
-      function backToRegistrationTypes(){['memberRegistrationForm','cadetRegistrationForm','volunteerRegistrationForm','internRegistrationForm'].forEach(id=>$('#'+id).style.display='none');$('#standardRegisterForm').style.display='block';$('#registerTypeDropdown').classList.add('open');$('.role-dropdown-toggle').setAttribute('aria-expanded','true');$$('.role-register-btn').forEach(x=>x.classList.remove('active'));$('#selectedRegisterRole').textContent='Choose Registration Type';$('#regAccountType').value='';$('.role-dropdown-toggle .dropdown-label-text').textContent='Choose Your Registration Type';window.scrollTo({top:0,behavior:'smooth'});}
-      function togglePass(id){const i=$('#'+id);if(!i)return;i.type=i.type==='password'?'text':'password';const b=i.parentElement?.querySelector('.password-toggle');if(b)b.setAttribute('aria-label',i.type==='password'?'Show password':'Hide password');}
+      function sendHeight(){
+        const panel=$('#registerPanel');
+        if(!panel)return;
+        const rect=panel.getBoundingClientRect();
+        const h=Math.ceil(rect.height || panel.offsetHeight || 900);
+        parent.postMessage({type:'registration-height',height:Math.max(350,h+24)},'*');
+      }
+      function normalizeRole(role){
+        if(!role) return 'Member';
+        const r = String(role).replace(/^Register\s+/i,'').trim();
+        if(/cadet/i.test(r)) return 'Cadet';
+        if(/volunteer/i.test(r)) return 'Volunteer';
+        if(/intern/i.test(r)) return 'Intern & Alumni Member';
+        return 'Member';
+      }
+      function syncFromStandardToRole(role){
+        role = normalizeRole(role);
+        const name = $('#regFullName')?.value || '';
+        const username = $('#regUsername')?.value || '';
+        const email = $('#regEmail')?.value || '';
+        const guardian = $('#regGuardian')?.value || '';
+        const dob = $('#regDOB')?.value || '';
+        const blood = $('#regBloodGroup')?.value || '';
+        const state = $('#regState')?.value || '';
+        const district = $('#regDistrict')?.value || '';
+        const fullAddress = [district, state].filter(Boolean).join(', ');
+
+        if(role === 'Member'){
+          const f = $('#memberForm');
+          if(f){
+            if(name) { const el = f.querySelector('[name="memberName"]'); if(el) el.value = name; }
+            if(email) { const el = f.querySelector('[name="memberEmail"]'); if(el) el.value = email; }
+            if(guardian) {
+              const g = f.querySelector('[name="guardianName"]'); if(g) g.value = guardian;
+              const fn = f.querySelector('[name="fatherName"]'); if(fn && !fn.value) fn.value = guardian;
+            }
+            if(dob) { const el = f.querySelector('[name="memberDOB"]'); if(el) el.value = dob; }
+            if(blood) { const el = f.querySelector('[name="bloodGroup"]'); if(el) el.value = blood; }
+            if(fullAddress) { const el = f.querySelector('[name="address"]'); if(el && !el.value) el.value = fullAddress; }
+            if(district) { const el = f.querySelector('[name="district"]'); if(el && !el.value) el.value = district; }
+          }
+        } else if(role === 'Cadet'){
+          const f = $('#cadetEnrollmentForm');
+          if(f){
+            if(name) { const el = f.querySelector('[name="cadetName"]'); if(el) el.value = name; }
+            if(email) { const el = f.querySelector('[name="email"]'); if(el) el.value = email; }
+            if(guardian) {
+              const fn = f.querySelector('[name="fatherName"]'); if(fn) fn.value = guardian;
+              const gn = f.querySelector('[name="guardianName"]'); if(gn) gn.value = guardian;
+            }
+            if(dob) { const el = f.querySelector('[name="cadetDOB"]'); if(el) el.value = dob; }
+            if(blood) { const el = f.querySelector('[name="bloodGroup"]'); if(el) el.value = blood; }
+            if(fullAddress) { const el = f.querySelector('[name="cadetAddress"]'); if(el && !el.value) el.value = fullAddress; }
+            if(district) { const el = f.querySelector('[name="district"]'); if(el && !el.value) el.value = district; }
+          }
+        } else if(role === 'Volunteer'){
+          const f = $('#volunteerForm');
+          if(f){
+            if(name) { const el = f.querySelector('[name="fullName"]'); if(el) el.value = name; }
+            if(email) { const el = f.querySelector('[name="email"]'); if(el) el.value = email; }
+            if(dob) { const el = f.querySelector('[name="dob"]'); if(el) el.value = dob; }
+            if(blood) { const el = f.querySelector('[name="bloodGroup"]'); if(el) el.value = blood; }
+            if(fullAddress) { const el = f.querySelector('[name="address"]'); if(el && !el.value) el.value = fullAddress; }
+          }
+        } else if(role === 'Intern & Alumni Member'){
+          const f = $('#internForm');
+          if(f){
+            if(name) { const el = f.querySelector('[name="fullName"]'); if(el) el.value = name; }
+            if(email) { const el = f.querySelector('[name="email"]'); if(el) el.value = email; }
+            if(dob) { const el = f.querySelector('[name="dob"]'); if(el) el.value = dob; }
+            if(blood) { const el = f.querySelector('[name="bloodGroup"]'); if(el) el.value = blood; }
+            if(fullAddress) { const el = f.querySelector('[name="address"]'); if(el && !el.value) el.value = fullAddress; }
+          }
+        }
+      }
+      function syncFromCategoryToStandard(){
+        const active = [$('#memberForm'), $('#cadetEnrollmentForm'), $('#volunteerForm'), $('#internForm')].find(f => f && f.offsetParent !== null);
+        if(!active) return;
+        const name = active.querySelector('[name="memberName"]')?.value || active.querySelector('[name="cadetName"]')?.value || active.querySelector('[name="fullName"]')?.value;
+        if(name && $('#regFullName')) $('#regFullName').value = name;
+        const email = active.querySelector('[name="memberEmail"]')?.value || active.querySelector('[name="email"]')?.value;
+        if(email && $('#regEmail')) $('#regEmail').value = email;
+        const guardian = active.querySelector('[name="guardianName"]')?.value || active.querySelector('[name="fatherName"]')?.value;
+        if(guardian && $('#regGuardian')) $('#regGuardian').value = guardian;
+        const dob = active.querySelector('[name="memberDOB"]')?.value || active.querySelector('[name="cadetDOB"]')?.value || active.querySelector('[name="dob"]')?.value;
+        if(dob && $('#regDOB')) $('#regDOB').value = dob;
+        const blood = active.querySelector('[name="bloodGroup"]')?.value;
+        if(blood && $('#regBloodGroup')) $('#regBloodGroup').value = blood;
+      }
+      function selectRegisterRole(button,role){
+        role = normalizeRole(role);
+        $$('.role-register-btn').forEach(x=>x.classList.toggle('active', !!(x.getAttribute('onclick')&&x.getAttribute('onclick').includes(role))));
+        $$('.reg-type-card').forEach(x => {
+          const match = x.getAttribute('data-role') === role || (x.getAttribute('onclick') && x.getAttribute('onclick').includes(role));
+          x.classList.toggle('active', !!match);
+          x.setAttribute('aria-checked', match ? 'true' : 'false');
+        });
+        if(button) {
+          button.classList.add('active');
+          button.setAttribute('aria-checked', 'true');
+        }
+        const roleLabels = {
+          'Member': 'Members',
+          'Cadet': 'Cadets',
+          'Volunteer': 'Volunteers',
+          'Intern & Alumni Member': 'Intern & Alumni'
+        };
+        if($('#selectedRegisterRole')) $('#selectedRegisterRole').textContent = roleLabels[role] || role;
+        if($('#regAccountType')) $('#regAccountType').value=role;
+        if($('#regAccountTypeSelect')) $('#regAccountTypeSelect').value=role;
+
+        // Sync entered details from standard form into chosen role form
+        syncFromStandardToRole(role);
+
+        // Hide main registration form (which completely hides the 4 category cards & icons)
+        const std = $('#standardRegisterForm');
+        if(std) std.style.display = 'none';
+
+        // Hide all individual category forms first
+        const ids = ['memberRegistrationForm','cadetRegistrationForm','volunteerRegistrationForm','internRegistrationForm'];
+        ids.forEach(id => { const el = $('#'+id); if(el) el.style.display = 'none'; });
+
+        // Open ONLY the corresponding selected individual registration form
+        const target = role === 'Member' ? 'memberRegistrationForm' : role === 'Cadet' ? 'cadetRegistrationForm' : role === 'Volunteer' ? 'volunteerRegistrationForm' : 'internRegistrationForm';
+        const targetEl = $('#'+target);
+        if(targetEl) targetEl.style.display = 'block';
+
+        if(role === 'Member' && $('#memberForm')) $('#memberForm').style.display = 'block';
+        if(role === 'Cadet' && $('#cadetEnrollmentForm')) $('#cadetEnrollmentForm').style.display = 'block';
+        if(role === 'Volunteer' && $('#volunteerForm')) $('#volunteerForm').style.display = 'block';
+        if(role === 'Intern & Alumni Member' && $('#internForm')) $('#internForm').style.display = 'block';
+
+        // Reset any sub-screens
+        if($('#memberPaymentScreen')) $('#memberPaymentScreen').style.display = 'none';
+        if($('#cadetConfirmScreen')) $('#cadetConfirmScreen').style.display = 'none';
+        if($('#volunteerConfirmScreen')) $('#volunteerConfirmScreen').style.display = 'none';
+        if($('#internConfirmScreen')) $('#internConfirmScreen').style.display = 'none';
+
+        sendHeight();
+        setTimeout(() => targetEl?.scrollIntoView({ block: 'start', behavior: 'smooth' }), 50);
+      }
+      function backToRegistrationTypes(){
+        // Sync any entered details from the category form back into standard form
+        syncFromCategoryToStandard();
+
+        // Hide all individual category forms
+        const ids = ['memberRegistrationForm','cadetRegistrationForm','volunteerRegistrationForm','internRegistrationForm'];
+        ids.forEach(id => { const el = $('#'+id); if(el) el.style.display = 'none'; });
+
+        // Return to main registration page and show the 4 category cards and icons again!
+        const std = $('#standardRegisterForm');
+        if(std){
+          std.style.display = 'block';
+          std.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        const currentRole = $('#regAccountType')?.value || 'Member';
+        $$('.reg-type-card').forEach(x => {
+          const match = x.getAttribute('data-role') === currentRole;
+          x.classList.toggle('active', !!match);
+          x.setAttribute('aria-checked', match ? 'true' : 'false');
+        });
+        if($('#selectedRegisterRole')) $('#selectedRegisterRole').textContent = {
+          'Member': 'Members',
+          'Cadet': 'Cadets',
+          'Volunteer': 'Volunteers',
+          'Intern & Alumni Member': 'Intern & Alumni'
+        }[currentRole] || currentRole;
+
+        sendHeight();
+      }
+      function togglePass(id, btn){
+        const i=$('#'+id);
+        if(!i)return;
+        const isPass = i.type==='password';
+        i.type = isPass ? 'text' : 'password';
+        const b = btn || i.parentElement?.querySelector('.password-toggle');
+        if(b){
+          b.setAttribute('aria-label', isPass ? 'Hide password' : 'Show password');
+          const eyeShow = b.querySelector('.eye-show');
+          const eyeHide = b.querySelector('.eye-hide');
+          if(eyeShow && eyeHide){
+            eyeShow.style.display = isPass ? 'none' : 'block';
+            eyeHide.style.display = isPass ? 'block' : 'none';
+          }
+        }
+      }
+
+      function evaluatePasswordStrength(val){
+        const hasLen = val.length >= 8 && val.length <= 64;
+        const hasUpper = /[A-Z]/.test(val);
+        const hasLower = /[a-z]/.test(val);
+        const hasNum = /[0-9]/.test(val);
+        const hasSpec = /[^A-Za-z0-9]/.test(val);
+        const criteria = [hasLen, hasUpper, hasLower, hasNum, hasSpec];
+        const passedCount = criteria.filter(Boolean).length;
+        
+        let strength = 'weak';
+        let label = 'Weak';
+        let color = '#ef4444';
+        let width = '25%';
+        
+        if (passedCount < 3) {
+          strength = 'weak';
+          label = 'Weak';
+          color = '#ef4444';
+          width = '25%';
+        } else if (passedCount === 3) {
+          strength = 'medium';
+          label = 'Medium';
+          color = '#f59e0b';
+          width = '50%';
+        } else if (passedCount === 4) {
+          strength = 'strong';
+          label = 'Strong';
+          color = '#10b981';
+          width = '75%';
+        } else if (passedCount === 5) {
+          if (val.length >= 10) {
+            strength = 'very-strong';
+            label = 'Very Strong';
+            color = '#059669';
+            width = '100%';
+          } else {
+            strength = 'strong';
+            label = 'Strong';
+            color = '#10b981';
+            width = '85%';
+          }
+        }
+        return {
+          hasLen,
+          hasUpper,
+          hasLower,
+          hasNum,
+          hasSpec,
+          allPassed: passedCount === 5,
+          passedCount,
+          strength,
+          label,
+          color,
+          width
+        };
+      }
+
+      function updatePasswordUI(){
+        const passInput = $('#regPassword');
+        if(!passInput) return;
+        const val = passInput.value || '';
+        
+        const pill = $('#passwordStrengthPill');
+        const label = $('#passwordStrengthLabel');
+        const fill = $('#passwordMeterFill');
+        const hint = $('#passwordMeterHint');
+        const reqLen = $('#req-length');
+        const reqUpper = $('#req-upper');
+        const reqLower = $('#req-lower');
+        const reqNum = $('#req-number');
+        const reqSpec = $('#req-special');
+
+        if(val.length === 0){
+          if(pill) pill.style.display = 'none';
+          if(fill){
+            fill.style.width = '0%';
+            fill.style.backgroundColor = 'transparent';
+          }
+          if(hint) hint.textContent = 'Must be 8–64 characters with uppercase, lowercase, number, and special character';
+          [reqLen, reqUpper, reqLower, reqNum, reqSpec].forEach(el => {
+            if(el) el.className = 'req-item neutral';
+          });
+        } else {
+          const res = evaluatePasswordStrength(val);
+          if(pill){
+            pill.style.display = 'inline-flex';
+            pill.className = 'password-strength-pill ' + res.strength;
+          }
+          if(label) label.textContent = res.label;
+          if(fill){
+            fill.style.width = res.width;
+            fill.style.backgroundColor = res.color;
+          }
+          if(hint){
+            if(res.allPassed){
+              hint.textContent = res.strength === 'very-strong' ? 'Excellent! Password meets all security standards.' : 'Great password! Satisfies all requirements.';
+            } else {
+              hint.textContent = (5 - res.passedCount) + ' requirement(s) remaining for a strong password';
+            }
+          }
+
+          const setReq = (el, passed) => {
+            if(!el) return;
+            el.className = passed ? 'req-item satisfied' : 'req-item unsatisfied';
+          };
+          setReq(reqLen, res.hasLen);
+          setReq(reqUpper, res.hasUpper);
+          setReq(reqLower, res.hasLower);
+          setReq(reqNum, res.hasNum);
+          setReq(reqSpec, res.hasSpec);
+        }
+
+        updateConfirmPasswordUI();
+        sendHeight();
+      }
+
+      function updateConfirmPasswordUI(){
+        const passInput = $('#regPassword');
+        const confirmInput = $('#regConfirmPassword');
+        if(!confirmInput) return;
+        const passVal = passInput ? passInput.value || '' : '';
+        const confirmVal = confirmInput.value || '';
+        const matchPill = $('#confirmMatchPill');
+        const matchMsg = $('#confirmMatchMessage');
+
+        if(confirmVal.length === 0){
+          if(matchPill) matchPill.style.display = 'none';
+          if(matchMsg) matchMsg.style.display = 'none';
+          confirmInput.removeAttribute('aria-invalid');
+        } else if(passVal.length > 0 && confirmVal === passVal){
+          if(matchPill){
+            matchPill.style.display = 'inline-flex';
+            matchPill.className = 'confirm-match-pill match-success';
+            matchPill.innerHTML = '<span class="match-dot"></span><span>Passwords match</span>';
+          }
+          if(matchMsg){
+            matchMsg.style.display = 'flex';
+            matchMsg.className = 'confirm-match-message match-success';
+            matchMsg.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg><span>Passwords match successfully.</span>';
+          }
+          confirmInput.removeAttribute('aria-invalid');
+        } else {
+          if(matchPill){
+            matchPill.style.display = 'inline-flex';
+            matchPill.className = 'confirm-match-pill match-error';
+            matchPill.innerHTML = '<span class="match-dot"></span><span>Mismatch</span>';
+          }
+          if(matchMsg){
+            matchMsg.style.display = 'flex';
+            matchMsg.className = 'confirm-match-message match-error';
+            matchMsg.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>Passwords do not match. Please ensure both passwords are identical.</span>';
+          }
+          confirmInput.setAttribute('aria-invalid', 'true');
+        }
+      }
       function previewPhoto(e){const f=e.target.files?.[0],img=$('#photoPreview');if(f&&img){img.src=URL.createObjectURL(f);img.style.display='block';}}
       function previewMemberPhoto(e){const f=e.target.files?.[0],img=$('#memberPhotoPreview');if(f&&img){img.src=URL.createObjectURL(f);img.style.display='block';}}
       function previewSignature(e,previewId,placeholderId){const f=e.target.files?.[0],img=$('#'+previewId),placeholder=$('#'+placeholderId);if(!f)return;if(f.type.startsWith('image/')){img.src=URL.createObjectURL(f);img.style.display='block';if(placeholder)placeholder.style.display='none';}else{img.style.display='none';if(placeholder){placeholder.textContent='📄 PDF Selected';placeholder.style.display='inline';}}}
       function previewCadetSignature(e,previewId,textId){const f=e.target.files?.[0],img=$('#'+previewId),label=$('#'+textId);if(f&&img){img.src=URL.createObjectURL(f);img.style.display='block';if(label)label.style.display='none';}}
       function toggleMemberChildren(show){const box=$('#memberChildren');if(box)box.style.display=show?'grid':'none';}
       function populateDistricts(){const state=$('#regState').value, select=$('#regDistrict');select.innerHTML='<option value="">Select District</option>';(${JSON.stringify(statesAndDistricts)}[state]||[]).forEach(x=>{const o=document.createElement('option');o.textContent=x;o.value=x;select.append(o)});}
-      function submitMemberRegistration(e){e.preventDefault();if(!validateForm(e.currentTarget))return;pendingMember=e.currentTarget;$('#memberForm').style.display='none';$('#memberPaymentScreen').style.display='block';$('#memberPaymentScreen').scrollIntoView({behavior:'smooth',block:'start'});}
-      function returnToMemberForm(){$('#memberPaymentScreen').style.display='none';$('#memberForm').style.display='block';$('#memberForm').scrollIntoView({behavior:'smooth',block:'start'});}
+      function submitMemberRegistration(e){
+        e.preventDefault();
+        if(!validateForm(e.currentTarget))return;
+        pendingMember=e.currentTarget;
+        const name=e.currentTarget.querySelector('[name="memberName"]')?.value || e.currentTarget.querySelector('[name="fullName"]')?.value || e.currentTarget.querySelector('[name="name"]')?.value || 'Applicant';
+        const phone=e.currentTarget.querySelector('[name="mobile"]')?.value || e.currentTarget.querySelector('[name="phone"]')?.value || '';
+        const refNo='ARWS-MEM-'+Math.floor(100000+Math.random()*900000);
+        if($('#memberSummaryName'))$('#memberSummaryName').textContent=name;
+        if($('#memberSummaryPhone'))$('#memberSummaryPhone').textContent=phone;
+        if($('#memberSummaryRef'))$('#memberSummaryRef').textContent=refNo;
+        $('#memberForm').style.display='none';
+        $('#memberPaymentScreen').style.display='block';
+        $('#memberPaymentScreen').scrollIntoView({behavior:'smooth',block:'start'});
+        sendHeight();
+      }
+      function returnToMemberForm(){
+        if($('#memberPaymentScreen'))$('#memberPaymentScreen').style.display='none';
+        if($('#memberRegistrationForm'))$('#memberRegistrationForm').style.display='block';
+        if($('#memberForm'))$('#memberForm').style.display='block';
+        $('#memberRegistrationForm').scrollIntoView({behavior:'smooth',block:'start'});
+        sendHeight();
+      }
       function startRazorpayMemberPayment(){if(pendingMember)send('member-payment',pendingMember);}
-      function submitCadetForm(e){e.preventDefault();if(!validateForm(e.currentTarget))return;send('application',e.currentTarget);}
-      function submitProgramForm(e){e.preventDefault();if(!validateForm(e.currentTarget))return;send('application',e.currentTarget);}
+      function submitCadetForm(e){
+        e.preventDefault();
+        if(!validateForm(e.currentTarget))return;
+        const cadetName=e.currentTarget.querySelector('[name="cadetName"]')?.value || e.currentTarget.querySelector('[name="name"]')?.value || 'Applicant';
+        if($('#cadetSummaryName'))$('#cadetSummaryName').textContent=cadetName;
+        if($('#cadetSummaryRef'))$('#cadetSummaryRef').textContent='ARWS-CAD-'+Math.floor(100000+Math.random()*900000);
+        send('application',e.currentTarget);
+      }
+      function submitProgramForm(e){
+        e.preventDefault();
+        if(!validateForm(e.currentTarget))return;
+        const name=e.currentTarget.querySelector('[name="fullName"]')?.value || e.currentTarget.querySelector('[name="name"]')?.value || 'Applicant';
+        if(e.currentTarget.id==='volunteerForm'){
+          if($('#volunteerSummaryName'))$('#volunteerSummaryName').textContent=name;
+          if($('#volunteerSummaryRef'))$('#volunteerSummaryRef').textContent='ARWS-VOL-'+Math.floor(100000+Math.random()*900000);
+        } else if(e.currentTarget.id==='internForm'){
+          if($('#internSummaryName'))$('#internSummaryName').textContent=name;
+          if($('#internSummaryRef'))$('#internSummaryRef').textContent='ARWS-INT-'+Math.floor(100000+Math.random()*900000);
+        }
+        send('application',e.currentTarget);
+      }
+      function returnToCadetForm(){
+        if($('#cadetConfirmScreen'))$('#cadetConfirmScreen').style.display='none';
+        if($('#cadetRegistrationForm'))$('#cadetRegistrationForm').style.display='block';
+        if($('#cadetEnrollmentForm'))$('#cadetEnrollmentForm').style.display='block';
+        $('#cadetRegistrationForm').scrollIntoView({behavior:'smooth',block:'start'});
+        sendHeight();
+      }
+      function returnToVolunteerForm(){
+        if($('#volunteerConfirmScreen'))$('#volunteerConfirmScreen').style.display='none';
+        if($('#volunteerRegistrationForm'))$('#volunteerRegistrationForm').style.display='block';
+        if($('#volunteerForm'))$('#volunteerForm').style.display='block';
+        $('#volunteerRegistrationForm').scrollIntoView({behavior:'smooth',block:'start'});
+        sendHeight();
+      }
+      function returnToInternForm(){
+        if($('#internConfirmScreen'))$('#internConfirmScreen').style.display='none';
+        if($('#internRegistrationForm'))$('#internRegistrationForm').style.display='block';
+        if($('#internForm'))$('#internForm').style.display='block';
+        $('#internRegistrationForm').scrollIntoView({behavior:'smooth',block:'start'});
+        sendHeight();
+      }
       function addReferenceFields(){
         const notice='Your login credentials are not chosen during registration. After administrator approval, a secure link is sent to your registered Gmail address. You set your username and password only through that link.';
         const how='After administrator approval, return to the Login page and sign in with this username and password to enter the website directly.';
@@ -68,18 +546,86 @@ export function createRegistrationDocument() {
         ['memberForm','cadetEnrollmentForm','volunteerForm','internForm'].forEach(id=>{const form=$('#'+id);if(!form)return;let n=1;form.querySelectorAll('.member-field,.cadet-field,.program-field').forEach(field=>{const label=Array.from(field.children).find(x=>x.tagName==='LABEL');if(!label||label.querySelector('input[type="radio"],input[type="checkbox"]'))return;const clean=(label.dataset.agniCleanText||label.textContent.replace(/^(?:[0-9]+[.][ ]*)+/, '')).trim();label.dataset.agniCleanText=clean;label.textContent=(n++)+'. '+clean;});});
       }
       document.addEventListener('DOMContentLoaded',()=>{$$('#registerPanel form').forEach(form=>form.noValidate=true);});
-      document.addEventListener('input',e=>{if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid')});
-      document.addEventListener('change',e=>{if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid')});
+      document.addEventListener('input',e=>{
+        if(e.target.id === 'regPassword') updatePasswordUI();
+        if(e.target.id === 'regConfirmPassword') updateConfirmPasswordUI();
+        if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid');
+      });
+      document.addEventListener('change',e=>{
+        if(e.target.id === 'regPassword') updatePasswordUI();
+        if(e.target.id === 'regConfirmPassword') updateConfirmPasswordUI();
+        if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid');
+      });
       $('#standardRegisterForm').addEventListener('submit',e=>{e.preventDefault();if(validateForm(e.currentTarget))send('account',e.currentTarget)});
       $('#registerPanel').addEventListener('load',()=>{});
-      window.addEventListener('resize',()=>parent.postMessage({type:'registration-height',height:document.documentElement.scrollHeight},'*'));
+      window.addEventListener('resize',()=>sendHeight());
       const themeTokenNames=${JSON.stringify(themeTokenNames)};
-      window.addEventListener('message',e=>{const m=e.data||{};if(m.type!=='app-theme')return;const root=document.documentElement;root.dataset.theme=m.theme==='dark'?'dark':'light';themeTokenNames.forEach(name=>{const value=m.tokens?.[name];if(typeof value==='string'&&value)root.style.setProperty(name,value)});root.style.colorScheme=root.dataset.theme});
-      new ResizeObserver(()=>parent.postMessage({type:'registration-height',height:document.documentElement.scrollHeight},'*')).observe(document.body);
+      window.addEventListener('message',e=>{const m=e.data||{};if(m.type!=='app-theme')return;const root=document.documentElement;root.dataset.theme=m.theme==='dark'?'dark':'light';themeTokenNames.forEach(name=>{const value=m.tokens?.[name];if(typeof value==='string'&&value)root.style.setProperty(name,value)});root.style.colorScheme=root.dataset.theme;sendHeight();});
+      const panelNode=$('#registerPanel');
+      if(panelNode&&typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>sendHeight()).observe(panelNode);}
       function enableFieldSuggestions(){const fields=$$('input[type="text"],input[type="email"],input[type="tel"],input[type="url"],textarea');fields.forEach(field=>{if(field.type==='password'||field.type==='file')return;if(field.hasAttribute('autocomplete')&&field.getAttribute('autocomplete')!=='on')return;const key=((field.name||'')+' '+(field.id||'')+' '+(field.labels?.[0]?.textContent||'')).toLowerCase();const value=field.type==='email'||/email/.test(key)?'email':/username/.test(key)?'username':/phone|mobile|telephone|contact\s*(?:number|phone|no\b)/.test(key)?'tel':/postal|pin code|pincode|zip/.test(key)?'postal-code':/address/.test(key)?'street-address':/full.?name|cadetname|membername/.test(key)?'name':/institution|college|school|organization/.test(key)?'organization':'on';field.setAttribute('autocomplete',value)});$$('input[type="password"]').forEach(field=>field.setAttribute('autocomplete','off'));}
-      document.addEventListener('DOMContentLoaded',()=>{const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());['regEnrollDate','memberEnrollmentDate'].forEach(id=>{const el=$('#'+id);if(el&&!el.value)el.value=today});$$('.password-toggle').forEach(button=>{const input=button.parentElement?.querySelector('input[type="password"]');if(input)button.setAttribute('aria-label',input.type==='password'?'Show password':'Hide password')});addReferenceFields();enableFieldSuggestions();});
-      window.addEventListener('message',e=>{const m=e.data||{};if(m.type!=='registration-result'||!m.ok)return;if(m.formId==='memberForm'){const n=$('#memberPaymentSuccess');if(n)n.style.display='block';}else if(m.formId==='cadetEnrollmentForm'){const n=$('#cadetFormSuccess');if(n)n.style.display='block';const b=$('.cadet-submit-btn');if(b){b.textContent='CADET ENROLLMENT SUBMITTED ✓';b.disabled=true;}}else if(m.formId==='volunteerForm'||m.formId==='internForm'){const n=$('#'+(m.formId==='volunteerForm'?'volunteerFormSuccess':'internFormSuccess'));if(n)n.style.display='block';const b=$('#'+m.formId+' .program-submit-btn');if(b){b.textContent=m.formId==='volunteerForm'?'VOLUNTEER REGISTRATION SUBMITTED ✓':'INTERNSHIP APPLICATION SUBMITTED ✓';b.disabled=true;}}});
-      window.parent.postMessage({type:'registration-height',height:document.documentElement.scrollHeight},'*');
+      document.addEventListener('DOMContentLoaded',()=>{
+        const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+        ['regEnrollDate','memberEnrollmentDate'].forEach(id=>{const el=$('#'+id);if(el&&!el.value)el.value=today});
+        $$('.password-toggle').forEach(button=>{
+          const input=button.parentElement?.querySelector('input[type="password"],input[type="text"]');
+          if(input)button.setAttribute('aria-label',input.type==='password'?'Show password':'Hide password');
+        });
+        updatePasswordUI();
+        addReferenceFields();
+        enableFieldSuggestions();
+        sendHeight();
+      });
+      window.addEventListener('message',e=>{
+        const m=e.data||{};
+        if(m.type!=='registration-result'||!m.ok)return;
+        if(m.formId==='memberForm'||m.formId==='memberRegistrationForm'){
+          const n=$('#memberPaymentSuccess');
+          if(n)n.style.display='block';
+          sendHeight();
+        }else if(m.formId==='cadetEnrollmentForm'){
+          const screen=$('#cadetConfirmScreen');
+          if(screen){
+            if(m.registrationId && $('#cadetSummaryRef')) $('#cadetSummaryRef').textContent = m.registrationId;
+            $('#cadetEnrollmentForm').style.display='none';
+            screen.style.display='block';
+            screen.scrollIntoView({behavior:'smooth',block:'start'});
+            sendHeight();
+          }else{
+            const n=$('#cadetFormSuccess');
+            if(n)n.style.display='block';
+            sendHeight();
+          }
+        }else if(m.formId==='volunteerForm'){
+          const screen=$('#volunteerConfirmScreen');
+          if(screen){
+            if(m.registrationId && $('#volunteerSummaryRef')) $('#volunteerSummaryRef').textContent = m.registrationId;
+            $('#volunteerForm').style.display='none';
+            screen.style.display='block';
+            screen.scrollIntoView({behavior:'smooth',block:'start'});
+            sendHeight();
+          }else{
+            const n=$('#volunteerFormSuccess');
+            if(n)n.style.display='block';
+            sendHeight();
+          }
+        }else if(m.formId==='internForm'){
+          const screen=$('#internConfirmScreen');
+          if(screen){
+            if(m.registrationId && $('#internSummaryRef')) $('#internSummaryRef').textContent = m.registrationId;
+            $('#internForm').style.display='none';
+            screen.style.display='block';
+            screen.scrollIntoView({behavior:'smooth',block:'start'});
+            sendHeight();
+          }else{
+            const n=$('#internFormSuccess');
+            if(n)n.style.display='block';
+            sendHeight();
+          }
+        }
+      });
+      sendHeight();
+      setTimeout(sendHeight, 150);
     `;
     return `<!doctype html><html lang="en" data-theme="${theme}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${registrationCss}\n${rootThemeStyle}\n${registrationThemeCss}</style></head><body>${markup}<script>${runtime}</script></body></html>`;
   }

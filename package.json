@@ -10,6 +10,7 @@
     "dev": "node tools/dev.cjs",
     "build": "npm --prefix client run build",
     "test": "npm --prefix server test",
+    "check:predeploy": "npm test && npm run build",
     "seed": "npm --prefix server run seed",
     "extract": "node tools/extract-reference.cjs",
     "demo": "node tools/demo.cjs",

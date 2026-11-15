@@ -67,6 +67,28 @@ export async function saveUpload(file, folder, { isPublic = folder === "gallery"
   return { fileId: id.toString(), filename: path.basename(file.originalname).slice(0, 200), mimetype, size: buffer.length, bucket: bucketName };
 }
 
+export async function saveBufferAsFile(buffer, originalname, mimetype = "application/pdf", { isPublic = false, category = "id-cards" } = {}) {
+  const ext = path.extname(originalname).toLowerCase() || ".pdf";
+  const bucketName = isPublic ? "publicFiles" : "privateFiles";
+  const filename = `${randomUUID()}${ext}`;
+  const id = new ObjectId();
+  const uploadStream = bucket(bucketName).openUploadStream(filename, {
+    id,
+    contentType: mimetype,
+    metadata: {
+      originalName: originalname.slice(0, 200),
+      visibility: isPublic ? "public" : "private",
+      category,
+    },
+  });
+  await new Promise((resolve, reject) => {
+    uploadStream.once("error", reject);
+    uploadStream.once("finish", resolve);
+    uploadStream.end(buffer);
+  });
+  return { fileId: id.toString(), filename: originalname.slice(0, 200), mimetype, size: buffer.length, bucket: bucketName };
+}
+
 export async function removeUpload(fileRef) {
   if (!fileRef?.fileId || !["privateFiles", "publicFiles"].includes(fileRef.bucket)) return;
   try { await bucket(fileRef.bucket).delete(new ObjectId(fileRef.fileId)); } catch { /* Cleanup is best effort after a failed document write. */ }

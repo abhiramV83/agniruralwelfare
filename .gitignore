@@ -1,8 +1,11 @@
 node_modules/
 .npm-cache/
 .env
+.env.*
 server/.env
+server/.env.*
 client/.env
+client/.env.*
 client/dist/
 server/uploads/*
 !server/uploads/.gitkeep
@@ -10,4 +13,11 @@ reference/
 *.log
 .cache/
 server/.demo-data/
+server/.local_mongodb_data/
 docs/qa/
+*.bson
+dump/
+*.pem
+*.key
+.vscode/
+client/.vscode/

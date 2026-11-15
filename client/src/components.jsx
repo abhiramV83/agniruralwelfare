@@ -295,6 +295,10 @@ export function Success({ result, onClose, title = c.demo.success }) {
       <p className="registration-id">
         {result.registrationId || result.reference}
       </p>
+      <div className="thank-you-support-card" style={{ margin: "16px 0", padding: "16px", background: "rgba(52, 211, 153, 0.12)", border: "1px solid rgba(52, 211, 153, 0.35)", borderRadius: "12px", textAlign: "center" }}>
+        <h4 style={{ margin: "0 0 6px 0", fontSize: "17px", fontWeight: "700", color: "#34d399" }}>Thank You for Your Support!</h4>
+        <p style={{ margin: 0, fontSize: "14px", color: "var(--text, #eaf1f4)", lineHeight: "1.5" }}>Your kindness and generosity help us create a better tomorrow.</p>
+      </div>
       <Action onClick={onClose}>{c.demo.close}</Action>
     </Modal>
   );

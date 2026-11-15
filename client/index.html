@@ -11,11 +11,38 @@
     <title>Agni Rural Welfare Society</title>
     <script>
       (() => {
-        let theme;
-        try { theme = localStorage.getItem("agni-theme"); } catch { /* Use system preference when storage is unavailable. */ }
-        if (theme !== "light" && theme !== "dark") theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        document.documentElement.dataset.theme = theme;
-        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#070d11" : "#f2f0e8");
+        const THEMES = [
+          { id: "emerald-grove", mode: "light", isAi: false, bg: "#f4f3ec" },
+          { id: "midnight-forest", mode: "dark", isAi: false, bg: "#071013" },
+          { id: "terracotta-earth", mode: "light", isAi: false, bg: "#fdf6ee" },
+          { id: "ocean-breeze", mode: "light", isAi: false, bg: "#f0f7fb" },
+          { id: "cyber-jade-ai", mode: "dark", isAi: true, bg: "#030806" },
+          { id: "neural-violet-ai", mode: "dark", isAi: true, bg: "#080411" },
+          { id: "synthwave-solar-ai", mode: "dark", isAi: true, bg: "#0c070d" },
+          { id: "arctic-quantum-ai", mode: "dark", isAi: true, bg: "#040a12" }
+        ];
+        let idx = 0;
+        try {
+          const stored = localStorage.getItem("agni_theme_rotation_idx");
+          if (stored !== null) {
+            idx = (parseInt(stored, 10) + 1) % THEMES.length;
+          }
+          localStorage.setItem("agni_theme_rotation_idx", idx.toString());
+        } catch (_e) {
+          idx = 0;
+        }
+        const current = THEMES[idx] || THEMES[0];
+        let submode = current.mode;
+        try {
+          const storedSubmode = localStorage.getItem("agni_subtheme_mode");
+          if (storedSubmode === "light" || storedSubmode === "dark") {
+            submode = storedSubmode;
+          }
+        } catch (_e) {}
+        document.documentElement.dataset.theme = current.id;
+        document.documentElement.dataset.themeMode = submode;
+        document.documentElement.dataset.themeAi = current.isAi ? "true" : "false";
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", current.bg);
       })();
     </script>
   </head>

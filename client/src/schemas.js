@@ -51,11 +51,12 @@ export function schemaFor(fields) {
         );
       if (f.name === "password" && f.placeholder === "Create a password")
         rule = rule
-          .min(10, "Use at least 10 characters.")
-          .max(72)
-          .regex(/[A-Z]/, "Include an uppercase letter.")
-          .regex(/[a-z]/, "Include a lowercase letter.")
-          .regex(/[0-9]/, "Include a number.");
+          .min(8, "Password must contain at least 8 characters.")
+          .max(64, "Password cannot exceed 64 characters.")
+          .regex(/[A-Z]/, "Password must contain at least one uppercase letter (A–Z).")
+          .regex(/[a-z]/, "Password must contain at least one lowercase letter (a–z).")
+          .regex(/[0-9]/, "Password must contain at least one number (0–9).")
+          .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character (!@#$%^&* etc.).");
       if (!f.required) rule = rule.optional();
     }
     shape[f.name] = rule;

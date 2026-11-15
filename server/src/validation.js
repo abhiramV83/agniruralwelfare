@@ -18,12 +18,13 @@ const consent = z
   .union([z.literal(true), z.literal("true")])
   .transform(() => true);
 export const password = z
-  .string()
-  .min(10)
-  .max(72)
-  .regex(/[A-Z]/)
-  .regex(/[a-z]/)
-  .regex(/[0-9]/)
+  .string({ required_error: "Password is required." })
+  .min(8, "Password must contain at least 8 characters.")
+  .max(64, "Password cannot exceed 64 characters.")
+  .regex(/[A-Z]/, "Password must contain at least one uppercase letter (A–Z).")
+  .regex(/[a-z]/, "Password must contain at least one lowercase letter (a–z).")
+  .regex(/[0-9]/, "Password must contain at least one number (0–9).")
+  .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character (!@#$%^&* etc.).")
   .refine(
     (v) => Buffer.byteLength(v, "utf8") <= 72,
     "Password must fit within 72 bytes",
@@ -43,6 +44,7 @@ export const registerSchema = z
       .transform((v) => v.toLowerCase()),
     email,
     password,
+    confirmPassword: z.string().optional(),
     guardian: z.string().trim().max(100).optional(),
     address: z.string().trim().max(1000).optional(),
     bloodGroup: z.string().trim().max(20).optional(),
@@ -50,7 +52,11 @@ export const registerSchema = z
     enrollmentDate: optionalDate,
     consent,
   })
-  .strict();
+  .strict()
+  .refine(
+    (data) => data.confirmPassword === undefined || data.password === data.confirmPassword,
+    { message: "Passwords do not match.", path: ["confirmPassword"] },
+  );
 export const loginSchema = z
   .object({
     username: s(40).transform((v) => v.toLowerCase()),

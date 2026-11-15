@@ -1,10 +1,13 @@
 <div id="registerPanel" class="auth-panel">
     <h3><svg class="registration-title-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Create Account</h3>
 
-    <form id="standardRegisterForm" onsubmit="event.preventDefault(); alert('Account Created Successfully!');
-closeAuth();">
-     <input type="hidden" id="regAccountType" name="accountType" value="Member">
-     <div class="auth-grid">
+    <!-- Hidden compatibility container for legacy selectors -->
+    <div id="registerTypeDropdown" style="display:none !important;" aria-hidden="true"></div>
+
+    <form id="standardRegisterForm" onsubmit="event.preventDefault(); alert('Account Created Successfully!'); closeAuth();">
+      <input type="hidden" id="regAccountType" name="accountType" value="Member">
+      <!-- SECTION 1 – EXISTING REGISTRATION FORM FIELDS -->
+      <div class="auth-grid">
        <div class="auth-group">
         <label for="regFullName">Full Name</label>
         <input type="text" id="regFullName" name="fullName" required placeholder="Enter full name" autocomplete="name" autocapitalize="words" spellcheck="false">
@@ -98,29 +101,148 @@ closeAuth();">
       </div>
 
 
-      <div class="auth-group">
-        <label for="regPassword">Password (Hidden)</label>
+      <div class="auth-group full password-field-group">
+        <div class="password-label-row">
+          <label for="regPassword">Password *</label>
+          <div class="password-strength-pill" id="passwordStrengthPill" style="display:none;">
+            <span class="strength-dot"></span>
+            <span class="strength-text" id="passwordStrengthLabel">Weak</span>
+          </div>
+        </div>
         <div class="password-wrap">
-         <input type="password" id="regPassword" required placeholder="Create password">
-         <button type="button" class="password-toggle" onclick="togglePass('regPassword')">
-👁️</button>
+          <input type="password" id="regPassword" required minlength="8" maxlength="64" placeholder="Create a strong password" autocomplete="new-password">
+          <button type="button" class="password-toggle" onclick="togglePass('regPassword', this)" aria-label="Show password">
+            <svg class="eye-icon eye-show" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon eye-hide" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+        <!-- Dynamic Password Strength Meter -->
+        <div class="password-meter-wrap" id="passwordMeterWrap">
+          <div class="password-meter-track">
+            <div class="password-meter-fill" id="passwordMeterFill"></div>
+          </div>
+          <div class="password-meter-legend">
+            <span class="meter-hint" id="passwordMeterHint">Must be 8–64 characters with uppercase, lowercase, number, and special character</span>
+          </div>
+        </div>
+        <!-- Password Requirements Checklist UI -->
+        <div class="password-requirements-box" id="passwordRequirementsBox">
+          <div class="requirements-header">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Password must contain:</span>
+          </div>
+          <ul class="requirements-checklist">
+            <li id="req-length" class="req-item neutral">
+              <span class="req-check-icon">✓</span>
+              <span class="req-label">At least 8 characters</span>
+            </li>
+            <li id="req-upper" class="req-item neutral">
+              <span class="req-check-icon">✓</span>
+              <span class="req-label">At least one uppercase letter</span>
+            </li>
+            <li id="req-lower" class="req-item neutral">
+              <span class="req-check-icon">✓</span>
+              <span class="req-label">At least one lowercase letter</span>
+            </li>
+            <li id="req-number" class="req-item neutral">
+              <span class="req-check-icon">✓</span>
+              <span class="req-label">At least one number</span>
+            </li>
+            <li id="req-special" class="req-item neutral">
+              <span class="req-check-icon">✓</span>
+              <span class="req-label">At least one special character</span>
+            </li>
+          </ul>
         </div>
       </div>
 
-
-      <div class="auth-group full">
-        <label for="regConfirmPassword">Confirm Password</label>
-        <div class="password-wrap">
-         <input type="password" id="regConfirmPassword" required placeholder="Re-enter password">
-         <button type="button" class="password-toggle"
-onclick="togglePass('regConfirmPassword')">   👁️</button>
+      <div class="auth-group full password-field-group">
+        <div class="password-label-row">
+          <label for="regConfirmPassword">Confirm Password *</label>
+          <div class="confirm-match-pill" id="confirmMatchPill" style="display:none;"></div>
         </div>
+        <div class="password-wrap">
+          <input type="password" id="regConfirmPassword" required placeholder="Re-enter password to confirm" autocomplete="new-password">
+          <button type="button" class="password-toggle" onclick="togglePass('regConfirmPassword', this)" aria-label="Show password">
+            <svg class="eye-icon eye-show" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <svg class="eye-icon eye-hide" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+          </button>
+        </div>
+        <div class="confirm-match-message" id="confirmMatchMessage" style="display:none;"></div>
+      </div>
+     </div>
+
+     <!-- SECTION 2 – SELECT REGISTRATION CATEGORY & SECTION 3 – FOUR REGISTRATION TYPE BUTTONS -->
+     <div class="registration-type-section" id="registrationTypeSection">
+       <div class="registration-type-header">
+         <div class="registration-type-header-titles">
+           <h4 class="registration-type-heading">SELECT REGISTRATION CATEGORY</h4>
+           <p class="registration-type-subtitle">Choose the registration category that best describes you.</p>
+         </div>
+         <span class="registration-type-status" id="registrationTypeStatus">Active: <strong id="selectedRegisterRole">Members</strong></span>
+       </div>
+
+       <div class="registration-type-grid" role="radiogroup" aria-label="Registration Categories">
+         <!-- 1. MEMBERS -->
+         <button type="button" class="reg-type-card reg-type-member active" onclick="selectRegisterRole(this,'Member')" role="radio" aria-checked="true" data-role="Member">
+           <div class="reg-card-icon-wrap">
+             <svg class="reg-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+               <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M17 3.13a4 4 0 0 1 0 7.75"/>
+             </svg>
+           </div>
+           <div class="reg-card-content">
+             <span class="reg-card-name">Members</span>
+             <span class="reg-card-desc">AGNI Society Membership</span>
+           </div>
+           <span class="reg-card-indicator" aria-hidden="true">✓</span>
+         </button>
+
+         <!-- 2. CADETS -->
+         <button type="button" class="reg-type-card reg-type-cadet" onclick="selectRegisterRole(this,'Cadet')" role="radio" aria-checked="false" data-role="Cadet">
+           <div class="reg-card-icon-wrap">
+             <svg class="reg-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+               <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11"/><path d="m9 12 2 2 4-4"/>
+             </svg>
+           </div>
+           <div class="reg-card-content">
+             <span class="reg-card-name">Cadets</span>
+             <span class="reg-card-desc">ARWS Cadet Enrollment</span>
+           </div>
+           <span class="reg-card-indicator" aria-hidden="true">✓</span>
+         </button>
+
+         <!-- 3. VOLUNTEERS -->
+         <button type="button" class="reg-type-card reg-type-volunteer" onclick="selectRegisterRole(this,'Volunteer')" role="radio" aria-checked="false" data-role="Volunteer">
+           <div class="reg-card-icon-wrap">
+             <svg class="reg-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+               <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+             </svg>
+           </div>
+           <div class="reg-card-content">
+             <span class="reg-card-name">Volunteers</span>
+             <span class="reg-card-desc">Community Service</span>
+           </div>
+           <span class="reg-card-indicator" aria-hidden="true">✓</span>
+         </button>
+
+         <!-- 4. INTERN & ALUMNI -->
+         <button type="button" class="reg-type-card reg-type-intern" onclick="selectRegisterRole(this,'Intern & Alumni Member')" role="radio" aria-checked="false" data-role="Intern & Alumni Member">
+           <div class="reg-card-icon-wrap">
+             <svg class="reg-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+               <path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/>
+             </svg>
+           </div>
+           <div class="reg-card-content">
+             <span class="reg-card-name">Intern &amp; Alumni</span>
+             <span class="reg-card-desc">Internship &amp; Mentorship</span>
+           </div>
+           <span class="reg-card-indicator" aria-hidden="true">✓</span>
+         </button>
        </div>
      </div>
 
-
-     <button type="submit" class="auth-btn" style="margin-top: 15px;">Register
-Now</button>
+     <!-- SECTION 4 – EXISTING REGISTRATION ACTION BUTTONS -->
+     <button type="submit" class="auth-btn" id="standardRegisterSubmitBtn" style="margin-top: 20px;">Register Now</button>
     </form>
 
     <!-- DETAILED MEMBERS REGISTRATION FORM -->
@@ -287,25 +409,62 @@ Now</button>
 
         <div id="memberFormSuccess" class="member-success">✓ Member registration form completed successfully.</div>
         <div class="member-form-actions">
+          <button type="button" class="member-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Form</button>
           <button type="submit" class="member-submit-btn">SUBMIT MEMBER REGISTRATION →</button>
         </div>
       </form>
 
 
-      <!-- MEMBER REGISTRATION RAZORPAY PAYMENT SCREEN -->
+      <!-- MEMBER REGISTRATION PAYMENT SCREEN (Requirement 4) -->
       <div id="memberPaymentScreen" class="member-payment-screen" aria-live="polite">
         <div class="member-payment-card">
           <div class="member-payment-icon">₹</div>
           <h3>Pay Your Member Registration Fee</h3>
-          <p>Your registration details are ready. Complete the required payment securely through Razorpay to submit your application for administrator verification.</p>
-          <div class="member-payment-amount">Member Registration Fee <strong>₹650</strong></div>
-          <div class="member-payment-status"><span>🔒 Razorpay Secure Checkout</span><span>✓ Amount: ₹650</span><span>💳 UPI / Card / Net Banking / Wallet</span></div>
-          <div class="member-payment-warning"><strong>Important:</strong> Your application is sent to the Administrator Portal only after Razorpay payment is successfully verified. A cancelled or failed payment does not submit the application.</div>
-          <div class="member-payment-actions">
-            <button type="button" class="member-payment-back" onclick="returnToMemberForm()">← Back to Registration Form</button>
-            <button id="razorpayMemberPayBtn" type="button" class="member-payment-done" onclick="startRazorpayMemberPayment()">Pay ₹650 Securely with Razorpay →</button>
+          <div class="member-payment-intro">
+            <span class="member-success-badge">✓ Form Submitted Successfully</span>
+            <p>Your Member registration details have been validated and saved. To complete your enrollment with Agni Rural Welfare Society, please proceed with the membership registration fee payment below.</p>
           </div>
-          <div id="memberPaymentSuccess" class="member-payment-success">✓ Payment verified successfully. Your Member registration has been submitted to the Administrator Portal for verification and approval.</div>
+          
+          <div class="member-payment-details-card">
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Reference Number:</span>
+              <strong class="payment-detail-val" id="memberSummaryRef">ARWS-MEM-842910</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Applicant Name:</span>
+              <strong class="payment-detail-val" id="memberSummaryName">—</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Contact Mobile:</span>
+              <strong class="payment-detail-val" id="memberSummaryPhone">—</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Registration Type:</span>
+              <strong class="payment-detail-val">Active Member (Agni Sena)</strong>
+            </div>
+            <div class="payment-detail-row highlight-row">
+              <span class="payment-detail-label">Configured Fee:</span>
+              <strong class="payment-detail-val amount-val">₹650</strong>
+            </div>
+          </div>
+
+          <div class="member-payment-status">
+            <span>🔒 Razorpay Secure Checkout</span>
+            <span>💳 UPI / Card / Net Banking / Wallet</span>
+          </div>
+          <div class="member-payment-warning"><strong>Important:</strong> Your application is sent to the Administrator Portal only after payment is verified. No charge is made without gateway confirmation.</div>
+          <div class="member-payment-actions">
+            <button type="button" class="member-payment-back" onclick="returnToMemberForm()">← Back to Registration</button>
+            <button id="razorpayMemberPayBtn" type="button" class="member-payment-done" onclick="startRazorpayMemberPayment()">Pay Now (₹650) →</button>
+          </div>
+          <div id="memberPaymentSuccess" class="member-payment-success">
+            <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">✓ Your Member Registration Form is Submitted Successfully!</div>
+            <div class="form-submitted-thankyou-box" style="margin:12px 0;padding:14px;background:rgba(52,211,153,0.15);border:1px solid rgba(52,211,153,0.35);border-radius:10px;text-align:center;">
+              <h4 style="margin:0 0 4px 0;font-size:16px;font-weight:700;color:#34d399;">Thank You for Your Support!</h4>
+              <p style="margin:0;font-size:13px;color:#eaf1f4;">Your kindness and generosity help us create a better tomorrow.</p>
+            </div>
+            <div>Your Member registration has been submitted to the Administrator Portal for verification and approval.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -412,9 +571,39 @@ Now</button>
               <div class="cadet-section-title"><span>08</span> Final Confirmation</div>
               <label class="cadet-check"><input type="checkbox" name="cadetDeclaration" required> <span>I confirm that the information provided in this Cadet Enrollment Form is true and accurate and I agree to abide by the Rules & Regulations of ARWS Training.</span></label>
               <div id="cadetFormSuccess" class="cadet-success">✓ Cadet enrollment form submitted successfully.</div>
-              <div class="cadet-form-actions"><button type="button" class="cadet-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Types</button><button type="submit" class="cadet-submit-btn">SUBMIT CADET ENROLLMENT →</button></div>
+              <div class="cadet-form-actions"><button type="button" class="cadet-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Form</button><button type="submit" class="cadet-submit-btn">SUBMIT CADET ENROLLMENT →</button></div>
             </div>
           </form>
+
+          <!-- CADET CONFIRMATION SCREEN (Requirement 6) -->
+          <div id="cadetConfirmScreen" class="program-confirm-screen" style="display:none;" aria-live="polite">
+            <div class="program-confirm-card">
+              <div class="program-confirm-icon">✓</div>
+              <h3>Your Cadet Enrollment Form is Submitted Successfully!</h3>
+              <div class="form-submitted-thankyou-box" style="margin:16px 0;padding:16px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.35);border-radius:12px;text-align:center;">
+                <h4 style="margin:0 0 6px 0;font-size:17px;font-weight:700;color:var(--brand-emerald,#34d399);">Thank You for Your Support!</h4>
+                <p style="margin:0;font-size:14px;color:var(--theme-text,#eaf1f4);line-height:1.5;">Your kindness and generosity help us create a better tomorrow.</p>
+              </div>
+              <p>Your Senior &amp; Junior Division/Wing Cadet Enrollment Form has been submitted successfully to the Administrator Portal for verification.</p>
+              <div class="member-payment-details-card">
+                <div class="payment-detail-row">
+                  <span class="payment-detail-label">Form Type:</span>
+                  <strong class="payment-detail-val">Cadet Enrollment (Senior &amp; Junior Division/Wing)</strong>
+                </div>
+                <div class="payment-detail-row">
+                  <span class="payment-detail-label">Reference Number:</span>
+                  <strong class="payment-detail-val" id="cadetSummaryRef">ARWS-CAD-592014</strong>
+                </div>
+                <div class="payment-detail-row">
+                  <span class="payment-detail-label">Cadet Name:</span>
+                  <strong class="payment-detail-val" id="cadetSummaryName">—</strong>
+                </div>
+              </div>
+              <div class="program-confirm-actions">
+                <button type="button" class="program-confirm-back" onclick="returnToCadetForm()">← Back to Registration</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -457,8 +646,42 @@ Now</button>
           <div class="program-field full"><div class="program-upload-grid"><div class="program-upload-card"><h4>📷 Photograph</h4><p>Optional recent profile photograph.</p><input type="file" name="photo" accept="image/*"></div><div class="program-upload-card"><h4>📄 Supporting Document</h4><p>Optional résumé, certificate or relevant document.</p><input type="file" name="document" accept=".pdf,.jpg,.jpeg,.png"></div></div></div>
         </div></div>
         <div class="program-section"><div class="program-section-title"><span>05</span> Declaration & Confirmation</div><label class="program-agreement"><input type="checkbox" required> I confirm that the information provided is true and I agree to follow the safety, discipline and volunteer guidelines of Agni Rural Welfare Society.</label><div class="program-note">After submission, your volunteer application can be reviewed by the organization before a suitable role or activity is assigned.</div></div>
-        <div id="volunteerFormSuccess" class="program-success">✓ Volunteer registration submitted successfully.</div><div class="program-actions"><button type="submit" class="program-submit-btn">SUBMIT VOLUNTEER REGISTRATION →</button></div>
+        <div id="volunteerFormSuccess" class="program-success">✓ Volunteer registration submitted successfully.</div>
+        <div class="program-actions">
+          <button type="button" class="program-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Form</button>
+          <button type="submit" class="program-submit-btn">SUBMIT VOLUNTEER REGISTRATION →</button>
+        </div>
       </form>
+
+      <!-- VOLUNTEER CONFIRMATION SCREEN (Requirement 6) -->
+      <div id="volunteerConfirmScreen" class="program-confirm-screen" style="display:none;" aria-live="polite">
+        <div class="program-confirm-card">
+          <div class="program-confirm-icon">✓</div>
+          <h3>Your Volunteer Registration Form is Submitted Successfully!</h3>
+          <div class="form-submitted-thankyou-box" style="margin:16px 0;padding:16px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.35);border-radius:12px;text-align:center;">
+            <h4 style="margin:0 0 6px 0;font-size:17px;font-weight:700;color:var(--brand-emerald,#34d399);">Thank You for Your Support!</h4>
+            <p style="margin:0;font-size:14px;color:var(--theme-text,#eaf1f4);line-height:1.5;">Your kindness and generosity help us create a better tomorrow.</p>
+          </div>
+          <p>Your Volunteer Registration Form has been submitted successfully to the Administrator Portal for community service verification.</p>
+          <div class="member-payment-details-card">
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Form Type:</span>
+              <strong class="payment-detail-val">Volunteer Registration</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Reference Number:</span>
+              <strong class="payment-detail-val" id="volunteerSummaryRef">ARWS-VOL-384912</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Volunteer Name:</span>
+              <strong class="payment-detail-val" id="volunteerSummaryName">—</strong>
+            </div>
+          </div>
+          <div class="program-confirm-actions">
+            <button type="button" class="program-confirm-back" onclick="returnToVolunteerForm()">← Back to Registration</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- INTERN REGISTRATION FORM -->
@@ -488,42 +711,42 @@ Now</button>
           <div class="program-field full"><div class="program-upload-grid"><div class="program-upload-card"><h4>📄 Résumé / CV *</h4><p>Upload your current résumé or CV.</p><input type="file" name="resume" accept=".pdf,.doc,.docx" required></div><div class="program-upload-card"><h4>🗂 Work Sample / Certificate</h4><p>Optional portfolio sample, certificate or supporting document.</p><input type="file" name="workSample" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"></div></div></div>
         </div></div>
         <div class="program-section"><div class="program-section-title"><span>05</span> Reference & Final Declaration</div><div class="program-grid"><div class="program-field"><label>Reference Name <small>(Optional)</small></label><input name="referenceName"></div><div class="program-field"><label>Reference Email / Phone <small>(Optional)</small></label><input name="referenceContact"></div></div><label class="program-agreement"><input type="checkbox" required> I confirm that the information and documents provided are accurate and I agree that Agni Rural Welfare Society may review my application for internship selection and communication.</label><div class="program-note">Internship applications focus on education, skills, project experience, availability and learning goals. Selection and assignment may depend on program requirements and available opportunities.</div></div>
-        <div id="internFormSuccess" class="program-success">✓ Internship application submitted successfully.</div><div class="program-actions"><button type="submit" class="program-submit-btn">SUBMIT INTERNSHIP APPLICATION →</button></div>
-      </form>
-    </div>
-
-    <!-- Registration Type Dropdown - placed below the register form -->
-    <div class="role-register-dropdown" id="registerTypeDropdown">
-      <button type="button" class="role-dropdown-toggle" onclick="toggleRegisterTypeDropdown()" aria-expanded="false">
-        <span class="dropdown-label"><svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M9 10h6M9 14h6M9 18h3"/></svg><span class="dropdown-label-text">Choose Your Registration Type</span></span>
-        <span class="role-dropdown-arrow">▼</span>
-      </button>
-
-      <div class="role-register-box">
-        <div class="role-register-title">Choose Your Registration Type</div>
-        <div class="role-register-subtitle">Select the account type you want to create</div>
-
-        <div class="role-register-grid">
-          <button type="button" class="role-register-btn active" onclick="selectRegisterRole(this,'Member')">
-            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M17 3.13a4 4 0 0 1 0 7.75"/></svg><span>Register Members</span>
-          </button>
-          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Cadet')">
-            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11"/><path d="m9 12 2 2 4-4"/></svg><span>Register Cadets</span>
-          </button>
-          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Volunteer')">
-            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg><span>Register Volunteers</span>
-          </button>
-          <button type="button" class="role-register-btn" onclick="selectRegisterRole(this,'Intern & Alumni Member')">
-            <svg class="registration-type-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m22 10-10-5L2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5M22 10v6"/></svg><span>Register Intern &amp; Alumni Members</span>
-          </button>
+        <div id="internFormSuccess" class="program-success">✓ Internship application submitted successfully.</div>
+        <div class="program-actions">
+          <button type="button" class="program-back-btn" onclick="backToRegistrationTypes()">← Back to Registration Form</button>
+          <button type="submit" class="program-submit-btn">SUBMIT INTERNSHIP APPLICATION →</button>
         </div>
+      </form>
 
-        <div class="role-selected">
-          Selected Account Type: <strong id="selectedRegisterRole">Member</strong>
+      <!-- INTERNSHIP CONFIRMATION SCREEN (Requirement 6) -->
+      <div id="internConfirmScreen" class="program-confirm-screen" style="display:none;" aria-live="polite">
+        <div class="program-confirm-card">
+          <div class="program-confirm-icon">✓</div>
+          <h3>Your Internship Application Form is Submitted Successfully!</h3>
+          <div class="form-submitted-thankyou-box" style="margin:16px 0;padding:16px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.35);border-radius:12px;text-align:center;">
+            <h4 style="margin:0 0 6px 0;font-size:17px;font-weight:700;color:var(--brand-emerald,#34d399);">Thank You for Your Support!</h4>
+            <p style="margin:0;font-size:14px;color:var(--theme-text,#eaf1f4);line-height:1.5;">Your kindness and generosity help us create a better tomorrow.</p>
+          </div>
+          <p>Your Internship &amp; Alumni Application Form has been submitted successfully to the Administrator Portal for evaluation and mentorship matching.</p>
+          <div class="member-payment-details-card">
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Form Type:</span>
+              <strong class="payment-detail-val">Internship Application</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Reference Number:</span>
+              <strong class="payment-detail-val" id="internSummaryRef">ARWS-INT-294817</strong>
+            </div>
+            <div class="payment-detail-row">
+              <span class="payment-detail-label">Applicant Name:</span>
+              <strong class="payment-detail-val" id="internSummaryName">—</strong>
+            </div>
+          </div>
+          <div class="program-confirm-actions">
+            <button type="button" class="program-confirm-back" onclick="returnToInternForm()">← Back to Registration</button>
+          </div>
         </div>
       </div>
     </div>
+
    </div>
-
-
-   

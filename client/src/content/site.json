@@ -55,7 +55,8 @@
   ],
   "home": {
     "heading": "Spreading Joy Through Social Service",
-    "subtitle": "Working together for children, communities, and a better tomorrow.",
+    "subtitle": "Together, We Can Make a Difference!",
+    "description": "Join AGNI Rural Welfare Society in building a better future through education, healthcare, environmental protection, community development, and support for underprivileged people. Every small contribution creates a meaningful change in someone's life.",
     "supportHeading": "Support Our Social Activities",
     "supportSubtitle": "Support Sundarban poor School Students with New Clothes,study materials, portion food & others.",
     "supportParagraphs": [
@@ -72,17 +73,20 @@
     "more": "Click here for more information",
     "apply": "Apply Now",
     "images": [
-      "/assets/original/image51.jpg",
+      "/assets/original/subhash_chandra_bose.jpg",
       "/assets/original/image3.jpg",
-      "/assets/original/image20.jpg",
-      "/assets/original/image57.jpg",
-      "/assets/original/image58.jpg",
-      "/assets/original/image59.jpg",
-      "/assets/original/image61.jpg",
-      "/assets/original/image62.jpg",
-      "/assets/original/image64.jpg",
-      "/assets/original/image4.jpg",
-      "/assets/original/image52.jpg"
+      "/assets/original/image17.jpg",
+      "/assets/original/image19.jpg",
+      "/assets/original/image43.jpg",
+      "/assets/original/image21.jpg",
+      "/assets/original/swami_vivekananda.jpg",
+      "/assets/original/image10.jpg",
+      "/assets/original/image30.jpg",
+      "/assets/original/image14.jpg",
+      "/assets/original/image18.jpg",
+      "/assets/original/image48.jpg",
+      "/assets/original/image16.jpg",
+      "/assets/original/image1.jpg"
     ]
   },
   "about": {
@@ -426,7 +430,357 @@
         "alt": "Agni Rural Welfare Society social activity 47",
         "referenceIndex": 47
       }
-    ]
+    ],
+    "galleryImages": [
+      {
+        "src": "/assets/original/subhash_chandra_bose.jpg",
+        "filename": "subhash_chandra_bose.jpg",
+        "title": "Netaji Subhash Chandra Bose",
+        "category": "Inspirational Patron",
+        "description": "Patron and guiding light whose ideals of discipline, selfless service, and patriotism inspire AGNI Rural Welfare Society's youth cadet corps."
+      },
+      {
+        "src": "/assets/original/swami_vivekananda.jpg",
+        "filename": "swami_vivekananda.jpg",
+        "title": "Swami Vivekananda",
+        "category": "Inspirational Patron",
+        "description": "Spiritual guide and philosopher whose timeless message of fearlessness, character building, and service to humanity guides our community welfare missions."
+      },
+      {
+        "src": "/assets/original/image14.jpg",
+        "filename": "image14.jpg",
+        "title": "Youth Cadet Corps Field Transit",
+        "category": "Cadet Training",
+        "description": "Cadets in uniform waving and flashing peace signs from military transport vehicle (SML)."
+      },
+      {
+        "src": "/assets/original/image15.jpg",
+        "filename": "image15.jpg",
+        "title": "Cadet Platoon Vehicle Departure",
+        "category": "Cadet Training",
+        "description": "Youth cadets aboard transport vehicle heading to regional camp."
+      },
+      {
+        "src": "/assets/original/image16.jpg",
+        "filename": "image16.jpg",
+        "title": "Indian Navy & Armed Forces Review",
+        "category": "Defense Mentorship",
+        "description": "Naval officers in ceremonial white dress uniforms and military officers on floating jetty during field inspection."
+      },
+      {
+        "src": "/assets/original/image17.jpg",
+        "filename": "image17.jpg",
+        "title": "Naval Officers Observation",
+        "category": "Defense Mentorship",
+        "description": "Naval and defense officers observing riverfront maneuvers and training drills."
+      },
+      {
+        "src": "/assets/original/image18.jpg",
+        "filename": "image18.jpg",
+        "title": "Ceremonial Pipe & Drum Band",
+        "category": "Cadet Band",
+        "description": "Cadet pipe and drum band lined up on river jetty in khaki uniforms with red beret plumes."
+      },
+      {
+        "src": "/assets/original/image19.jpg",
+        "filename": "image19.jpg",
+        "title": "Drum Squad at Vidyasagar Setu",
+        "category": "Public Events",
+        "description": "Cadet marching drum squad on river deck with iconic Vidyasagar Setu bridge in background."
+      },
+      {
+        "src": "/assets/original/image20.jpg",
+        "filename": "image20.jpg",
+        "title": "Cadet Band Platoon Assembly",
+        "category": "Cadet Platoon",
+        "description": "Cadet band platoon in red uniforms assembled with instructors and officers on river pier."
+      },
+      {
+        "src": "/assets/original/image21.jpg",
+        "filename": "image21.jpg",
+        "title": "Commanding Officers Briefing",
+        "category": "Field Training",
+        "description": "Officers in naval and army uniforms briefing cadet trainees on the pier before field drills."
+      },
+      {
+        "src": "/assets/original/image22.jpg",
+        "filename": "image22.jpg",
+        "title": "Cadet Corps Tricolor Assembly",
+        "category": "Ceremonial Events",
+        "description": "Full cadet battalion assembled in formation before the giant national tricolor backdrop."
+      },
+      {
+        "src": "/assets/original/image23.jpg",
+        "filename": "image23.jpg",
+        "title": "Synchronized Foot Drill Formation",
+        "category": "Parade & Drill",
+        "description": "Platoon of cadets standing in disciplined parade drill formation with ceremonial sashes."
+      },
+      {
+        "src": "/assets/original/image24.jpg",
+        "filename": "image24.jpg",
+        "title": "Parade Ground Cadet Squad",
+        "category": "Ceremonial Events",
+        "description": "Cadet squad assembled in disciplined formation before the national tricolor."
+      },
+      {
+        "src": "/assets/original/image25.jpg",
+        "filename": "image25.jpg",
+        "title": "Platoon Flag Escort at Attention",
+        "category": "Parade & Drill",
+        "description": "Cadet platoon standing at attention with ceremonial flag bearer on the parade ground."
+      },
+      {
+        "src": "/assets/original/image26.jpg",
+        "filename": "image26.jpg",
+        "title": "Society Leadership Portrait",
+        "category": "Leadership",
+        "description": "Society leadership standing proudly before the national tricolor."
+      },
+      {
+        "src": "/assets/original/image27.jpg",
+        "filename": "image27.jpg",
+        "title": "Tricolor Guard Cadet Formation",
+        "category": "Cadet Training",
+        "description": "Cadets squad kneeling and standing in parade formation before the tricolor backdrop."
+      },
+      {
+        "src": "/assets/original/image28.jpg",
+        "filename": "image28.jpg",
+        "title": "Sonarpur Mahavidyalaya Training Camp",
+        "category": "Institutional Milestone",
+        "description": "Cadets holding national flags and Sonarpur Mahavidyalaya institutional placard in front of tricolor."
+      },
+      {
+        "src": "/assets/original/image29.jpg",
+        "filename": "image29.jpg",
+        "title": "Annual Merit & Sports Awards Ceremony",
+        "category": "Awards & Honors",
+        "description": "Police officers in khaki service dress, dignitaries, and teachers posing with student cadets holding awarded championship trophies and certificates."
+      },
+      {
+        "src": "/assets/original/image30.jpg",
+        "filename": "image30.jpg",
+        "title": "Cadet Battalion Assembly Ground",
+        "category": "Ceremonial Events",
+        "description": "Mass cadet assembly and guests gathered on the ceremonial parade field."
+      },
+      {
+        "src": "/assets/original/image31.jpg",
+        "filename": "image31.jpg",
+        "title": "Merit Trophy Presentation",
+        "category": "Awards & Honors",
+        "description": "Distinguished police officers and dignitaries presenting merit certificates and trophies to cadets."
+      },
+      {
+        "src": "/assets/original/image32.jpg",
+        "filename": "image32.jpg",
+        "title": "Youth Parade Platoon Assembly",
+        "category": "Ceremonial Events",
+        "description": "Cadets parade squad standing at attention in front of the giant tricolor."
+      },
+      {
+        "src": "/assets/original/image33.jpg",
+        "filename": "image33.jpg",
+        "title": "Cadet Honor Ceremony Gathering",
+        "category": "Organizational Moments",
+        "description": "Cadets, faculty members, and honored guests gathered during the sports and awards ceremony."
+      },
+      {
+        "src": "/assets/original/image34.jpg",
+        "filename": "image34.jpg",
+        "title": "Female Cadets with Faculty",
+        "category": "Cadet Corps",
+        "description": "Female cadets in uniform standing with instructor/faculty member."
+      },
+      {
+        "src": "/assets/original/image35.jpg",
+        "filename": "image35.jpg",
+        "title": "Cadet Platoon March with Standard",
+        "category": "Parade & Drill",
+        "description": "Cadet platoon marching in formation with society standard."
+      },
+      {
+        "src": "/assets/original/image36.jpg",
+        "filename": "image36.jpg",
+        "title": "Society Dignitary Formal Portrait",
+        "category": "Leadership",
+        "description": "Society leadership portrait in front of the tricolor."
+      },
+      {
+        "src": "/assets/original/image37.jpg",
+        "filename": "image37.jpg",
+        "title": "Platoon Flag March Formation",
+        "category": "Parade & Drill",
+        "description": "Platoon in formation at attention with national flags on the field."
+      },
+      {
+        "src": "/assets/original/image38.jpg",
+        "filename": "image38.jpg",
+        "title": "Color Party at Attention",
+        "category": "Parade & Drill",
+        "description": "Cadet color party in formation with standard flag."
+      },
+      {
+        "src": "/assets/original/image39.jpg",
+        "filename": "image39.jpg",
+        "title": "Ceremonial Standard Flag Bearing",
+        "category": "Ceremonial Flag",
+        "description": "Cadet squad marching with ceremonial society standard flag and flag escort."
+      },
+      {
+        "src": "/assets/original/image40.jpg",
+        "filename": "image40.jpg",
+        "title": "Police Officer Service Inspection",
+        "category": "Dignitaries",
+        "description": "Police officer in ceremonial dress on the field during the annual celebration."
+      },
+      {
+        "src": "/assets/original/image41.jpg",
+        "filename": "image41.jpg",
+        "title": "Cadets & Community Mass Gathering",
+        "category": "Organizational Moments",
+        "description": "Cadets and community participants in group formation in front of tricolor."
+      },
+      {
+        "src": "/assets/original/image42.jpg",
+        "filename": "image42.jpg",
+        "title": "Parade March Drill Alignment",
+        "category": "Parade & Drill",
+        "description": "Cadets in formation with colors during parade drill."
+      },
+      {
+        "src": "/assets/original/image45.jpg",
+        "filename": "image45.jpg",
+        "title": "Youth Cadet Trainees Assembly",
+        "category": "Cadet Training",
+        "description": "Cadet trainees assembled in uniform on the field."
+      },
+      {
+        "src": "/assets/original/image49.jpg",
+        "filename": "image49.jpg",
+        "title": "Annual Youth Sports Meet",
+        "category": "Sports & Athletics",
+        "description": "Cadets group photo after football and athletic sports competition."
+      }
+    ],
+    "activitiesImages": [
+      {
+        "src": "/assets/original/image1.jpg",
+        "filename": "image1.jpg",
+        "title": "Emergency Relief Boat Mission",
+        "category": "Disaster Relief",
+        "description": "Emergency relief boat loaded with food packets, bottled water, and provisions on the muddy riverbank with volunteers displaying the official AGNI RURAL WELFARE SOCIETY banner."
+      },
+      {
+        "src": "/assets/original/image3.jpg",
+        "filename": "image3.jpg",
+        "title": "Social Service Awareness Campaign",
+        "category": "Awareness Campaign",
+        "description": "Awareness poster calling on youth and volunteers: Do you want to join our NGO for social service? with photo of relief distribution."
+      },
+      {
+        "src": "/assets/original/image4.jpg",
+        "filename": "image4.jpg",
+        "title": "Volunteer Recruitment & Relief Drive",
+        "category": "Awareness Campaign",
+        "description": "Social service community outreach campaign poster with direct helpline and essential supplies distribution."
+      },
+      {
+        "src": "/assets/original/image5.jpg",
+        "filename": "image5.jpg",
+        "title": "Riverbank Emergency Relief Distribution",
+        "category": "Community Support",
+        "description": "Society volunteers on the riverbank presenting emergency relief packages to rural residents in the Sundarbans."
+      },
+      {
+        "src": "/assets/original/image6.jpg",
+        "filename": "image6.jpg",
+        "title": "Direct Family Ration Distribution",
+        "category": "Distribution Program",
+        "description": "Society volunteer directly handing essential food and ration supplies to a local resident."
+      },
+      {
+        "src": "/assets/original/image7.jpg",
+        "filename": "image7.jpg",
+        "title": "Essential Food Aid Provision",
+        "category": "Distribution Program",
+        "description": "Volunteer handing packaged food ration packet to a resident woman accompanied by an elderly villager with the relief boat in the background."
+      },
+      {
+        "src": "/assets/original/image8.jpg",
+        "filename": "image8.jpg",
+        "title": "Sundarbans Riverbank Relief Mission",
+        "category": "Disaster Relief",
+        "description": "Flood relief distribution team and local villagers standing on riverbank with society banner."
+      },
+      {
+        "src": "/assets/original/image9.jpg",
+        "filename": "image9.jpg",
+        "title": "Boat-to-Shore Supply Distribution",
+        "category": "Distribution Program",
+        "description": "Volunteers on boat handing food and relief packets down to residents on the riverbank."
+      },
+      {
+        "src": "/assets/original/image10.jpg",
+        "filename": "image10.jpg",
+        "title": "Rural Student Nutrition Distribution",
+        "category": "Child Welfare",
+        "description": "Volunteer distributing nutrition and food packets to a young rural boy during outreach in Sundarbans."
+      },
+      {
+        "src": "/assets/original/image11.jpg",
+        "filename": "image11.jpg",
+        "title": "Family Emergency Supplies Distribution",
+        "category": "Distribution Program",
+        "description": "Volunteer handing food and relief goods to children and families in flooded area."
+      },
+      {
+        "src": "/assets/original/image43.jpg",
+        "filename": "image43.jpg",
+        "title": "Rural Women Self-Help Group Assembly",
+        "category": "Women Empowerment",
+        "description": "Rural women self-help and community welfare group in colorful sarees gathered in front of the tricolor."
+      },
+      {
+        "src": "/assets/original/image44.jpg",
+        "filename": "image44.jpg",
+        "title": "Women Social Welfare Outreach",
+        "category": "Community Support",
+        "description": "Women community welfare participants with society leaders and officials."
+      },
+      {
+        "src": "/assets/original/image46.jpg",
+        "filename": "image46.jpg",
+        "title": "Bodra High School Cadet Partnership",
+        "category": "School Education",
+        "description": "Cadet holding BODRA HIGH SCHOOL placard with color guard in formation."
+      },
+      {
+        "src": "/assets/original/image47.jpg",
+        "filename": "image47.jpg",
+        "title": "Community Gathering & Social Outreach",
+        "category": "Community Support",
+        "description": "Full community assembly with cadets, teachers, and local village leaders in front of tricolor."
+      },
+      {
+        "src": "/assets/original/image48.jpg",
+        "filename": "image48.jpg",
+        "title": "Village Women Welfare & Festive Drive",
+        "category": "Community Support",
+        "description": "Society leadership and village women participants during community welfare drive."
+      },
+      {
+        "src": "/assets/original/image50.jpg",
+        "filename": "image50.jpg",
+        "title": "Rural High School Training Initiative",
+        "category": "School Education",
+        "description": "Bodra High School parade team standing in formation on village school ground."
+      }
+    ],
+    "galleryCount": 33,
+    "activitiesCount": 16,
+    "totalCount": 49
   },
   "membership": {
     "heading": "Become a Member",
@@ -903,7 +1257,7 @@
     "fillSample": "Fill sample details",
     "lightbox": "Open image",
     "galleryNote": "",
-    "passwordHelp": "Use 10–72 characters, including uppercase, lowercase and a number.",
+    "passwordHelp": "Use 8–64 characters, including uppercase, lowercase, numbers, and special characters (!@#$%^&*).",
     "cvHelp": "PDF, DOC, DOCX, JPG or PNG. Maximum 2 MB.",
     "imageHelp": "JPEG or PNG, up to 2 MB.",
     "paymentExplanation": "Payments are not processed on this page. Your pledge is recorded without a charge.",

@@ -10,7 +10,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import sharp from "sharp";
 import { createApp } from "../src/app.js";
-import { User, Session, Cadet, Internship, Pledge } from "../src/models.js";
+import { User, Session, Cadet, Internship, Pledge, SiteContent } from "../src/models.js";
 let db, app, uploads, token, adminToken, memberId, refreshCookie, internshipId;
 const secret = "test-secret-which-is-longer-than-32-characters";
 const profile = {
@@ -27,10 +27,10 @@ const profile = {
 };
 before(
   async () => {
-    process.env.MONGOMS_DOWNLOAD_DIR = path.resolve("../.cache/mongodb");
+    process.env.MONGOMS_DOWNLOAD_DIR = path.resolve("./node_modules/.cache/mongodb-memory-server");
     db = await MongoMemoryServer.create({
       binary: {
-        version: "7.0.14",
+        version: "7.0.24",
         downloadDir: process.env.MONGOMS_DOWNLOAD_DIR,
       },
     });
@@ -41,7 +41,16 @@ before(
       Cadet.init(),
       Internship.init(),
       Pledge.init(),
+      SiteContent.init(),
     ]);
+    await SiteContent.create({
+      key: "site",
+      content: {
+        organization: "Agni Rural Welfare Society",
+        regNo: "ARWS/2026/01",
+        contactEmail: "contact@agnirural.org",
+      },
+    });
     uploads = await fs.mkdtemp(path.join(os.tmpdir(), "agni-test-"));
     await fs.mkdir("../docs/qa", { recursive: true });
     app = createApp({
@@ -216,12 +225,19 @@ test("cadet workflow persists ID, rejects sensitive fields and permits admin app
   const data = {
     fullName: "Demo Cadet",
     guardian: "Demo Guardian",
+    guardianPhone: "0000000000",
     dob: "2005-01-01",
     phone: "0000000000",
     email: "cadet@example.com",
     address: "Demo address",
     qualification: "Demo Graduate",
     school: "Demo School",
+    institution: "Demo Institute",
+    bloodGroup: "O+",
+    guardianDeclaration: true,
+    finalConfirmation: true,
+    place: "Demo Place",
+    declarationDate: "2026-10-27",
     gender: "Female",
     fatherName: "Demo Father",
     motherName: "Demo Mother",
@@ -259,6 +275,7 @@ test("cadet workflow persists ID, rejects sensitive fields and permits admin app
   });
   assert.equal(res.status, 201);
   assert.match(res.body.registrationId, /^ARWS-/);
+  await Cadet.updateOne({ registrationId: res.body.registrationId }, { status: "approved" });
   const card = await request(app)
     .get(`/api/cadets/${res.body.registrationId}/id-card`)
     .auth(token, { type: "bearer" });
@@ -267,7 +284,8 @@ test("cadet workflow persists ID, rejects sensitive fields and permits admin app
   await fs.writeFile("../docs/qa/demo-cadet-card.pdf", card.body);
   assert.equal(
     (card.body.toString("latin1").match(/\/Type \/Page\b/g) || []).length,
-    1,
+    2,
+    "ID card must contain front and reverse pages",
   );
   const publicRecord = await request(app).get(
     `/api/verify/${res.body.registrationId}`,
@@ -378,6 +396,7 @@ test("internship validates CV, stores it privately and supports review/rejection
   );
 });
 test("ID card returns a PDF; QR verification exposes only minimal public fields", async () => {
+  await User.updateOne({ username: profile.username }, { status: "approved" });
   const pdf = await request(app)
     .get("/api/members/id-card")
     .auth(token, { type: "bearer" });
@@ -386,8 +405,8 @@ test("ID card returns a PDF; QR verification exposes only minimal public fields"
   assert.equal(pdf.body.subarray(0, 5).toString(), "%PDF-");
   assert.equal(
     (pdf.body.toString("latin1").match(/\/Type \/Page\b/g) || []).length,
-    1,
-    "ID card must fit on one PDF page",
+    2,
+    "ID card must contain front and reverse pages",
   );
   await fs.mkdir("../docs/qa", { recursive: true });
   await fs.writeFile("../docs/qa/demo-id-card.pdf", pdf.body);

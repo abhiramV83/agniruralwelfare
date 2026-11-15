@@ -419,6 +419,197 @@ body,
 }
 #registerPanel .password-toggle:hover { background: var(--surface) !important; color: var(--text) !important; }
 #registerPanel .password-toggle:focus-visible { outline: 2px solid var(--focus-ring) !important; }
+#registerPanel .password-toggle svg { pointer-events: none; }
+
+#registerPanel .password-label-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 7px !important;
+}
+#registerPanel .password-label-row label {
+  margin: 0 !important;
+}
+#registerPanel .password-strength-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 2px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11.5px !important;
+  font-weight: 650 !important;
+  line-height: 1.4 !important;
+  transition: all 0.25s ease !important;
+}
+#registerPanel .password-strength-pill .strength-dot {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: currentColor !important;
+}
+#registerPanel .password-strength-pill.weak {
+  color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+}
+#registerPanel .password-strength-pill.medium {
+  color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.12) !important;
+  border: 1px solid rgba(245, 158, 11, 0.25) !important;
+}
+#registerPanel .password-strength-pill.strong {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+#registerPanel .password-strength-pill.very-strong {
+  color: #059669 !important;
+  background: rgba(5, 150, 105, 0.15) !important;
+  border: 1px solid rgba(5, 150, 105, 0.35) !important;
+}
+
+#registerPanel .password-meter-wrap {
+  width: 100% !important;
+  margin-top: 8px !important;
+}
+#registerPanel .password-meter-track {
+  width: 100% !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: color-mix(in srgb, var(--text) 10%, transparent) !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+#registerPanel .password-meter-fill {
+  height: 100% !important;
+  width: 0%;
+  border-radius: 999px !important;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.35s ease !important;
+}
+#registerPanel .password-meter-legend {
+  margin-top: 5px !important;
+  font-size: 11.5px !important;
+  color: var(--text-muted) !important;
+  line-height: 1.3 !important;
+}
+
+#registerPanel .password-requirements-box {
+  margin-top: 10px !important;
+  padding: 12px 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--registration-border) !important;
+  background: color-mix(in srgb, var(--surface) 90%, var(--surface-elevated)) !important;
+  backdrop-filter: blur(8px) !important;
+}
+#registerPanel .requirements-header {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  color: var(--text) !important;
+}
+#registerPanel .requirements-header svg {
+  color: var(--primary) !important;
+  flex-shrink: 0 !important;
+}
+#registerPanel .requirements-checklist {
+  margin: 8px 0 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)) !important;
+  gap: 6px 12px !important;
+}
+#registerPanel .req-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+  transition: all 0.2s ease !important;
+}
+#registerPanel .req-check-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  border-radius: 50% !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  transition: all 0.2s ease !important;
+}
+#registerPanel .req-item.neutral .req-check-icon {
+  background: color-mix(in srgb, var(--text-muted) 15%, transparent) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid color-mix(in srgb, var(--text-muted) 30%, transparent) !important;
+}
+#registerPanel .req-item.satisfied {
+  color: #10b981 !important;
+  font-weight: 600 !important;
+}
+#registerPanel .req-item.satisfied .req-check-icon {
+  background: rgba(16, 185, 129, 0.18) !important;
+  color: #10b981 !important;
+  border: 1px solid #10b981 !important;
+}
+#registerPanel .req-item.unsatisfied {
+  color: var(--text-muted) !important;
+}
+#registerPanel .req-item.unsatisfied .req-check-icon {
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+}
+
+#registerPanel .confirm-match-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 2px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11.5px !important;
+  font-weight: 650 !important;
+  line-height: 1.4 !important;
+}
+#registerPanel .confirm-match-pill .match-dot {
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 50% !important;
+  background: currentColor !important;
+}
+#registerPanel .confirm-match-pill.match-success {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+#registerPanel .confirm-match-pill.match-error {
+  color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.12) !important;
+  border: 1px solid rgba(239, 68, 68, 0.25) !important;
+}
+
+#registerPanel .confirm-match-message {
+  margin-top: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 12px !important;
+  font-weight: 550 !important;
+  line-height: 1.4 !important;
+}
+#registerPanel .confirm-match-message.match-success {
+  color: #10b981 !important;
+}
+#registerPanel .confirm-match-message.match-error {
+  color: #ef4444 !important;
+}
+#registerPanel .confirm-match-message svg {
+  flex-shrink: 0 !important;
+}
 #registerPanel :is(.cadet-radio-row label, .member-choice-row label) > input { flex: 0 0 18px; }
 #registerPanel .signature-file-btn {
   min-height: 44px;
@@ -539,4 +730,527 @@ body,
 }
 @media (prefers-reduced-motion:reduce) {
   #registerPanel :is(input,select,textarea,.member-form-actions button,.cadet-form-actions button,.program-actions button,.member-payment-actions button) { transition:none !important; }
+}
+
+/* ==========================================================================
+   INDIVIDUAL FORM BOTTOM ACTIONS (LEFT: Back, RIGHT: Submit)
+   ========================================================================== */
+#registerPanel :is(.member-form-actions, .cadet-form-actions, .program-actions) {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+  margin-top: 32px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid var(--border) !important;
+  width: 100% !important;
+}
+
+#registerPanel :is(.member-payment-actions, .program-confirm-actions) {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+  margin-top: 28px !important;
+  width: 100% !important;
+}
+
+#registerPanel :is(.member-submit-btn, .cadet-submit-btn, .program-submit-btn, #proceedPaymentBtn, .member-payment-done, .register-btn, .login-btn) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 240px !important;
+  min-height: 48px !important;
+  padding: 12px 24px !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  border-radius: 12px !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.02em !important;
+}
+
+#registerPanel :is(.member-back-btn, .cadet-back-btn, .program-back-btn, .member-payment-back, .program-confirm-back) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 46px !important;
+  padding: 12px 22px !important;
+  font-size: 13.5px !important;
+  font-weight: 700 !important;
+  color: var(--text) !important;
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease !important;
+}
+
+#registerPanel :is(.member-back-btn, .cadet-back-btn, .program-back-btn):hover {
+  background: color-mix(in srgb, var(--primary) 12%, var(--surface-elevated)) !important;
+  border-color: var(--primary) !important;
+  transform: translateX(-2px) !important;
+}
+
+@media (max-width: 640px) {
+  #registerPanel :is(.member-form-actions, .cadet-form-actions, .program-actions) {
+    flex-direction: column-reverse !important;
+    gap: 12px !important;
+  }
+  #registerPanel :is(.member-back-btn, .cadet-back-btn, .program-back-btn),
+  #registerPanel :is(.member-submit-btn, .cadet-submit-btn, .program-submit-btn) {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+}
+}
+
+/* ==========================================================================
+   UNWANTED WHITESPACE REMOVAL (Requirement 5)
+   ========================================================================== */
+#registerPanel form {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+#registerPanel .member-payment-screen,
+#registerPanel .program-confirm-screen {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+#registerPanel .role-register-dropdown {
+  margin-top: 18px !important;
+  margin-bottom: 0 !important;
+  padding: 14px clamp(12px, 2vw, 18px) !important;
+  overflow: visible !important;
+}
+#registerPanel .role-register-box {
+  margin: 12px 0 0 !important;
+  padding: 16px !important;
+}
+#registerPanel .role-register-grid {
+  gap: 10px !important;
+}
+#registerPanel .role-register-btn {
+  min-height: 70px !important;
+  padding: 10px !important;
+}
+#registerPanel .role-selected {
+  margin-top: 12px !important;
+  padding: 8px 12px !important;
+}
+#registerPanel :is(.member-form-body, .cadet-form-body, .program-form-body) {
+  padding-bottom: 12px !important;
+  margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   DROPDOWN READABILITY & THEME CONTRAST (Requirement 3)
+   ========================================================================== */
+#registerPanel select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2326c281' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 16px !important;
+  padding-right: 42px !important;
+  cursor: pointer !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+#registerPanel select option,
+#registerPanel select optgroup {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  padding: 10px !important;
+  font-size: 14px !important;
+}
+
+:root[data-theme="light"] #registerPanel select {
+  background-color: #ffffff !important;
+  color: #172420 !important;
+  border-color: #b7cebf !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d6b61' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+}
+
+:root[data-theme="light"] #registerPanel select option {
+  background-color: #ffffff !important;
+  color: #172420 !important;
+}
+
+:root[data-theme="dark"] #registerPanel select {
+  background-color: #0c181d !important;
+  color: #eef5f0 !important;
+  border-color: #2b453a !important;
+}
+
+:root[data-theme="dark"] #registerPanel select option {
+  background-color: #0c181d !important;
+  color: #eef5f0 !important;
+}
+
+/* ==========================================================================
+   MODERN REGISTRATION TYPE ICONS (Requirement 8)
+   ========================================================================== */
+#registerPanel .registration-type-icon {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-bottom: 6px;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
+}
+#registerPanel .role-register-btn:hover .registration-type-icon {
+  transform: translateY(-3px) scale(1.12);
+  color: var(--primary);
+}
+#registerPanel .role-register-btn.active .registration-type-icon {
+  color: var(--primary);
+  transform: scale(1.08);
+}
+
+
+/* ==========================================================================
+   PREMIUM AI REGISTRATION TYPE SELECTION - PERFECT DESIGN INTEGRATION
+   ========================================================================== */
+#registerPanel .registration-type-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 24px 0 20px 0 !important;
+  padding: 0 !important;
+}
+
+#registerPanel .registration-type-header {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  margin-bottom: 14px !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+}
+
+#registerPanel .registration-type-header-titles {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+}
+
+#registerPanel .registration-type-heading {
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text) !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+}
+
+#registerPanel .registration-type-subtitle {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+#registerPanel .registration-type-label {
+  font-size: 13px !important;
+  font-weight: 750 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--text-muted) !important;
+}
+
+#registerPanel .registration-type-status {
+  font-size: 12px !important;
+  color: var(--text-muted) !important;
+  font-weight: 500 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  align-self: center !important;
+}
+
+#registerPanel .registration-type-status strong {
+  color: var(--primary) !important;
+  font-weight: 750 !important;
+}
+
+#registerPanel #standardRegisterSubmitBtn {
+  margin-top: 20px !important;
+  width: 100% !important;
+}
+
+#registerPanel .registration-type-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* Individual Card Styling - matches website form language & glassmorphism */
+#registerPanel .reg-type-card {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-height: 82px !important;
+  padding: 12px 14px !important;
+  border-radius: clamp(12px, 1.2vw, 16px) !important;
+  background: var(--surface-elevated) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s ease,
+              box-shadow 0.22s ease,
+              background-color 0.22s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  outline: none !important;
+  font-family: inherit !important;
+}
+
+#registerPanel .reg-type-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border)) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+#registerPanel .reg-type-card:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Card Icon Box */
+#registerPanel .reg-card-icon-wrap {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 10px !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+  transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+#registerPanel .reg-card-icon {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: currentColor !important;
+  stroke-width: 1.9 !important;
+  fill: none !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+#registerPanel .reg-type-card:hover .reg-card-icon-wrap {
+  transform: scale(1.08) !important;
+}
+
+/* Typography Inside Card */
+#registerPanel .reg-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+#registerPanel .reg-card-name {
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  color: var(--text) !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#registerPanel .reg-card-desc {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--text-muted) !important;
+  line-height: 1.25 !important;
+  margin-top: 3px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Active Check Indicator */
+#registerPanel .reg-card-indicator {
+  display: none !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  place-items: center !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 1. Members - Primary Identity Emerald Green */
+#registerPanel .reg-type-member .reg-card-icon-wrap {
+  background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+  color: var(--primary) !important;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent) !important;
+}
+
+#registerPanel .reg-type-member.active {
+  background: color-mix(in srgb, var(--primary) 9%, var(--surface-elevated)) !important;
+  border-color: var(--primary) !important;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--primary) 20%, transparent) !important;
+}
+#registerPanel .reg-type-member.active .reg-card-indicator {
+  display: grid !important;
+  background: var(--primary) !important;
+  color: var(--on-primary) !important;
+}
+
+/* 2. Cadets - Secondary Blue Accent Highlight */
+#registerPanel .reg-type-cadet .reg-card-icon-wrap {
+  background: rgba(2, 132, 199, 0.12) !important;
+  color: #0284c7 !important;
+  border: 1px solid rgba(2, 132, 199, 0.28) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-cadet .reg-card-icon-wrap {
+  background: rgba(56, 189, 248, 0.14) !important;
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.32) !important;
+}
+
+#registerPanel .reg-type-cadet.active {
+  background: color-mix(in srgb, #0284c7 8%, var(--surface-elevated)) !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.20) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-cadet.active {
+  background: color-mix(in srgb, #38bdf8 10%, var(--surface-elevated)) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.22) !important;
+}
+#registerPanel .reg-type-cadet.active .reg-card-indicator {
+  display: grid !important;
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-cadet.active .reg-card-indicator {
+  background: #38bdf8 !important;
+  color: #070d11 !important;
+}
+
+/* 3. Volunteers - Emerald / Teal Accent */
+#registerPanel .reg-type-volunteer .reg-card-icon-wrap {
+  background: color-mix(in srgb, #08766f 12%, transparent) !important;
+  color: #08766f !important;
+  border: 1px solid color-mix(in srgb, #08766f 28%, transparent) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-volunteer .reg-card-icon-wrap {
+  background: rgba(52, 211, 153, 0.14) !important;
+  color: #34d399 !important;
+  border-color: rgba(52, 211, 153, 0.32) !important;
+}
+
+#registerPanel .reg-type-volunteer.active {
+  background: color-mix(in srgb, #08766f 9%, var(--surface-elevated)) !important;
+  border-color: #08766f !important;
+  box-shadow: 0 8px 24px rgba(8, 118, 111, 0.20) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-volunteer.active {
+  background: color-mix(in srgb, #34d399 10%, var(--surface-elevated)) !important;
+  border-color: #34d399 !important;
+  box-shadow: 0 8px 24px rgba(52, 211, 153, 0.22) !important;
+}
+#registerPanel .reg-type-volunteer.active .reg-card-indicator {
+  display: grid !important;
+  background: #08766f !important;
+  color: #ffffff !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-volunteer.active .reg-card-indicator {
+  background: #34d399 !important;
+  color: #070d11 !important;
+}
+
+/* 4. Intern & Alumni - Secondary Purple Accent Highlight */
+#registerPanel .reg-type-intern .reg-card-icon-wrap {
+  background: rgba(124, 58, 237, 0.12) !important;
+  color: #7c3aed !important;
+  border: 1px solid rgba(124, 58, 237, 0.28) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-intern .reg-card-icon-wrap {
+  background: rgba(192, 132, 252, 0.14) !important;
+  color: #c084fc !important;
+  border-color: rgba(192, 132, 252, 0.32) !important;
+}
+
+#registerPanel .reg-type-intern.active {
+  background: color-mix(in srgb, #7c3aed 8%, var(--surface-elevated)) !important;
+  border-color: #7c3aed !important;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.20) !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-intern.active {
+  background: color-mix(in srgb, #c084fc 10%, var(--surface-elevated)) !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 8px 24px rgba(192, 132, 252, 0.22) !important;
+}
+#registerPanel .reg-type-intern.active .reg-card-indicator {
+  display: grid !important;
+  background: #7c3aed !important;
+  color: #ffffff !important;
+}
+:root[data-theme="dark"] #registerPanel .reg-type-intern.active .reg-card-indicator {
+  background: #c084fc !important;
+  color: #070d11 !important;
+}
+
+/* RESPONSIVE DESIGN - Section 4 */
+@media (max-width: 860px) {
+  #registerPanel .registration-type-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  #registerPanel .registration-type-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  #registerPanel .reg-type-card {
+    padding: 10px 11px !important;
+    min-height: 74px !important;
+    gap: 9px !important;
+  }
+  #registerPanel .reg-card-icon-wrap {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+  }
+  #registerPanel .reg-card-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  #registerPanel .reg-card-name {
+    font-size: 12.5px !important;
+  }
+  #registerPanel .reg-card-desc {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  #registerPanel .registration-type-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

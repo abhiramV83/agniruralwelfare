@@ -22,7 +22,7 @@ export async function registerAccount(req, res, cfg) {
     memberSignature = await saveUpload(req.files?.memberSignature?.[0], "photos");
     supportingDocument = await saveUpload(req.files?.supportingDocument?.[0], "cv");
     workSample = await saveUpload(req.files?.workSample?.[0], "cv");
-    const { password, consent, ...profile } = data;
+    const { password, confirmPassword, consent, ...profile } = data;
     const applicationType = { "Register Member": "Member", "Register Cadets": "Cadet", "Register Volunteers": "Volunteer", "Register Intern & Alumni Members": "Intern & Alumni Member" }[data.registrationType || "Register Member"];
     const previousApplication = await RegistrationApplication.findOne({
       type: applicationType,
@@ -41,6 +41,27 @@ export async function registerAccount(req, res, cfg) {
       approvedAt: previousApplication?.approvedAt || null,
       passwordHash: await bcrypt.hash(password, 12),
     });
+    if (!previousApplication) {
+      const appData = {
+        fullName: profile.fullName,
+        name: profile.fullName,
+        email: profile.email,
+        username: profile.username,
+        guardian: profile.guardian || "",
+        address: profile.address || "",
+        bloodGroup: profile.bloodGroup || "",
+        dob: profile.dob || "",
+        enrollmentDate: profile.enrollmentDate || "",
+        registrationCategory: applicationType,
+        accountType: applicationType,
+      };
+      const appAttachments = photo ? [{ name: photo.filename, fileId: photo.fileId, filename: photo.filename, mimetype: photo.mimetype, size: photo.size, bucket: photo.bucket }] : [];
+      await createRegistrationApplication({
+        type: applicationType,
+        data: encryptSensitiveFields(appData, cfg.encryptionKey),
+        status: "pending",
+      }, appAttachments);
+    }
     return res.status(201).json(await issueSession(user, res, cfg));
   } catch (error) {
     await Promise.all([photo, cv, membershipProof, memberSignature, supportingDocument, workSample].filter(Boolean).map((file) => removeUpload(file)));

@@ -8,11 +8,35 @@ import {
   ShieldCheck,
   Download,
   CheckCircle2,
+  XCircle,
+  AlertCircle,
   ArrowRight,
   Upload,
   LogIn,
   UserRoundPlus,
+  Search,
+  Filter,
+  Calendar,
+  RefreshCw,
+  FileText,
+  Mail,
+  Eye,
+  Clock,
+  Users,
+  Pause,
+  Play,
+  RotateCw,
+  ChevronLeft,
+  ChevronRight,
+  ExternalLink,
+  Award,
+  Send,
+  Sparkles,
+  Info,
 } from "lucide-react";
+import { AiLoginIcon, AiRegisterIcon, AiAdminIcon, AdvancedAiLogo } from "./AiIcons";
+import { useSuccessPopup, useConfirmationDialog } from "./success-popup-context";
+import { ApplicationAiInsightsCard, AdminContentDrafter } from "./components/AdminAiAssistants";
 import {
   copy as c,
   Fields,
@@ -132,6 +156,7 @@ export function AuthPage({ initialTab = "Login" }) {
     [registerStep, setRegisterStep] = useState(0),
     [error, setError] = useState(null),
     [terms, setTerms] = useState(false);
+  const { showConfirmation, showSuccessPopup } = useConfirmationDialog();
   const intent = useRef("member");
   const authCardRef = useRef(null);
   const navigate = useNavigate();
@@ -189,12 +214,35 @@ export function AuthPage({ initialTab = "Login" }) {
           method: "POST",
           body: formData(payload),
         });
-      } else
+        showSuccessPopup({
+          heading: `Your ${values.registrationType?.replace(/^Register\s+/, "") || "Member"} Registration Form is Submitted Successfully!`,
+          message: "Your account registration has been received and recorded in our official database.",
+          category: values.registrationType?.toLowerCase() || "member",
+          referenceId: data.memberId || data.registrationId || null,
+          applicantName: values.fullName,
+          details: [
+            { label: "Account Category", value: values.registrationType || "Member" },
+            { label: "Registered Email", value: values.email },
+          ],
+        });
+      } else {
         data = await api(
           tab === "Admin" ? "/auth/admin-login" : "/auth/login",
           { method: "POST", body: values },
         );
-      setSession(data);
+        setSession(data);
+        if (tab === "Admin") {
+          showConfirmation({
+            type: "success",
+            title: "Welcome Back!",
+            message: "Admin login successful. Redirecting to your dashboard.",
+            actionText: "Go to Dashboard",
+            onAction: () => navigate("/admin"),
+            autoCloseMs: 1600,
+          });
+          return;
+        }
+      }
       if (tab === "Register") {
         if (values.registrationType === "Register Cadets" || intent.current === "enroll") navigate("/enroll");
         else navigate("/member");
@@ -208,6 +256,14 @@ export function AuthPage({ initialTab = "Login" }) {
             : "/member",
       );
     } catch (e) {
+      if (tab === "Admin") {
+        showConfirmation({
+          type: "error",
+          title: "Authentication Failed",
+          message: e.message || "Invalid administrator credentials. Please check your username and password and try again.",
+          actionText: "Try Again",
+        });
+      }
       applyErrors(e, form, setError);
     }
   }
@@ -266,36 +322,46 @@ export function AuthPage({ initialTab = "Login" }) {
           <p>{c.brand.tagline}</p>
           <p className="auth-motto">{c.brand.motto}</p>
         </div>
-        <div className="tab-bar" role="tablist" aria-label={c.nav[1].label}>
-          {c.auth.tabs.map((t) => (
-            <button
-              key={t}
-              id={`auth-tab-${t}`}
-              type="button"
-              role="tab"
-              aria-controls="auth-panel"
-              aria-selected={tab === t}
-              tabIndex={tab === t ? 0 : -1}
-              className={tab === t ? "active" : ""}
-              onClick={() => switchTab(t)}
-              onKeyDown={(e) => {
-                if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
-                  e.preventDefault();
-                  const next =
-                    c.auth.tabs[
-                      (c.auth.tabs.indexOf(tab) +
-                        (e.key === "ArrowRight" ? 1 : 2)) %
-                        3
-                    ];
-                  switchTab(next);
-                  document.getElementById(`auth-tab-${next}`)?.focus();
-                }
-              }}
-            >
-              {t === "Login" ? <LogIn aria-hidden="true" /> : t === "Register" ? <UserRoundPlus aria-hidden="true" /> : <ShieldCheck aria-hidden="true" />}
-              <span>{t}</span>
-            </button>
-          ))}
+        <div className="tab-bar auth-tab-bar" role="tablist" aria-label={c.nav[1].label}>
+          {c.auth.tabs.map((t) => {
+            const isTabActive = tab === t;
+            return (
+              <button
+                key={t}
+                id={`auth-tab-${t}`}
+                type="button"
+                role="tab"
+                aria-controls="auth-panel"
+                aria-selected={isTabActive}
+                tabIndex={isTabActive ? 0 : -1}
+                className={`tab-btn tab-btn-${t.toLowerCase()} ${isTabActive ? "active" : ""}`}
+                onClick={() => switchTab(t)}
+                onKeyDown={(e) => {
+                  if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+                    e.preventDefault();
+                    const next =
+                      c.auth.tabs[
+                        (c.auth.tabs.indexOf(tab) +
+                          (e.key === "ArrowRight" ? 1 : 2)) %
+                          3
+                      ];
+                    switchTab(next);
+                    document.getElementById(`auth-tab-${next}`)?.focus();
+                  }
+                }}
+              >
+                {t === "Login" ? (
+                  <AiLoginIcon aria-hidden="true" size={18} />
+                ) : t === "Register" ? (
+                  <AiRegisterIcon aria-hidden="true" size={18} />
+                ) : (
+                  <AiAdminIcon aria-hidden="true" size={18} />
+                )}
+                <span className="tab-text">{t}</span>
+                {isTabActive && <span className="ai-active-glow" aria-hidden="true" />}
+              </button>
+            );
+          })}
         </div>
         <div
           id="auth-panel"
@@ -304,7 +370,7 @@ export function AuthPage({ initialTab = "Login" }) {
         >
           {tab === "Register" ? <RegistrationPortal /> : <>
           <h2 className="icon-heading">
-            {tab === "Admin" ? <ShieldCheck aria-hidden="true" /> : tab === "Register" ? <UserRoundPlus aria-hidden="true" /> : <LogIn aria-hidden="true" />}
+            {tab === "Admin" ? <AiAdminIcon aria-hidden="true" size={26} /> : tab === "Register" ? <AiRegisterIcon aria-hidden="true" size={26} /> : <AiLoginIcon aria-hidden="true" size={26} />}
             {tab === "Register"
               ? registerStep === 0
                 ? c.auth.registerHeading
@@ -336,14 +402,6 @@ export function AuthPage({ initialTab = "Login" }) {
           )}
           <ErrorMessage error={error} />
           <form noValidate onSubmit={form.handleSubmit(submit)}>
-            {tab === "Register" && (
-              <div className="register-progress" aria-label={`Step ${registerStep + 1} of 3`}>
-                <div className="register-progress-track"><span style={{ width: `${((registerStep + 1) / 3) * 100}%` }} /></div>
-                <div className="register-step-labels">
-                  {["Account", "Personal details", "Application details"].map((label, index) => <span className={index <= registerStep ? "active" : ""} key={label}>{label}</span>)}
-                </div>
-              </div>
-            )}
             {tab === "Register" ? (() => {
               const type = form.watch("registrationType") || "Register Member";
               const typeFields = registrationDetails[type] || [];
@@ -379,13 +437,15 @@ export function AuthPage({ initialTab = "Login" }) {
                     }}>{c.demo.next}</Action>
                   ) : (
                     <>
-                      <Action type="button" disabled={form.formState.isSubmitting} onClick={() => submitRegistration("member")}>{form.formState.isSubmitting ? c.demo.loading : c.auth.create}</Action>
+                      <Action type="button" disabled={form.formState.isSubmitting} onClick={() => submitRegistration("member")}>
+                        {form.formState.isSubmitting ? c.demo.loading : <><AiRegisterIcon size={16} /> <span>{c.auth.create}</span></>}
+                      </Action>
                     </>
                   )}
                 </>
               ) : (
                 <Action disabled={form.formState.isSubmitting}>
-                  {form.formState.isSubmitting ? c.demo.loading : c.auth.signIn}
+                  {form.formState.isSubmitting ? c.demo.loading : tab === "Admin" ? <><AiAdminIcon size={16} /> <span>{c.auth.signIn}</span></> : <><AiLoginIcon size={16} /> <span>{c.auth.signIn}</span></>}
                 </Action>
               )}
             </div>
@@ -436,6 +496,7 @@ export function Donate() {
     [membershipType, setMembershipType] = useState("monthly"),
     [result, setResult] = useState(null),
     [error, setError] = useState(null);
+  const { showConfirmation, showSuccessPopup } = useConfirmationDialog();
   const form = useForm({ resolver: zodResolver(schemaFor(c.forms.pledge)) });
   async function submit(values) {
     setError(null);
@@ -449,6 +510,18 @@ export function Donate() {
         },
       });
       setResult(data);
+      showSuccessPopup({
+        heading: "Contribution & Support Pledge Received!",
+        message: "Your generous pledge helps empower rural youth, students, and society.",
+        category: "donation",
+        referenceId: data.reference || data._id,
+        applicantName: values.name || values.fullName,
+        details: [
+          { label: "Pledge Type", value: kind === "Membership" ? `Membership (${membershipType})` : "Donation" },
+          { label: "Pledged Amount", value: `₹${Number(values.amount || 0).toLocaleString("en-IN")}` },
+          { label: "Transaction Reference", value: data.reference || "Recorded" },
+        ],
+      });
       form.reset();
     } catch (e) {
       applyErrors(e, form, setError);
@@ -527,7 +600,7 @@ export function Donate() {
       {result && (
         <Success
           result={result}
-          title={c.demo.paymentSuccess}
+          title="Your Donation / Support Form is Submitted Successfully!"
           onClose={() => setResult(null)}
         />
       )}
@@ -537,6 +610,7 @@ export function Donate() {
 export function InternshipForm() {
   const [error, setError] = useState(null),
     [result, setResult] = useState(null);
+  const { showConfirmation, showSuccessPopup } = useConfirmationDialog();
   const form = useForm({
     resolver: zodResolver(schemaFor(c.forms.internship)),
   });
@@ -548,6 +622,18 @@ export function InternshipForm() {
         body: formData(values),
       });
       setResult(data);
+      showSuccessPopup({
+        heading: "Internship & Alumni Application Submitted Successfully!",
+        message: "Your application has been received and forwarded to our evaluation committee.",
+        category: "intern",
+        referenceId: data.registrationId || data._id,
+        applicantName: values.fullName,
+        details: [
+          { label: "Position Applied", value: values.position || "Internship" },
+          { label: "Email Address", value: values.email },
+          { label: "Contact Phone", value: values.phone },
+        ],
+      });
       form.reset();
     } catch (e) {
       applyErrors(e, form, setError);
@@ -585,7 +671,7 @@ export function InternshipForm() {
           </Action>
         </form>
       </Reveal>
-      {result && <Success result={result} onClose={() => setResult(null)} />}
+      {result && <Success result={result} title="Your Internship Application Form is Submitted Successfully!" onClose={() => setResult(null)} />}
     </Page>
   );
 }
@@ -593,6 +679,7 @@ export function Enrollment() {
   const [page, setPage] = useState(1),
     [result, setResult] = useState(null),
     [error, setError] = useState(null);
+  const { showConfirmation, showSuccessPopup } = useConfirmationDialog();
   const fields = c.demo.enrollmentFields;
   const form = useForm({
     resolver: zodResolver(schemaFor(fields)),
@@ -629,9 +716,20 @@ export function Enrollment() {
   async function submit(values) {
     setError(null);
     try {
-      setResult(
-        await api("/cadets", { method: "POST", body: formData(values) }),
-      );
+      const data = await api("/cadets", { method: "POST", body: formData(values) });
+      setResult(data);
+      showSuccessPopup({
+        heading: "Cadet Enrollment Submitted Successfully!",
+        message: "Your cadet enrollment application has been recorded in our official battalion records.",
+        category: "cadet",
+        referenceId: data.registrationId || data._id,
+        applicantName: values.fullName,
+        details: [
+          { label: "Cadet Registration ID", value: data.registrationId || "Assigned" },
+          { label: "Email Address", value: values.email },
+          { label: "Contact Phone", value: values.phone },
+        ],
+      });
       form.reset();
       setPage(1);
     } catch (e) {
@@ -743,10 +841,14 @@ function CadetSuccess({ result, onClose }) {
   const [copied, setCopied] = useState(false),
     [error, setError] = useState(null);
   return (
-    <Modal title={c.demo.cadetSuccess} onClose={onClose}>
+    <Modal title="Your Cadet Enrollment Form is Submitted Successfully!" onClose={onClose}>
       <p>{c.demo.cadetSubmitted}</p>
       <small>{c.demo.cadetRegistrationId}</small>
       <p className="registration-id">{result.registrationId}</p>
+      <div className="thank-you-support-card" style={{ margin: "16px 0", padding: "16px", background: "rgba(52, 211, 153, 0.12)", border: "1px solid rgba(52, 211, 153, 0.35)", borderRadius: "12px", textAlign: "center" }}>
+        <h4 style={{ margin: "0 0 6px 0", fontSize: "17px", fontWeight: "700", color: "#34d399" }}>Thank You for Your Support!</h4>
+        <p style={{ margin: 0, fontSize: "14px", color: "var(--text, #eaf1f4)", lineHeight: "1.5" }}>Your kindness and generosity help us create a better tomorrow.</p>
+      </div>
       <Action
         onClick={async () => {
           try {
@@ -780,12 +882,297 @@ function CadetSuccess({ result, onClose }) {
     </Modal>
   );
 }
+export function DigitalIdCard3D({ record = {}, onDownload, allowDownload = true, showControls = true }) {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [autoFlip, setAutoFlip] = useState(true);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    if (!autoFlip) return;
+    const interval = setInterval(() => {
+      setIsFlipped((prev) => !prev);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [autoFlip]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 12;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+    setTilt({ x: Number(x.toFixed(2)), y: Number(y.toFixed(2)) });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+  };
+
+  const regNo = record.registrationNumber || record.registrationId || record.memberId || "AGNI-MEM-2026-0001";
+  const categoryRaw = record.type || record.registrationType || record.category || "Member";
+  const isCadet = /cadet/i.test(categoryRaw);
+  const isVolunteer = /volunteer/i.test(categoryRaw);
+  const isIntern = /intern|alumni/i.test(categoryRaw);
+  const isMember = !isCadet && !isVolunteer && !isIntern;
+
+  const designation = isCadet ? "CADET" : isVolunteer ? "VOLUNTEER" : isIntern ? "INTERN & ALUMNI" : "MEMBER";
+
+  const formatIST = (input) => {
+    if (!input) return "—";
+    const d = new Date(input);
+    return Number.isNaN(d.valueOf()) ? String(input) : d.toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "2-digit", year: "numeric" });
+  };
+
+  const name = record.fullName || record.memberName || record.cadetName || "Valued Member";
+  const rank = record.rank || record.position || designation;
+  const institution = record.troopNo || record.institution || record.school || record.institute || record.details?.institution || record.registrationDetails?.institution || "ARWS Center";
+  const guardian = record.guardian || record.fatherName || record.details?.guardian || record.registrationDetails?.guardian || "—";
+  const address = record.address || record.residentialAddress || record.details?.address || record.registrationDetails?.address || "—";
+  const blood = record.bloodGroup || record.details?.bloodGroup || record.registrationDetails?.bloodGroup || "—";
+  const dob = formatIST(record.dob || record.details?.dob || record.registrationDetails?.dob);
+  const nationality = record.citizenship || record.nationality || "Indian";
+  const issueDate = formatIST(record.approvedAt || record.createdAt || new Date());
+  const enrollmentDate = formatIST(record.enrollmentDate || record.approvedAt || record.createdAt);
+  const validFrom = record.validFrom ? formatIST(record.validFrom) : issueDate;
+  const validUntil = record.validUntil ? formatIST(record.validUntil) : "Permanent";
+
+  const photoSrc = record.photoUrl || (record.photoFileId ? `/api/files/${record.photoFileId}` : (record.photo?.fileId ? `/api/files/${record.photo.fileId}` : null));
+  const cryptoHash = encodeURIComponent(regNo).replace(/[^a-zA-Z0-9]/g, "").padEnd(12, "0").slice(0, 12).toUpperCase();
+
+  return (
+    <div
+      className="id-card-3d-wrapper"
+      aria-label="Interactive 3D Digital Identity Card"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className={`id-card-3d-scene ${isFlipped ? "flipped" : ""}`}>
+        <div
+          className="id-card-3d-inner"
+          style={{
+            transform: isFlipped
+              ? `rotateY(${180 + tilt.x}deg) rotateX(${tilt.y}deg)`
+              : `rotateY(${tilt.x}deg) rotateX(${tilt.y}deg)`,
+          }}
+        >
+          {/* FRONT FACE */}
+          <div className="id-card-face id-card-front">
+            <div className="id-card-top-bar">
+              <div className="id-card-top-bar-shine" />
+            </div>
+            <div className="id-card-hologram-sweep" aria-hidden="true" />
+            <div className="id-card-circuit-bg" aria-hidden="true" />
+
+            <div className="id-card-front-content">
+              <div className="id-card-header-block">
+                <img src="/assets/logo.png" alt="Agni Logo" className="id-card-logo-front" />
+                <h4 className="id-card-brand-title">AGNI RURAL WELFARE SOCIETY</h4>
+                <p className="id-card-govt-regd">Govt. Regd. No. : S/1L/55059</p>
+                <div className="id-card-main-title">OFFICIAL IDENTITY CARD</div>
+                <p className="id-card-motto">Motto : Service to humanity is service to God</p>
+                <div className="id-card-security-badge" aria-hidden="true">
+                  <ShieldCheck size={10} />
+                  <span>SECURE AI VERIFIED</span>
+                </div>
+              </div>
+
+              <div className="id-card-categories-row">
+                <span className={`cat-item ${isMember ? "active" : ""}`}>MEMBER [{isMember ? "✓" : " "}]</span>
+                <span className={`cat-item ${isCadet ? "active" : ""}`}>CADET [{isCadet ? "✓" : " "}]</span>
+                <span className={`cat-item ${isVolunteer ? "active" : ""}`}>VOLUNTEER [{isVolunteer ? "✓" : " "}]</span>
+                <span className={`cat-item ${isIntern ? "active" : ""}`}>INTERN & ALUMNI [{isIntern ? "✓" : " "}]</span>
+              </div>
+
+              <div className="id-card-front-body">
+                <div className="id-card-left-col">
+                  <div className="id-card-photo-box">
+                    {photoSrc ? (
+                      <img src={photoSrc} alt={name} />
+                    ) : (
+                      <div className="id-card-photo-placeholder">
+                        <span>AFFIX PHOTO</span>
+                        <small style={{ display: "block", fontSize: "7px", marginTop: "2px" }}>OFFICIAL RECORD</small>
+                      </div>
+                    )}
+                    <div className="id-card-photo-corners" aria-hidden="true" />
+                    <div className="id-card-photo-scanline" aria-hidden="true" />
+                  </div>
+
+                  <div className="id-card-smart-chip" title="Cryptographic Microchip" aria-hidden="true">
+                    <div className="chip-pattern" />
+                  </div>
+                </div>
+
+                <div className="id-card-fields-front">
+                  <div className="id-card-row">
+                    <span className="id-card-label">Name</span>
+                    <span className="id-card-dots" />
+                    <span className="id-card-val">{name}</span>
+                  </div>
+                  <div className="id-card-row">
+                    <span className="id-card-label">Rank / Role</span>
+                    <span className="id-card-dots" />
+                    <span className="id-card-val">{rank}</span>
+                  </div>
+                  <div className="id-card-row">
+                    <span className="id-card-label">Regd. No.</span>
+                    <span className="id-card-dots" />
+                    <span className="id-card-val id-card-regno-val">{regNo}</span>
+                  </div>
+                  <div className="id-card-row">
+                    <span className="id-card-label">Institution / Troop</span>
+                    <span className="id-card-dots" />
+                    <span className="id-card-val" style={{ maxWidth: "160px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{institution}</span>
+                  </div>
+                  <div className="id-card-row">
+                    <span className="id-card-label">Date of Issue</span>
+                    <span className="id-card-dots" />
+                    <span className="id-card-val">{issueDate}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="id-card-signature-line">
+                <span className="id-card-crypto-pill">ENCRYPTED ID: {cryptoHash}</span>
+                <span>Signature of Issuing Authority : ____________________</span>
+              </div>
+            </div>
+          </div>
+
+          {/* BACK FACE */}
+          <div className="id-card-face id-card-back">
+            <div className="id-card-top-bar">
+              <div className="id-card-top-bar-shine" />
+            </div>
+            <div className="id-card-hologram-sweep" aria-hidden="true" />
+            <div className="id-card-circuit-bg" aria-hidden="true" />
+
+            <div className="id-card-back-content">
+              <div className="id-card-back-header">
+                <span className="id-card-back-brand">AGNI RURAL WELFARE SOCIETY</span>
+                <span className="id-card-back-regd">Regd. No.: {regNo}</span>
+              </div>
+
+              <div className="id-card-back-grid">
+                <div className="id-card-row full">
+                  <span className="id-card-label">Father’s / Guardian Name:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{guardian}</span>
+                </div>
+                <div className="id-card-row full">
+                  <span className="id-card-label">Address:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val" style={{ maxWidth: "340px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{address}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Blood Group:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{blood}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Date of Birth:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{dob}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Nationality:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{nationality}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Date of Enrollment:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{enrollmentDate}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Valid From:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{validFrom}</span>
+                </div>
+                <div className="id-card-row">
+                  <span className="id-card-label">Valid Until:</span>
+                  <span className="id-card-dots" />
+                  <span className="id-card-val">{validUntil}</span>
+                </div>
+              </div>
+
+              <div className="id-card-back-footer">
+                <div className="id-card-helpline-box">
+                  <div className="id-card-helpline-title">ORGANIZATION CONTACT & HELPLINE</div>
+                  <div>AGNI RURAL WELFARE SOCIETY · Govt Regd No: S/1L/55059</div>
+                  <div>Address: Sonarpur, Baruipur Sub-Division, South 24 Parganas, Kolkata, West Bengal</div>
+                  <div>Helpline: +91 9433834013 · Email: contact@agniruralwelfare.org</div>
+                  <div className="id-card-back-disclaimer">
+                    This card remains society property. If found, please return to address above.
+                  </div>
+                </div>
+
+                <div className="id-card-qr-box">
+                  <div className="id-card-qr-frame">
+                    <img src={`/api/verify/${encodeURIComponent(regNo)}/qr`} alt="Verification QR Code" />
+                    <div className="qr-scanner-line" aria-hidden="true" />
+                  </div>
+                  <span>Scan to Verify</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {showControls && (
+        <div className="id-card-controls">
+          <button
+            type="button"
+            className={`id-btn ${!isFlipped ? "active" : ""}`}
+            onClick={() => {
+              setIsFlipped(false);
+              setAutoFlip(false);
+            }}
+          >
+            View Front
+          </button>
+          <button
+            type="button"
+            className={`id-btn ${isFlipped ? "active" : ""}`}
+            onClick={() => {
+              setIsFlipped(true);
+              setAutoFlip(false);
+            }}
+          >
+            View Back
+          </button>
+          <button
+            type="button"
+            className={`id-btn id-btn-auto ${autoFlip ? "playing" : "paused"}`}
+            onClick={() => setAutoFlip((v) => !v)}
+            title="Toggle 5-second automatic alternating flip"
+          >
+            {autoFlip ? <Pause size={13} /> : <Play size={13} />}
+            <span>{autoFlip ? "Auto-Flip (5s)" : "Auto-Flip Paused"}</span>
+          </button>
+          {allowDownload && onDownload && (
+            <button
+              type="button"
+              className="id-btn"
+              style={{ background: "#0d6b61", color: "#fff", borderColor: "#0d6b61" }}
+              onClick={onDownload}
+            >
+              <Download size={14} />
+              Download PDF
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Member() {
   const { user, logout } = useAuth();
   const [photo, setPhoto] = useState(null);
   const [error, setError] = useState(null),
     [applications, setApplications] = useState([]);
   const [busy, setBusy] = useState(false);
+
   useEffect(() => {
     api("/auth/me").then(setSession).catch(setError);
     api("/cadets/mine").then(setApplications).catch(setError);
@@ -803,61 +1190,80 @@ export function Member() {
       if (url) URL.revokeObjectURL(url);
     };
   }, []);
+
   async function idCard() {
     setError(null);
     setBusy(true);
     try {
-      await download("/members/id-card", "agni-id-card.pdf");
+      await download("/members/id-card", `agni-id-card-${user.registrationNumber || user.memberId || "card"}.pdf`);
     } catch (e) {
       setError(e);
     } finally {
       setBusy(false);
     }
   }
+
+  const isApproved = user.status === "approved" || user.status === "accepted";
+  const isRejected = user.status === "rejected";
+
   return (
     <Page title={c.demo.profile} intro={c.brand.tagline}>
       <div className="member-layout">
-        {user.status === "approved" ? <Reveal className="glass member-id">
-          <div className="id-top">
-            <img src="/assets/logo.png" alt={c.brand.name} />
-            <ShieldCheck size={24} />
-          </div>
-          <small>{c.demo.idHeading}</small>
-          {photo && (
-            <img className="member-photo" src={photo} alt={user.fullName} />
-          )}
-          <p>{c.brand.motto}</p>
-          <h2>{user.fullName}</h2>
-          <p className="muted">@{user.username}</p>
-          <p className="registration-id">{user.memberId}</p>
-          <dl className="review-fields">
-            {[
-              ...c.demo.idFields,
-              { name: "registrationType", label: "Designation / Rank :", value: (user.registrationType || "Register Member").replace(/^Register /, "") },
-              { name: "institution", label: "Institution :", value: user.registrationDetails?.institution || user.registrationDetails?.memberInstitution || user.registrationDetails?.collegeUniversity || user.registrationDetails?.institute },
-            ].map((f) => (
-              <div key={f.name}>
-                <dt>{f.label}</dt>
-                <dd>{f.value || user[f.name] || "—"}</dd>
+        {isApproved ? (
+          <Reveal className="glass member-id-wrap" style={{ padding: "28px", borderRadius: "20px" }}>
+            <div style={{ textAlign: "center", marginBottom: "22px" }}>
+              <span className="status-badge status-accepted" style={{ marginBottom: "8px" }}>
+                <CheckCircle2 size={14} /> Registration Approved
+              </span>
+              <h2>Welcome, {user.fullName}!</h2>
+              <p className="lead" style={{ margin: "4px 0 0" }}>
+                Official AGNI Rural Welfare Society Digital Identity Card
+              </p>
+            </div>
+
+            <DigitalIdCard3D
+              record={{
+                ...user,
+                photoUrl: photo,
+              }}
+              allowDownload={true}
+              onDownload={idCard}
+            />
+          </Reveal>
+        ) : (
+          <Reveal className="glass member-id member-approval-state">
+            <div className="id-top">
+              <img src="/assets/logo.png" alt={c.brand.name} />
+              <ShieldCheck size={24} />
+            </div>
+            <h2>{isRejected ? c.demo.applicationDeclined : c.demo.applicationPending}</h2>
+            <p>{isRejected ? (user.rejectionReason ? `Reason: ${user.rejectionReason}` : c.demo.applicationDeclinedText) : c.demo.applicationPendingText}</p>
+            <dl className="review-fields">
+              <div>
+                <dt>{c.demo.registrationId}</dt>
+                <dd>{user.memberId}</dd>
               </div>
-            ))}
-          </dl>
-          {c.demo.dataNotice && <small>{c.demo.dataNotice}</small>}
-        </Reveal> : <Reveal className="glass member-id member-approval-state">
-          <div className="id-top"><img src="/assets/logo.png" alt={c.brand.name} /><ShieldCheck size={24} /></div>
-          <h2>{user.status === "rejected" ? c.demo.applicationDeclined : c.demo.applicationPending}</h2>
-          <p>{user.status === "rejected" ? c.demo.applicationDeclinedText : c.demo.applicationPendingText}</p>
-          <dl className="review-fields"><div><dt>{c.demo.registrationId}</dt><dd>{user.memberId}</dd></div><div><dt>{c.demo.statusLabel}</dt><dd>{user.status || "approved"}</dd></div></dl>
-        </Reveal>}
+              <div>
+                <dt>{c.demo.statusLabel}</dt>
+                <dd className={`status ${user.status}`}>{user.status || "pending"}</dd>
+              </div>
+            </dl>
+          </Reveal>
+        )}
+
         <Reveal className="member-actions">
           <ErrorMessage error={error} />
-          {user.status === "approved" && <>
-            <Action disabled={busy} onClick={idCard}>
-              <Download size={18} />
-              {busy ? c.demo.loading : c.demo.download}
-            </Action>
-            <Action to={`/verify/${user.memberId}`} className="secondary">{c.demo.openVerification}</Action>
-          </>}
+          {isApproved && (
+            <>
+              <Action disabled={busy} onClick={idCard}>
+                <Download size={18} />
+                {busy ? c.demo.loading : c.demo.download}
+              </Action>
+              <Action to={`/verify/${user.registrationNumber || user.memberId}`} className="secondary">
+                {c.demo.openVerification}
+              </Action>
+            </>
+          )}
           <Action to="/enroll" className="secondary">
             {c.demo.enroll}
           </Action>
@@ -867,6 +1273,7 @@ export function Member() {
           </button>
         </Reveal>
       </div>
+
       {applications.length > 0 && (
         <div className="records">
           <h2>{c.demo.statsLabels[1]}</h2>
@@ -874,7 +1281,11 @@ export function Member() {
             <article className="glass record" key={a.registrationId}>
               <code>{a.registrationId}</code>
               <span className={`status ${a.status}`}>{a.status}</span>
-              {a.status === "approved" && <Action onClick={() => download(`/cadets/${a.registrationId}/id-card`, `agni-cadet-${a.registrationId}.pdf`).catch(setError)}><Download size={16} />{c.demo.download}</Action>}
+              {a.status === "approved" && (
+                <Action onClick={() => download(`/cadets/${a.registrationId}/id-card`, `agni-cadet-${a.registrationId}.pdf`).catch(setError)}>
+                  <Download size={16} />{c.demo.download}
+                </Action>
+              )}
             </article>
           ))}
         </div>
@@ -929,15 +1340,110 @@ function Counter({ value }) {
   }, [value, inView, reduced]);
   return <strong ref={ref}>{n}</strong>;
 }
+
+function EmailStatusCard({ item, busy, onRetry }) {
+  if (!item?.emailStatus) return null;
+
+  const isSent = item.emailStatus === "sent";
+  const isFailed = item.emailStatus === "failed";
+  const isPending = item.emailStatus === "pending";
+  const isUnconfigured = item.emailStatus === "not_configured";
+
+  const statusType = isSent ? "sent" : isFailed ? "failed" : isUnconfigured ? "unconfigured" : "pending";
+
+  const title = isSent
+    ? "Official Email Delivered"
+    : isFailed
+      ? "Email Delivery Failed"
+      : isUnconfigured
+        ? "SMTP Configuration Required"
+        : "Email Notification Pending";
+
+  const description = isSent
+    ? `Official notification and digital ID card have been delivered through the configured SMTP provider to ${item.email || "applicant"}.`
+    : isFailed
+      ? (item.emailError || "The SMTP server rejected the delivery or timed out. Check recipient address and server logs.")
+      : isUnconfigured
+        ? "Real SMTP delivery is pending. Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS in server/.env to enable live email delivery."
+        : "The email notification is queued and awaiting delivery.";
+
+  return (
+    <div className={`email-status-card status-${statusType}`} role="status">
+      <div className="email-status-icon-col">
+        {isSent && <CheckCircle2 size={24} style={{ color: "#10b981" }} />}
+        {isFailed && <AlertCircle size={24} style={{ color: "#ef4444" }} />}
+        {isUnconfigured && <Info size={24} style={{ color: "#3b82f6" }} />}
+        {isPending && <Clock size={24} style={{ color: "#f59e0b" }} />}
+      </div>
+      <div className="email-status-content-col">
+        <h4 className="email-status-title">{title}</h4>
+        <p className="email-status-desc">{description}</p>
+        {item.emailSentAt && (
+          <div className="email-status-meta">
+            Attempted: {new Date(item.emailSentAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" })}
+          </div>
+        )}
+      </div>
+      <div className="email-status-action-col">
+        <button
+          type="button"
+          className="button secondary email-retry-btn"
+          disabled={busy}
+          onClick={() => onRetry(item)}
+          title="Retry email delivery to applicant"
+        >
+          <RefreshCw size={14} className={busy ? "spin" : ""} />
+          <span>{busy ? "Retrying..." : "Retry Email"}</span>
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function Admin() {
   const { logout } = useAuth();
-  const [stats, setStats] = useState(null),
-    [tab, setTab] = useState("applications"),
-    [records, setRecords] = useState([]),
-    [error, setError] = useState(null),
-    [loading, setLoading] = useState(true),
-    [busy, setBusy] = useState(false),
-    [saved, setSaved] = useState(false);
+  const { showConfirmation, showSuccessPopup } = useConfirmationDialog();
+  const [stats, setStats] = useState(null);
+  const [tab, setTab] = useState("all");
+  const [records, setRecords] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [busy, setBusy] = useState(false);
+  const [actionId, setActionId] = useState(null);
+  const [saved, setSaved] = useState(false);
+  const [toastNotice, setToastNotice] = useState(null);
+
+  // Filters state
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [presetRange, setPresetRange] = useState("all");
+  const [dayFilter, setDayFilter] = useState("all");
+  const [monthFilter, setMonthFilter] = useState("all");
+  const [yearFilter, setYearFilter] = useState("all");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  // Table view & pagination
+  const [viewMode, setViewMode] = useState("table");
+  const [sortField, setSortField] = useState("createdAt");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+
+  // Modals state
+  const [detailsModalItem, setDetailsModalItem] = useState(null);
+  const [cardModalItem, setCardModalItem] = useState(null);
+  const [acceptModalItem, setAcceptModalItem] = useState(null);
+  const [acceptRegNo, setAcceptRegNo] = useState("");
+  const [acceptValidFrom, setAcceptValidFrom] = useState("");
+  const [acceptValidUntil, setAcceptValidUntil] = useState("");
+  const [acceptError, setAcceptError] = useState(null);
+
+  const [declineModalItem, setDeclineModalItem] = useState(null);
+  const [declineReason, setDeclineReason] = useState("");
+  const [previewPhoto, setPreviewPhoto] = useState(null);
+
   const form = useForm({
     resolver: zodResolver(
       schemaFor([
@@ -951,18 +1457,36 @@ export function Admin() {
       ]),
     ),
   });
-  useEffect(() => {
+
+  const loadData = () => {
     let live = true;
     setLoading(true);
     setError(null);
+
+    if (tab === "content-drafter") {
+      api("/admin/stats")
+        .then((s) => {
+          if (live) setStats(s);
+        })
+        .catch(() => {})
+        .finally(() => {
+          if (live) setLoading(false);
+        });
+      return () => {
+        live = false;
+      };
+    }
+
+    const dataEndpoint = tab === "gallery" ? "/gallery" : (tab === "pledges" ? "/admin/pledges" : "/admin/applications");
+
     Promise.all([
       api("/admin/stats"),
-      api(tab === "gallery" ? "/gallery" : `/admin/${tab}`),
+      api(dataEndpoint),
     ])
       .then(([s, r]) => {
         if (live) {
           setStats(s);
-          setRecords(r);
+          setRecords(Array.isArray(r) ? r : []);
         }
       })
       .catch((e) => {
@@ -971,55 +1495,366 @@ export function Admin() {
       .finally(() => {
         if (live) setLoading(false);
       });
+
     return () => {
       live = false;
     };
+  };
+
+  useEffect(() => {
+    return loadData();
   }, [tab]);
-  async function decision(id, status) {
-    setBusy(true);
-    setError(null);
-    try {
-      const item = records.find((record) => record._id === id);
-      let route = `/admin/${tab}/${id}`;
-      if (tab === "applications" && item) {
-        const sources = {
-          "Account registration": "accounts",
-          "Cadet enrollment": "cadets",
-          "Internship application": "internships",
-          "Registration application": "submissions",
-        };
-        const source = sources[item.source];
-        const recordId = String(item._id).slice(String(item._id).indexOf(":") + 1);
-        route = `/admin/applications/${source}/${recordId}`;
+
+  const formatIST = (input) => {
+    if (!input) return "—";
+    const d = new Date(input);
+    return Number.isNaN(d.valueOf()) ? String(input) : d.toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
+  };
+
+  const handleOpenAccept = (item) => {
+    setAcceptModalItem(item);
+    setAcceptRegNo(item.registrationNumber || item.registrationId || item.memberId || "");
+    const todayStr = new Date().toISOString().split("T")[0];
+    const oneYearLater = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+    setAcceptValidFrom(item.validFrom || todayStr);
+    setAcceptValidUntil(item.validUntil || oneYearLater);
+    setAcceptError(null);
+  };
+
+  const handleAcceptConfirm = async () => {
+    if (!acceptModalItem) return;
+    setAcceptError(null);
+    const trimmedRegNo = (acceptRegNo || "").trim();
+    if (!trimmedRegNo) {
+      setAcceptError("Please enter or verify the Official Registration Number.");
+      return;
+    }
+    if (acceptValidFrom && acceptValidUntil) {
+      if (new Date(acceptValidUntil) < new Date(acceptValidFrom)) {
+        setAcceptError("Valid Until date must be on or after Valid From date.");
+        return;
       }
-      const updated = await api(route, {
-        method: "PATCH",
-        body: { status },
+    }
+
+    setBusy(true);
+    setActionId(acceptModalItem._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${acceptModalItem.source}/${acceptModalItem.recordId}/accept`, {
+        method: "POST",
+        body: {
+          registrationNumber: trimmedRegNo,
+          validFrom: acceptValidFrom,
+          validUntil: acceptValidUntil,
+        },
       });
-      setRecords((r) => r.map((record) => {
-        if (record._id === id) return { ...record, ...updated };
-        if (updated.linkedAccountId && record._id === `account:${updated.linkedAccountId}`)
-          return { ...record, status: updated.linkedAccountStatus || record.status };
-        return record;
-      }));
+
+      const updatedRecord = { ...acceptModalItem, ...res, status: "accepted" };
+      setRecords((prev) =>
+        prev.map((r) => (r._id === acceptModalItem._id ? updatedRecord : r))
+      );
+      if (detailsModalItem && detailsModalItem._id === acceptModalItem._id) {
+        setDetailsModalItem(updatedRecord);
+      }
+      setToastNotice(`✓ Application for ${acceptModalItem.fullName} approved. Registration Number ${res.registrationNumber || res.registrationId} assigned.`);
+      setAcceptModalItem(null);
+      api("/admin/stats").then(setStats).catch(() => {});
+
+      showSuccessPopup({
+        heading: "Application Accepted Successfully!",
+        message: `Official Registration Number ${res.registrationNumber || res.registrationId} assigned to ${acceptModalItem.fullName}.`,
+        category: (acceptModalItem.category || "member").toLowerCase(),
+        referenceId: res.registrationNumber || res.registrationId,
+        applicantName: acceptModalItem.fullName,
+        actionText: "Generate ID Card Now",
+        onAction: () => handleGenerateIdCard(updatedRecord),
+        details: [
+          { label: "Applicant Name", value: acceptModalItem.fullName },
+          { label: "Registration Type", value: acceptModalItem.category },
+          { label: "Assigned Regd. No.", value: res.registrationNumber || res.registrationId },
+          { label: "Valid From", value: res.validFrom || acceptValidFrom },
+          { label: "Valid Until", value: res.validUntil || acceptValidUntil },
+        ],
+      });
+    } catch (e) {
+      setAcceptError(e.message || "Failed to accept application.");
+    } finally {
+      setBusy(false);
+      setActionId(null);
+    }
+  };
+
+  const handleGenerateIdCard = async (item) => {
+    setBusy(true);
+    setActionId(item._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${item.source}/${item.recordId}/generate-id-card`, {
+        method: "POST",
+      });
+      const updated = { ...item, idCardFileId: res.idCardFileId, idCardGeneratedAt: res.idCardGeneratedAt };
+      setRecords((prev) => prev.map((r) => (r._id === item._id ? updated : r)));
+      if (detailsModalItem && detailsModalItem._id === item._id) {
+        setDetailsModalItem(updated);
+      }
+      setToastNotice(`✓ Official 2-sided ID Card PDF generated for ${item.fullName}. Ready for download and approval email.`);
+
+      showSuccessPopup({
+        heading: "Official ID Card Generated!",
+        message: `High-resolution double-sided ID Card with QR verification has been generated for ${item.fullName}.`,
+        category: (item.category || "member").toLowerCase(),
+        referenceId: item.registrationNumber || item.registrationId,
+        applicantName: item.fullName,
+        actionText: "Preview 3D ID Card",
+        onAction: () => setCardModalItem(updated),
+        details: [
+          { label: "Applicant Name", value: item.fullName },
+          { label: "Registration ID", value: item.registrationNumber || item.registrationId },
+          { label: "Status", value: "Verified & Generated" },
+        ],
+      });
     } catch (e) {
       setError(e);
     } finally {
       setBusy(false);
+      setActionId(null);
     }
-  }
-  async function exportCSV() {
+  };
+
+  const handleSendApprovalEmail = async (item) => {
+    setBusy(true);
+    setActionId(item._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${item.source}/${item.recordId}/send-approval-email`, {
+        method: "POST",
+      });
+      const updated = {
+        ...item,
+        approvalEmailStatus: res.approvalEmailStatus,
+        acceptanceEmailSent: res.acceptanceEmailSent,
+        emailStatus: res.emailStatus,
+        emailError: res.emailError,
+        emailSentAt: res.emailSentAt,
+      };
+      setRecords((prev) => prev.map((r) => (r._id === item._id ? updated : r)));
+      if (detailsModalItem && detailsModalItem._id === item._id) {
+        setDetailsModalItem(updated);
+      }
+      if (res.success) {
+        setToastNotice(`✓ Approval email with ID card attached successfully delivered to ${item.email}.`);
+        showConfirmation({
+          type: "success",
+          title: "Approval Email Successfully Delivered",
+          message: `Official acceptance notice and verified 2-sided digital ID card have been delivered through the configured SMTP provider to ${item.email}.`,
+          actionText: "Done",
+        });
+      } else if (res.notConfigured || res.approvalEmailStatus === "not_configured") {
+        setToastNotice(`ℹ Approval email recorded. (Real SMTP requires credentials in server/.env).`);
+        showConfirmation({
+          type: "info",
+          title: "SMTP Configuration Required",
+          message: "Approval status was updated, but SMTP credentials are not configured in server/.env. Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS to enable live email delivery.",
+          actionText: "Understood",
+        });
+      } else {
+        setToastNotice(`⚠ Email delivery attempt: ${res.emailError || "Check mail logs"}`);
+        showConfirmation({
+          type: "error",
+          title: "Email Delivery Failed",
+          message: res.emailError || "The SMTP server rejected delivery. Please verify recipient address and server settings.",
+          actionText: "Close",
+        });
+      }
+    } catch (e) {
+      setError(e);
+      showConfirmation({
+        type: "error",
+        title: "Dispatch Request Failed",
+        message: e.message || "Failed to trigger approval email dispatch.",
+        actionText: "Close",
+      });
+    } finally {
+      setBusy(false);
+      setActionId(null);
+    }
+  };
+
+  const handleDeclineConfirm = async () => {
+    if (!declineModalItem) return;
+    setBusy(true);
+    setActionId(declineModalItem._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${declineModalItem.source}/${declineModalItem.recordId}/decline`, {
+        method: "POST",
+        body: { reason: declineReason },
+      });
+      const updated = { ...declineModalItem, ...res, status: "rejected" };
+      setRecords((prev) =>
+        prev.map((r) => (r._id === declineModalItem._id ? updated : r))
+      );
+      if (detailsModalItem && detailsModalItem._id === declineModalItem._id) {
+        setDetailsModalItem(updated);
+      }
+      setToastNotice(`Application for ${declineModalItem.fullName} has been declined.`);
+      setDeclineModalItem(null);
+      setDeclineReason("");
+      api("/admin/stats").then(setStats).catch(() => {});
+
+      showConfirmation({
+        type: "warning",
+        title: "Application Declined",
+        message: `Application for ${declineModalItem.fullName} has been recorded as declined.`,
+        actionText: "Close",
+      });
+    } catch (e) {
+      setError(e);
+      showConfirmation({
+        type: "error",
+        title: "Decline Failed",
+        message: e.message || "Could not decline application.",
+        actionText: "Close",
+      });
+    } finally {
+      setBusy(false);
+      setActionId(null);
+    }
+  };
+
+  const handleSendRejectionEmail = async (item) => {
+    setBusy(true);
+    setActionId(item._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${item.source}/${item.recordId}/send-rejection-email`, {
+        method: "POST",
+      });
+      const updated = {
+        ...item,
+        rejectionEmailStatus: res.rejectionEmailStatus,
+        rejectionEmailSent: res.rejectionEmailSent,
+        emailStatus: res.emailStatus,
+        emailError: res.emailError,
+        emailSentAt: res.emailSentAt,
+      };
+      setRecords((prev) => prev.map((r) => (r._id === item._id ? updated : r)));
+      if (detailsModalItem && detailsModalItem._id === item._id) {
+        setDetailsModalItem(updated);
+      }
+      if (res.success) {
+        setToastNotice(`✓ Rejection email successfully dispatched to ${item.email}.`);
+        showConfirmation({
+          type: "success",
+          title: "Rejection Notice Dispatched",
+          message: `Official application update email has been delivered to ${item.email}.`,
+          actionText: "Done",
+        });
+      } else if (res.notConfigured || res.rejectionEmailStatus === "not_configured") {
+        setToastNotice(`ℹ Rejection email status: ${res.rejectionEmailStatus}`);
+        showConfirmation({
+          type: "info",
+          title: "SMTP Configuration Required",
+          message: "Rejection status recorded, but SMTP credentials are not configured in server/.env. Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS for live email dispatch.",
+          actionText: "Understood",
+        });
+      } else {
+        setToastNotice(`⚠ Email delivery: ${res.emailError || "Check mail logs"}`);
+        showConfirmation({
+          type: "error",
+          title: "Email Delivery Failed",
+          message: res.emailError || "The SMTP server rejected delivery of the rejection notice.",
+          actionText: "Close",
+        });
+      }
+    } catch (e) {
+      setError(e);
+      showConfirmation({
+        type: "error",
+        title: "Dispatch Request Failed",
+        message: e.message || "Failed to trigger rejection email dispatch.",
+        actionText: "Close",
+      });
+    } finally {
+      setBusy(false);
+      setActionId(null);
+    }
+  };
+
+  const handleRetryEmail = async (item) => {
+    setBusy(true);
+    setActionId(item._id);
+    setError(null);
+    try {
+      const res = await api(`/admin/applications/${item.source}/${item.recordId}/retry-email`, {
+        method: "POST",
+      });
+      const updated = { ...item, ...res };
+      setRecords((prev) => prev.map((r) => (r._id === item._id ? updated : r)));
+      if (detailsModalItem && detailsModalItem._id === item._id) {
+        setDetailsModalItem(updated);
+      }
+      setToastNotice(`Email delivery re-attempted: ${res.emailStatus}.`);
+      if (res.success) {
+        showConfirmation({
+          type: "success",
+          title: "Email Successfully Re-sent",
+          message: `The official notification has been successfully delivered through SMTP to ${item.email}.`,
+          actionText: "Done",
+        });
+      } else if (res.notConfigured) {
+        showConfirmation({
+          type: "info",
+          title: "SMTP Configuration Required",
+          message: "Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS in server/.env before retrying delivery.",
+          actionText: "Understood",
+        });
+      } else {
+        showConfirmation({
+          type: "error",
+          title: "Email Retry Failed",
+          message: res.emailError || "SMTP server failed to deliver the email. Please check network and mail server settings.",
+          actionText: "Close",
+        });
+      }
+    } catch (e) {
+      setError(e);
+      showConfirmation({
+        type: "error",
+        title: "Retry Request Failed",
+        message: e.message || "Failed to re-attempt email delivery.",
+        actionText: "Close",
+      });
+    } finally {
+      setBusy(false);
+      setActionId(null);
+    }
+  };
+
+  const handleDownloadIdCard = async (item) => {
+    setError(null);
+    try {
+      const regId = item.registrationNumber || item.registrationId || item.memberId || "id-card";
+      await download(`/admin/applications/${item.source}/${item.recordId}/id-card`, `agni-${regId}.pdf`);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  const exportCSV = async () => {
     setError(null);
     setBusy(true);
     try {
-      await download(`/admin/${tab}/export`, `${tab}.csv`);
+      const target = tab === "pledges" ? "pledges" : "applications";
+      await download(`/admin/${target}/export`, `${target}.csv`);
     } catch (e) {
       setError(e);
     } finally {
       setBusy(false);
     }
-  }
-  async function uploadImage(values) {
+  };
+
+  const uploadImage = async (values) => {
     setError(null);
     setSaved(false);
     try {
@@ -1033,61 +1868,345 @@ export function Admin() {
     } catch (e) {
       applyErrors(e, form, setError);
     }
-  }
-  async function cv(id) {
-    setError(null);
-    try {
-      await download(`/admin/internships/${id}/cv`, "application-cv.pdf");
-    } catch (e) {
-      setError(e);
+  };
+
+  // Filter application records
+  const filteredRecords = records.filter((item) => {
+    if (tab === "gallery" || tab === "pledges") return true;
+
+    // Tab category filter
+    if (tab === "members" && item.category !== "Members") return false;
+    if (tab === "cadets" && item.category !== "Cadets") return false;
+    if (tab === "volunteers" && item.category !== "Volunteers") return false;
+    if (tab === "interns" && item.category !== "Intern & Alumni") return false;
+
+    // Dropdown category filter
+    if (tab === "all" && categoryFilter !== "all" && item.category !== categoryFilter) return false;
+
+    // Status filter
+    if (statusFilter !== "all" && item.status !== statusFilter) return false;
+
+    // Text search
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      const matchName = (item.fullName || "").toLowerCase().includes(q);
+      const matchEmail = (item.email || "").toLowerCase().includes(q);
+      const matchPhone = (item.phone || "").toLowerCase().includes(q);
+      const matchId = (item.registrationId || "").toLowerCase().includes(q);
+      const matchRegNo = (item.registrationNumber || "").toLowerCase().includes(q);
+      if (!matchName && !matchEmail && !matchPhone && !matchId && !matchRegNo) return false;
     }
-  }
+
+    const created = new Date(item.createdAt || 0);
+
+    // Preset Date Range Filter
+    if (presetRange === "today") {
+      const now = new Date();
+      if (created.toDateString() !== now.toDateString()) return false;
+    } else if (presetRange === "thisWeek") {
+      const now = new Date();
+      const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      if (created < oneWeekAgo) return false;
+    } else if (presetRange === "thisMonth") {
+      const now = new Date();
+      if (created.getMonth() !== now.getMonth() || created.getFullYear() !== now.getFullYear()) return false;
+    } else if (presetRange === "custom") {
+      if (startDate && created < new Date(startDate)) return false;
+      if (endDate && created > new Date(`${endDate}T23:59:59`)) return false;
+    }
+
+    // Granular Day, Month, Year
+    if (dayFilter !== "all") {
+      if (created.getDate() !== Number(dayFilter)) return false;
+    }
+    if (monthFilter !== "all") {
+      if (created.getMonth() + 1 !== Number(monthFilter)) return false;
+    }
+    if (yearFilter !== "all") {
+      if (created.getFullYear() !== Number(yearFilter)) return false;
+    }
+
+    return true;
+  }).sort((a, b) => {
+    let cmp = 0;
+    if (sortField === "fullName") {
+      cmp = (a.fullName || "").localeCompare(b.fullName || "");
+    } else if (sortField === "status") {
+      cmp = (a.status || "").localeCompare(b.status || "");
+    } else if (sortField === "registrationId") {
+      cmp = (a.registrationNumber || a.registrationId || "").localeCompare(b.registrationNumber || b.registrationId || "");
+    } else {
+      cmp = new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+    }
+    return sortOrder === "asc" ? -cmp : cmp;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredRecords.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const paginatedRecords = filteredRecords.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+  const applicationTabs = [
+    { id: "all", label: "All Applications" },
+    { id: "members", label: "Members" },
+    { id: "cadets", label: "Cadets" },
+    { id: "volunteers", label: "Volunteers" },
+    { id: "interns", label: "Intern & Alumni" },
+    { id: "pledges", label: "Pledges" },
+    { id: "gallery", label: "Gallery" },
+    { id: "content-drafter", label: "Content Drafter" },
+  ];
+
   return (
-    <Page title={c.demo.admin} intro={c.demo.approvalNote}>
+    <Page title="Administrator Portal" intro="Centralized application management, automated unique ID assignment, multi-step verification, approval/rejection email automation, and 3D digital ID card generation.">
       <div className="admin-top">
         <Link to="/member">{c.demo.idHeading}</Link>
         <button className="text-button" onClick={logout}>
           {c.demo.logout}
         </button>
       </div>
-      <div className="stats-grid">
-        {["applicants", "members", "cadets", "volunteers", "internships", "pledges"].map((key, i) => (
-          <div className="glass stat" key={key}>
-            <span>0{i + 1}</span>
-            <Counter value={stats?.[key] || 0} />
-            <p>{c.demo.statsLabels[i]}</p>
-          </div>
-        ))}
+
+      {/* MODULE 1: 8 Live Statistics Cards */}
+      <div className="admin-stats-overview" aria-label="Live database registration metrics">
+        <div className="admin-stat-card">
+          <span className="stat-num">{stats?.totalApplications ?? stats?.applicants ?? 0}</span>
+          <span className="stat-label">Total Registrations</span>
+        </div>
+        <div className="admin-stat-card stat-pending">
+          <span className="stat-num">{stats?.pending ?? 0}</span>
+          <span className="stat-label">Pending</span>
+        </div>
+        <div className="admin-stat-card stat-accepted">
+          <span className="stat-num">{stats?.accepted ?? 0}</span>
+          <span className="stat-label">Approved</span>
+        </div>
+        <div className="admin-stat-card stat-rejected">
+          <span className="stat-num">{stats?.rejected ?? 0}</span>
+          <span className="stat-label">Rejected</span>
+        </div>
+        <div className="admin-stat-card">
+          <span className="stat-num">{stats?.members ?? 0}</span>
+          <span className="stat-label">Members</span>
+        </div>
+        <div className="admin-stat-card">
+          <span className="stat-num">{stats?.cadets ?? 0}</span>
+          <span className="stat-label">Cadets</span>
+        </div>
+        <div className="admin-stat-card">
+          <span className="stat-num">{stats?.volunteers ?? 0}</span>
+          <span className="stat-label">Volunteers</span>
+        </div>
+        <div className="admin-stat-card">
+          <span className="stat-num">{stats?.internships ?? 0}</span>
+          <span className="stat-label">Intern & Alumni</span>
+        </div>
       </div>
+
+      {/* Tabs Toolbar */}
       <div className="admin-toolbar">
         <div className="tab-bar">
-          {c.demo.adminTabs.map((t, i) => (
+          {applicationTabs.map((t) => (
             <button
-              key={t}
+              key={t.id}
               type="button"
-              aria-pressed={tab === t}
-              className={tab === t ? "active" : ""}
+              aria-pressed={tab === t.id}
+              className={tab === t.id ? "active" : ""}
               onClick={() => {
                 setLoading(true);
                 setRecords([]);
-                setTab(t);
+                setTab(t.id);
                 setSaved(false);
+                setPage(1);
               }}
             >
-              {c.demo.adminLabels[i]}
+              {t.label}
             </button>
           ))}
         </div>
-        {tab !== "gallery" && tab !== "applications" && (
+        {tab !== "gallery" && tab !== "content-drafter" && (
           <Action className="secondary" onClick={exportCSV} disabled={busy}>
             <Download size={17} />
             {c.demo.export}
           </Action>
         )}
       </div>
+
+      {toastNotice && (
+        <div className="app-email-banner email-sent" role="status" style={{ marginBottom: "18px" }}>
+          <span>{toastNotice}</span>
+          <button type="button" className="text-button" onClick={() => setToastNotice(null)}>Dismiss</button>
+        </div>
+      )}
+
       <ErrorMessage error={error} />
+
+      {/* MODULE 1: Advanced Filter & Search Toolbar */}
+      {tab !== "gallery" && tab !== "pledges" && tab !== "content-drafter" && (
+        <div className="admin-filter-container">
+          <div className="admin-search-wrap">
+            <Search size={16} aria-hidden="true" />
+            <input
+              type="search"
+              placeholder="Search by name, email, phone, ID, or Regd No..."
+              value={search}
+              onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+              aria-label="Search applications"
+            />
+          </div>
+
+          <div className="admin-filter-group">
+            {tab === "all" && (
+              <select
+                className="admin-select"
+                value={categoryFilter}
+                onChange={(e) => { setCategoryFilter(e.target.value); setPage(1); }}
+                aria-label="Filter by category"
+              >
+                <option value="all">All Categories</option>
+                <option value="Members">Members</option>
+                <option value="Cadets">Cadets</option>
+                <option value="Volunteers">Volunteers</option>
+                <option value="Intern & Alumni">Intern & Alumni</option>
+              </select>
+            )}
+
+            <select
+              className="admin-select"
+              value={statusFilter}
+              onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
+              aria-label="Filter by status"
+            >
+              <option value="all">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="accepted">Approved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            {/* Date Preset Filter */}
+            <select
+              className="admin-select"
+              value={presetRange}
+              onChange={(e) => { setPresetRange(e.target.value); setPage(1); }}
+              aria-label="Date preset range"
+            >
+              <option value="all">All Dates</option>
+              <option value="today">Today</option>
+              <option value="thisWeek">This Week</option>
+              <option value="thisMonth">This Month</option>
+              <option value="custom">Custom Date Range</option>
+            </select>
+
+            {/* Granular Day, Month, Year */}
+            <select
+              className="admin-select"
+              value={dayFilter}
+              onChange={(e) => { setDayFilter(e.target.value); setPage(1); }}
+              aria-label="Filter by Day"
+            >
+              <option value="all">Day: All</option>
+              {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                <option key={d} value={String(d)}>Day: {d}</option>
+              ))}
+            </select>
+
+            <select
+              className="admin-select"
+              value={monthFilter}
+              onChange={(e) => { setMonthFilter(e.target.value); setPage(1); }}
+              aria-label="Filter by Month"
+            >
+              <option value="all">Month: All</option>
+              {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].map((m, idx) => (
+                <option key={m} value={String(idx + 1)}>{m}</option>
+              ))}
+            </select>
+
+            <select
+              className="admin-select"
+              value={yearFilter}
+              onChange={(e) => { setYearFilter(e.target.value); setPage(1); }}
+              aria-label="Filter by Year"
+            >
+              <option value="all">Year: All</option>
+              {["2024", "2025", "2026", "2027"].map((y) => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+
+            {presetRange === "custom" && (
+              <>
+                <div className="admin-date-input">
+                  <Calendar size={14} aria-hidden="true" />
+                  <span>From:</span>
+                  <input
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => { setStartDate(e.target.value); setPage(1); }}
+                    aria-label="From date filter"
+                  />
+                </div>
+                <div className="admin-date-input">
+                  <span>To:</span>
+                  <input
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => { setEndDate(e.target.value); setPage(1); }}
+                    aria-label="To date filter"
+                  />
+                </div>
+              </>
+            )}
+
+            {(search || statusFilter !== "all" || categoryFilter !== "all" || presetRange !== "all" || dayFilter !== "all" || monthFilter !== "all" || yearFilter !== "all" || startDate || endDate) && (
+              <button
+                type="button"
+                className="button secondary"
+                style={{ padding: "8px 14px", fontSize: "12px" }}
+                onClick={() => {
+                  setSearch("");
+                  setStatusFilter("all");
+                  setCategoryFilter("all");
+                  setPresetRange("all");
+                  setDayFilter("all");
+                  setMonthFilter("all");
+                  setYearFilter("all");
+                  setStartDate("");
+                  setEndDate("");
+                  setPage(1);
+                }}
+              >
+                Clear Filters
+              </button>
+            )}
+
+            {/* Layout Toggle */}
+            <div style={{ marginLeft: "auto", display: "flex", gap: "4px" }}>
+              <button
+                type="button"
+                className={`id-btn ${viewMode === "table" ? "active" : ""}`}
+                onClick={() => setViewMode("table")}
+                title="Table View"
+                style={{ padding: "6px 12px", fontSize: "12px" }}
+              >
+                Table View
+              </button>
+              <button
+                type="button"
+                className={`id-btn ${viewMode === "cards" ? "active" : ""}`}
+                onClick={() => setViewMode("cards")}
+                title="Cards View"
+                style={{ padding: "6px 12px", fontSize: "12px" }}
+              >
+                Card View
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {loading ? (
         <p role="status">{c.demo.loading}</p>
+      ) : tab === "content-drafter" ? (
+        <AdminContentDrafter />
       ) : tab === "gallery" ? (
         <>
           <div className="glass application-card">
@@ -1110,9 +2229,7 @@ export function Admin() {
               </div>
               <Action disabled={form.formState.isSubmitting}>
                 <Upload size={17} />
-                {form.formState.isSubmitting
-                  ? c.demo.loading
-                  : c.demo.submitUpload}
+                {form.formState.isSubmitting ? c.demo.loading : c.demo.submitUpload}
               </Action>
               {saved && <p role="status">{c.demo.saved}</p>}
             </form>
@@ -1126,90 +2243,649 @@ export function Admin() {
             ))}
           </div>
         </>
-      ) : (
+      ) : tab === "pledges" ? (
         <div className="records">
           {records.length === 0 && <p>{c.demo.noRecords}</p>}
           {records.map((item) => (
             <article className="record glass" key={item._id}>
               <div className="record-heading">
                 <h3>{item.fullName}</h3>
-                <span className={`status ${item.status || "pending"}`}>
-                  {item.status || c.demo.notice}
-                </span>
+                <span className="status approved">Received</span>
               </div>
-              <p>{item.email}</p>
-              <code>{item.registrationId || item.reference}</code>
-          {tab === "applications" ? (
-                <>
-                  <p>{item.source} · {item.type}</p>
-                  <details open>
-                    <summary>{c.demo.review}</summary>
-                    <dl className="review-fields">
-                      {Object.entries(item.details || {}).map(([key, value]) => (
-                        <div key={key}>
-                          <dt>{key.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (letter) => letter.toUpperCase())}</dt>
-                          <dd>{String(value)}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                    {!!item.files?.length && <p>{item.files.map((file) => typeof file === "string" ? file : file.name).join(", ")}</p>}
-                  </details>
-                  <div className="form-actions">
-                    <Action disabled={busy || item.status === "approved"} onClick={() => decision(item._id, "approved")}>{c.demo.approve}</Action>
-                    <Action disabled={busy || item.status === "rejected"} className="secondary" onClick={() => decision(item._id, "rejected")}>{c.demo.reject}</Action>
-                  </div>
-                </>
-              ) : tab === "pledges" ? (
-                <p>
-                  {item.kind} {item.membershipType || ""} · ₹
-                  {item.amount.toLocaleString("en-IN")}
-                </p>
-              ) : (
-                <>
-                  <details>
-                    <summary>{c.demo.review}</summary>
-                    <dl className="review-fields">
-                      {(tab === "cadets"
-                        ? c.demo.enrollmentFields
-                        : c.forms.internship
-                      )
-                        .filter((f) => !["cv", "consent"].includes(f.name))
-                        .map((f) => (
-                          <div key={f.name}>
-                            <dt>{f.label}</dt>
-                            <dd>{item[f.name] || "—"}</dd>
-                          </div>
-                        ))}
-                    </dl>
-                    {tab === "internships" && (
-                      <button
-                        type="button"
-                        className="text-button"
-                        onClick={() => cv(item._id)}
-                      >
-                        {c.demo.viewCV}
-                      </button>
-                    )}
-                  </details>
-                  <div className="form-actions">
-                    <Action
-                      disabled={busy || item.status === "approved"}
-                      onClick={() => decision(item._id, "approved")}
-                    >
-                      {c.demo.approve}
-                    </Action>
-                    <Action
-                      disabled={busy || item.status === "rejected"}
-                      className="secondary"
-                      onClick={() => decision(item._id, "rejected")}
-                    >
-                      {c.demo.reject}
-                    </Action>
-                  </div>
-                </>
-              )}
+              <p>{item.email} · {item.phone}</p>
+              <code>{item.reference}</code>
+              <p style={{ marginTop: "12px", fontWeight: "600" }}>
+                {item.kind} {item.membershipType ? `(${item.membershipType})` : ""} · ₹{Number(item.amount || 0).toLocaleString("en-IN")}
+              </p>
             </article>
           ))}
+        </div>
+      ) : viewMode === "table" ? (
+        /* MODULE 1: Responsive Registration Table */
+        <div className="admin-table-container">
+          <div className="admin-records-count" style={{ padding: "14px 18px 0" }}>
+            <span>Showing {filteredRecords.length ? (currentPage - 1) * pageSize + 1 : 0} – {Math.min(currentPage * pageSize, filteredRecords.length)} of {filteredRecords.length} registrations (Timezone: Asia/Kolkata IST)</span>
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <span style={{ fontSize: "12px" }}>Sort:</span>
+              <select
+                className="admin-select"
+                style={{ padding: "4px 8px", fontSize: "12px" }}
+                value={`${sortField}-${sortOrder}`}
+                onChange={(e) => {
+                  const [f, o] = e.target.value.split("-");
+                  setSortField(f);
+                  setSortOrder(o);
+                }}
+              >
+                <option value="createdAt-desc">Date (Newest First)</option>
+                <option value="createdAt-asc">Date (Oldest First)</option>
+                <option value="fullName-asc">Name (A–Z)</option>
+                <option value="fullName-desc">Name (Z–A)</option>
+                <option value="status-asc">Status</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Application ID</th>
+                  <th>Applicant Name</th>
+                  <th>Registration Type</th>
+                  <th>Email Address</th>
+                  <th>Phone Number</th>
+                  <th>Submission Date & Time (IST)</th>
+                  <th>Status</th>
+                  <th style={{ textAlign: "right" }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {paginatedRecords.length === 0 ? (
+                  <tr>
+                    <td colSpan={8} style={{ textAlign: "center", padding: "40px", color: "var(--text-muted)" }}>
+                      No registration records matching the selected filters.
+                    </td>
+                  </tr>
+                ) : (
+                  paginatedRecords.map((item) => {
+                    const isAccepted = item.status === "accepted";
+                    const isRejected = item.status === "rejected";
+                    const catClass = item.category === "Cadets" ? "cat-cadets" : item.category === "Volunteers" ? "cat-volunteers" : item.category === "Intern & Alumni" ? "cat-interns" : "cat-members";
+                    const regId = item.registrationNumber || item.registrationId || "—";
+
+                    return (
+                      <tr key={item._id}>
+                        <td>
+                          <code>{regId}</code>
+                        </td>
+                        <td>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            {item.photoFileId && (
+                              <img
+                                src={`/api/files/${item.photoFileId}`}
+                                alt=""
+                                style={{ width: "24px", height: "24px", borderRadius: "50%", objectFit: "cover" }}
+                              />
+                            )}
+                            <strong>{item.fullName}</strong>
+                          </div>
+                        </td>
+                        <td>
+                          <span className={`category-badge ${catClass}`}>{item.category}</span>
+                        </td>
+                        <td>
+                          {item.email ? <a href={`mailto:${item.email}`}>{item.email}</a> : "—"}
+                        </td>
+                        <td>
+                          {item.phone ? <a href={`tel:${item.phone}`}>{item.phone}</a> : "—"}
+                        </td>
+                        <td>
+                          <span style={{ whiteSpace: "nowrap" }}>{formatIST(item.createdAt)}</span>
+                        </td>
+                        <td>
+                          <span className={`status-badge status-${item.status}`}>
+                            {isAccepted ? <CheckCircle2 size={12} /> : isRejected ? <XCircle size={12} /> : <Clock size={12} />}
+                            {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                          </span>
+                        </td>
+                        <td style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                          <button
+                            type="button"
+                            className="id-btn"
+                            style={{ padding: "5px 12px", fontSize: "12px", background: "var(--surface)", borderColor: "var(--border)" }}
+                            onClick={() => setDetailsModalItem(item)}
+                          >
+                            <Eye size={13} />
+                            View Details
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination Controls */}
+          <div className="admin-pagination">
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <span>Rows per page:</span>
+              <select
+                className="admin-select"
+                style={{ padding: "4px 8px", fontSize: "12px" }}
+                value={pageSize}
+                onChange={(e) => {
+                  setPageSize(Number(e.target.value));
+                  setPage(1);
+                }}
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+              </select>
+            </div>
+
+            <div className="admin-pagination-controls">
+              <span>Page {currentPage} of {totalPages}</span>
+              <button
+                type="button"
+                className="admin-pagination-btn"
+                disabled={currentPage <= 1}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+              >
+                <ChevronLeft size={14} />
+              </button>
+              <button
+                type="button"
+                className="admin-pagination-btn"
+                disabled={currentPage >= totalPages}
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              >
+                <ChevronRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* Alternate Cards View */
+        <div className="records">
+          <div className="admin-records-count">
+            <span>Showing {paginatedRecords.length} of {filteredRecords.length} applications</span>
+          </div>
+
+          {paginatedRecords.length === 0 && (
+            <div className="glass record" style={{ textAlign: "center", padding: "40px" }}>
+              <p>{c.demo.noRecords}</p>
+            </div>
+          )}
+
+          {paginatedRecords.map((item) => {
+            const isAccepted = item.status === "accepted";
+            const isRejected = item.status === "rejected";
+            const isCurrentBusy = busy && actionId === item._id;
+            const categoryClass = item.category === "Cadets" ? "cat-cadets" : item.category === "Volunteers" ? "cat-volunteers" : item.category === "Intern & Alumni" ? "cat-interns" : "cat-members";
+
+            return (
+              <article className="app-card" key={item._id}>
+                <div className="app-header">
+                  <h3>{item.fullName}</h3>
+                  <div className="app-badge-group">
+                    <span className={`category-badge ${categoryClass}`}>{item.category}</span>
+                    <span className={`status-badge status-${item.status}`}>
+                      {isAccepted ? <CheckCircle2 size={13} /> : isRejected ? <XCircle size={13} /> : <Clock size={13} />}
+                      {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="app-info-grid">
+                  <div className="app-info-item">
+                    <span className="info-label">Registration ID</span>
+                    <span className="info-val"><code>{item.registrationNumber || item.registrationId || "—"}</code></span>
+                  </div>
+                  <div className="app-info-item">
+                    <span className="info-label">Email</span>
+                    <span className="info-val"><a href={`mailto:${item.email}`}>{item.email}</a></span>
+                  </div>
+                  <div className="app-info-item">
+                    <span className="info-label">Phone</span>
+                    <span className="info-val"><a href={`tel:${item.phone}`}>{item.phone || "—"}</a></span>
+                  </div>
+                  <div className="app-info-item">
+                    <span className="info-label">Submission Date & Time (IST)</span>
+                    <span className="info-val">{formatIST(item.createdAt)}</span>
+                  </div>
+                </div>
+
+                <div className="app-actions-row">
+                  <button
+                    type="button"
+                    className="id-btn"
+                    style={{ background: "var(--primary)", color: "#fff", borderColor: "var(--primary)" }}
+                    onClick={() => setDetailsModalItem(item)}
+                  >
+                    <Eye size={14} /> View Application Details
+                  </button>
+                  {isAccepted && item.idCardFileId && (
+                    <button
+                      type="button"
+                      className="id-btn"
+                      onClick={() => setCardModalItem(item)}
+                    >
+                      <RotateCw size={14} /> 3D Flip ID Card
+                    </button>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+
+      {/* MODULE 2: Comprehensive Application Details Modal */}
+      {detailsModalItem && (
+        <div className="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="details-title" onClick={() => setDetailsModalItem(null)}>
+          <div className="admin-modal-box modal-large" onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "18px", borderBottom: "1px solid var(--border)", paddingBottom: "14px" }}>
+              <div>
+                <h3 id="details-title" style={{ margin: "0 0 6px" }}>{detailsModalItem.fullName}</h3>
+                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                  <span className={`category-badge ${detailsModalItem.category === "Cadets" ? "cat-cadets" : detailsModalItem.category === "Volunteers" ? "cat-volunteers" : detailsModalItem.category === "Intern & Alumni" ? "cat-interns" : "cat-members"}`}>
+                    {detailsModalItem.category}
+                  </span>
+                  <span className={`status-badge status-${detailsModalItem.status}`}>
+                    {detailsModalItem.status === "accepted" ? <CheckCircle2 size={13} /> : detailsModalItem.status === "rejected" ? <XCircle size={13} /> : <Clock size={13} />}
+                    {detailsModalItem.status.charAt(0).toUpperCase() + detailsModalItem.status.slice(1)}
+                  </span>
+                  <code style={{ fontSize: "12px" }}>{detailsModalItem.registrationNumber || detailsModalItem.registrationId}</code>
+                </div>
+              </div>
+              <button type="button" className="text-button" onClick={() => setDetailsModalItem(null)}>✕ Close</button>
+            </div>
+
+            {/* Photo preview */}
+            {detailsModalItem.photoFileId && (
+              <div className="app-photo-thumb-container">
+                <img
+                  src={`/api/files/${detailsModalItem.photoFileId}`}
+                  alt={detailsModalItem.fullName}
+                  className="app-photo-thumb"
+                  onClick={() => setPreviewPhoto(`/api/files/${detailsModalItem.photoFileId}`)}
+                  title="Click to enlarge photograph"
+                />
+                <div>
+                  <strong style={{ display: "block", fontSize: "14px", color: "var(--text)" }}>Official Applicant Photograph</strong>
+                  <span style={{ fontSize: "12px", color: "var(--text-muted)" }}>Submitted photograph for digital identity card issuance</span>
+                </div>
+              </div>
+            )}
+
+            {/* Submitted Data Fields */}
+            <h4 style={{ fontSize: "13px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--text-muted)", margin: "16px 0 10px" }}>
+              Submitted Form Information
+            </h4>
+            <div className="app-details-subgrid">
+              <div className="app-detail-card">
+                <dt>Full Name</dt>
+                <dd>{detailsModalItem.fullName}</dd>
+              </div>
+              <div className="app-detail-card">
+                <dt>Email Address</dt>
+                <dd><a href={`mailto:${detailsModalItem.email}`}>{detailsModalItem.email}</a></dd>
+              </div>
+              <div className="app-detail-card">
+                <dt>Phone Number</dt>
+                <dd><a href={`tel:${detailsModalItem.phone}`}>{detailsModalItem.phone || "—"}</a></dd>
+              </div>
+              {detailsModalItem.address && (
+                <div className="app-detail-card" style={{ gridColumn: "1 / -1" }}>
+                  <dt>Address</dt>
+                  <dd>{detailsModalItem.address}</dd>
+                </div>
+              )}
+              {Object.entries(detailsModalItem.details || {}).map(([key, val]) => (
+                <div className="app-detail-card" key={key}>
+                  <dt>{key.replace(/([a-z])([A-Z])/g, "$1 $2").replace(/^./, (l) => l.toUpperCase())}</dt>
+                  <dd>{String(val)}</dd>
+                </div>
+              ))}
+            </div>
+
+            {/* Uploaded Documents */}
+            {Boolean(detailsModalItem.files?.length) && (
+              <div style={{ marginTop: "16px" }}>
+                <h4 style={{ fontSize: "13px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.05em", color: "var(--text-muted)", margin: "0 0 8px" }}>
+                  Uploaded Documents & Proofs
+                </h4>
+                <div className="app-files-list">
+                  {detailsModalItem.files.map((file, idx) => (
+                    <a
+                      key={file.fileId || idx}
+                      href={`/api/files/${file.fileId}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="app-file-chip"
+                    >
+                      <FileText size={14} />
+                      <span>{file.name || file.filename || "Document"}</span>
+                      {file.size && <span style={{ opacity: 0.65 }}>({Math.round(file.size / 1024)} KB)</span>}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Audit Trail */}
+            <div className="app-audit-trail">
+              <div className="app-audit-item">
+                <span className="audit-label">Submitted At (IST)</span>
+                <span className="audit-val">{formatIST(detailsModalItem.createdAt)}</span>
+              </div>
+              {detailsModalItem.status === "accepted" && (
+                <>
+                  <div className="app-audit-item">
+                    <span className="audit-label">Approved At (IST)</span>
+                    <span className="audit-val">{formatIST(detailsModalItem.approvedAt)}</span>
+                  </div>
+                  <div className="app-audit-item">
+                    <span className="audit-label">Official Regd. No.</span>
+                    <span className="audit-val">{detailsModalItem.registrationNumber || detailsModalItem.registrationId}</span>
+                  </div>
+                  <div className="app-audit-item">
+                    <span className="audit-label">Validity Period</span>
+                    <span className="audit-val">{detailsModalItem.validFrom ? `${formatIST(detailsModalItem.validFrom)} – ${formatIST(detailsModalItem.validUntil)}` : "Permanent"}</span>
+                  </div>
+                  {detailsModalItem.reviewedBy && (
+                    <div className="app-audit-item">
+                      <span className="audit-label">Reviewed By</span>
+                      <span className="audit-val">{detailsModalItem.reviewedBy}</span>
+                    </div>
+                  )}
+                </>
+              )}
+              {detailsModalItem.status === "rejected" && (
+                <>
+                  <div className="app-audit-item">
+                    <span className="audit-label">Rejected At (IST)</span>
+                    <span className="audit-val">{formatIST(detailsModalItem.rejectedAt)}</span>
+                  </div>
+                  {detailsModalItem.rejectionReason && (
+                    <div className="app-audit-item" style={{ gridColumn: "1 / -1" }}>
+                      <span className="audit-label">Rejection Reason</span>
+                      <span className="audit-val" style={{ color: "#ef4444" }}>{detailsModalItem.rejectionReason}</span>
+                    </div>
+                  )}
+                  {detailsModalItem.reviewedBy && (
+                    <div className="app-audit-item">
+                      <span className="audit-label">Reviewed By</span>
+                      <span className="audit-val">{detailsModalItem.reviewedBy}</span>
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+
+            {/* AI Application Assistant: Verification Checklist & Duplicate Detection */}
+            <ApplicationAiInsightsCard
+              item={detailsModalItem}
+              allRecords={records}
+            />
+
+            {/* Separated, Professional Email Status Card */}
+            <EmailStatusCard
+              item={detailsModalItem}
+              busy={busy}
+              onRetry={handleRetryEmail}
+            />
+
+            {/* Workflow Action Buttons */}
+            <div className="app-actions-row" style={{ marginTop: "24px" }}>
+              {detailsModalItem.status === "pending" ? (
+                <>
+                  <button
+                    type="button"
+                    className="button btn-accept"
+                    disabled={busy}
+                    onClick={() => handleOpenAccept(detailsModalItem)}
+                  >
+                    <CheckCircle2 size={16} /> Accept Application
+                  </button>
+                  <button
+                    type="button"
+                    className="button btn-decline"
+                    disabled={busy}
+                    onClick={() => {
+                      setDeclineModalItem(detailsModalItem);
+                      setDeclineReason("");
+                    }}
+                  >
+                    <XCircle size={16} /> Decline Application
+                  </button>
+                </>
+              ) : detailsModalItem.status === "accepted" ? (
+                <>
+                  {!detailsModalItem.idCardFileId ? (
+                    <>
+                      <button
+                        type="button"
+                        className="button"
+                        disabled={busy}
+                        onClick={() => handleGenerateIdCard(detailsModalItem)}
+                      >
+                        <Sparkles size={16} /> Generate ID Card
+                      </button>
+                      <button
+                        type="button"
+                        className="button secondary"
+                        disabled={busy}
+                        onClick={() => handleSendApprovalEmail(detailsModalItem)}
+                      >
+                        <Send size={16} /> Send Acceptance Email
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="button"
+                        className="button secondary"
+                        onClick={() => setCardModalItem(detailsModalItem)}
+                      >
+                        <Eye size={16} /> Preview ID Card
+                      </button>
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => handleDownloadIdCard(detailsModalItem)}
+                      >
+                        <Download size={16} /> Download ID Card (PDF)
+                      </button>
+                      <button
+                        type="button"
+                        className="button secondary"
+                        disabled={busy}
+                        onClick={() => handleSendApprovalEmail(detailsModalItem)}
+                      >
+                        <Send size={16} /> Send Acceptance Email
+                      </button>
+                    </>
+                  )}
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="button secondary"
+                  disabled={busy}
+                  onClick={() => handleSendRejectionEmail(detailsModalItem)}
+                >
+                  <Send size={16} /> Send Rejection Email
+                </button>
+              )}
+              <button
+                type="button"
+                className="button secondary"
+                style={{ marginLeft: "auto" }}
+                onClick={() => setDetailsModalItem(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODULE 3: Acceptance Dialog with Regd No & Validity Assignment */}
+      {acceptModalItem && (
+        <div className="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="accept-title">
+          <div className="admin-modal-box">
+            <h3 id="accept-title">Accept & Verify Registration</h3>
+            <p>
+              Assign the official Registration Number and Validity period for <strong>{acceptModalItem.fullName}</strong> ({acceptModalItem.category}):
+            </p>
+
+            {acceptError && (
+              <div className="app-email-banner email-failed" style={{ marginBottom: "14px" }}>
+                <span>{acceptError}</span>
+              </div>
+            )}
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "18px" }}>
+              <div className="input-label-pair">
+                <label htmlFor="regNoInput">Official Registration Number (Regd. No.):</label>
+                <input
+                  id="regNoInput"
+                  type="text"
+                  placeholder="e.g. AGNI-MEM-2026-0001"
+                  value={acceptRegNo}
+                  onChange={(e) => setAcceptRegNo(e.target.value)}
+                />
+                <small style={{ color: "var(--text-muted)", fontSize: "11px" }}>Unique official identifier assigned to this registrant.</small>
+              </div>
+
+              <div className="input-date-pair">
+                <div className="input-label-pair">
+                  <label htmlFor="validFromInput">Valid From:</label>
+                  <input
+                    id="validFromInput"
+                    type="date"
+                    value={acceptValidFrom}
+                    onChange={(e) => setAcceptValidFrom(e.target.value)}
+                  />
+                </div>
+                <div className="input-label-pair">
+                  <label htmlFor="validUntilInput">Valid Until:</label>
+                  <input
+                    id="validUntilInput"
+                    type="date"
+                    value={acceptValidUntil}
+                    onChange={(e) => setAcceptValidUntil(e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="admin-modal-actions">
+              <button
+                type="button"
+                className="button secondary"
+                disabled={busy}
+                onClick={() => setAcceptModalItem(null)}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="button btn-accept"
+                disabled={busy}
+                onClick={handleAcceptConfirm}
+              >
+                {busy ? "Processing..." : "Confirm & Accept"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODULE 4: Decline Application Modal */}
+      {declineModalItem && (
+        <div className="admin-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="decline-title">
+          <div className="admin-modal-box">
+            <h3 id="decline-title">Decline Application</h3>
+            <p>
+              Are you sure you want to decline the application for <strong>{declineModalItem.fullName}</strong>?
+            </p>
+            <label htmlFor="rejectionReason" style={{ display: "block", fontSize: "12px", fontWeight: "600", marginBottom: "6px", color: "var(--text)" }}>
+              Optional Rejection Reason:
+            </label>
+            <textarea
+              id="rejectionReason"
+              className="admin-modal-textarea"
+              placeholder="Enter reason for declining (e.g., age criteria not met, incomplete documentation)..."
+              value={declineReason}
+              onChange={(e) => setDeclineReason(e.target.value)}
+            />
+            <div className="admin-modal-actions">
+              <button
+                type="button"
+                className="button secondary"
+                disabled={busy}
+                onClick={() => {
+                  setDeclineModalItem(null);
+                  setDeclineReason("");
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="button btn-decline"
+                disabled={busy}
+                onClick={handleDeclineConfirm}
+              >
+                {busy ? "Processing..." : "Confirm & Decline"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODULE 6 & 7: 3D Interactive Flip Digital ID Card Modal */}
+      {cardModalItem && (
+        <div className="admin-modal-overlay" role="dialog" aria-modal="true" onClick={() => setCardModalItem(null)}>
+          <div className="admin-modal-box modal-large" onClick={(e) => e.stopPropagation()} style={{ textAlign: "center" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+              <h3 style={{ margin: 0 }}>Official 3D Digital Identity Card</h3>
+              <button type="button" className="text-button" onClick={() => setCardModalItem(null)}>✕ Close</button>
+            </div>
+            <p style={{ margin: "0 0 20px", fontSize: "13px", color: "var(--text-muted)" }}>
+              Interactive 3D view alternates between Front and Back every 5 seconds. Use buttons below to pause, switch sides, or download official PDF.
+            </p>
+
+            <DigitalIdCard3D
+              record={cardModalItem}
+              allowDownload={true}
+              onDownload={() => handleDownloadIdCard(cardModalItem)}
+            />
+
+            <div style={{ marginTop: "24px" }}>
+              <button type="button" className="button secondary" onClick={() => setCardModalItem(null)}>
+                Close Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Lightbox Modal: Photo Preview */}
+      {previewPhoto && (
+        <div className="admin-modal-overlay" onClick={() => setPreviewPhoto(null)}>
+          <div style={{ maxWidth: "90vw", maxHeight: "90vh", padding: "10px", background: "#000", borderRadius: "14px" }} onClick={(e) => e.stopPropagation()}>
+            <img src={previewPhoto} alt="Applicant Preview" style={{ maxWidth: "100%", maxHeight: "80vh", display: "block", borderRadius: "8px" }} />
+            <div style={{ textAlign: "right", marginTop: "10px" }}>
+              <button type="button" className="button secondary" onClick={() => setPreviewPhoto(null)}>Close Preview</button>
+            </div>
+          </div>
         </div>
       )}
     </Page>

@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   build: {
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -14,9 +15,31 @@ export default defineConfig({
     },
   },
   server: {
+    host: "0.0.0.0",
+    port: 5173,
     proxy: {
-      "/api": "http://127.0.0.1:5000",
-      "/uploads": "http://127.0.0.1:5000",
+      "/api": {
+        target: "http://127.0.0.1:5001",
+        changeOrigin: true,
+      },
+      "/uploads": {
+        target: "http://127.0.0.1:5001",
+        changeOrigin: true,
+      },
+    },
+  },
+  preview: {
+    host: "0.0.0.0",
+    port: 4173,
+    proxy: {
+      "/api": {
+        target: "http://127.0.0.1:5001",
+        changeOrigin: true,
+      },
+      "/uploads": {
+        target: "http://127.0.0.1:5001",
+        changeOrigin: true,
+      },
     },
   },
 });

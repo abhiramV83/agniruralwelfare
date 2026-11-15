@@ -11,12 +11,12 @@ export function config() {
   if (
     !secret ||
     secret.length < 32 ||
-    /^(replace|generate|change)/i.test(secret)
+    /^(replace|generate|change|secret|changeme|default|admin|password)/i.test(secret)
   )
     throw new Error(
       "JWT_ACCESS_SECRET must contain a generated secret of at least 32 characters. Copy server/.env.example to server/.env and generate a secret.",
     );
-  const clientOrigins = (process.env.CLIENT_ORIGIN || "http://127.0.0.1:5173")
+  const clientOrigins = (process.env.CLIENT_ORIGIN || "http://127.0.0.1:5173,http://localhost:5173,http://127.0.0.1:5001,http://localhost:5001,http://127.0.0.1:5000,http://localhost:5000")
     .split(",")
     .map((value) => value.trim().replace(/\/$/, ""))
     .filter(Boolean);
@@ -32,7 +32,7 @@ export function config() {
     origin,
     clientOrigins,
     production: process.env.NODE_ENV === "production",
-    port: Number(process.env.PORT || 5000),
+    port: Number(process.env.PORT || 5001),
     mongo,
     dbName: process.env.MONGODB_DATABASE || "agni_rural_welfare",
     encryptionKey,
