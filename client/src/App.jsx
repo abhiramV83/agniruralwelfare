@@ -36,6 +36,9 @@ import { ToastProvider } from "./toast-context";
 import { AiNgoAssistant } from "./components/AiNgoAssistant";
 import { getCurrentTheme, applyThemeToDOM, getCurrentSubthemeMode, setSubthemeMode } from "./theme-manager";
 import { TopGreetingBanner } from "./time-greeting";
+import { FestiveBanner } from "./components/FestivalDecorations";
+import { SeasonalIndicatorChip } from "./components/SeasonalAccents";
+import "./content/seasonal-festive.css";
 const navIcons = {
   "/": House,
   "/about": Building2,
@@ -236,6 +239,7 @@ export default function App() {
       </a>
       <div className="ambient" aria-hidden="true" />
       <TopGreetingBanner />
+      <FestiveBanner />
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <div className="header-inner">
           <Link className="wordmark" to="/">
@@ -271,6 +275,9 @@ export default function App() {
               </div>
             </details>
             <div className="mobile-nav-actions">
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: "8px" }}>
+                <SeasonalIndicatorChip />
+              </div>
               <div className="subtheme-toggle-cluster mobile-subtheme-cluster" role="group" aria-label="Theme mode: Light or Dark">
                 <button
                   type="button"
@@ -327,6 +334,7 @@ export default function App() {
             </div>
           </nav>
           <div className="header-actions">
+            <SeasonalIndicatorChip />
             <div className="subtheme-toggle-cluster" role="group" aria-label="Theme mode: Light or Dark">
               <button
                 type="button"

@@ -12,6 +12,16 @@ import { sendAcceptanceEmail, sendRejectionEmail, isSmtpConfigured } from "./ema
 import { getNextRegistrationId } from "./registration-id.js";
 import { registerAccount, submitRegistrationApplication } from "./modules/registration/registration.controller.js";
 import { answerNgoInquiry, getApplicationAiInsights, draftContentForAdmin } from "./ai-service.js";
+import {
+  getCalendarOverview,
+  INDIAN_SEASONS,
+  INDIAN_FESTIVALS,
+  getIndianDate,
+  getCurrentSeason,
+  getActiveFestival,
+  getUpcomingFestivals,
+  getFestivalById
+} from "./services/indian-calendar.js";
 
 import { stringify } from "csv-stringify/sync";
 import { ZodError } from "zod";
@@ -137,6 +147,40 @@ export function createApp(cfg) {
     const content = await SiteContent.findOne({ key: "site" }).lean();
     if (!content) return res.status(503).json({ message: "Site content has not been seeded yet." });
     res.json({ content: content.content, updatedAt: content.updatedAt });
+  }));
+
+  const getCalendarSettings = async () => {
+    try {
+      const row = await SiteContent.findOne({ key: "calendar_settings" }).lean();
+      return row?.content || {
+        enableFestiveBanner: true,
+        enableSeasonalAccents: true,
+        overrideFestivalId: "auto",
+        customMessage: "",
+        customDates: {}
+      };
+    } catch (_err) {
+      return {
+        enableFestiveBanner: true,
+        enableSeasonalAccents: true,
+        overrideFestivalId: "auto",
+        customMessage: "",
+        customDates: {}
+      };
+    }
+  };
+
+  app.get("/api/calendar/status", wrap(async (_req, res) => {
+    const settings = await getCalendarSettings();
+    const overview = getCalendarOverview(new Date(), settings);
+    res.json(overview);
+  }));
+
+  app.get("/api/calendar/upcoming", wrap(async (req, res) => {
+    const limit = Math.min(20, Math.max(1, parseInt(req.query.limit, 10) || 6));
+    const settings = await getCalendarSettings();
+    const upcoming = getUpcomingFestivals(new Date(), limit, settings);
+    res.json({ upcoming, count: upcoming.length });
   }));
   app.post("/api/ai/assistant", submissionLimit, wrap(async (req, res) => {
     const result = await answerNgoInquiry(req.body);
@@ -1564,6 +1608,83 @@ export function createApp(cfg) {
     wrap(async (req, res) => {
       const draft = await draftContentForAdmin(req.body || {});
       res.json(draft);
+    }),
+  );
+
+  app.get(
+    "/api/admin/calendar/settings",
+    wrap(async (_req, res) => {
+      const settings = await getCalendarSettings();
+      const overview = getCalendarOverview(new Date(), settings);
+      res.json({
+        settings,
+        overview,
+        allFestivals: INDIAN_FESTIVALS,
+        allSeasons: INDIAN_SEASONS
+      });
+    }),
+  );
+
+  app.post(
+    "/api/admin/calendar/settings",
+    wrap(async (req, res) => {
+      const {
+        enableFestiveBanner,
+        enableSeasonalAccents,
+        overrideFestivalId,
+        customMessage
+      } = req.body || {};
+
+      const existing = await getCalendarSettings();
+      const updated = {
+        ...existing,
+        enableFestiveBanner: typeof enableFestiveBanner === "boolean" ? enableFestiveBanner : existing.enableFestiveBanner,
+        enableSeasonalAccents: typeof enableSeasonalAccents === "boolean" ? enableSeasonalAccents : existing.enableSeasonalAccents,
+        overrideFestivalId: typeof overrideFestivalId === "string" ? overrideFestivalId : existing.overrideFestivalId,
+        customMessage: typeof customMessage === "string" ? customMessage.trim() : (existing.customMessage || "")
+      };
+
+      await SiteContent.findOneAndUpdate(
+        { key: "calendar_settings" },
+        { $set: { content: updated, updatedAt: new Date() } },
+        { upsert: true, new: true }
+      );
+
+      const overview = getCalendarOverview(new Date(), updated);
+      res.json({ message: "Calendar & festive settings saved successfully.", settings: updated, overview });
+    }),
+  );
+
+  app.post(
+    "/api/admin/calendar/festival-date",
+    wrap(async (req, res) => {
+      const { festivalId, year, startDate, endDate } = req.body || {};
+      if (!festivalId || !year || !startDate || !endDate) {
+        return res.status(400).json({ message: "festivalId, year, startDate, and endDate are required." });
+      }
+
+      const existing = await getCalendarSettings();
+      const customDates = { ...(existing.customDates || {}) };
+      if (!customDates[festivalId]) customDates[festivalId] = {};
+      customDates[festivalId][year] = { start: startDate, end: endDate };
+
+      const updated = {
+        ...existing,
+        customDates
+      };
+
+      await SiteContent.findOneAndUpdate(
+        { key: "calendar_settings" },
+        { $set: { content: updated, updatedAt: new Date() } },
+        { upsert: true, new: true }
+      );
+
+      res.json({
+        message: `Festival date for ${festivalId} (${year}) updated successfully.`,
+        festivalId,
+        year,
+        dates: customDates[festivalId][year]
+      });
     }),
   );
   app.use("/api", (_req, res) =>

@@ -64,3 +64,4 @@ test("time greeting returns night greeting and round-the-clock message from 10pm
   assert.equal(g2.period, "night");
   assert.equal(g2.iconName, "Moon");
 });
+

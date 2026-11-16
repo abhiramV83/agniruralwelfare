@@ -2,17 +2,75 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { answerNgoInquiry, getApplicationAiInsights, draftContentForAdmin } from "../src/ai-service.js";
 
-test("answerNgoInquiry provides accurate knowledge base response without API key", async () => {
-  const res1 = await answerNgoInquiry({ message: "How can I join the cadet corps?" });
-  assert.ok(res1.reply);
-  assert.ok(res1.reply.includes("Cadet"));
-  assert.equal(res1.source, "knowledge_base");
+test("answerNgoInquiry provides specific, distinct responses for different user questions", async () => {
+  // 1. Membership fees
+  const resFee = await answerNgoInquiry({ message: "What is the membership fee to join?" });
+  assert.equal(resFee.intentId, "fees_contribution");
+  assert.ok(resFee.reply.includes("free of mandatory enrollment charges") || resFee.reply.includes("nominal contribution"));
+  assert.ok(!resFee.reply.includes("AGNI Rural Welfare Society was founded with the mission of"));
 
-  const res2 = await answerNgoInquiry({ message: "Are donations eligible for 80G tax benefits?" });
-  assert.ok(res2.reply.includes("80G"));
+  // 2. Cadet Corps
+  const resCadet = await answerNgoInquiry({ message: "What training do cadets receive in drill and parade?" });
+  assert.equal(resCadet.intentId, "cadet_program");
+  assert.ok(resCadet.reply.includes("Bravery, Unity & Discipline"));
+  assert.ok(resCadet.reply.includes("Netaji Subhash Chandra Bose"));
 
-  const res3 = await answerNgoInquiry({ message: "Tell me about your ID cards and verification" });
-  assert.ok(res3.reply.includes("ID card") || res3.reply.includes("QR"));
+  // 3. Volunteering
+  const resVol = await answerNgoInquiry({ message: "Can I volunteer on weekends for health camps?" });
+  assert.equal(resVol.intentId, "volunteer_program");
+  assert.ok(resVol.reply.includes("Flexible Engagement") || resVol.reply.includes("Volunteer Program"));
+
+  // 4. College Internship
+  const resInt = await answerNgoInquiry({ message: "Can MSW students apply for a rural internship project?" });
+  assert.equal(resInt.intentId, "internship_program");
+  assert.ok(resInt.reply.includes("MSW") || resInt.reply.includes("Academic Placements"));
+
+  // 5. Documents required
+  const resDocs = await answerNgoInquiry({ message: "What documents and photo do I need to register?" });
+  assert.equal(resDocs.intentId, "documents_required");
+  assert.ok(resDocs.reply.includes("Passport-Size Photograph"));
+  assert.ok(resDocs.reply.includes("Blood Group"));
+
+  // 6. Application review status
+  const resStatus = await answerNgoInquiry({ message: "How long does application status approval take?" });
+  assert.equal(resStatus.intentId, "application_status");
+  assert.ok(resStatus.reply.includes("24 to 48 hours"));
+
+  // 7. ID Card & QR Verification
+  const resCard = await answerNgoInquiry({ message: "How does the QR code verify my ID card?" });
+  assert.equal(resCard.intentId, "id_card_verification");
+  assert.ok(resCard.reply.includes("/verify/:id"));
+
+  // 8. 80G Tax Exemption
+  const resTax = await answerNgoInquiry({ message: "Is my donation eligible for 80G tax deduction?" });
+  assert.equal(resTax.intentId, "donations_80g");
+  assert.ok(resTax.reply.includes("80G"));
+  assert.ok(resTax.reply.includes("50% tax deduction"));
+
+  // 9. Indian Festivals
+  const resFest = await answerNgoInquiry({ message: "Which upcoming Indian festival or holiday is next?" });
+  assert.equal(resFest.intentId, "indian_calendar_festivals");
+  assert.ok(resFest.reply.includes("Upcoming Festivals") || resFest.reply.includes("Active Festival"));
+
+  // 10. Indian Seasons
+  const resSeason = await answerNgoInquiry({ message: "What traditional Indian season or Ritu is it right now?" });
+  assert.equal(resSeason.intentId, "indian_seasons");
+  assert.ok(resSeason.reply.includes("Ritu"));
+
+  // 11. Health & Medical camps
+  const resHealth = await answerNgoInquiry({ message: "Tell me about your free medical health checkup camps" });
+  assert.equal(resHealth.intentId, "health_camps");
+  assert.ok(resHealth.reply.includes("General Health Camps"));
+
+  // 12. Office & Contact
+  const resContact = await answerNgoInquiry({ message: "Where is the registered headquarters office and phone number?" });
+  assert.equal(resContact.intentId, "contact_location");
+  assert.ok(resContact.reply.includes("+91 94331 23456"));
+
+  // 13. Polite greeting
+  const resGreeting = await answerNgoInquiry({ message: "Good morning! Hello there" });
+  assert.equal(resGreeting.intentId, "greetings");
+  assert.ok(resGreeting.reply.includes("Namaste"));
 });
 
 test("getApplicationAiInsights evaluates completeness and detects potential duplicates safely", () => {
@@ -60,4 +118,3 @@ test("draftContentForAdmin produces structured, reviewable content drafts", asyn
   assert.ok(draft.content.includes("AGNI Rural Welfare Society"));
   assert.ok(draft.source === "template_engine" || draft.source === "gemini_ai");
 });
-

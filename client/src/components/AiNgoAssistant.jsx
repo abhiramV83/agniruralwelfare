@@ -3,10 +3,13 @@ import { MessageSquare, X, Send, Bot, Sparkles, ChevronDown, CheckCircle2 } from
 import { api } from "../api";
 
 const QUICK_PROMPTS = [
-  "How do I join as a Cadet or Volunteer?",
-  "What are AGNI's key rural programs?",
+  "What is the membership fee to join?",
+  "What training do cadets receive in drill and parade?",
+  "Which upcoming Indian festival is next?",
+  "What traditional Indian season (Ritu) is it right now?",
   "Are donations eligible for 80G tax deduction?",
-  "How does registration and ID card verification work?",
+  "What documents and photo do I need to register?",
+  "How does ID card QR verification work?",
   "Where is AGNI located and how can I contact?"
 ];
 

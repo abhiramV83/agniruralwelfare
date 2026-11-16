@@ -37,6 +37,7 @@ import {
 import { AiLoginIcon, AiRegisterIcon, AiAdminIcon, AdvancedAiLogo } from "./AiIcons";
 import { useSuccessPopup, useConfirmationDialog } from "./success-popup-context";
 import { ApplicationAiInsightsCard, AdminContentDrafter } from "./components/AdminAiAssistants";
+import { AdminCalendarManagement } from "./components/AdminCalendarManagement";
 import {
   copy as c,
   Fields,
@@ -1472,7 +1473,7 @@ export function Admin() {
     setLoading(true);
     setError(null);
 
-    if (tab === "content-drafter") {
+    if (tab === "content-drafter" || tab === "calendar") {
       api("/admin/stats")
         .then((s) => {
           if (live) setStats(s);
@@ -1972,6 +1973,7 @@ export function Admin() {
     { id: "pledges", label: "Pledges" },
     { id: "gallery", label: "Gallery" },
     { id: "content-drafter", label: "Content Drafter" },
+    { id: "calendar", label: "Festivals & Seasons" },
   ];
 
   return (
@@ -2040,7 +2042,7 @@ export function Admin() {
             </button>
           ))}
         </div>
-        {tab !== "gallery" && tab !== "content-drafter" && (
+        {tab !== "gallery" && tab !== "content-drafter" && tab !== "calendar" && (
           <Action className="secondary" onClick={exportCSV} disabled={busy}>
             <Download size={17} />
             {c.demo.export}
@@ -2058,7 +2060,7 @@ export function Admin() {
       <ErrorMessage error={error} />
 
       {/* MODULE 1: Advanced Filter & Search Toolbar */}
-      {tab !== "gallery" && tab !== "pledges" && tab !== "content-drafter" && (
+      {tab !== "gallery" && tab !== "pledges" && tab !== "content-drafter" && tab !== "calendar" && (
         <div className="admin-filter-container">
           <div className="admin-search-wrap">
             <Search size={16} aria-hidden="true" />
@@ -2225,6 +2227,8 @@ export function Admin() {
         <p role="status">{c.demo.loading}</p>
       ) : tab === "content-drafter" ? (
         <AdminContentDrafter />
+      ) : tab === "calendar" ? (
+        <AdminCalendarManagement />
       ) : tab === "gallery" ? (
         <>
           <div className="glass application-card">
