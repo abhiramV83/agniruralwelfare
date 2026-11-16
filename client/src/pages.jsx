@@ -37,12 +37,21 @@ import {
 } from "./components";
 import { api } from "./api";
 import { useSuccessPopup, useConfirmationDialog } from "./success-popup-context";
-export function Welcome() {
+import { useTimeGreeting, HeroGreetingPill } from "./time-greeting";
+export function Welcome({ className = "" }) {
+  const { salutation, headline, welcomeMessage, Icon, period } = useTimeGreeting();
   return (
-    <div className="container">
-      <div className="welcome">
-        <span className="status-dot" />
-        {c.brand.welcome}
+    <div className={`container welcome-container ${className}`}>
+      <div className={`welcome period-${period}`} role="region" aria-label="Welcome greeting">
+        <span className="welcome-badge">
+          <Icon size={15} className="welcome-badge-icon" aria-hidden="true" />
+          <span className="welcome-badge-text">{salutation}!</span>
+        </span>
+        <div className="welcome-content-flow">
+          <strong className="welcome-headline">{headline}</strong>
+          <span className="welcome-separator" aria-hidden="true">—</span>
+          <span className="welcome-body">{welcomeMessage}</span>
+        </div>
         <span className="welcome-line" />
       </div>
     </div>
@@ -130,6 +139,7 @@ export function Home() {
 
           {/* Hero Content - floating directly over slideshow without any background card */}
           <div className="hero-content">
+            <HeroGreetingPill />
             <h1 className="hero-main-heading">Spreading Joy Through Social Service</h1>
             <p className="hero-subtitle">Together, We Can Make a Difference!</p>
             <p className="hero-description">
@@ -147,6 +157,7 @@ export function Home() {
           </a>
         </section>
       </div>
+      <Welcome />
       <section id="support" data-scroll-nav="/gallery" className="container split support-section">
         <Reveal className="support-copy">
           <span className="eyebrow">Community support</span>

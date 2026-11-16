@@ -35,6 +35,7 @@ import { AuthContext, useAuth } from "./auth-context";
 import { ToastProvider } from "./toast-context";
 import { AiNgoAssistant } from "./components/AiNgoAssistant";
 import { getCurrentTheme, applyThemeToDOM, getCurrentSubthemeMode, setSubthemeMode } from "./theme-manager";
+import { TopGreetingBanner } from "./time-greeting";
 const navIcons = {
   "/": House,
   "/about": Building2,
@@ -234,6 +235,7 @@ export default function App() {
         {c.demo.skipContent}
       </a>
       <div className="ambient" aria-hidden="true" />
+      <TopGreetingBanner />
       <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
         <div className="header-inner">
           <Link className="wordmark" to="/">

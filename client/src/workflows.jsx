@@ -48,6 +48,7 @@ import {
 } from "./components";
 import { Page } from "./pages";
 import { schemaFor } from "./schemas";
+import { useTimeGreeting } from "./time-greeting";
 import { api, setSession, formData, download } from "./api";
 import { useAuth } from "./auth-context";
 import { RegistrationPortal } from "./RegistrationPortal";
@@ -1168,6 +1169,7 @@ export function DigitalIdCard3D({ record = {}, onDownload, allowDownload = true,
 
 export function Member() {
   const { user, logout } = useAuth();
+  const timeGreeting = useTimeGreeting();
   const [photo, setPhoto] = useState(null);
   const [error, setError] = useState(null),
     [applications, setApplications] = useState([]);
@@ -1215,9 +1217,9 @@ export function Member() {
               <span className="status-badge status-accepted" style={{ marginBottom: "8px" }}>
                 <CheckCircle2 size={14} /> Registration Approved
               </span>
-              <h2>Welcome, {user.fullName}!</h2>
-              <p className="lead" style={{ margin: "4px 0 0" }}>
-                Official AGNI Rural Welfare Society Digital Identity Card
+              <h2>{timeGreeting.salutation}, {user.fullName}!</h2>
+              <p className="lead" style={{ margin: "4px auto 0", maxWidth: "680px" }}>
+                {timeGreeting.welcomeMessage}
               </p>
             </div>
 
