@@ -969,7 +969,7 @@ export function DigitalIdCard3D({ record = {}, onDownload, allowDownload = true,
                 <h4 className="id-card-brand-title">AGNI RURAL WELFARE SOCIETY</h4>
                 <p className="id-card-govt-regd">Govt. Regd. No. : S/1L/55059</p>
                 <div className="id-card-main-title">OFFICIAL IDENTITY CARD</div>
-                <p className="id-card-motto">Motto : Service to humanity is service to God</p>
+                <p className="id-card-motto">Motto: Bravery, Unity &amp; Discipline</p>
                 <div className="id-card-security-badge" aria-hidden="true">
                   <ShieldCheck size={10} />
                   <span>SECURE AI VERIFIED</span>

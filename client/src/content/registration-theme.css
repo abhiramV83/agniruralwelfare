@@ -4,8 +4,14 @@
   font-family: Inter, "Segoe UI", Arial, sans-serif;
 }
 :root[data-theme="dark"],
-:root[data-theme-mode="dark"] {
+:root[data-theme-mode="dark"],
+html.theme-dark {
   color-scheme: dark !important;
+}
+:root[data-theme="light"],
+:root[data-theme-mode="light"],
+html.theme-light {
+  color-scheme: light !important;
 }
 html {
   scroll-behavior: smooth;
@@ -715,27 +721,65 @@ body,
   border-color:var(--danger) !important;
   box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 15%,transparent) !important;
 }
-#registerPanel input:-webkit-autofill,
-#registerPanel input:-webkit-autofill:hover,
-#registerPanel input:-webkit-autofill:focus,
-#registerPanel input:-webkit-autofill:active,
-#registerPanel textarea:-webkit-autofill,
-#registerPanel textarea:-webkit-autofill:hover,
-#registerPanel textarea:-webkit-autofill:focus,
-#registerPanel textarea:-webkit-autofill:active,
-#registerPanel select:-webkit-autofill,
-#registerPanel select:-webkit-autofill:hover,
-#registerPanel select:-webkit-autofill:focus,
-#registerPanel select:-webkit-autofill:active,
-#registerPanel input:-internal-autofill-selected,
-#registerPanel select:-internal-autofill-selected {
-  -webkit-text-fill-color: var(--text) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
-  box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
-  transition: background-color 50000s ease-in-out 0s !important;
-  caret-color: var(--text) !important;
+/* Universal Form Control Theming & Contrast */
+#registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
   color: var(--text) !important;
+  -webkit-text-fill-color: var(--text) !important;
+  background-color: var(--input-bg) !important;
+  background: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  font: 400 15px/1.4 Inter, "Segoe UI", Arial, sans-serif !important;
 }
+
+:root[data-theme="dark"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
+:root[data-theme-mode="dark"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
+html.theme-dark #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+  color-scheme: dark !important;
+  color: #edf4ef !important;
+  -webkit-text-fill-color: #edf4ef !important;
+  background-color: var(--input-bg, #112821) !important;
+  background: var(--input-bg, #112821) !important;
+  border-color: var(--input-border, rgba(144, 238, 144, 0.45)) !important;
+}
+
+:root[data-theme="light"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
+:root[data-theme-mode="light"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
+html.theme-light #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+  color-scheme: light !important;
+  color: #172420 !important;
+  -webkit-text-fill-color: #172420 !important;
+  background-color: var(--input-bg, #fdfdfc) !important;
+  background: var(--input-bg, #fdfdfc) !important;
+  border-color: var(--input-border, #cad5ca) !important;
+}
+
+/* Autofill rules with explicit solid fallback to avoid unreadable white-on-white text */
+:root[data-theme="dark"] #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+:root[data-theme-mode="dark"] #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+html.theme-dark #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+  color-scheme: dark !important;
+  -webkit-text-fill-color: #f1f7f4 !important;
+  caret-color: #f1f7f4 !important;
+  color: #f1f7f4 !important;
+  -webkit-box-shadow: 0 0 0 1000px #112821 inset !important;
+  box-shadow: 0 0 0 1000px #112821 inset !important;
+  background-color: #112821 !important;
+  transition: background-color 500000s ease-in-out 0s !important;
+}
+
+:root[data-theme="light"] #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+:root[data-theme-mode="light"] #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+html.theme-light #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+  color-scheme: light !important;
+  -webkit-text-fill-color: #14201b !important;
+  caret-color: #14201b !important;
+  color: #14201b !important;
+  -webkit-box-shadow: 0 0 0 1000px #f8faf8 inset !important;
+  box-shadow: 0 0 0 1000px #f8faf8 inset !important;
+  background-color: #f8faf8 !important;
+  transition: background-color 500000s ease-in-out 0s !important;
+}
+
 #registerPanel select {
   color: var(--text) !important;
   background-color: var(--input-bg) !important;
@@ -904,25 +948,36 @@ body,
   font-size: 14px !important;
 }
 
-:root[data-theme="light"] #registerPanel select {
+:root[data-theme="light"] #registerPanel select,
+:root[data-theme-mode="light"] #registerPanel select,
+html.theme-light #registerPanel select {
   background-color: #ffffff !important;
   color: #172420 !important;
+  -webkit-text-fill-color: #172420 !important;
   border-color: #b7cebf !important;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230d6b61' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
 }
 
-:root[data-theme="light"] #registerPanel select option {
+:root[data-theme="light"] #registerPanel select option,
+:root[data-theme-mode="light"] #registerPanel select option,
+html.theme-light #registerPanel select option {
   background-color: #ffffff !important;
   color: #172420 !important;
 }
 
-:root[data-theme="dark"] #registerPanel select {
+:root[data-theme="dark"] #registerPanel select,
+:root[data-theme-mode="dark"] #registerPanel select,
+html.theme-dark #registerPanel select {
   background-color: #0c181d !important;
   color: #eef5f0 !important;
+  -webkit-text-fill-color: #eef5f0 !important;
   border-color: #2b453a !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234ade80' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
 }
 
-:root[data-theme="dark"] #registerPanel select option {
+:root[data-theme="dark"] #registerPanel select option,
+:root[data-theme-mode="dark"] #registerPanel select option,
+html.theme-dark #registerPanel select option {
   background-color: #0c181d !important;
   color: #eef5f0 !important;
 }

@@ -4246,6 +4246,36 @@ select:-internal-autofill-selected {
   caret-color: var(--text) !important;
   color: var(--text) !important;
 }
+
+[data-theme-mode="dark"] :is(input, select, textarea),
+[data-theme="dark"] :is(input, select, textarea) {
+  color-scheme: dark !important;
+}
+
+[data-theme-mode="light"] :is(input, select, textarea),
+[data-theme="light"] :is(input, select, textarea) {
+  color-scheme: light !important;
+}
+
+[data-theme-mode="dark"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+[data-theme="dark"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+  color-scheme: dark !important;
+  -webkit-text-fill-color: #f1f7f4 !important;
+  caret-color: #f1f7f4 !important;
+  color: #f1f7f4 !important;
+  -webkit-box-shadow: 0 0 0 1000px #112821 inset !important;
+  box-shadow: 0 0 0 1000px #112821 inset !important;
+}
+
+[data-theme-mode="light"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
+[data-theme="light"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+  color-scheme: light !important;
+  -webkit-text-fill-color: #14201b !important;
+  caret-color: #14201b !important;
+  color: #14201b !important;
+  -webkit-box-shadow: 0 0 0 1000px #f8faf8 inset !important;
+  box-shadow: 0 0 0 1000px #f8faf8 inset !important;
+}
 select option {
   color: var(--text) !important;
   background-color: var(--surface-elevated) !important;

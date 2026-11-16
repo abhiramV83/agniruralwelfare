@@ -8,13 +8,15 @@ export function useRegistrationTheme(frame) {
       const styles = getComputedStyle(document.documentElement);
       const tokens = Object.fromEntries(themeTokenNames.map((name) => [name, styles.getPropertyValue(name).trim()]));
       const mode = document.documentElement.dataset.themeMode || (document.documentElement.classList.contains("theme-dark") ? "dark" : "light");
-      frame.current?.contentWindow?.postMessage({ type: "app-theme", theme: mode, mode, tokens }, "*");
+      const themeId = document.documentElement.dataset.theme || "emerald-grove";
+      frame.current?.contentWindow?.postMessage({ type: "app-theme", theme: mode, mode, themeId, tokens }, "*");
     };
     const observer = new MutationObserver(syncTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "data-theme-mode", "class"] });
     const currentFrame = frame.current;
     currentFrame?.addEventListener("load", syncTheme);
     syncTheme();
-    return () => { observer.disconnect(); currentFrame?.removeEventListener("load", syncTheme); };
+    const t = setTimeout(syncTheme, 150);
+    return () => { clearTimeout(t); observer.disconnect(); currentFrame?.removeEventListener("load", syncTheme); };
   }, [frame]);
 }
