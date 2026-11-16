@@ -263,14 +263,49 @@ export default function App() {
             className={menu ? "open" : ""}
             aria-label="Primary"
           >
-            {primaryLinks.map((n) => (
-              <NavLink key={n.to} to={n.to} end={n.to === "/"} className={({ isActive }) => (location.pathname === "/" ? sectionFocus === n.to : isActive) ? "active" : ""} onClick={() => setMenu(false)}>
-                {(() => { const Icon = navIcons[n.to]; return <><Icon size={16} aria-hidden="true" /><span>{n.label}</span></>; })()}
-              </NavLink>
-            ))}
-            <details className={`nav-more ${moreLinks.some((n) => n.to === location.pathname) ? "active" : ""}`}>
+            {primaryLinks.map((n) => {
+              const isSecondary = n.to === "/supporters" || n.to === "/feedback";
+              return (
+                <NavLink
+                  key={n.to}
+                  to={n.to}
+                  end={n.to === "/"}
+                  className={({ isActive }) =>
+                    `nav-link-item ${isSecondary ? "nav-link-secondary" : ""} ${
+                      (location.pathname === "/" ? sectionFocus === n.to : isActive) ? "active" : ""
+                    }`.trim()
+                  }
+                  onClick={() => setMenu(false)}
+                >
+                  {(() => {
+                    const Icon = navIcons[n.to];
+                    return (
+                      <>
+                        <Icon size={16} aria-hidden="true" />
+                        <span>{n.label}</span>
+                      </>
+                    );
+                  })()}
+                </NavLink>
+              );
+            })}
+            <details className={`nav-more ${[...moreLinks, { to: "/supporters" }, { to: "/feedback" }].some((n) => n.to === location.pathname) ? "active" : ""}`}>
               <summary aria-label="More pages">More <ChevronDown size={15} /></summary>
               <div className="more-menu">
+                <NavLink
+                  to="/supporters"
+                  className="more-link-compact"
+                  onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}
+                >
+                  {(() => { const Icon = navIcons["/supporters"]; return <><Icon size={16} aria-hidden="true" /><span>Supporters</span></>; })()}
+                </NavLink>
+                <NavLink
+                  to="/feedback"
+                  className="more-link-compact"
+                  onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}
+                >
+                  {(() => { const Icon = navIcons["/feedback"]; return <><Icon size={16} aria-hidden="true" /><span>Feedback</span></>; })()}
+                </NavLink>
                 {moreLinks.map((n) => (
                   <NavLink key={n.to} to={n.to} onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}>{(() => { const Icon = navIcons[n.to]; return <><Icon size={16} aria-hidden="true" /><span>{n.label}</span></>; })()}</NavLink>
                 ))}
@@ -348,7 +383,7 @@ export default function App() {
                 title={`Switch to ${currentTheme?.name || "Theme"} Light Mode`}
               >
                 <Sun size={13} aria-hidden="true" />
-                <span>Light</span>
+                <span className="subtheme-label">Light</span>
               </button>
               <button
                 type="button"
@@ -358,7 +393,7 @@ export default function App() {
                 title={`Switch to ${currentTheme?.name || "Theme"} Dark Mode`}
               >
                 <Moon size={13} aria-hidden="true" />
-                <span>Dark</span>
+                <span className="subtheme-label">Dark</span>
               </button>
             </div>
             {user ? (
