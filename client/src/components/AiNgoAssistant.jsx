@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, X, Send, Bot, Sparkles, ChevronDown, CheckCircle2 } from "lucide-react";
 import { api } from "../api";
+import { getClientNgoAnswer } from "../services/ai-client-fallback";
 
 const QUICK_PROMPTS = [
   "What is the membership fee to join?",
@@ -51,25 +52,28 @@ export function AiNgoAssistant() {
     try {
       const res = await api("/ai/assistant", {
         method: "POST",
-        body: JSON.stringify({ message: text }),
+        body: { message: text },
       });
 
-      const reply = res?.reply || "AGNI Rural Welfare Society is here to assist you. Please visit our Activities or Register pages for more details.";
+      const reply = res?.reply || getClientNgoAnswer(text);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
           text: reply,
-          source: res?.source,
+          source: res?.source || "knowledge_base",
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
         }
       ]);
     } catch (_err) {
+      // Intelligent resilient client-side response - never generic or broken
+      const fallbackReply = getClientNgoAnswer(text);
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          text: "Thank you for reaching out. AGNI Rural Welfare Society works for rural youth discipline, healthcare, women self-help, and social welfare. Feel free to explore our Activities or contact our office!",
+          text: fallbackReply,
+          source: "offline_resilient",
           time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
         }
       ]);

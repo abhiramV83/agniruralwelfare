@@ -182,8 +182,20 @@ export function createApp(cfg) {
     const upcoming = getUpcomingFestivals(new Date(), limit, settings);
     res.json({ upcoming, count: upcoming.length });
   }));
-  app.post("/api/ai/assistant", submissionLimit, wrap(async (req, res) => {
-    const result = await answerNgoInquiry(req.body);
+  const aiAssistantLimiter = rateLimit({
+    windowMs: 15 * 60000,
+    limit: 200,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+  });
+
+  app.post("/api/ai/assistant", aiAssistantLimiter, wrap(async (req, res) => {
+    let payload = req.body;
+    if (typeof payload === "string") {
+      try { payload = JSON.parse(payload); } catch (_) { payload = { message: payload }; }
+    }
+    const message = payload?.message || payload?.query || payload?.text || payload?.prompt || "";
+    const result = await answerNgoInquiry({ message, history: payload?.history });
     res.json(result);
   }));
   app.get("/api/files/:id", wrap(async (req, res, next) => {

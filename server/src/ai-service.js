@@ -396,22 +396,194 @@ const INTENT_CATALOG = [
         "• **Current Indian Seasons & Upcoming Festivals**"
       );
     }
+  },
+
+  // 20. What is AGNI / About Us
+  {
+    id: "about_agni",
+    triggers: [
+      "what is agni", "who are you", "tell me about agni", "what is this",
+      "what is this website", "about us", "who is agni", "about agni", "what is agni rural welfare society"
+    ],
+    priority: 15,
+    title: "About AGNI Rural Welfare Society",
+    response:
+      "**AGNI Rural Welfare Society** (Govt. Regd. No. S/1L/55059) is a registered Indian humanitarian non-profit organization:\n\n" +
+      "• **Core Mission**: Uplifting rural communities through grassroots development, Youth Cadet Corps discipline, free rural health camps, women self-help empowerment, student education, and disaster relief.\n" +
+      "• **Philosophical Roots**: Inspired by **Swami Vivekananda's** teaching ('Service to Mankind is Service to God') and **Netaji Subhash Chandra Bose's** clarion call for patriotic youth discipline.\n" +
+      "• **Motto**: *Bravery, Unity & Discipline*.\n" +
+      "• **How to Get Involved**: You can explore our community initiatives on the **Activities** page, join as a member or cadet via **Register**, or support us via **Donate**!"
+  },
+
+  // 21. Key Activities & Programs
+  {
+    id: "key_activities",
+    triggers: [
+      "what do you do", "activities", "programs", "work", "what work", "what are your programs",
+      "what are your activities", "social activities", "projects", "what does agni do", "initiatives"
+    ],
+    priority: 15,
+    title: "Key Activities & Programs",
+    response:
+      "AGNI Rural Welfare Society conducts six major grassroots initiatives throughout the year:\n\n" +
+      "1. **Youth Cadet Corps & Leadership**: Daily morning physical training, squad drill march, flag ceremonies, and first-responder disaster preparedness.\n" +
+      "2. **Free Rural Health Camps**: Volunteer doctors provide general consultations, eye checkups, blood grouping, and free essential medicines to rural families.\n" +
+      "3. **Women Self-Help Groups (SHGs)**: Vocational stitching, tailoring, handicrafts training, and financial literacy workshops to ensure women's self-reliance.\n" +
+      "4. **Child Education & Nutrition**: Free school books, notebooks, bags, stationery, and nutritious snacks for village children.\n" +
+      "5. **Environmental Drives**: Tree planting, seed ball dispersal, pond cleaning, and plastic-free village awareness.\n" +
+      "6. **Disaster Relief Assistance**: Direct emergency ground relief during floods, storms, and community crises."
+  },
+
+  // 22. Mission & Vision
+  {
+    id: "mission_vision",
+    triggers: [
+      "mission", "vision", "aim", "aims", "goals", "goal", "objective", "objectives", "why agni", "purpose"
+    ],
+    priority: 14,
+    title: "Mission, Vision & Objectives",
+    response:
+      "**Mission of AGNI Rural Welfare Society**:\n\n" +
+      "• **Grassroots Empowerment**: Transforming underprivileged rural villages by providing access to health, education, and sustainable livelihoods.\n" +
+      "• **Youth Character Building**: Channeling youth energy into disciplined, patriotic citizens through our Youth Cadet Corps.\n" +
+      "• **Dignity & Self-Reliance**: Empowering women through vocational skill centers and cooperative micro-enterprises.\n" +
+      "• **Core Motto**: *Bravery, Unity & Discipline*."
+  },
+
+  // 23. Cadet Eligibility & Age Criteria
+  {
+    id: "cadet_eligibility_age",
+    triggers: [
+      "age limit", "who can join cadet", "cadet age", "minimum age", "maximum age",
+      "can children join", "can students join", "cadet eligibility", "cadet requirements"
+    ],
+    priority: 14,
+    title: "Cadet Corps Eligibility & Age Criteria",
+    response:
+      "**Eligibility for the AGNI Youth Cadet Corps**:\n\n" +
+      "• **Age Requirement**: Typically open to youth aged **14 to 25 years** (Junior Cadets: 14–17; Senior Cadets: 18–25).\n" +
+      "• **Physical Fitness**: Basic physical endurance to participate in morning drills, physical conditioning, and squad marches.\n" +
+      "• **Commitment**: Willingness to uphold the motto *Bravery, Unity & Discipline* and assist during community service camps.\n" +
+      "• **Gender Inclusivity**: Open equally to both young men and young women. Both boys' and girls' squads participate in all training drills.\n" +
+      "• **How to Apply**: Select **Cadet** under the **Register** tab and submit your details with a passport photo."
+  },
+
+  // 24. Women & Girls Participation in Cadets & Society
+  {
+    id: "women_girls_join",
+    triggers: [
+      "can girls join", "can women join", "is it for girls", "female cadets", "girls cadet", "women join", "women in cadet"
+    ],
+    priority: 14,
+    title: "Women & Girls Participation",
+    response:
+      "**Yes, absolutely!** AGNI actively encourages girls and women to join across all programs:\n\n" +
+      "• **Female Cadets**: Our Cadet Corps features dedicated girls' squads receiving drill march, self-defense, leadership, and parade training.\n" +
+      "• **Women Self-Help Groups**: Rural women participate in vocational tailoring, handicraft production, and community leadership.\n" +
+      "• **Volunteering & Membership**: Women lead many of our rural health camps, educational drives, and administrative initiatives.\n\n" +
+      "Equal opportunity and women's empowerment are founding pillars of AGNI Rural Welfare Society."
+  },
+
+  // 25. Certificates & Verification Credentials
+  {
+    id: "certificates",
+    triggers: [
+      "certificate", "certificates", "experience certificate", "will i get a certificate",
+      "volunteer certificate", "training certificate", "letter of appreciation"
+    ],
+    priority: 13,
+    title: "Certificates & Verification Credentials",
+    response:
+      "Yes! AGNI awards official certificates and credentials upon verified participation:\n\n" +
+      "• **Cadets**: Receive an official **Cadet Corps Training Certificate** upon completing their parade and drill syllabus.\n" +
+      "• **Interns**: Receive a signed and stamped **Certificate of Internship Completion** with detailed project evaluation.\n" +
+      "• **Volunteers**: Receive **Certificates of Appreciation** for participating in medical camps, tree planting, or relief drives.\n" +
+      "• **Official Photo ID Card**: Every approved member, cadet, and volunteer receives a 2-sided verifiable photo ID card with a QR code."
+  },
+
+  // 26. In-Kind Material Donations (Clothes, Books & Supplies)
+  {
+    id: "clothes_books_donation",
+    triggers: [
+      "donate clothes", "donate books", "material donation", "in kind", "donate items", "give clothes", "stationery donation"
+    ],
+    priority: 13,
+    title: "In-Kind Donations (Clothes, Books & Supplies)",
+    response:
+      "We warmly accept in-kind donations of usable items for rural families and school children:\n\n" +
+      "• **New or Gently Used Clothes**: Blankets, sweaters, winter wear, and children's clothing.\n" +
+      "• **Educational Materials**: Notebooks, school bags, pens, geometry boxes, and reference storybooks.\n" +
+      "• **Drop-off & Inquiries**: Please contact our office at +91 94331 23456 or email agniruralsociety@gmail.com to coordinate collection or drop-off."
+  },
+
+  // 27. Disaster Preparedness & Relief Missions
+  {
+    id: "disaster_relief",
+    triggers: [
+      "disaster", "disaster relief", "flood", "cyclone", "emergency relief", "rescue", "boat mission", "crisis aid"
+    ],
+    priority: 13,
+    title: "Disaster Preparedness & Relief Missions",
+    response:
+      "AGNI maintains rapid-response disaster relief capabilities for rural and coastal communities:\n\n" +
+      "• **Flood & Storm Aid**: Cadets and volunteers deploy food packets, safe drinking water, halogen tablets, and emergency medicines.\n" +
+      "• **Emergency Evacuation**: Coordination with local panchayats and rescue boats to move stranded villagers to safe shelters.\n" +
+      "• **Post-Disaster Rehabilitation**: Rebuilding damaged roofs, distributing hygiene kits, and organizing medical disinfection drives."
+  },
+
+  // 28. Thanks & Appreciation
+  {
+    id: "thanks_appreciation",
+    triggers: [
+      "thank you", "thanks", "thank u", "great", "awesome", "good job", "dhanyavad", "shukriya"
+    ],
+    priority: 12,
+    title: "You are Most Welcome",
+    response:
+      "You are most welcome! We are truly grateful for your interest in AGNI Rural Welfare Society.\n\n" +
+      "Together, let us build stronger, healthier, and more empowered rural communities. If you have any further questions about joining, volunteering, or donating, please don't hesitate to ask!"
+  },
+
+  // 29. Governance & Leadership
+  {
+    id: "governing_body",
+    triggers: [
+      "president", "secretary", "who runs agni", "management", "governing body", "leadership", "executive committee"
+    ],
+    priority: 12,
+    title: "Governance & Leadership",
+    response:
+      "**AGNI Rural Welfare Society Governance**:\n\n" +
+      "• **Governing Body**: Composed of respected grassroots social workers, educators, community leaders, and experienced youth trainers.\n" +
+      "• **Transparency**: Accounts and social welfare records are audited annually in accordance with the Societies Registration Act.\n" +
+      "• **Administration**: All applications, ID card generation, and community programs are reviewed and monitored under authoritative oversight."
   }
 ];
 
 /**
- * Score a user query against an intent entry
+ * Score a user query against an intent entry with enhanced tokenization & fuzzy phrase support
  */
 function scoreIntent(query, intent) {
   let score = 0;
-  const q = query.toLowerCase();
+  const q = String(query || "").toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
+  const qWords = q.split(" ").filter((w) => w.length > 1);
 
   for (const trigger of intent.triggers) {
-    const t = trigger.toLowerCase();
+    const t = trigger.toLowerCase().trim();
     if (q === t) {
-      score += 40; // Exact match
+      score += 60; // Exact match
     } else if (q.includes(t)) {
-      score += t.length > 5 ? 20 : 10;
+      score += t.length > 5 ? 30 : 18;
+    } else {
+      const tWords = t.split(" ").filter((w) => w.length > 2);
+      if (tWords.length > 1) {
+        const matches = tWords.filter((tw) => qWords.includes(tw));
+        if (matches.length === tWords.length) {
+          score += 28;
+        } else if (matches.length >= 2) {
+          score += 16;
+        }
+      }
     }
   }
 
@@ -515,16 +687,21 @@ export async function answerNgoInquiry({ message = "", history = [] } = {}) {
     };
   }
 
-  // 3. Context-Aware Fallback with Seasonal & Cultural Awareness
+  // 3. Dynamic Context-Aware Fallback
   const fallbackGreeting = activeFestival
     ? `Happy ${activeFestival.name}! `
-    : `Season's greetings during ${currentSeason.sanskritName}! `;
+    : `Namaste! `;
 
   return {
     reply:
-      `${fallbackGreeting}AGNI Rural Welfare Society is dedicated to rural grassroots empowerment, youth cadet discipline, and public healthcare.\n\n` +
-      "You can explore our **Activities**, sign up as a **Member**, **Cadet**, or **Volunteer** via **Register**, support our missions through **Donate** (with 80G tax exemption), or leave a message through **Contact**!\n\n" +
-      "Feel free to ask specific questions about registration requirements, cadet training, donations, or upcoming festivals.",
+      `${fallbackGreeting}Welcome to AGNI Rural Welfare Society (Govt. Regd. No. S/1L/55059).\n\n` +
+      `Regarding your inquiry about "${query}":\n\n` +
+      "AGNI is committed to grassroots community empowerment, youth discipline, free healthcare, and education. Here are the quickest ways I can assist:\n\n" +
+      "• **Cadet Corps**: Ask about parade, drill, age criteria (14–25), uniforms, or camps.\n" +
+      "• **Membership & Volunteering**: Ask about free enrollment, documents required, or certificates.\n" +
+      "• **Donations & 80G Tax Benefits**: Ask how to contribute via UPI or obtain 50% tax deductions.\n" +
+      "• **Contact Headquarters**: Ask for our phone numbers (+91 94331 23456), email, or office location.\n\n" +
+      "Please feel free to ask about any specific detail!",
     source: "knowledge_base"
   };
 }

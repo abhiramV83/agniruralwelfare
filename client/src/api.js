@@ -39,9 +39,13 @@ export async function api(path, options = {}, retry = true) {
   const headers = new Headers(options.headers || {});
   if (accessToken) headers.set("Authorization", `Bearer ${accessToken}`);
   let body = options.body;
-  if (body && !(body instanceof FormData) && typeof body !== "string") {
-    headers.set("Content-Type", "application/json");
-    body = JSON.stringify(body);
+  if (body && !(body instanceof FormData)) {
+    if (typeof body !== "string") {
+      headers.set("Content-Type", "application/json");
+      body = JSON.stringify(body);
+    } else if (!headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json");
+    }
   }
   const res = await fetch(`/api${path}`, {
     ...options,

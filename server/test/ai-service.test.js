@@ -71,6 +71,48 @@ test("answerNgoInquiry provides specific, distinct responses for different user 
   const resGreeting = await answerNgoInquiry({ message: "Good morning! Hello there" });
   assert.equal(resGreeting.intentId, "greetings");
   assert.ok(resGreeting.reply.includes("Namaste"));
+
+  // 14. What is AGNI?
+  const resAbout = await answerNgoInquiry({ message: "What is AGNI and what does it stand for?" });
+  assert.equal(resAbout.intentId, "about_agni");
+  assert.ok(resAbout.reply.includes("AGNI Rural Welfare Society"));
+  assert.ok(resAbout.reply.includes("S/1L/55059"));
+
+  // 15. What do you do? (Activities & Programs)
+  const resAct = await answerNgoInquiry({ message: "What do you do and what are your main activities?" });
+  assert.equal(resAct.intentId, "key_activities");
+  assert.ok(resAct.reply.includes("Free Rural Health Camps"));
+  assert.ok(resAct.reply.includes("Youth Cadet Corps"));
+
+  // 16. Can girls join?
+  const resGirls = await answerNgoInquiry({ message: "Can girls join the cadet corps?" });
+  assert.equal(resGirls.intentId, "women_girls_join");
+  assert.ok(resGirls.reply.includes("Yes, absolutely"));
+
+  // 17. Cadet age limit
+  const resAge = await answerNgoInquiry({ message: "What is the age limit to join the cadet corps?" });
+  assert.equal(resAge.intentId, "cadet_eligibility_age");
+  assert.ok(resAge.reply.includes("14 to 25 years"));
+
+  // 18. Certificates
+  const resCert = await answerNgoInquiry({ message: "Will I get a certificate after completing my training or volunteering?" });
+  assert.equal(resCert.intentId, "certificates");
+  assert.ok(resCert.reply.includes("Certificate"));
+
+  // 19. Mission & Vision
+  const resMiss = await answerNgoInquiry({ message: "What is the mission and vision of AGNI?" });
+  assert.equal(resMiss.intentId, "mission_vision");
+  assert.ok(resMiss.reply.includes("Grassroots Empowerment"));
+
+  // 20. Clothes & Books donation
+  const resClothes = await answerNgoInquiry({ message: "Can I donate clothes and books for rural kids?" });
+  assert.equal(resClothes.intentId, "clothes_books_donation");
+  assert.ok(resClothes.reply.includes("usable items"));
+
+  // 21. Thanks
+  const resThanks = await answerNgoInquiry({ message: "Thank you for the information!" });
+  assert.equal(resThanks.intentId, "thanks_appreciation");
+  assert.ok(resThanks.reply.includes("most welcome"));
 });
 
 test("getApplicationAiInsights evaluates completeness and detects potential duplicates safely", () => {
