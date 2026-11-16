@@ -1117,3 +1117,4 @@ export function getCategoryCounts() {
   });
   return counts;
 }
+

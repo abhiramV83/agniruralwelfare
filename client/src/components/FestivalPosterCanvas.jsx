@@ -357,3 +357,4 @@ export function FestivalPosterCanvas({ festival, className = "", onDownloadSucce
     </div>
   );
 }
+
