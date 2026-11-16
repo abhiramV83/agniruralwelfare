@@ -7,10 +7,11 @@ export function useRegistrationTheme(frame) {
     const syncTheme = () => {
       const styles = getComputedStyle(document.documentElement);
       const tokens = Object.fromEntries(themeTokenNames.map((name) => [name, styles.getPropertyValue(name).trim()]));
-      frame.current?.contentWindow?.postMessage({ type: "app-theme", theme: document.documentElement.dataset.theme || "light", tokens }, "*");
+      const mode = document.documentElement.dataset.themeMode || (document.documentElement.classList.contains("theme-dark") ? "dark" : "light");
+      frame.current?.contentWindow?.postMessage({ type: "app-theme", theme: mode, mode, tokens }, "*");
     };
     const observer = new MutationObserver(syncTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "data-theme-mode", "class"] });
     const currentFrame = frame.current;
     currentFrame?.addEventListener("load", syncTheme);
     syncTheme();

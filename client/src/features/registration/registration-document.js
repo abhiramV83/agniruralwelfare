@@ -20,9 +20,10 @@ const registrationIcons = {
 };
 
 export function createRegistrationDocument() {
-    const theme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+    const isDarkInitial = typeof document !== "undefined" && (document.documentElement.dataset.themeMode === "dark" || document.documentElement.classList.contains("theme-dark"));
+    const theme = isDarkInitial ? "dark" : "light";
     const themeTokenNames = ["--bg", "--surface", "--surface-elevated", "--border", "--text", "--text-muted", "--primary", "--accent", "--on-primary", "--photo-text", "--photo-accent", "--success", "--danger", "--overlay", "--shadow", "--glow", "--amber", "--radius", "--input-bg", "--input-border", "--registration-border", "--focus-ring", "--info-bg", "--info-border", "--info-text", "--warning-bg", "--warning-border", "--warning-text", "--success-bg", "--success-border", "--success-text", "--danger-bg", "--danger-border", "--hero-start", "--hero-mid", "--hero-end"];
-    const themeTokens = Object.fromEntries(themeTokenNames.map((name) => [name, getComputedStyle(document.documentElement).getPropertyValue(name).trim()]));
+    const themeTokens = typeof document !== "undefined" ? Object.fromEntries(themeTokenNames.map((name) => [name, getComputedStyle(document.documentElement).getPropertyValue(name).trim()])) : {};
     const rootThemeStyle = `:root{${Object.entries(themeTokens).map(([name, value]) => `${name}:${value}`).join(";")};color-scheme:${theme}}`;
     let markup = registrationMarkup
       .replace('id="registerPanel" class="auth-panel"', 'id="registerPanel" class="auth-panel active"')
@@ -560,7 +561,7 @@ export function createRegistrationDocument() {
       $('#registerPanel').addEventListener('load',()=>{});
       window.addEventListener('resize',()=>sendHeight());
       const themeTokenNames=${JSON.stringify(themeTokenNames)};
-      window.addEventListener('message',e=>{const m=e.data||{};if(m.type!=='app-theme')return;const root=document.documentElement;root.dataset.theme=m.theme==='dark'?'dark':'light';themeTokenNames.forEach(name=>{const value=m.tokens?.[name];if(typeof value==='string'&&value)root.style.setProperty(name,value)});root.style.colorScheme=root.dataset.theme;sendHeight();});
+      window.addEventListener('message',e=>{const m=e.data||{};if(m.type!=='app-theme')return;const root=document.documentElement;const isDark=m.theme==='dark'||m.mode==='dark';root.dataset.theme=isDark?'dark':'light';themeTokenNames.forEach(name=>{const value=m.tokens?.[name];if(typeof value==='string'&&value)root.style.setProperty(name,value)});root.style.colorScheme=root.dataset.theme;sendHeight();});
       const panelNode=$('#registerPanel');
       if(panelNode&&typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>sendHeight()).observe(panelNode);}
       function enableFieldSuggestions(){const fields=$$('input[type="text"],input[type="email"],input[type="tel"],input[type="url"],textarea');fields.forEach(field=>{if(field.type==='password'||field.type==='file')return;if(field.hasAttribute('autocomplete')&&field.getAttribute('autocomplete')!=='on')return;const key=((field.name||'')+' '+(field.id||'')+' '+(field.labels?.[0]?.textContent||'')).toLowerCase();const value=field.type==='email'||/email/.test(key)?'email':/username/.test(key)?'username':/phone|mobile|telephone|contact\s*(?:number|phone|no\b)/.test(key)?'tel':/postal|pin code|pincode|zip/.test(key)?'postal-code':/address/.test(key)?'street-address':/full.?name|cadetname|membername/.test(key)?'name':/institution|college|school|organization/.test(key)?'organization':'on';field.setAttribute('autocomplete',value)});$$('input[type="password"]').forEach(field=>field.setAttribute('autocomplete','off'));}

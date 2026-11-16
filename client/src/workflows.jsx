@@ -1439,6 +1439,13 @@ export function Admin() {
   const [acceptValidFrom, setAcceptValidFrom] = useState("");
   const [acceptValidUntil, setAcceptValidUntil] = useState("");
   const [acceptError, setAcceptError] = useState(null);
+  const [adminRegNoInput, setAdminRegNoInput] = useState("");
+
+  useEffect(() => {
+    if (detailsModalItem) {
+      setAdminRegNoInput(detailsModalItem.registrationNumber || detailsModalItem.registrationId || detailsModalItem.memberId || "");
+    }
+  }, [detailsModalItem?._id, detailsModalItem?.registrationNumber]);
 
   const [declineModalItem, setDeclineModalItem] = useState(null);
   const [declineReason, setDeclineReason] = useState("");
@@ -1567,7 +1574,7 @@ export function Admin() {
         referenceId: res.registrationNumber || res.registrationId,
         applicantName: acceptModalItem.fullName,
         actionText: "Generate ID Card Now",
-        onAction: () => handleGenerateIdCard(updatedRecord),
+        onAction: () => handleGenerateIdCard(updatedRecord, res.registrationNumber || trimmedRegNo),
         details: [
           { label: "Applicant Name", value: acceptModalItem.fullName },
           { label: "Registration Type", value: acceptModalItem.category },
@@ -1584,32 +1591,41 @@ export function Admin() {
     }
   };
 
-  const handleGenerateIdCard = async (item) => {
+  const handleGenerateIdCard = async (item, customRegNo = null) => {
     setBusy(true);
     setActionId(item._id);
     setError(null);
     try {
+      const regToSend = (typeof customRegNo === "string" && customRegNo.trim())
+        ? customRegNo.trim()
+        : (item.registrationNumber || item.registrationId || item.memberId || "");
       const res = await api(`/admin/applications/${item.source}/${item.recordId}/generate-id-card`, {
         method: "POST",
+        body: regToSend ? { registrationNumber: regToSend } : undefined,
       });
-      const updated = { ...item, idCardFileId: res.idCardFileId, idCardGeneratedAt: res.idCardGeneratedAt };
+      const updated = {
+        ...item,
+        registrationNumber: res.registrationNumber || regToSend || item.registrationNumber,
+        idCardFileId: res.idCardFileId,
+        idCardGeneratedAt: res.idCardGeneratedAt
+      };
       setRecords((prev) => prev.map((r) => (r._id === item._id ? updated : r)));
       if (detailsModalItem && detailsModalItem._id === item._id) {
         setDetailsModalItem(updated);
       }
-      setToastNotice(`✓ Official 2-sided ID Card PDF generated for ${item.fullName}. Ready for download and approval email.`);
+      setToastNotice(`✓ Official 2-sided ID Card PDF generated for ${item.fullName} (Regd. No: ${updated.registrationNumber}). Ready for download and approval email.`);
 
       showSuccessPopup({
         heading: "Official ID Card Generated!",
         message: `High-resolution double-sided ID Card with QR verification has been generated for ${item.fullName}.`,
         category: (item.category || "member").toLowerCase(),
-        referenceId: item.registrationNumber || item.registrationId,
+        referenceId: updated.registrationNumber || item.registrationNumber || item.registrationId,
         applicantName: item.fullName,
         actionText: "Preview 3D ID Card",
         onAction: () => setCardModalItem(updated),
         details: [
           { label: "Applicant Name", value: item.fullName },
-          { label: "Registration ID", value: item.registrationNumber || item.registrationId },
+          { label: "Registration ID", value: updated.registrationNumber || item.registrationNumber || item.registrationId },
           { label: "Status", value: "Verified & Generated" },
         ],
       });
@@ -2640,6 +2656,94 @@ export function Admin() {
               onRetry={handleRetryEmail}
             />
 
+            {/* Official Registration Number Assignment & ID Card Generation Panel */}
+            {detailsModalItem.status === "accepted" && (
+              <div
+                className="admin-id-card-panel"
+                style={{
+                  width: "100%",
+                  marginTop: "20px",
+                  padding: "18px 20px",
+                  borderRadius: "14px",
+                  border: "1px solid var(--border)",
+                  background: "var(--surface-elevated)",
+                  boxShadow: "var(--shadow)",
+                }}
+              >
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
+                    <label
+                      htmlFor="adminRegdNumberInput"
+                      style={{
+                        fontWeight: "750",
+                        fontSize: "14px",
+                        color: "var(--text)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <Sparkles size={16} style={{ color: "var(--primary)" }} />
+                      Official Registration Number (Regd. No.)
+                    </label>
+                    {detailsModalItem.idCardFileId && (
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "700",
+                          padding: "3px 10px",
+                          borderRadius: "999px",
+                          background: "color-mix(in srgb, var(--success) 16%, transparent)",
+                          color: "var(--success)",
+                          border: "1px solid color-mix(in srgb, var(--success) 35%, transparent)",
+                        }}
+                      >
+                        ✓ ID Card Active
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
+                    <input
+                      id="adminRegdNumberInput"
+                      type="text"
+                      value={adminRegNoInput}
+                      onChange={(e) => setAdminRegNoInput(e.target.value)}
+                      placeholder="e.g. ARWS/CADET/2026/001"
+                      style={{
+                        flex: "1 1 260px",
+                        minWidth: "220px",
+                        padding: "11px 14px",
+                        borderRadius: "10px",
+                        fontSize: "14px",
+                        fontWeight: "700",
+                        letterSpacing: "0.5px",
+                        border: "1px solid var(--input-border)",
+                        background: "var(--input-bg)",
+                        color: "var(--text)",
+                      }}
+                    />
+                    <button
+                      type="button"
+                      className="button"
+                      disabled={busy || !adminRegNoInput.trim()}
+                      onClick={() => handleGenerateIdCard(detailsModalItem, adminRegNoInput)}
+                      style={{ whiteSpace: "nowrap", padding: "11px 20px" }}
+                    >
+                      <Sparkles size={16} />
+                      {detailsModalItem.idCardFileId ? "Update & Re-generate ID Card" : "Generate ID Card"}
+                    </button>
+                  </div>
+
+                  <p style={{ margin: "2px 0 0", fontSize: "12.5px", color: "var(--text-muted)", lineHeight: 1.5 }}>
+                    {detailsModalItem.idCardFileId
+                      ? "The official registration number assigned above is printed on the member's verified double-sided ID card. You can modify it anytime and click 'Update & Re-generate ID Card' to reissue."
+                      : "Assign the official registration number above before clicking 'Generate ID Card'. This number will be printed on the official ID card and linked to their account."}
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* Workflow Action Buttons */}
             <div className="app-actions-row" style={{ marginTop: "24px" }}>
               {detailsModalItem.status === "pending" ? (
@@ -2667,24 +2771,14 @@ export function Admin() {
               ) : detailsModalItem.status === "accepted" ? (
                 <>
                   {!detailsModalItem.idCardFileId ? (
-                    <>
-                      <button
-                        type="button"
-                        className="button"
-                        disabled={busy}
-                        onClick={() => handleGenerateIdCard(detailsModalItem)}
-                      >
-                        <Sparkles size={16} /> Generate ID Card
-                      </button>
-                      <button
-                        type="button"
-                        className="button secondary"
-                        disabled={busy}
-                        onClick={() => handleSendApprovalEmail(detailsModalItem)}
-                      >
-                        <Send size={16} /> Send Acceptance Email
-                      </button>
-                    </>
+                    <button
+                      type="button"
+                      className="button secondary"
+                      disabled={busy}
+                      onClick={() => handleSendApprovalEmail(detailsModalItem)}
+                    >
+                      <Send size={16} /> Send Acceptance Email
+                    </button>
                   ) : (
                     <>
                       <button

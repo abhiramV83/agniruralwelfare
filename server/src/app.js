@@ -655,7 +655,7 @@ export function createApp(cfg) {
     };
   }
 
-  async function handleGenerateIdCard(source, id, cfg) {
+  async function handleGenerateIdCard(source, id, cfg, customRegId = null) {
     const { item, Model, source: actualSource, id: actualId } = await resolveApplication(source, id);
 
     const isAccepted = item.status === "accepted" || item.status === "approved";
@@ -664,7 +664,10 @@ export function createApp(cfg) {
     }
 
     const category = getApplicationCategory(actualSource, item);
-    const regId = item.registrationNumber || (actualSource === "accounts" ? item.memberId : item.registrationId) || await getNextRegistrationId(category);
+    const assignedRegId = (typeof customRegId === "string" && customRegId.trim())
+      ? customRegId.trim()
+      : (item.registrationNumber || (actualSource === "accounts" ? item.memberId : item.registrationId) || await getNextRegistrationId(category));
+    const regId = assignedRegId;
 
     // Resolve photo buffer
     let photoBuffer = null;
@@ -709,6 +712,9 @@ export function createApp(cfg) {
     // Save ID card in GridFS
     const savedCard = await saveBufferAsFile(pdfBuffer, `agni-id-card-${regId}.pdf`, "application/pdf");
 
+    item.registrationNumber = regId;
+    if (actualSource === "accounts") item.memberId = regId;
+    else item.registrationId = regId;
     item.idCardFileId = savedCard.fileId;
     item.idCardFileReference = savedCard.fileId;
     item.idCardGenerated = true;
@@ -718,6 +724,8 @@ export function createApp(cfg) {
     } catch {
       await Model.findByIdAndUpdate(actualId, {
         $set: {
+          registrationNumber: regId,
+          ...(actualSource === "accounts" ? { memberId: regId } : { registrationId: regId }),
           idCardFileId: savedCard.fileId,
           idCardFileReference: savedCard.fileId,
           idCardGenerated: true,
@@ -728,10 +736,12 @@ export function createApp(cfg) {
 
     // Sync linked user account if exists
     const applicantEmail = item.email || item.data?.email || item.data?.memberEmail;
-    if (actualSource === "submissions" && applicantEmail) {
+    if (applicantEmail) {
       try {
-        const account = await User.findOne({ role: "member", email: applicantEmail.trim().toLowerCase() });
+        const account = await User.findOne({ email: applicantEmail.trim().toLowerCase() });
         if (account) {
+          account.registrationNumber = regId;
+          account.memberId = regId;
           account.idCardFileId = savedCard.fileId;
           account.idCardFileReference = savedCard.fileId;
           account.idCardGenerated = true;
@@ -748,6 +758,7 @@ export function createApp(cfg) {
 
     return {
       success: true,
+      registrationNumber: regId,
       idCardFileId: savedCard.fileId,
       idCardGenerated: true,
       idCardGeneratedAt: item.idCardGeneratedAt,
@@ -1386,7 +1397,8 @@ export function createApp(cfg) {
   }));
 
   app.post(["/api/admin/applications/:source/:id/generate-id-card", "/api/admin/applications/:id/generate-id-card"], wrap(async (req, res) => {
-    const result = await handleGenerateIdCard(req.params.source, req.params.id, cfg);
+    const customRegId = req.body?.registrationNumber || req.body?.regId || req.body?.registrationId;
+    const result = await handleGenerateIdCard(req.params.source, req.params.id, cfg, customRegId);
     res.json(result);
   }));
 

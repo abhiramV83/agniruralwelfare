@@ -31,7 +31,11 @@ const dateText = (input) => {
  */
 export async function generateIdCardPdf(record, cfg, copy = {}) {
   const brandName = (copy?.brand?.name || "Agni Rural Welfare Society").trim();
-  const motto = copy?.brand?.motto || "Service to humanity is service to God";
+  const rawMotto = copy?.brand?.motto || "Bravery, Unity & Discipline";
+  let cleanMotto = rawMotto.replace(/^motto\s*:\s*/i, "").trim();
+  cleanMotto = cleanMotto.replace(/Bravery\s+Unity/i, "Bravery, Unity");
+  if (!cleanMotto) cleanMotto = "Bravery, Unity & Discipline";
+
   const registrationId = record.registrationNumber || record.registrationId || record.memberId || "AGNI-MEM-2026-0001";
   const categoryRaw = record.type || record.registrationType || record.category || "Member";
 
@@ -47,7 +51,7 @@ export async function generateIdCardPdf(record, cfg, copy = {}) {
 
   const name = value(record, "fullName", "memberName", "cadetName") || "Valued Member";
   const rank = value(record, "rank", "cadetRank", "position") || designation;
-  const troopOrInst = value(record, "troopNo", "institution", "memberInstitution", "school", "schoolName", "institute");
+  const troopOrInst = value(record, "troopNo", "institution", "memberInstitution", "school", "schoolName", "institute") || "Agni Rural Welfare Society";
   const guardian = value(record, "guardian", "guardianName", "fatherName", "memberGuardian");
   const address = value(record, "address", "memberAddress", "cadetAddress", "currentAddress", "permanentAddress", "residentialAddress");
   const dob = value(record, "dob", "dateOfBirth");
@@ -57,7 +61,7 @@ export async function generateIdCardPdf(record, cfg, copy = {}) {
   const validFromVal = value(record, "validFrom") ? dateText(record.validFrom) : dateText(approved);
   const validUntilVal = value(record, "validUntil", "validity", "validTo") ? dateText(record.validUntil || record.validity || record.validTo) : "Permanent";
 
-  const frontBg = "#fffafc", ink = "#17231f", red = "#b92e31", green = "#0d6b61", rose = "#fce8ef";
+  const frontBg = "#fffcf9", ink = "#141c19", red = "#a82024", green = "#0a5c53", lightGreen = "#e8f5f2", subtleBorder = "#cbdcd6";
 
   return new Promise((resolve, reject) => {
     try {
@@ -71,69 +75,122 @@ export async function generateIdCardPdf(record, cfg, copy = {}) {
       // FRONT SIDE
       // ==========================================
       doc.rect(0, 0, 800, 500).fill(frontBg);
-      doc.rect(0, 0, 800, 14).fill(green);
-
-      // Photo frame
-      doc.rect(26, 32, 172, 222).lineWidth(2).stroke(ink);
-      if (record.photoBuffer) {
-        try {
-          doc.image(record.photoBuffer, 32, 38, { fit: [160, 210], align: "center", valign: "center" });
-        } catch {
-          doc.fillColor("#7a7074").font("Helvetica").fontSize(12).text("APPLICANT PHOTO", 32, 135, { width: 160, align: "center" });
-        }
-      } else {
-        doc.fillColor("#8a8085").font("Helvetica-Bold").fontSize(13).text("AFFIX PHOTO", 32, 130, { width: 160, align: "center" });
-        doc.font("Helvetica").fontSize(10).text("OFFICIAL RECORD", 32, 148, { width: 160, align: "center" });
-      }
-
-      // Organization Header
-      doc.fillColor(red).font("Helvetica-Bold").fontSize(24).text(brandName.toUpperCase(), 215, 34, { width: 510, align: "center", characterSpacing: 1.1 });
-      doc.fillColor(ink).font("Helvetica").fontSize(15).text("Govt. Regd. No. : S/1L/55059", 215, 68, { width: 510, align: "center" });
-      doc.font("Helvetica-Bold").fontSize(28).text("OFFICIAL IDENTITY CARD", 215, 98, { width: 510, align: "center" });
-      doc.fontSize(15).font("Helvetica-Oblique").text(`Motto : ${motto}`, 215, 136, { width: 510, align: "center" });
-
-      // Category Indicators
-      const memberMark = designation === "MEMBER" ? "✓" : " ";
-      const cadetMark = designation === "CADET" ? "✓" : " ";
-      const volunteerMark = designation === "VOLUNTEER" ? "✓" : " ";
-      const internMark = designation === "INTERN & ALUMNI" ? "✓" : " ";
-      doc.font("Helvetica-Bold").fontSize(13).text(`MEMBER [${memberMark}]    CADET [${cadetMark}]    VOLUNTEER [${volunteerMark}]    INTERN & ALUMNI [${internMark}]`, 215, 172, { width: 510, align: "center" });
+      doc.rect(0, 0, 800, 12).fill(green);
+      doc.roundedRect(12, 12, 776, 476, 6).lineWidth(1.5).strokeColor(green).stroke();
 
       // Top logo
-      try { doc.image(logoPath, 725, 28, { fit: [48, 48] }); } catch {}
+      try {
+        doc.image(logoPath, 725, 22, { fit: [50, 50] });
+      } catch {}
 
-      // Decorative background emblem
-      doc.save().fillColor(rose).opacity(0.35).circle(520, 420, 130).fill().restore();
-
-      // Front rows
-      const frontRows = [
-        ["Name", name],
-        ["Rank / Role", rank],
-        ["Regd. No.", registrationId],
-      ];
-      if (troopOrInst) frontRows.push(["Institution / Troop", troopOrInst]);
-      frontRows.push(["Date of Issue", dateText(approved)]);
-
-      let y = 250;
-      for (const [label, text] of frontRows) {
-        doc.fillColor(ink).font("Helvetica").fontSize(15).text(label, 35, y, { width: 190, height: 22, ellipsis: true });
-        doc.save().dash(2, { space: 3 }).moveTo(230, y + 17).lineTo(265, y + 17).lineWidth(0.7).strokeColor("#62565b").stroke().restore();
-        doc.font("Helvetica-Bold").fontSize(16).text(text, 275, y, { width: 490, height: 24, ellipsis: true });
-        y += 38;
+      // Photo frame (Left side: x:28, y:24, width:164, height:205) -> Ends cleanly at y:229
+      const photoX = 28, photoY = 24, photoW = 164, photoH = 205;
+      doc.roundedRect(photoX, photoY, photoW, photoH, 4).lineWidth(1.5).strokeColor("#20302b").stroke();
+      if (record.photoBuffer) {
+        try {
+          doc.image(record.photoBuffer, photoX + 4, photoY + 4, { fit: [photoW - 8, photoH - 8], align: "center", valign: "center" });
+        } catch {
+          doc.fillColor("#6b7280").font("Helvetica-Bold").fontSize(11).text("APPLICANT PHOTO", photoX, photoY + 95, { width: photoW, align: "center" });
+        }
+      } else {
+        doc.save().fillColor("#f1f5f3").roundedRect(photoX + 2, photoY + 2, photoW - 4, photoH - 4, 3).fill().restore();
+        doc.fillColor("#4b5563").font("Helvetica-Bold").fontSize(12).text("AFFIX PHOTO", photoX, photoY + 86, { width: photoW, align: "center" });
+        doc.font("Helvetica").fontSize(10).fillColor("#6b7280").text("OFFICIAL RECORD", photoX, photoY + 104, { width: photoW, align: "center" });
       }
 
-      doc.fillColor(ink).font("Helvetica").fontSize(14).text("Signature of Issuing Authority :  ________________________________________", 35, 465, { width: 730 });
+      // Organization Header (Centered in remaining space: x: 202, width: 515)
+      const headerX = 202, headerW = 515;
+      doc.fillColor(red).font("Helvetica-Bold").fontSize(23).text(brandName.toUpperCase(), headerX, 26, { width: headerW, align: "center", characterSpacing: 0.8 });
+      doc.fillColor("#4b5563").font("Helvetica-Bold").fontSize(13.5).text("Govt. Regd. No. : S/1L/55059", headerX, 58, { width: headerW, align: "center" });
+      doc.fillColor(ink).font("Helvetica-Bold").fontSize(26).text("OFFICIAL IDENTITY CARD", headerX, 84, { width: headerW, align: "center", characterSpacing: 0.5 });
+
+      // Clean single motto line
+      doc.fillColor(green).font("Helvetica-Oblique").fontSize(13.5).text(`Motto: ${cleanMotto}`, headerX, 120, { width: headerW, align: "center" });
+
+      // Category Badges (4 side-by-side pills)
+      const categories = ["MEMBER", "CADET", "VOLUNTEER", "INTERN & ALUMNI"];
+      const badgeY = 152, badgeH = 26;
+      const badgeWidths = [105, 95, 115, 155];
+      const totalBadgesW = badgeWidths.reduce((a, b) => a + b, 0) + (categories.length - 1) * 10;
+      let curBadgeX = headerX + Math.round((headerW - totalBadgesW) / 2);
+
+      for (let i = 0; i < categories.length; i++) {
+        const cat = categories[i];
+        const bW = badgeWidths[i];
+        const isActive = designation === cat;
+
+        if (isActive) {
+          doc.save().fillColor(green).roundedRect(curBadgeX, badgeY, bW, badgeH, 13).fill().restore();
+          doc.fillColor("#ffffff").font("Helvetica-Bold").fontSize(11).text(`● ${cat}`, curBadgeX, badgeY + 7, { width: bW, align: "center" });
+        } else {
+          doc.save().fillColor("#ffffff").roundedRect(curBadgeX, badgeY, bW, badgeH, 13).fill().restore();
+          doc.roundedRect(curBadgeX, badgeY, bW, badgeH, 13).lineWidth(1).strokeColor(subtleBorder).stroke();
+          doc.fillColor("#64748b").font("Helvetica-Bold").fontSize(10.5).text(cat, curBadgeX, badgeY + 7, { width: bW, align: "center" });
+        }
+        curBadgeX += bW + 10;
+      }
+
+      // Elegant horizontal divider below photo (at y = 240)
+      doc.save().strokeColor(green).lineWidth(1.2).moveTo(28, 240).lineTo(772, 240).stroke().restore();
+
+      // Decorative subtle watermark background emblem
+      doc.save().fillColor(green).opacity(0.04).circle(530, 360, 110).fill().restore();
+
+      // Front Key-Value Rows (All start comfortably below y = 240)
+      const frontRows = [
+        ["Name", name, false],
+        ["Rank / Role", rank, false],
+        ["Regd. No.", registrationId, true],
+        ["Institution / Troop", troopOrInst, false],
+        ["Date of Issue", dateText(approved), false],
+      ];
+
+      let rowY = 252;
+      const rowH = 36;
+      for (let i = 0; i < frontRows.length; i++) {
+        const [label, valText, isHighlight] = frontRows[i];
+
+        if (i % 2 === 0) {
+          doc.save().fillColor(lightGreen).opacity(0.4).roundedRect(32, rowY, 736, rowH - 4, 4).fill().restore();
+        }
+
+        // Label
+        doc.fillColor("#2d3748").font("Helvetica-Bold").fontSize(14).text(label, 48, rowY + 7, { width: 175 });
+
+        // Colon
+        doc.fillColor(green).font("Helvetica-Bold").fontSize(14).text(":", 225, rowY + 7, { width: 15, align: "center" });
+
+        // Value
+        if (isHighlight) {
+          doc.fillColor(red).font("Helvetica-Bold").fontSize(15.5).text(valText, 250, rowY + 6, { width: 505, height: 24, ellipsis: true });
+        } else {
+          doc.fillColor(ink).font("Helvetica-Bold").fontSize(15).text(valText, 250, rowY + 6, { width: 505, height: 24, ellipsis: true });
+        }
+
+        rowY += rowH;
+      }
+
+      // Signature line at bottom
+      doc.fillColor("#2d3748").font("Helvetica-Bold").fontSize(13).text("Signature of Issuing Authority :", 48, 452);
+      doc.save().lineWidth(1).strokeColor("#4a5568").moveTo(260, 465).lineTo(520, 465).stroke().restore();
+
+      // Official Stamp box on right
+      doc.roundedRect(630, 436, 130, 44, 4).lineWidth(1).dash(3, { space: 3 }).strokeColor("#94a3b8").stroke();
+      doc.undash();
+      doc.fillColor("#94a3b8").font("Helvetica-Bold").fontSize(9.5).text("OFFICIAL SEAL / STAMP", 630, 452, { width: 130, align: "center" });
 
       // ==========================================
       // REVERSE SIDE
       // ==========================================
       doc.addPage({ size: [800, 500], margin: 0 });
       doc.rect(0, 0, 800, 500).fill(frontBg);
-      doc.rect(0, 0, 800, 14).fill(green);
-      doc.rect(20, 24, 760, 452).lineWidth(1.5).stroke(green);
+      doc.rect(0, 0, 800, 12).fill(green);
+      doc.roundedRect(12, 12, 776, 476, 6).lineWidth(1.5).strokeColor(green).stroke();
 
-      doc.fillColor(red).font("Helvetica-Bold").fontSize(20).text(brandName.toUpperCase(), 42, 34, { width: 600 });
-      doc.fillColor(ink).font("Helvetica-Bold").fontSize(14).text(`Regd. No.: ${registrationId}`, 42, 62, { width: 600 });
+      // Reverse Header
+      doc.fillColor(red).font("Helvetica-Bold").fontSize(19).text(brandName.toUpperCase(), 38, 26, { width: 580 });
+      doc.fillColor(ink).font("Helvetica-Bold").fontSize(13.5).text(`Official Regd. No. : ${registrationId}`, 38, 52, { width: 580 });
+      doc.save().strokeColor(green).lineWidth(1).moveTo(38, 72).lineTo(762, 72).stroke().restore();
 
       // Back Details
       const backRows = [];
@@ -147,31 +204,51 @@ export async function generateIdCardPdf(record, cfg, copy = {}) {
       backRows.push(["Valid From", validFromVal]);
       backRows.push(["Valid Until", validUntilVal]);
 
-      let by = 94;
-      for (const [label, text] of backRows) {
-        doc.fillColor(ink).font("Helvetica-Bold").fontSize(12).text(label, 42, by, { width: 210 });
-        doc.font("Helvetica").fontSize(12).text(text, 260, by, { width: 460, height: 24, ellipsis: true });
-        doc.save().dash(2, { space: 3 }).moveTo(260, by + 16).lineTo(715, by + 16).lineWidth(0.7).strokeColor("#62565b").stroke().restore();
-        by += 28;
+      let by = 82;
+      const bRowH = 29;
+      for (let i = 0; i < backRows.length; i++) {
+        const [label, bText] = backRows[i];
+
+        if (i % 2 === 0) {
+          doc.save().fillColor(lightGreen).opacity(0.35).roundedRect(36, by - 2, 570, bRowH - 2, 3).fill().restore();
+        }
+
+        // Label
+        doc.fillColor("#334155").font("Helvetica-Bold").fontSize(12).text(label, 44, by + 4, { width: 195 });
+        // Colon
+        doc.fillColor(green).font("Helvetica-Bold").fontSize(12).text(":", 242, by + 4, { width: 12 });
+        // Value
+        doc.fillColor(ink).font("Helvetica-Bold").fontSize(12).text(bText, 258, by + 4, { width: 340, height: 20, ellipsis: true });
+
+        by += bRowH;
       }
 
-      // Organization Contact Information
-      doc.fillColor(red).font("Helvetica-Bold").fontSize(11).text("ORGANIZATION CONTACT & HELPLINE", 42, 385);
-      doc.fillColor(ink).font("Helvetica").fontSize(9.5).text(
+      // Organization Contact & Helpline Card
+      doc.roundedRect(36, 362, 570, 114, 6).lineWidth(1).strokeColor(subtleBorder).stroke();
+      doc.fillColor(red).font("Helvetica-Bold").fontSize(11.5).text("ORGANIZATION CONTACT & HELPLINE", 48, 372);
+      doc.fillColor("#1e293b").font("Helvetica").fontSize(10).text(
         "AGNI RURAL WELFARE SOCIETY · Govt Regd No: S/1L/55059\n" +
         "Address: Sonarpur, Baruipur Sub-Division, South 24 Parganas, Kolkata, West Bengal\n" +
         "Helpline: +91 9433834013 · Email: contact@agniruralwelfare.org · Web: agniruralwelfare.org",
-        42, 403, { width: 560, lineGap: 3 }
+        48, 392, { width: 546, lineGap: 3.5 }
+      );
+      doc.fillColor("#842029").font("Helvetica-Bold").fontSize(8.5).text(
+        "Notice: This identity card remains the property of Agni Rural Welfare Society. If found, please return to the address above.",
+        48, 452, { width: 546 }
       );
 
-      doc.fillColor("#6e2226").font("Helvetica-Bold").fontSize(8.5).text(
-        "Important: This identity card remains the property of the society. If found, please return to the address above.",
-        42, 452, { width: 560 }
-      );
+      // QR Code container on right side
+      const qrBoxX = 630, qrBoxY = 82, qrBoxW = 132, qrBoxH = 200;
+      doc.roundedRect(qrBoxX, qrBoxY, qrBoxW, qrBoxH, 6).lineWidth(1).strokeColor(subtleBorder).stroke();
+      doc.fillColor(green).font("Helvetica-Bold").fontSize(11).text("PUBLIC VERIFICATION", qrBoxX, qrBoxY + 12, { width: qrBoxW, align: "center" });
+      doc.image(qrBuffer, qrBoxX + 16, qrBoxY + 32, { width: 100 });
+      doc.fillColor("#475569").font("Helvetica").fontSize(8.5).text("Scan with any camera or QR app to verify authenticity on official portal.", qrBoxX + 8, qrBoxY + 140, { width: qrBoxW - 16, align: "center", lineGap: 2 });
 
-      // QR Code on bottom right
-      doc.image(qrBuffer, 635, 345, { width: 110 });
-      doc.fillColor(green).font("Helvetica-Bold").fontSize(9).text("Scan to Verify", 635, 458, { width: 110, align: "center" });
+      // Hologram / Security Seal Box
+      const holoBoxY = qrBoxY + qrBoxH + 14;
+      doc.roundedRect(qrBoxX, holoBoxY, qrBoxW, 76, 6).lineWidth(1).strokeColor(green).stroke();
+      doc.fillColor(green).font("Helvetica-Bold").fontSize(10).text("OFFICIAL CREDENTIAL", qrBoxX, holoBoxY + 12, { width: qrBoxW, align: "center" });
+      doc.fillColor("#64748b").font("Helvetica").fontSize(8.5).text("Authorized Digital Issuance\nAgni Rural Welfare Society", qrBoxX, holoBoxY + 30, { width: qrBoxW, align: "center", lineGap: 2 });
 
       doc.end();
     } catch (err) {

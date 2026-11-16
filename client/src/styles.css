@@ -3870,10 +3870,42 @@ form input:not([type="checkbox"]):not([type="radio"]):focus,form textarea:focus,
 }
 .field input::placeholder,.field textarea::placeholder,form input::placeholder,form textarea::placeholder { color:var(--text-muted) !important; opacity:.82; }
 .field input:disabled,.field textarea:disabled,.field select:disabled { opacity:.68; background:var(--surface-elevated) !important; cursor:not-allowed; }
-.field input:-webkit-autofill,.field input:-webkit-autofill:hover,.field input:-webkit-autofill:focus {
-  -webkit-text-fill-color:var(--text) !important;
-  -webkit-box-shadow:0 0 0 1000px var(--input-bg) inset !important;
-  caret-color:var(--text);
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field input:-webkit-autofill:active,
+form input:-webkit-autofill,
+form input:-webkit-autofill:hover,
+form input:-webkit-autofill:focus,
+form input:-webkit-autofill:active,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active,
+input:-internal-autofill-selected,
+select:-internal-autofill-selected {
+  -webkit-text-fill-color: var(--text) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  caret-color: var(--text) !important;
+  color: var(--text) !important;
+}
+select option {
+  color: var(--text) !important;
+  background-color: var(--surface-elevated) !important;
+}
+select option:checked {
+  background-color: var(--primary) !important;
+  color: var(--on-primary) !important;
 }
 .field input[type="file"] { padding:8px !important; }
 .field input[type="file"]::file-selector-button {
