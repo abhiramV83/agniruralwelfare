@@ -7,7 +7,7 @@ import {
   useLocation,
   Navigate,
 } from "react-router-dom";
-import { Menu, X, ArrowUpRight, ChevronDown, Heart, Sun, Moon, House, Building2, Images, UsersRound, BriefcaseBusiness, MessageSquare, FileText, HandHeart, HandHelping, LogIn, UserPlus, ShieldCheck, UserCheck } from "lucide-react";
+import { Menu, X, ArrowUpRight, ChevronDown, Heart, Sun, Moon, House, Building2, Images, UsersRound, BriefcaseBusiness, MessageSquare, FileText, HandHeart, HandHelping, LogIn, UserPlus, ShieldCheck, UserCheck, Shield, Activity, Droplets, HeartHandshake, Sprout, Lock, Scale, Sparkles } from "lucide-react";
 import { AiLoginIcon, AiRegisterIcon, AiAdminIcon, AdvancedAiLogo } from "./AiIcons";
 import { copy as c, Action, replaceSiteCopy } from "./components";
 import { subscribeSession, refreshSession, api, setSession } from "./api";
@@ -43,18 +43,31 @@ import "./content/seasonal-festive.css";
 const navIcons = {
   "/": House,
   "/about": Building2,
+  "/cadet-corps": Shield,
   "/gallery": Images,
   "/membership": UsersRound,
-  "/jobs": BriefcaseBusiness,
-  "/contact": MessageSquare,
-  "/documentation": FileText,
   "/supporters": HandHeart,
+  "/feedback": MessageSquare,
+  "/contact": MessageSquare,
+  "/jobs": BriefcaseBusiness,
+  "/documentation": FileText,
   "/volunteer": HandHelping,
+  "/activities": Activity,
+  "/blood-donation": Droplets,
+  "/organ-pledge": HeartHandshake,
+  "/plant-pledge": Sprout,
+  "/privacy": Lock,
+  "/terms": Scale,
   "/login": AiLoginIcon,
   "/register": AiRegisterIcon,
   "/admin": AiAdminIcon,
   "/admin/login": AiAdminIcon,
 };
+
+function renderNavIcon(path) {
+  const IconComponent = navIcons[path] || Sparkles;
+  return <IconComponent size={16} aria-hidden="true" />;
+}
 function Protected({ admin = false, children }) {
   const { user, loading } = useAuth();
   if (loading)
@@ -277,15 +290,8 @@ export default function App() {
                   }
                   onClick={() => setMenu(false)}
                 >
-                  {(() => {
-                    const Icon = navIcons[n.to];
-                    return (
-                      <>
-                        <Icon size={16} aria-hidden="true" />
-                        <span>{n.label}</span>
-                      </>
-                    );
-                  })()}
+                  {renderNavIcon(n.to)}
+                  <span>{n.label}</span>
                 </NavLink>
               );
             })}
@@ -297,17 +303,22 @@ export default function App() {
                   className="more-link-compact"
                   onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}
                 >
-                  {(() => { const Icon = navIcons["/supporters"]; return <><Icon size={16} aria-hidden="true" /><span>Supporters</span></>; })()}
+                  {renderNavIcon("/supporters")}
+                  <span>Supporters</span>
                 </NavLink>
                 <NavLink
                   to="/feedback"
                   className="more-link-compact"
                   onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}
                 >
-                  {(() => { const Icon = navIcons["/feedback"]; return <><Icon size={16} aria-hidden="true" /><span>Feedback</span></>; })()}
+                  {renderNavIcon("/feedback")}
+                  <span>Feedback</span>
                 </NavLink>
                 {moreLinks.map((n) => (
-                  <NavLink key={n.to} to={n.to} onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}>{(() => { const Icon = navIcons[n.to]; return <><Icon size={16} aria-hidden="true" /><span>{n.label}</span></>; })()}</NavLink>
+                  <NavLink key={n.to} to={n.to} onClick={(event) => { setMenu(false); event.currentTarget.closest("details")?.removeAttribute("open"); }}>
+                    {renderNavIcon(n.to)}
+                    <span>{n.label}</span>
+                  </NavLink>
                 ))}
               </div>
             </details>
