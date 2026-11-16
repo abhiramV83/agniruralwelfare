@@ -1227,3 +1227,847 @@
     flex: 1;
   }
 }
+
+
+/* ==========================================================================
+   ADVANCED SEASONAL & INDIAN FESTIVAL THEME ENGINE (Website-wide Overlay)
+   ========================================================================== */
+
+/* Website-Wide Atmospheric Integration */
+[data-seasonal-theme],
+[data-festival-theme] {
+  /* Dynamic CSS variables injected by Theme Engine:
+     --festive-primary
+     --festive-accent
+     --festive-secondary
+     --festive-glow
+     --festive-hero-gradient
+     --festive-badge-bg
+     --festive-badge-border
+     --festive-badge-text
+     --festive-header-ribbon
+     --festive-card-border
+     --festive-active
+  */
+}
+
+/* Subtle Header Festive Ribbon */
+[data-seasonal-theme] .site-header,
+[data-festival-theme] .site-header {
+  position: relative;
+}
+
+[data-seasonal-theme] .site-header::after,
+[data-festival-theme] .site-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: var(--festive-header-ribbon, linear-gradient(90deg, #10b981, #f59e0b, #0284c7));
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Hero Section Subtle Atmosphere */
+[data-seasonal-theme] .hero-wrap,
+[data-festival-theme] .hero-wrap,
+[data-seasonal-theme] .page-hero,
+[data-festival-theme] .page-hero {
+  position: relative;
+  background-image: var(--festive-hero-gradient, none);
+  background-blend-mode: overlay;
+  transition: background-image 0.6s ease;
+}
+
+/* Cards & Elevated Containers Subtle Glow on Hover */
+[data-seasonal-theme] .card:hover,
+[data-festival-theme] .card:hover,
+[data-seasonal-theme] .feature-card:hover,
+[data-festival-theme] .feature-card:hover,
+[data-seasonal-theme] .stat-card:hover,
+[data-festival-theme] .stat-card:hover {
+  border-color: var(--festive-card-border, var(--border));
+  box-shadow: 0 10px 28px var(--festive-glow, rgba(0, 0, 0, 0.08));
+}
+
+/* Section Divider Accents */
+[data-seasonal-theme] .section-badge,
+[data-festival-theme] .section-badge {
+  background: var(--festive-badge-bg, rgba(16, 185, 129, 0.12));
+  border-color: var(--festive-badge-border, rgba(16, 185, 129, 0.3));
+  color: var(--festive-badge-text, var(--primary));
+}
+
+/* Footer Subtle Top Line */
+[data-seasonal-theme] .site-footer,
+[data-festival-theme] .site-footer {
+  border-top-color: var(--festive-card-border, var(--border));
+}
+
+/* Seasonal Theme Pill in Header */
+.seasonal-theme-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.seasonal-theme-pill:hover {
+  border-color: var(--festive-primary, var(--primary));
+  box-shadow: 0 3px 10px var(--festive-glow, rgba(0, 0, 0, 0.1));
+  transform: translateY(-1px);
+}
+
+.seasonal-theme-pill.is-festive {
+  border-color: var(--festive-badge-border, var(--border));
+  background: var(--festive-badge-bg, var(--surface));
+  color: var(--festive-badge-text, var(--text));
+}
+
+.seasonal-pill-icon {
+  color: var(--festive-primary, var(--primary));
+  flex-shrink: 0;
+}
+
+.seasonal-pill-text {
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.seasonal-pill-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme-mode="dark"] .seasonal-pill-tag {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Smart Recommendation Floating Bar */
+.festive-rec-banner {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 998;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--festive-card-border, var(--border));
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18), 0 0 16px var(--festive-glow, rgba(0, 0, 0, 0.05));
+  padding: 14px 16px;
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.festive-rec-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.festive-rec-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--festive-badge-bg, rgba(16, 185, 129, 0.12));
+  color: var(--festive-primary, var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.festive-rec-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.festive-rec-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.festive-rec-desc {
+  display: block;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.festive-rec-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.festive-rec-apply-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: var(--festive-primary, var(--primary));
+  color: #fff;
+  border: none;
+  font-size: 12.5px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-rec-apply-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.festive-rec-dismiss-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-rec-dismiss-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text);
+}
+
+[data-theme-mode="dark"] .festive-rec-dismiss-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Backdrop & Container */
+.festive-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.festive-modal-card {
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Modal Header */
+.festive-modal-header {
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--surface-elevated, var(--surface));
+}
+
+.festive-modal-heading-group {
+  flex: 1;
+}
+
+.festive-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--festive-badge-bg, rgba(16, 185, 129, 0.12));
+  border: 1px solid var(--festive-badge-border, rgba(16, 185, 129, 0.3));
+  color: var(--festive-badge-text, var(--primary));
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.festive-modal-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.festive-modal-subtitle {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 680px;
+}
+
+.festive-modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Prominent Instant "Return to Original AGNI Theme" Button */
+.festive-return-original-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.festive-return-original-btn:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+  transform: translateY(-1px);
+}
+
+.festive-return-original-btn.is-active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.festive-modal-close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text);
+}
+
+/* Status Strip */
+.festive-status-bar {
+  padding: 12px 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.festive-status-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.festive-status-label {
+  color: var(--text-muted);
+}
+
+.festive-status-value {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.festive-status-mode-pill {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.14);
+  color: #10b981;
+}
+
+.festive-status-toggles {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.festive-auto-sync-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-auto-sync-btn.is-active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.festive-effect-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.festive-effect-toggle input {
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Navigation Tabs Bar */
+.festive-tabs-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+  padding: 0 28px;
+  gap: 8px;
+}
+
+.festive-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-tab-btn:hover {
+  color: var(--text);
+}
+
+.festive-tab-btn.is-active {
+  color: var(--festive-primary, var(--primary));
+  border-bottom-color: var(--festive-primary, var(--primary));
+}
+
+/* Tab Pane & Scrollable Content */
+.festive-tab-pane {
+  padding: 24px 28px;
+  overflow-y: auto;
+  max-height: calc(90vh - 240px);
+}
+
+.festive-pane-desc {
+  margin: 0 0 20px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Season Cards Grid */
+.festive-seasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+}
+
+.festive-theme-card {
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.festive-theme-card:hover {
+  border-color: var(--card-accent, var(--primary));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.festive-theme-card.is-selected {
+  border-color: var(--card-accent, var(--primary));
+  box-shadow: 0 0 0 2px var(--card-accent, var(--primary)), 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: var(--surface-elevated, var(--surface));
+}
+
+.festive-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.festive-card-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.festive-card-title-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.festive-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 750;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.festive-card-sanskrit,
+.festive-card-category {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.festive-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.festive-card-tagline {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.festive-card-greeting-badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--text);
+}
+
+[data-theme-mode="dark"] .festive-card-greeting-badge {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.festive-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  padding: 6px 0;
+  border-top: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
+}
+
+.festive-card-effect-tag {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.festive-card-social {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  flex: 1;
+}
+
+.festive-card-social strong {
+  color: var(--text);
+}
+
+.festive-card-apply-btn {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.festive-theme-card:hover .festive-card-apply-btn {
+  background: var(--card-accent, var(--primary));
+  color: #fff;
+  border-color: var(--card-accent, var(--primary));
+}
+
+.festive-theme-card.is-selected .festive-card-apply-btn {
+  background: var(--card-accent, var(--primary));
+  color: #fff;
+  border-color: var(--card-accent, var(--primary));
+}
+
+/* Festival Controls */
+.festive-festivals-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.festive-category-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+
+.festive-cat-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.festive-cat-pill:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.festive-cat-pill.is-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.festive-search-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.festive-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.festive-search-input {
+  width: 100%;
+  padding: 11px 40px 11px 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13.5px;
+  transition: all 0.2s ease;
+}
+
+.festive-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.festive-search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.festive-festivals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+}
+
+.festive-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Modal Footer */
+.festive-modal-footer {
+  padding: 16px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.festive-footer-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.festive-modal-done-btn {
+  padding: 9px 24px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.festive-modal-done-btn:hover {
+  filter: brightness(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .festive-modal-card {
+    max-height: 94vh;
+  }
+  .festive-modal-header {
+    flex-direction: column;
+    padding: 18px 20px;
+  }
+  .festive-modal-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .festive-return-original-btn {
+    flex: 1;
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .festive-status-bar {
+    padding: 10px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .festive-tabs-bar {
+    padding: 0 16px;
+  }
+  .festive-tab-pane {
+    padding: 16px 20px;
+  }
+  .festive-seasons-grid,
+  .festive-festivals-grid {
+    grid-template-columns: 1fr;
+  }
+  .festive-rec-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}

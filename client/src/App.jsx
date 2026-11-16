@@ -38,6 +38,7 @@ import { getCurrentTheme, applyThemeToDOM, getCurrentSubthemeMode, setSubthemeMo
 import { TopGreetingBanner } from "./time-greeting";
 import { FestiveBanner } from "./components/FestivalDecorations";
 import { SeasonalIndicatorChip } from "./components/SeasonalAccents";
+import { SeasonalThemeProvider, SeasonalThemePill } from "./themes";
 import "./content/seasonal-festive.css";
 const navIcons = {
   "/": House,
@@ -233,6 +234,7 @@ export default function App() {
   }
   return (
     <ToastProvider>
+    <SeasonalThemeProvider>
     <AuthContext.Provider value={{ user, loading, logout }}>
       <a href="#main" className="skip-link">
         {c.demo.skipContent}
@@ -275,7 +277,8 @@ export default function App() {
               </div>
             </details>
             <div className="mobile-nav-actions">
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: "8px" }}>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "8px", flexWrap: "wrap", marginBottom: "8px" }}>
+                <SeasonalThemePill />
                 <SeasonalIndicatorChip />
               </div>
               <div className="subtheme-toggle-cluster mobile-subtheme-cluster" role="group" aria-label="Theme mode: Light or Dark">
@@ -334,6 +337,7 @@ export default function App() {
             </div>
           </nav>
           <div className="header-actions">
+            <SeasonalThemePill />
             <SeasonalIndicatorChip />
             <div className="subtheme-toggle-cluster" role="group" aria-label="Theme mode: Light or Dark">
               <button
@@ -566,6 +570,7 @@ export default function App() {
       <button className={`back-top ${scrolled ? "visible" : ""}`} type="button" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" })}>↑</button>
       <AiNgoAssistant />
     </AuthContext.Provider>
+    </SeasonalThemeProvider>
     </ToastProvider>
   );
 }
