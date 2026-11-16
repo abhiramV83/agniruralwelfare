@@ -721,8 +721,10 @@ body,
   border-color:var(--danger) !important;
   box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 15%,transparent) !important;
 }
-/* Universal Form Control Theming & Contrast */
-#registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+/* ==========================================================================
+   UNIVERSAL FORM CONTROL THEMING & GUARANTEED CONTRAST ACROSS ALL THEMES
+   ========================================================================== */
+#registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
   color: var(--text) !important;
   -webkit-text-fill-color: var(--text) !important;
   background-color: var(--input-bg) !important;
@@ -731,73 +733,175 @@ body,
   font: 400 15px/1.4 Inter, "Segoe UI", Arial, sans-serif !important;
 }
 
-:root[data-theme="dark"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
-:root[data-theme-mode="dark"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
-html.theme-dark #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+/* 1. DARK SUBTHEME / DARK MODE FORM INPUTS (All 8 Themes) */
+:is(:root[data-theme-mode="dark"], :root[data-theme="dark"], html.theme-dark, :root.theme-dark, [data-theme-mode="dark"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
   color-scheme: dark !important;
-  color: #edf4ef !important;
-  -webkit-text-fill-color: #edf4ef !important;
+  color: var(--text, #f8fafc) !important;
+  -webkit-text-fill-color: var(--text, #f8fafc) !important;
   background-color: var(--input-bg, #112821) !important;
   background: var(--input-bg, #112821) !important;
-  border-color: var(--input-border, rgba(144, 238, 144, 0.45)) !important;
+  border-color: var(--input-border, rgba(52, 211, 153, 0.45)) !important;
 }
 
-:root[data-theme="light"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
-:root[data-theme-mode="light"] #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea),
-html.theme-light #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+:is(:root[data-theme-mode="dark"], :root[data-theme="dark"], html.theme-dark, :root.theme-dark, [data-theme-mode="dark"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea):focus {
+  color: var(--text, #ffffff) !important;
+  -webkit-text-fill-color: var(--text, #ffffff) !important;
+  background-color: var(--input-bg, #112821) !important;
+  background: var(--input-bg, #112821) !important;
+  border-color: var(--primary, #10b981) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(16, 185, 129, 0.4)) !important;
+}
+
+/* 2. LIGHT SUBTHEME / LIGHT MODE FORM INPUTS (All 8 Themes) */
+:is(:root[data-theme-mode="light"], :root[data-theme="light"], html.theme-light, :root.theme-light, [data-theme-mode="light"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
   color-scheme: light !important;
-  color: #172420 !important;
-  -webkit-text-fill-color: #172420 !important;
-  background-color: var(--input-bg, #fdfdfc) !important;
-  background: var(--input-bg, #fdfdfc) !important;
-  border-color: var(--input-border, #cad5ca) !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  background: var(--input-bg, #ffffff) !important;
+  border-color: var(--input-border, #cbd5e1) !important;
 }
 
-/* Autofill rules with explicit solid fallback to avoid unreadable white-on-white text */
-:is(:root[data-theme="dark"], :root[data-theme-mode="dark"], html.theme-dark) #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+:is(:root[data-theme-mode="light"], :root[data-theme="light"], html.theme-light, :root.theme-light, [data-theme-mode="light"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea):focus {
+  color: var(--text, #0f172a) !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  background: var(--input-bg, #ffffff) !important;
+  border-color: var(--primary, #059669) !important;
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(5, 150, 105, 0.35)) !important;
+}
+
+/* 3. AUTOFILL IN DARK MODE - Overrides Browser Default White/Blue with High-Contrast Theme Layer */
+:is(:root[data-theme-mode="dark"], :root[data-theme="dark"], html.theme-dark, :root.theme-dark, [data-theme-mode="dark"]) #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: dark !important;
-  -webkit-text-fill-color: var(--text, #edf7f2) !important;
-  caret-color: var(--text, #edf7f2) !important;
-  color: var(--text, #edf7f2) !important;
+  -webkit-text-fill-color: var(--text, #f8fafc) !important;
+  caret-color: var(--text, #f8fafc) !important;
+  color: var(--text, #f8fafc) !important;
   -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
   box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
   background-color: var(--input-bg, #112821) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  border-color: var(--input-border, rgba(52, 211, 153, 0.45)) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
-:is(:root[data-theme="dark"], :root[data-theme-mode="dark"], html.theme-dark) #registerPanel :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
+:is(:root[data-theme-mode="dark"], :root[data-theme="dark"], html.theme-dark, :root.theme-dark, [data-theme-mode="dark"]) #registerPanel :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
   color-scheme: dark !important;
-  -webkit-text-fill-color: var(--text, #edf7f2) !important;
-  caret-color: var(--text, #edf7f2) !important;
-  color: var(--text, #edf7f2) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
-  border-color: var(--primary, #059669) !important;
+  -webkit-text-fill-color: var(--text, #ffffff) !important;
+  caret-color: var(--text, #ffffff) !important;
+  color: var(--text, #ffffff) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, rgba(16, 185, 129, 0.4)) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, rgba(16, 185, 129, 0.4)) !important;
+  border-color: var(--primary, #10b981) !important;
   background-color: var(--input-bg, #112821) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
-:is(:root[data-theme="light"], :root[data-theme-mode="light"], html.theme-light) #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+/* 4. AUTOFILL IN LIGHT MODE - Overrides Browser Default with Clean Light Theme Layer */
+:is(:root[data-theme-mode="light"], :root[data-theme="light"], html.theme-light, :root.theme-light, [data-theme-mode="light"]) #registerPanel :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: light !important;
-  -webkit-text-fill-color: var(--text, #14201b) !important;
-  caret-color: var(--text, #14201b) !important;
-  color: var(--text, #14201b) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
-  background-color: var(--input-bg, #f8faf8) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  caret-color: var(--text, #0f172a) !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  border-color: var(--input-border, #cbd5e1) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
-:is(:root[data-theme="light"], :root[data-theme-mode="light"], html.theme-light) #registerPanel :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
+:is(:root[data-theme-mode="light"], :root[data-theme="light"], html.theme-light, :root.theme-light, [data-theme-mode="light"]) #registerPanel :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
   color-scheme: light !important;
-  -webkit-text-fill-color: var(--text, #14201b) !important;
-  caret-color: var(--text, #14201b) !important;
-  color: var(--text, #14201b) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  caret-color: var(--text, #0f172a) !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset, 0 0 0 3px var(--focus-ring, rgba(5, 150, 105, 0.35)) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset, 0 0 0 3px var(--focus-ring, rgba(5, 150, 105, 0.35)) !important;
   border-color: var(--primary, #059669) !important;
-  background-color: var(--input-bg, #f8faf8) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
+}
+
+/* 5. INDIVIDUAL BASE THEME EXPLICIT COLOR DEFINITIONS */
+/* Emerald Grove Dark */
+:is([data-theme="emerald-grove"][data-theme-mode="dark"], html[data-theme="emerald-grove"].theme-dark, [data-themeId="emerald-grove"][data-theme-mode="dark"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #112821 !important;
+  background: #112821 !important;
+  color: #edf4ef !important;
+  -webkit-text-fill-color: #edf4ef !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+}
+/* Midnight Forest */
+:is([data-theme="midnight-forest"], html[data-theme="midnight-forest"], [data-themeId="midnight-forest"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #122126 !important;
+  background: #122126 !important;
+  color: #edf4ef !important;
+  -webkit-text-fill-color: #edf4ef !important;
+  border-color: rgba(180, 225, 200, 0.42) !important;
+}
+/* Terracotta Earth Dark */
+:is([data-theme="terracotta-earth"][data-theme-mode="dark"], html[data-theme="terracotta-earth"].theme-dark, [data-themeId="terracotta-earth"][data-theme-mode="dark"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #22140f !important;
+  background: #22140f !important;
+  color: #fbeae2 !important;
+  -webkit-text-fill-color: #fbeae2 !important;
+  border-color: rgba(234, 88, 12, 0.42) !important;
+}
+/* Ocean Breeze Dark */
+:is([data-theme="ocean-breeze"][data-theme-mode="dark"], html[data-theme="ocean-breeze"].theme-dark, [data-themeId="ocean-breeze"][data-theme-mode="dark"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #0c2036 !important;
+  background: #0c2036 !important;
+  color: #e1f0fc !important;
+  -webkit-text-fill-color: #e1f0fc !important;
+  border-color: rgba(56, 189, 248, 0.42) !important;
+}
+/* Cyber Jade AI */
+:is([data-theme="cyber-jade-ai"], html[data-theme="cyber-jade-ai"], [data-themeId="cyber-jade-ai"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #061a12 !important;
+  background: #061a12 !important;
+  color: #edfdf5 !important;
+  -webkit-text-fill-color: #edfdf5 !important;
+  border-color: rgba(0, 255, 157, 0.48) !important;
+}
+/* Neural Violet AI */
+:is([data-theme="neural-violet-ai"], html[data-theme="neural-violet-ai"], [data-themeId="neural-violet-ai"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #170b28 !important;
+  background: #170b28 !important;
+  color: #fae8ff !important;
+  -webkit-text-fill-color: #fae8ff !important;
+  border-color: rgba(168, 85, 247, 0.48) !important;
+}
+/* Synthwave Solar AI */
+:is([data-theme="synthwave-solar-ai"], html[data-theme="synthwave-solar-ai"], [data-themeId="synthwave-solar-ai"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #1d120c !important;
+  background: #1d120c !important;
+  color: #fef3c7 !important;
+  -webkit-text-fill-color: #fef3c7 !important;
+  border-color: rgba(245, 158, 11, 0.48) !important;
+}
+/* Arctic Quantum AI */
+:is([data-theme="arctic-quantum-ai"], html[data-theme="arctic-quantum-ai"], [data-themeId="arctic-quantum-ai"]) #registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea) {
+  background-color: #041019 !important;
+  background: #041019 !important;
+  color: #ecfeff !important;
+  -webkit-text-fill-color: #ecfeff !important;
+  border-color: rgba(0, 229, 255, 0.48) !important;
+}
+
+/* 6. HIGH CONTRAST PLACEHOLDERS */
+#registerPanel ::placeholder {
+  color: var(--text-muted) !important;
+  -webkit-text-fill-color: var(--text-muted) !important;
+  opacity: 0.82 !important;
+}
+:is([data-theme-mode="dark"], [data-theme="dark"], html.theme-dark, :root.theme-dark) #registerPanel ::placeholder {
+  color: rgba(226, 232, 240, 0.72) !important;
+  -webkit-text-fill-color: rgba(226, 232, 240, 0.72) !important;
+  opacity: 0.85 !important;
+}
+:is([data-theme-mode="light"], [data-theme="light"], html.theme-light, :root.theme-light) #registerPanel ::placeholder {
+  color: rgba(71, 85, 105, 0.78) !important;
+  -webkit-text-fill-color: rgba(71, 85, 105, 0.78) !important;
+  opacity: 0.85 !important;
 }
 
 #registerPanel select {

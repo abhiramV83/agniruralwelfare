@@ -4257,50 +4257,70 @@ select:-internal-autofill-selected {
   color-scheme: light !important;
 }
 
+:is([data-theme-mode="dark"], [data-theme="dark"], .theme-dark) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+  color-scheme: dark !important;
+  color: var(--text, #f8fafc) !important;
+  -webkit-text-fill-color: var(--text, #f8fafc) !important;
+  background-color: var(--input-bg, #112821) !important;
+  background: var(--input-bg, #112821) !important;
+  border-color: var(--input-border, rgba(52, 211, 153, 0.4)) !important;
+}
+
+:is([data-theme-mode="light"], [data-theme="light"], .theme-light) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), select, textarea) {
+  color-scheme: light !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  background: var(--input-bg, #ffffff) !important;
+  border-color: var(--input-border, #cbd5e1) !important;
+}
+
 :is([data-theme-mode="dark"], [data-theme="dark"], .theme-dark) :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: dark !important;
-  -webkit-text-fill-color: var(--text, #edf7f2) !important;
-  caret-color: var(--text, #edf7f2) !important;
-  color: var(--text, #edf7f2) !important;
+  -webkit-text-fill-color: var(--text, #f8fafc) !important;
+  caret-color: var(--text, #f8fafc) !important;
+  color: var(--text, #f8fafc) !important;
   -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
   box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
   background-color: var(--input-bg, #112821) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  border-color: var(--input-border, rgba(52, 211, 153, 0.4)) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
 :is([data-theme-mode="dark"], [data-theme="dark"], .theme-dark) :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
   color-scheme: dark !important;
-  -webkit-text-fill-color: var(--text, #edf7f2) !important;
-  caret-color: var(--text, #edf7f2) !important;
-  color: var(--text, #edf7f2) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
-  border-color: var(--primary, #059669) !important;
+  -webkit-text-fill-color: var(--text, #ffffff) !important;
+  caret-color: var(--text, #ffffff) !important;
+  color: var(--text, #ffffff) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, rgba(16, 185, 129, 0.35)) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, rgba(16, 185, 129, 0.35)) !important;
+  border-color: var(--primary, #10b981) !important;
   background-color: var(--input-bg, #112821) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
 :is([data-theme-mode="light"], [data-theme="light"], .theme-light) :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: light !important;
-  -webkit-text-fill-color: var(--text, #14201b) !important;
-  caret-color: var(--text, #14201b) !important;
-  color: var(--text, #14201b) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
-  background-color: var(--input-bg, #f8faf8) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  caret-color: var(--text, #0f172a) !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  border-color: var(--input-border, #cbd5e1) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 
 :is([data-theme-mode="light"], [data-theme="light"], .theme-light) :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
   color-scheme: light !important;
-  -webkit-text-fill-color: var(--text, #14201b) !important;
-  caret-color: var(--text, #14201b) !important;
-  color: var(--text, #14201b) !important;
-  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
-  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
+  -webkit-text-fill-color: var(--text, #0f172a) !important;
+  caret-color: var(--text, #0f172a) !important;
+  color: var(--text, #0f172a) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset, 0 0 0 3px var(--focus-ring, rgba(5, 150, 105, 0.3)) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #ffffff) inset, 0 0 0 3px var(--focus-ring, rgba(5, 150, 105, 0.3)) !important;
   border-color: var(--primary, #059669) !important;
-  background-color: var(--input-bg, #f8faf8) !important;
-  transition: background-color 500000s ease-in-out 0s !important;
+  background-color: var(--input-bg, #ffffff) !important;
+  transition: background-color 5000000s ease-in-out 0s !important;
 }
 select option {
   color: var(--text) !important;

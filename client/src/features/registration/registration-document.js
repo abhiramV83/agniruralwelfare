@@ -547,15 +547,30 @@ export function createRegistrationDocument() {
         ['memberForm','cadetEnrollmentForm','volunteerForm','internForm'].forEach(id=>{const form=$('#'+id);if(!form)return;let n=1;form.querySelectorAll('.member-field,.cadet-field,.program-field').forEach(field=>{const label=Array.from(field.children).find(x=>x.tagName==='LABEL');if(!label||label.querySelector('input[type="radio"],input[type="checkbox"]'))return;const clean=(label.dataset.agniCleanText||label.textContent.replace(/^(?:[0-9]+[.][ ]*)+/, '')).trim();label.dataset.agniCleanText=clean;label.textContent=(n++)+'. '+clean;});});
       }
       document.addEventListener('DOMContentLoaded',()=>{$$('#registerPanel form').forEach(form=>form.noValidate=true);});
+      function syncInputContrast(target) {
+        if (!target || !target.matches('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea')) return;
+        const root = document.documentElement;
+        const isDark = root.dataset.themeMode === 'dark' || root.classList.contains('theme-dark');
+        const txt = isDark ? (root.style.getPropertyValue('--text') || '#f8fafc') : (root.style.getPropertyValue('--text') || '#0f172a');
+        const bg = isDark ? (root.style.getPropertyValue('--input-bg') || '#112821') : (root.style.getPropertyValue('--input-bg') || '#ffffff');
+        target.style.color = txt;
+        target.style.webkitTextFillColor = txt;
+        target.style.backgroundColor = bg;
+      }
       document.addEventListener('input',e=>{
         if(e.target.id === 'regPassword') updatePasswordUI();
         if(e.target.id === 'regConfirmPassword') updateConfirmPasswordUI();
         if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid');
+        syncInputContrast(e.target);
       });
       document.addEventListener('change',e=>{
         if(e.target.id === 'regPassword') updatePasswordUI();
         if(e.target.id === 'regConfirmPassword') updateConfirmPasswordUI();
         if(e.target.matches('input,select,textarea')&&e.target.checkValidity())e.target.removeAttribute('aria-invalid');
+        syncInputContrast(e.target);
+      });
+      document.addEventListener('focusin',e=>{
+        syncInputContrast(e.target);
       });
       $('#standardRegisterForm').addEventListener('submit',e=>{e.preventDefault();if(validateForm(e.currentTarget))send('account',e.currentTarget)});
       $('#registerPanel').addEventListener('load',()=>{});
@@ -565,7 +580,7 @@ export function createRegistrationDocument() {
         const m=e.data||{};
         if(m.type!=='app-theme')return;
         const root=document.documentElement;
-        const isDark=m.theme==='dark'||m.mode==='dark';
+        const isDark=m.theme==='dark'||m.mode==='dark'||m.isDark===true;
         const mode=isDark?'dark':'light';
         root.dataset.theme=m.themeId||mode;
         root.dataset.themeMode=mode;
@@ -582,6 +597,18 @@ export function createRegistrationDocument() {
           if(typeof value==='string'&&value)root.style.setProperty(name,value);
         });
         root.style.colorScheme=mode;
+
+        // Instantly sync user-entered info with active theme palette
+        const currentTxt = isDark ? (m.tokens?.['--text'] || '#f8fafc') : (m.tokens?.['--text'] || '#0f172a');
+        const currentBg = isDark ? (m.tokens?.['--input-bg'] || '#112821') : (m.tokens?.['--input-bg'] || '#ffffff');
+        const currentBrd = isDark ? (m.tokens?.['--input-border'] || 'rgba(52, 211, 153, 0.45)') : (m.tokens?.['--input-border'] || '#cbd5e1');
+        $$('#registerPanel :is(input:not([type="radio"]):not([type="checkbox"]):not([type="file"]), select, textarea)').forEach(el => {
+          el.style.color = currentTxt;
+          el.style.webkitTextFillColor = currentTxt;
+          el.style.backgroundColor = currentBg;
+          el.style.borderColor = currentBrd;
+        });
+
         sendHeight();
       });
       const panelNode=$('#registerPanel');

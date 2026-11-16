@@ -958,3 +958,4 @@ export function filterFestivalThemes(category = "All", search = "") {
   }
   return list;
 }
+

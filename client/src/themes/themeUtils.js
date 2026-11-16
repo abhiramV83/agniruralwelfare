@@ -191,3 +191,4 @@ export function determineAutoTheme(inputDate = new Date()) {
     activeInfo: currentSeason
   };
 }
+

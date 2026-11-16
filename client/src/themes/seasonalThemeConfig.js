@@ -236,3 +236,4 @@ export function getSeasonalThemeById(id) {
     ) || INDIAN_SEASONAL_THEMES[0]
   );
 }
+
