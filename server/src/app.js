@@ -1176,14 +1176,9 @@ export function createApp(cfg) {
       return res.status(400).json({ message: "ID card is only available for accepted applications." });
     }
 
-    if (item.idCardFileId) {
-      const info = await getFileInfo(item.idCardFileId);
-      if (info) return pipeGridFile(info, res);
-    }
-
     const category = getApplicationCategory(actualSource, item);
-    const regId = item.registrationNumber || (actualSource === "accounts" ? item.memberId : item.registrationId);
-    const siteCopy = await readSiteCopy().catch(() => ({ brand: { name: "Agni Rural Welfare Society", motto: "Service to humanity is service to God" } }));
+    const regId = item.registrationNumber || (actualSource === "accounts" ? item.memberId : item.registrationId) || "AGNI-MEM-2026-0001";
+    const siteCopy = await readSiteCopy().catch(() => ({ brand: { name: "Agni Rural Welfare Society", motto: "Bravery, Unity & Discipline" } }));
     let photoBuffer = null;
     let photoRef = item.photo || item.attachments?.find((f) => f.mimetype?.startsWith("image/"));
     if (photoRef?.fileId) {

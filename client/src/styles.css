@@ -4257,24 +4257,50 @@ select:-internal-autofill-selected {
   color-scheme: light !important;
 }
 
-[data-theme-mode="dark"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
-[data-theme="dark"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+:is([data-theme-mode="dark"], [data-theme="dark"], .theme-dark) :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: dark !important;
-  -webkit-text-fill-color: #f1f7f4 !important;
-  caret-color: #f1f7f4 !important;
-  color: #f1f7f4 !important;
-  -webkit-box-shadow: 0 0 0 1000px #112821 inset !important;
-  box-shadow: 0 0 0 1000px #112821 inset !important;
+  -webkit-text-fill-color: var(--text, #edf7f2) !important;
+  caret-color: var(--text, #edf7f2) !important;
+  color: var(--text, #edf7f2) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset !important;
+  background-color: var(--input-bg, #112821) !important;
+  transition: background-color 500000s ease-in-out 0s !important;
 }
 
-[data-theme-mode="light"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected),
-[data-theme="light"] :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
+:is([data-theme-mode="dark"], [data-theme="dark"], .theme-dark) :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
+  color-scheme: dark !important;
+  -webkit-text-fill-color: var(--text, #edf7f2) !important;
+  caret-color: var(--text, #edf7f2) !important;
+  color: var(--text, #edf7f2) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #112821) inset, 0 0 0 3px var(--focus-ring, #34d399) !important;
+  border-color: var(--primary, #059669) !important;
+  background-color: var(--input-bg, #112821) !important;
+  transition: background-color 500000s ease-in-out 0s !important;
+}
+
+:is([data-theme-mode="light"], [data-theme="light"], .theme-light) :is(input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill, input:-internal-autofill-selected, select:-internal-autofill-selected) {
   color-scheme: light !important;
-  -webkit-text-fill-color: #14201b !important;
-  caret-color: #14201b !important;
-  color: #14201b !important;
-  -webkit-box-shadow: 0 0 0 1000px #f8faf8 inset !important;
-  box-shadow: 0 0 0 1000px #f8faf8 inset !important;
+  -webkit-text-fill-color: var(--text, #14201b) !important;
+  caret-color: var(--text, #14201b) !important;
+  color: var(--text, #14201b) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset !important;
+  background-color: var(--input-bg, #f8faf8) !important;
+  transition: background-color 500000s ease-in-out 0s !important;
+}
+
+:is([data-theme-mode="light"], [data-theme="light"], .theme-light) :is(input:-webkit-autofill:focus, input:-webkit-autofill:focus-visible, select:-webkit-autofill:focus, select:-webkit-autofill:focus-visible, textarea:-webkit-autofill:focus, textarea:-webkit-autofill:focus-visible, input:-internal-autofill-selected:focus, input:-internal-autofill-selected:focus-visible, select:-internal-autofill-selected:focus, select:-internal-autofill-selected:focus-visible) {
+  color-scheme: light !important;
+  -webkit-text-fill-color: var(--text, #14201b) !important;
+  caret-color: var(--text, #14201b) !important;
+  color: var(--text, #14201b) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
+  box-shadow: 0 0 0 1000px var(--input-bg, #f8faf8) inset, 0 0 0 3px var(--focus-ring, #059669) !important;
+  border-color: var(--primary, #059669) !important;
+  background-color: var(--input-bg, #f8faf8) !important;
+  transition: background-color 500000s ease-in-out 0s !important;
 }
 select option {
   color: var(--text) !important;

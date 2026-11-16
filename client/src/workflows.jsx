@@ -1444,9 +1444,19 @@ export function Admin() {
   const [acceptError, setAcceptError] = useState(null);
   const [adminRegNoInput, setAdminRegNoInput] = useState("");
 
+  const getSuggestedRegNo = (item) => {
+    if (!item) return "";
+    const cat = item.category || "Member";
+    const prefix = /cadet/i.test(cat) ? "CAD" : /volunteer/i.test(cat) ? "VOL" : /intern|alumni/i.test(cat) ? "INT" : "MEM";
+    const year = new Date().getFullYear();
+    return `ARWS/${prefix}/${year}/001`;
+  };
+
   useEffect(() => {
     if (detailsModalItem) {
-      setAdminRegNoInput(detailsModalItem.registrationNumber || detailsModalItem.registrationId || detailsModalItem.memberId || "");
+      const existing = detailsModalItem.registrationNumber || detailsModalItem.registrationId || detailsModalItem.memberId || "";
+      const isUuid = !detailsModalItem.registrationNumber && /^[a-f0-9-]{12,}$/i.test(String(existing).replace(/^ARWS-?/i, ""));
+      setAdminRegNoInput(isUuid ? getSuggestedRegNo(detailsModalItem) : existing);
     }
   }, [detailsModalItem?._id, detailsModalItem?.registrationNumber]);
 
@@ -1523,7 +1533,9 @@ export function Admin() {
 
   const handleOpenAccept = (item) => {
     setAcceptModalItem(item);
-    setAcceptRegNo(item.registrationNumber || item.registrationId || item.memberId || "");
+    const existing = item.registrationNumber || item.registrationId || item.memberId || "";
+    const isUuid = !item.registrationNumber && /^[a-f0-9-]{12,}$/i.test(String(existing).replace(/^ARWS-?/i, ""));
+    setAcceptRegNo(isUuid ? getSuggestedRegNo(item) : existing);
     const todayStr = new Date().toISOString().split("T")[0];
     const oneYearLater = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
     setAcceptValidFrom(item.validFrom || todayStr);
@@ -2692,21 +2704,32 @@ export function Admin() {
                       <Sparkles size={16} style={{ color: "var(--primary)" }} />
                       Official Registration Number (Regd. No.)
                     </label>
-                    {detailsModalItem.idCardFileId && (
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: "700",
-                          padding: "3px 10px",
-                          borderRadius: "999px",
-                          background: "color-mix(in srgb, var(--success) 16%, transparent)",
-                          color: "var(--success)",
-                          border: "1px solid color-mix(in srgb, var(--success) 35%, transparent)",
-                        }}
+                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                      <button
+                        type="button"
+                        className="text-button"
+                        style={{ fontSize: "12px", color: "var(--primary)", fontWeight: "600", textDecoration: "underline" }}
+                        onClick={() => setAdminRegNoInput(getSuggestedRegNo(detailsModalItem))}
+                        title="Fill recommended format e.g. ARWS/CAD/2026/001"
                       >
-                        ✓ ID Card Active
-                      </span>
-                    )}
+                        Auto-suggest Format
+                      </button>
+                      {detailsModalItem.idCardFileId && (
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "700",
+                            padding: "3px 10px",
+                            borderRadius: "999px",
+                            background: "color-mix(in srgb, var(--success) 16%, transparent)",
+                            color: "var(--success)",
+                            border: "1px solid color-mix(in srgb, var(--success) 35%, transparent)",
+                          }}
+                        >
+                          ✓ ID Card Active
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>

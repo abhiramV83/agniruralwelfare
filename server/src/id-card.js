@@ -32,8 +32,11 @@ const dateText = (input) => {
 export async function generateIdCardPdf(record, cfg, copy = {}) {
   const brandName = (copy?.brand?.name || "Agni Rural Welfare Society").trim();
   const rawMotto = copy?.brand?.motto || "Bravery, Unity & Discipline";
-  let cleanMotto = rawMotto.replace(/^motto\s*:\s*/i, "").trim();
-  cleanMotto = cleanMotto.replace(/Bravery\s+Unity/i, "Bravery, Unity");
+  let cleanMotto = String(rawMotto)
+    .replace(/(?:^|\s*)motto\s*:\s*/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  cleanMotto = cleanMotto.replace(/Bravery\s*,?\s*Unity/i, "Bravery, Unity");
   if (!cleanMotto) cleanMotto = "Bravery, Unity & Discipline";
 
   const registrationId = record.registrationNumber || record.registrationId || record.memberId || "AGNI-MEM-2026-0001";

@@ -567,7 +567,7 @@ export function createRegistrationDocument() {
         const root=document.documentElement;
         const isDark=m.theme==='dark'||m.mode==='dark';
         const mode=isDark?'dark':'light';
-        root.dataset.theme=mode;
+        root.dataset.theme=m.themeId||mode;
         root.dataset.themeMode=mode;
         if(m.themeId)root.dataset.themeId=m.themeId;
         if(isDark){

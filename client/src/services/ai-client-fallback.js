@@ -195,3 +195,4 @@ export function getClientNgoAnswer(queryText = "") {
     "You can register online under **Register**, check our frontline social service under **Activities**, or contact our headquarters directly at +91 94331 23456."
   );
 }
+
