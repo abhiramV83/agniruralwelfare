@@ -880,3 +880,4 @@ export function getCalendarOverview(inputDate = new Date(), settings = {}) {
     }
   };
 }
+

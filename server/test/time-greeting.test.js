@@ -41,7 +41,7 @@ test("time greeting returns Good Evening and evening welcome message from 5pm to
   assert.equal(g5.period, "evening");
   assert.equal(g5.salutation, "Good Evening");
   assert.equal(g5.iconName, "Sunset");
-  assert.ok(g5.welcomeMessage.includes("dusk settles"));
+  assert.ok(g5.welcomeMessage.includes("twilight") || g5.welcomeMessage.includes("evening"));
 
   // 9:59 PM
   const d9pm = new Date("2026-11-16T21:59:59");

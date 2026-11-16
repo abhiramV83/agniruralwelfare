@@ -132,3 +132,4 @@ export function SeasonalIndicatorChip() {
     </div>
   );
 }
+

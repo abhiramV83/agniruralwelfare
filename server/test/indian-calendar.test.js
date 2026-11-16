@@ -78,3 +78,4 @@ test("getCalendarOverview produces comprehensive status object", () => {
   assert.equal(overview.allSeasons.length, 6);
   assert.ok(overview.totalFestivalsCount >= 20);
 });
+

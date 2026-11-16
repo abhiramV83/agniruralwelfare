@@ -948,14 +948,20 @@ nav a.active:after {
 }
 
 /* Evening Styling */
+.top-greeting-banner.period-evening {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--surface) 94%, #f59e0b 6%), color-mix(in srgb, var(--surface) 95%, #ea580c 5%));
+  border-bottom: 1px solid color-mix(in srgb, #f59e0b 28%, var(--border));
+}
+
 .period-evening .greeting-badge {
-  background: color-mix(in srgb, var(--accent) 15%, transparent);
-  color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
-  box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 18%, transparent);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(234, 88, 12, 0.14));
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.42);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.22);
 }
 .period-evening .greeting-icon {
-  color: var(--accent);
+  color: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.4));
 }
 
 /* Night Styling */
@@ -1097,6 +1103,57 @@ nav a.active:after {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Period-Specific Welcome Card Accents */
+.welcome.period-morning {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 93%, #10b981 7%), var(--surface));
+  border: 1px solid color-mix(in srgb, #10b981 30%, var(--border));
+  box-shadow: 0 4px 20px color-mix(in srgb, #10b981 10%, transparent);
+}
+.welcome.period-morning .welcome-badge {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.welcome.period-afternoon {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 93%, #0284c7 7%), var(--surface));
+  border: 1px solid color-mix(in srgb, #0284c7 30%, var(--border));
+  box-shadow: 0 4px 20px color-mix(in srgb, #0284c7 10%, transparent);
+}
+.welcome.period-afternoon .welcome-badge {
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+}
+
+.welcome.period-evening {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 92%, #f59e0b 8%), color-mix(in srgb, var(--surface) 95%, #ea580c 5%));
+  border: 1px solid color-mix(in srgb, #f59e0b 38%, var(--border));
+  box-shadow: 0 6px 26px color-mix(in srgb, #f59e0b 14%, transparent);
+}
+.welcome.period-evening .welcome-badge {
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 3px 12px rgba(245, 158, 11, 0.4);
+}
+.welcome.period-evening .welcome-headline {
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.welcome.period-night {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 93%, #10b981 7%), var(--surface));
+  border: 1px solid color-mix(in srgb, #10b981 30%, var(--border));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.welcome.period-night .welcome-badge {
+  background: linear-gradient(135deg, #10b981, #047857);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
 }
 
 .welcome-badge {

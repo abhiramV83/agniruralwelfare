@@ -37,7 +37,7 @@ import {
 } from "./components";
 import { api } from "./api";
 import { useSuccessPopup, useConfirmationDialog } from "./success-popup-context";
-import { useTimeGreeting, HeroGreetingPill } from "./time-greeting";
+import { useTimeGreeting } from "./time-greeting";
 export function Welcome({ className = "" }) {
   const { salutation, headline, welcomeMessage, Icon, period } = useTimeGreeting();
   return (
@@ -139,7 +139,6 @@ export function Home() {
 
           {/* Hero Content - floating directly over slideshow without any background card */}
           <div className="hero-content">
-            <HeroGreetingPill />
             <h1 className="hero-main-heading">Spreading Joy Through Social Service</h1>
             <p className="hero-subtitle">Together, We Can Make a Difference!</p>
             <p className="hero-description">

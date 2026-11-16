@@ -39,13 +39,13 @@ export function getTimeGreeting(now = new Date()) {
     return {
       period: "evening",
       salutation: "Good Evening",
-      headline: "Good Evening! Welcome to Agni Rural Welfare Society",
+      headline: "Good Evening! Luminous Warmth & Serenity from AGNI",
       welcomeMessage:
-        "As dusk settles, we celebrate the dedication of our volunteers, cadets, and community leaders working tirelessly for bravery, unity, and discipline.",
+        "As twilight gently settles over our villages, we celebrate the tireless courage, unity, and selfless service of our volunteers and cadets. Wishing you an inspiring, peaceful, and radiant evening.",
       shortMessage:
-        "Reflecting on a day of unity, courage, and dedicated community impact.",
-      tagline: "Standing united for human dignity and community welfare.",
-      badge: "Evening Welcome",
+        "Lighting lamps of compassion, courage, and selfless service as dusk gently descends.",
+      tagline: "Radiating warmth, dignity, and tireless grassroots community care.",
+      badge: "Radiant Evening",
       iconName: "Sunset",
     };
   } else {
